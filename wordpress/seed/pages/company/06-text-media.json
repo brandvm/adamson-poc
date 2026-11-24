@@ -1,0 +1,26 @@
+{
+  "block": "adamson/text-media",
+  "data": {
+    "anchor": "sustainability",
+    "theme": "dark",
+    "imageSide": "left",
+    "eyebrow": "Sustainability",
+    "heading": "Built to last decades, not seasons",
+    "text": "The most sustainable loudspeaker is the one you never replace. Adamson cabinets are built to tour for decades, and every part can be repaired or replaced in Port Perry.\n\nWe source wood from certified forests, run the factory on Ontario’s low-carbon grid and take back old systems for refurbishment.",
+    "button": null,
+    "image": {
+      "seed": "technology/transducers-background.jpg",
+      "alt": "Adamson transducer"
+    },
+    "points": [
+      {
+        "value": "20+ yrs",
+        "label": "Typical system life"
+      },
+      {
+        "value": "100%",
+        "label": "Repairable parts"
+      }
+    ]
+  }
+}

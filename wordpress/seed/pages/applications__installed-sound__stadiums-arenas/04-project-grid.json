@@ -1,0 +1,17 @@
+{
+ "block": "adamson/project-grid",
+ "data": {
+  "anchor": "projects",
+  "theme": "dark",
+  "eyebrow": "Projects",
+  "heading": "Stadiums & Arenas projects",
+  "description": "",
+  "button": {
+   "label": "All projects",
+   "url": "/applications/projects"
+  },
+  "applications": "Stadiums & Arenas",
+  "limit": 6,
+  "filters": false
+ }
+}

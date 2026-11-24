@@ -1,0 +1,39 @@
+{
+ "block": "adamson/page-hero",
+ "data": {
+  "eyebrow": "Applications · Projects",
+  "heading": "Projects and case studies from tours, theatres, arenas and churches",
+  "button": {
+   "label": "Browse projects",
+   "url": "#projects"
+  },
+  "wordmark": "PROJECTS",
+  "background": {
+   "seed": "products-in-action/auditorium.jpg",
+   "alt": "Auditorium with an Adamson system"
+  },
+  "overlay": null,
+  "anchors": [
+   {
+    "label": "Touring",
+    "meta": "On the road",
+    "url": "/applications/touring"
+   },
+   {
+    "label": "Performing Arts",
+    "meta": "Theatres & halls",
+    "url": "/applications/installed-sound/performing-arts"
+   },
+   {
+    "label": "Stadiums & Arenas",
+    "meta": "Big rooms",
+    "url": "/applications/installed-sound/stadiums-arenas"
+   },
+   {
+    "label": "Houses of Worship",
+    "meta": "Churches",
+    "url": "/applications/installed-sound/houses-of-worship"
+   }
+  ]
+ }
+}

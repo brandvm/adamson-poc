@@ -1,0 +1,99 @@
+{
+  "block": "adamson/card-grid",
+  "data": {
+    "anchor": "courses",
+    "theme": "light",
+    "columns": "3",
+    "imageRatio": "landscape",
+    "eyebrow": "Courses",
+    "heading": "Learn the Adamson way",
+    "description": "From first system design to advanced Vergence tuning, taught by the engineers who build the products.",
+    "button": null,
+    "cards": [
+      {
+        "image": {
+          "seed": "applications/touring-background.jpg",
+          "alt": "Touring system"
+        },
+        "eyebrow": "Level 1",
+        "title": "Adamson Fundamentals",
+        "text": "Loudspeaker theory, the Adamson range and safe rigging. The starting point for every technician.",
+        "tags": "Online, 1 day",
+        "link": {
+          "label": "Enquire",
+          "url": "/contact"
+        }
+      },
+      {
+        "image": {
+          "seed": "technology/software-background.jpg",
+          "alt": "ArrayIntelligence"
+        },
+        "eyebrow": "Level 2",
+        "title": "System Design with ArrayIntelligence",
+        "text": "Prediction, optimisation and control of line arrays and subwoofers in ArrayIntelligence.",
+        "tags": "In person, 2 days",
+        "link": {
+          "label": "Enquire",
+          "url": "/contact"
+        }
+      },
+      {
+        "image": {
+          "seed": "products-in-action/auditorium.jpg",
+          "alt": "Auditorium"
+        },
+        "eyebrow": "Certification",
+        "title": "Vergence Group Certification",
+        "text": "Deploying, tuning and maintaining Vergence systems on tour. Ends with a practical exam.",
+        "tags": "In person, 3 days",
+        "link": {
+          "label": "Enquire",
+          "url": "/contact"
+        }
+      },
+      {
+        "image": {
+          "seed": "featured-products/xg8.jpg",
+          "alt": "XG8 amplifier"
+        },
+        "eyebrow": "Level 2",
+        "title": "Milan & Networking",
+        "text": "XG amplifiers, Milan networks and system redundancy for installs and tours.",
+        "tags": "Online, 1 day",
+        "link": {
+          "label": "Enquire",
+          "url": "/contact"
+        }
+      },
+      {
+        "image": {
+          "seed": "applications/install-background.jpg",
+          "alt": "Installed system"
+        },
+        "eyebrow": "Level 2",
+        "title": "Installed Sound for Integrators",
+        "text": "Designing for theatres, worship and arenas: coverage, rigging and code.",
+        "tags": "In person, 2 days",
+        "link": {
+          "label": "Enquire",
+          "url": "/contact"
+        }
+      },
+      {
+        "image": {
+          "seed": "stats/building-loudspeakers.jpg",
+          "alt": "Loudspeaker build"
+        },
+        "eyebrow": "Certification",
+        "title": "Service Technician",
+        "text": "Repair, re-coning and testing to factory specification at Port Perry.",
+        "tags": "Port Perry, 2 days",
+        "link": {
+          "label": "Enquire",
+          "url": "/contact"
+        }
+      }
+    ]
+  }
+}

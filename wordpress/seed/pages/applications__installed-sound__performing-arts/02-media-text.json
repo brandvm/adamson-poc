@@ -1,0 +1,37 @@
+{
+ "block": "adamson/media-text",
+ "data": {
+  "anchor": "challenges",
+  "theme": "dark",
+  "imagePosition": "right",
+  "eyebrow": "Performing Arts",
+  "heading": "What the room needs",
+  "text": "Reinforcement in a theatre should support the performance, not compete with it. The system has to be even, intelligible and out of sight.",
+  "points": [
+   {
+    "title": "Even coverage",
+    "text": "Every seat, from the front row to the top balcony."
+   },
+   {
+    "title": "Intelligibility",
+    "text": "Clear speech for drama and musicals."
+   },
+   {
+    "title": "Discreet",
+    "text": "Small cabinets, custom colours, hidden subwoofers."
+   },
+   {
+    "title": "Flexible",
+    "text": "Presets for concerts, spoken word and touring productions."
+   }
+  ],
+  "button": {
+   "label": "Talk to an application engineer",
+   "url": "/contact"
+  },
+  "image": {
+   "seed": "news/warsaw-theatre-brooklyn.jpg",
+   "alt": "Historic theatre interior"
+  }
+ }
+}

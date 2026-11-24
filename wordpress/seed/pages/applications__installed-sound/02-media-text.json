@@ -1,0 +1,37 @@
+{
+ "block": "adamson/media-text",
+ "data": {
+  "anchor": "integrators",
+  "theme": "dark",
+  "imagePosition": "left",
+  "eyebrow": "For integrators",
+  "heading": "Everything you need to design, install and hand over",
+  "text": "Adamson works alongside consultants and integrators from the first drawing to the opening night.",
+  "points": [
+   {
+    "title": "Design tools",
+    "text": "Array Intelligence for prediction and Blueprint AV for system design."
+   },
+   {
+    "title": "Documentation",
+    "text": "Drawings, specifications and EASE data for every product."
+   },
+   {
+    "title": "Training",
+    "text": "Certification courses for installers and system technicians."
+   },
+   {
+    "title": "Project support",
+    "text": "Adamson application engineers on your project, from bid to commissioning."
+   }
+  ],
+  "button": {
+   "label": "Documentation & Downloads",
+   "url": "/support/downloads"
+  },
+  "image": {
+   "seed": "stats/building-loudspeakers.jpg",
+   "alt": "Adamson loudspeakers being built"
+  }
+ }
+}

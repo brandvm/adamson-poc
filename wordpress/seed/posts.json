@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Fall 2026 Software & Firmware Updates",
+    "excerpt": "New releases of Adamson's software and firmware are available for download.",
+    "category": "Adamson",
+    "date": "2026-10-15 10:00:00",
+    "image": {
+      "seed": "news/fall-2026-software-firmware.jpg",
+      "alt": "Laptop running Adamson software in front of a mixing console"
+    },
+    "type": "Press release",
+    "content": "<!-- wp:paragraph --><p>New versions of ArrayIntelligence, Array Tools and the XG Series firmware are available today from Documentation &amp; Downloads.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>ArrayIntelligence 4.2 adds faster prediction for large Vergence systems and a new venue import. XG firmware 2.6 adds Milan redundancy and shortens boot time.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>As always, updates are free for every Adamson owner.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "Adamson Powers Historic Warsaw Theatre in Brooklyn",
+    "excerpt": "The historic Warsaw theatre in Brooklyn now runs on an Adamson system.",
+    "category": "Adamson",
+    "date": "2025-12-08 10:00:00",
+    "image": {
+      "seed": "news/warsaw-theatre-brooklyn.jpg",
+      "alt": "Ornate theatre ceiling with flown Adamson loudspeakers and lighting truss"
+    },
+    "type": "Tour",
+    "content": "<!-- wp:paragraph --><p>The Warsaw, a 1924 landmark in Greenpoint, Brooklyn, has reopened with a new Adamson system designed for its ornate ballroom.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>The install pairs IS7 line arrays with IS119 subwoofers, flown to keep sightlines clear of the restored ceiling.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>“The room finally sounds as good as it looks,” said the venue’s production manager.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "D-Block Europe’s PTSD2 Arena Tour",
+    "excerpt": "D-Block Europe take Adamson on the road for the PTSD2 arena tour.",
+    "category": "Adamson",
+    "date": "2026-03-25 10:00:00",
+    "image": {
+      "seed": "news/d-block-europe-ptsd2.jpg",
+      "alt": "Arena crowd holding up phone lights under a loudspeaker array"
+    },
+    "type": "Tour",
+    "content": "<!-- wp:paragraph --><p>D-Block Europe’s PTSD2 arena tour runs on a Vergence Group system across 24 UK and European arenas.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>The rig uses VGt main hangs, VGs subwoofers and XG amplification, designed in ArrayIntelligence.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "Adamson Introduces the VGd Compact Line Array",
+    "excerpt": "The newest member of the Vergence Group brings the family’s sound to smaller rooms and delays.",
+    "category": "Adamson",
+    "type": "Launch",
+    "date": "2025-11-10 10:00:00",
+    "image": {
+      "seed": "stats/building-loudspeakers.jpg",
+      "alt": "Close-up of an Adamson cabinet"
+    },
+    "content": "<!-- wp:paragraph --><p>The newest member of the Vergence Group brings the family’s sound to smaller rooms and delays.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>More details, photos and system specifications will follow.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "Adamson at ISE 2026 in Barcelona",
+    "excerpt": "Meet the team, hear the Vergence Group in our demo room and see FletcherMachine live.",
+    "category": "Adamson",
+    "type": "Press release",
+    "date": "2025-09-02 10:00:00",
+    "image": {
+      "seed": "stats/shows-and-events.jpg",
+      "alt": "Crowd at a trade show stand"
+    },
+    "content": "<!-- wp:paragraph --><p>Meet the team, hear the Vergence Group in our demo room and see FletcherMachine live.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>More details, photos and system specifications will follow.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "Imagine Dragons Loom World Tour",
+    "excerpt": "Imagine Dragons carry a full Vergence Group rig on the Loom world tour.",
+    "category": "Adamson",
+    "type": "Tour",
+    "date": "2025-06-18 10:00:00",
+    "image": {
+      "seed": "videos/imagine-dragons.jpg",
+      "alt": "Imagine Dragons on stage"
+    },
+    "content": "<!-- wp:paragraph --><p>Imagine Dragons carry a full Vergence Group rig on the Loom world tour.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>More details, photos and system specifications will follow.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "Linkin Park From Zero Tour",
+    "excerpt": "Linkin Park’s From Zero world tour runs on Adamson across five continents.",
+    "category": "Adamson",
+    "type": "Tour",
+    "date": "2025-04-07 10:00:00",
+    "image": {
+      "seed": "videos/linkin-park-from-zero.jpg",
+      "alt": "Linkin Park performing to an arena crowd"
+    },
+    "content": "<!-- wp:paragraph --><p>Linkin Park’s From Zero world tour runs on Adamson across five continents.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>More details, photos and system specifications will follow.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "New Training Centre Opens in Port Perry",
+    "excerpt": "Adamson’s new training centre hosts certification courses for system technicians and integrators.",
+    "category": "Adamson",
+    "type": "Press release",
+    "date": "2025-02-12 10:00:00",
+    "image": {
+      "seed": "applications/install-background.jpg",
+      "alt": "Installed loudspeakers in a venue"
+    },
+    "content": "<!-- wp:paragraph --><p>Adamson’s new training centre hosts certification courses for system technicians and integrators.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>More details, photos and system specifications will follow.</p><!-- /wp:paragraph -->"
+  },
+  {
+    "title": "XG Series Amplifiers Now Shipping",
+    "excerpt": "The XG Series brings Milan-ready amplification to every Adamson system.",
+    "category": "Adamson",
+    "type": "Launch",
+    "date": "2024-10-21 10:00:00",
+    "image": {
+      "seed": "featured-products/xg8.jpg",
+      "alt": "XG8 amplifier"
+    },
+    "content": "<!-- wp:paragraph --><p>The XG Series brings Milan-ready amplification to every Adamson system.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>More details, photos and system specifications will follow.</p><!-- /wp:paragraph -->"
+  }
+]

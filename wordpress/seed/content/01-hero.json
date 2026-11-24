@@ -1,0 +1,39 @@
+{
+  "block": "adamson/hero",
+  "data": {
+    "heading": "Adamson Systems Engineering: Professional Loudspeaker Systems",
+    "primary": {
+      "label": "Products",
+      "url": "/products"
+    },
+    "secondary": {
+      "label": "Technology",
+      "url": "/technology"
+    },
+    "background": null,
+    "product": {
+      "seed": "hero/hero-speaker.png",
+      "alt": "Exploded view of an Adamson compression driver"
+    },
+    "artists": [
+      {
+        "name": "Drake"
+      },
+      {
+        "name": "Lady Gaga"
+      },
+      {
+        "name": "Imagine Dragons"
+      },
+      {
+        "name": "Paul McCartney"
+      },
+      {
+        "name": "Linkin Park"
+      },
+      {
+        "name": "David Guetta"
+      }
+    ]
+  }
+}

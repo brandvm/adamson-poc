@@ -1,0 +1,45 @@
+{
+  "fields": [
+    { "key": "footer", "type": "group", "label": "Footer",
+      "fields": [
+        { "key": "logo", "type": "image", "label": "Logo", "help": "Square logo (mark + wordmark), shown at 113 × 113." },
+        { "key": "address", "type": "textarea", "label": "Address", "rows": 2 },
+        { "key": "phone", "type": "text", "label": "Phone number" },
+        { "key": "columns", "type": "repeater", "label": "Link columns", "itemName": "column", "itemLabel": "title", "max": 4,
+          "fields": [
+            { "key": "title", "type": "text", "label": "Column title" },
+            { "key": "links", "type": "repeater", "label": "Links", "itemName": "link", "itemLabel": "label", "max": 6,
+              "fields": [
+                { "key": "label", "type": "text", "label": "Label" },
+                { "key": "url", "type": "url", "label": "Link" }
+              ] }
+          ] },
+        { "key": "newsletter", "type": "group", "label": "Newsletter",
+          "fields": [
+            { "key": "title", "type": "text", "label": "Title" },
+            { "key": "text", "type": "textarea", "label": "Text", "rows": 2 },
+            { "key": "placeholder", "type": "text", "label": "Email field placeholder" },
+            { "key": "button", "type": "text", "label": "Button label" },
+            { "key": "action", "type": "url", "label": "Form action URL", "help": "Where the sign-up form posts (e.g. the mailing-list provider's form URL)." }
+          ] },
+        { "key": "social", "type": "repeater", "label": "Social links", "itemName": "social link", "itemLabel": "platform", "max": 6,
+          "fields": [
+            { "key": "platform", "type": "select", "label": "Platform", "default": "linkedin",
+              "options": [
+                { "label": "LinkedIn", "value": "linkedin" },
+                { "label": "Instagram", "value": "instagram" },
+                { "label": "Facebook", "value": "facebook" },
+                { "label": "YouTube", "value": "youtube" }
+              ] },
+            { "key": "url", "type": "url", "label": "Link" }
+          ] },
+        { "key": "copyright", "type": "text", "label": "Copyright line" },
+        { "key": "legal", "type": "repeater", "label": "Bottom row links", "itemName": "link", "itemLabel": "label", "max": 10,
+          "help": "Shown bottom right, separated by dots.",
+          "fields": [
+            { "key": "label", "type": "text", "label": "Label" },
+            { "key": "url", "type": "url", "label": "Link" }
+          ] }
+      ] }
+  ]
+}

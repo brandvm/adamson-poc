@@ -1,0 +1,50 @@
+{
+  "block": "adamson/category-bento",
+  "data": {
+    "anchor": "software",
+    "theme": "light",
+    "featurePosition": "right",
+    "eyebrow": "2 tools",
+    "heading": "Software",
+    "description": "The brilliance behind the scenes.",
+    "button": {
+      "label": "Explore Software",
+      "url": "/products/software"
+    },
+    "feature": {
+      "eyebrow": "Free · Windows",
+      "title": "ArrayIntelligence",
+      "text": "One platform to design, deploy and diagnose an Adamson system: room design, simulation, control and metering.",
+      "link": {
+        "label": "Download ArrayIntelligence",
+        "url": "/support/downloads"
+      },
+      "background": {
+        "seed": "products-page/software-bg.png",
+        "alt": ""
+      },
+      "image": {
+        "seed": "products-page/software-laptop.png",
+        "alt": "ArrayIntelligence running on a laptop"
+      }
+    },
+    "categories": [
+      {
+        "title": "Blueprint AV™",
+        "text": "Free design and simulation, native for PC and Mac.",
+        "tags": "2D Auto Shoot, 3D SPL, Virtual microphones",
+        "link": {
+          "url": "/products/software#blueprint-av"
+        }
+      },
+      {
+        "title": "Tutorials",
+        "text": "Education Series for ArrayIntelligence and the Blueprint AV™ Tutorial Series.",
+        "tags": "ArrayIntelligence, Blueprint AV™",
+        "link": {
+          "url": "/support/training"
+        }
+      }
+    ]
+  }
+}

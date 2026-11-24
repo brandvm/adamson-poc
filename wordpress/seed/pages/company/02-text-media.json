@@ -1,0 +1,33 @@
+{
+  "block": "adamson/text-media",
+  "data": {
+    "anchor": "story",
+    "theme": "light",
+    "imageSide": "right",
+    "eyebrow": "Our story",
+    "heading": "Who we are",
+    "text": "Adamson was founded by Brock Adamson in 1983 with one goal: build the most accurate loudspeakers in the world.\n\nForty years on, every Adamson system is still designed, built and tested in Port Perry, Ontario, and plays on the biggest tours and in the most demanding venues on every continent.",
+    "button": {
+      "label": "History & Patents",
+      "url": "/company/history"
+    },
+    "image": {
+      "seed": "stats/shows-and-events.jpg",
+      "alt": "Crowd at a concert"
+    },
+    "points": [
+      {
+        "value": "1983",
+        "label": "Founded"
+      },
+      {
+        "value": "60+",
+        "label": "Countries"
+      },
+      {
+        "value": "100%",
+        "label": "Made in Canada"
+      }
+    ]
+  }
+}

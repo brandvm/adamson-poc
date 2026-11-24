@@ -1,0 +1,58 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "why",
+  "theme": "dark",
+  "columns": "4",
+  "numbered": true,
+  "eyebrow": "Why Adamson",
+  "heading": "Built to stay in place for decades",
+  "description": "",
+  "button": {
+   "label": "",
+   "url": ""
+  },
+  "items": [
+   {
+    "title": "Discreet by design",
+    "meta": "",
+    "text": "Compact cabinets, custom colours and rigging that fits heritage and modern rooms.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   },
+   {
+    "title": "Networked",
+    "meta": "",
+    "text": "Milan AVB across amplifiers, processing and switching, monitored from one place.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   },
+   {
+    "title": "Weather-ready",
+    "meta": "",
+    "text": "Weatherised versions for open-air stadiums and outdoor venues.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   },
+   {
+    "title": "Long-term support",
+    "meta": "",
+    "text": "Spare parts and service for the life of the installation.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   }
+  ]
+ }
+}

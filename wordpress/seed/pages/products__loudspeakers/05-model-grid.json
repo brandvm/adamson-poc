@@ -1,0 +1,15 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "dark",
+    "button": {
+      "label": "Explore IS Series",
+      "url": "/products/loudspeakers/is-series"
+    },
+    "description": "Installation versions of Adamson’s touring designs, finished and rigged for permanent venues.",
+    "anchor": "is-series",
+    "eyebrow": "12 models",
+    "heading": "IS Series",
+    "series": "IS Series"
+  }
+}

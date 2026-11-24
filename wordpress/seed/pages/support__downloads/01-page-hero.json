@@ -1,0 +1,15 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Support",
+    "heading": "Documentation & Downloads",
+    "button": null,
+    "wordmark": "DOWNLOADS",
+    "background": {
+      "seed": "technology/software-background.jpg",
+      "alt": "Adamson software on a laptop"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "block": "adamson/testimonials",
+  "data": {
+    "eyebrow": "User recommendations",
+    "title": "Trusted by top engineers",
+    "button": { "label": "User Recommendations", "url": "/news#user-recommendations" },
+    "featured": {
+      "image": { "seed": "testimonials/paul-boothroyd.jpg", "alt": "Arena concert with an Adamson PA, lights and pyrotechnics" },
+      "quote": "The best delivery of high-mid I hear today.",
+      "name": "Paul (PAB) Boothroyd",
+      "role": "FOH — Paul McCartney, AC/DC",
+      "button": { "label": "Watch Video", "url": "#" }
+    },
+    "stat": {
+      "value": "27 FOH",
+      "label": "engineers and production managers",
+      "avatars": [
+        { "image": { "seed": "testimonials/avatar-1.png", "alt": "" } },
+        { "image": { "seed": "testimonials/avatar-2.png", "alt": "" } },
+        { "image": { "seed": "testimonials/avatar-1.png", "alt": "" } },
+        { "image": { "seed": "testimonials/avatar-2.png", "alt": "" } }
+      ]
+    },
+    "quotes": [
+      { "quote": "The low end capabilities from the flown rig and flown subs were about as big as I’ve heard.", "name": "Chris Rabold", "role": "FOH — Lady Gaga", "button": { "label": "Watch Video", "url": "#" } },
+      { "quote": "The high end of this PA is one of the clearest and smoothest I've ever heard.", "name": "Demetrius Moore", "role": "FOH — Drake", "button": { "label": "Watch Video", "url": "#" } },
+      { "quote": "The clarity is impeccable. I rank it number one.", "name": "Kyle Hamilton", "role": "FOH — Pharrell Williams, Rihanna", "button": { "label": "", "url": "" } }
+    ]
+  }
+}

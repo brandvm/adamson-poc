@@ -1,0 +1,33 @@
+{
+  "name": "adamson/category-bento",
+  "title": "Category bento",
+  "description": "Header and a bento: one large photo card next to a column of category cards (title, description, tags, arrow link).",
+  "icon": "screenoptions",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor", "help": "Section id for links, without #, e.g. electronics." },
+    { "key": "theme", "type": "select", "label": "Background", "default": "dark",
+      "options": [ { "label": "Dark", "value": "dark" }, { "label": "Light", "value": "light" } ] },
+    { "key": "featurePosition", "type": "select", "label": "Photo card side", "default": "left",
+      "options": [ { "label": "Left", "value": "left" }, { "label": "Right", "value": "right" } ] },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button" },
+    { "key": "feature", "type": "group", "label": "Photo card",
+      "fields": [
+        { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "text", "type": "textarea", "label": "Description" },
+        { "key": "link", "type": "link", "label": "Button" },
+        { "key": "background", "type": "image", "label": "Photo" },
+        { "key": "image", "type": "image", "label": "Cut-out", "help": "Optional transparent PNG over the photo." }
+      ] },
+    { "key": "categories", "type": "repeater", "label": "Category cards", "itemName": "category", "itemLabel": "title",
+      "fields": [
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "text", "type": "textarea", "label": "Description" },
+        { "key": "tags", "type": "text", "label": "Tags", "help": "Comma separated, e.g. NDS, MS8.2" },
+        { "key": "link", "type": "link", "label": "Link", "help": "Only the URL is used, for the arrow button." }
+      ] }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+ "block": "adamson/project-grid",
+ "data": {
+  "anchor": "projects",
+  "theme": "dark",
+  "eyebrow": "Case studies",
+  "heading": "All projects",
+  "description": "Filter by application, region or the Adamson products used.",
+  "button": {
+   "label": "",
+   "url": ""
+  },
+  "applications": "",
+  "limit": 0,
+  "filters": true
+ }
+}

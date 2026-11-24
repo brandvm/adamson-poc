@@ -1,0 +1,12 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "dark",
+    "button": null,
+    "description": "Bring analog, AES/EBU and USB sources onto a Milan network.",
+    "anchor": "media-converters",
+    "eyebrow": "3 models",
+    "heading": "Media Converters",
+    "series": "Media Converters"
+  }
+}

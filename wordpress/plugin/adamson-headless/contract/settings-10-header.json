@@ -1,0 +1,19 @@
+{
+  "fields": [
+    { "key": "logo", "type": "image", "label": "Logo", "help": "Shown in the header." },
+    { "key": "nav", "type": "repeater", "label": "Header navigation", "itemName": "link", "itemLabel": "label", "max": 7,
+      "fields": [
+        { "key": "label", "type": "text", "label": "Label" },
+        { "key": "url", "type": "url", "label": "Link" },
+        { "key": "dropdown", "type": "toggle", "label": "Shows a dropdown arrow" },
+        { "key": "children", "type": "repeater", "label": "Dropdown links", "itemName": "link", "itemLabel": "label", "max": 10,
+          "fields": [
+            { "key": "label", "type": "text", "label": "Label" },
+            { "key": "url", "type": "url", "label": "Link" },
+            { "key": "text", "type": "text", "label": "Short description" }
+          ] }
+      ] },
+    { "key": "login", "type": "link", "label": "Login link" },
+    { "key": "cta", "type": "link", "label": "Header button" }
+  ]
+}

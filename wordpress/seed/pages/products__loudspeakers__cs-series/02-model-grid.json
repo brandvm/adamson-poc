@@ -1,0 +1,12 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "dark",
+    "button": null,
+    "description": "",
+    "anchor": "models",
+    "eyebrow": "7 models",
+    "heading": "Models",
+    "series": "CS Series"
+  }
+}

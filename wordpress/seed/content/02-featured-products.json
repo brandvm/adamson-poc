@@ -1,0 +1,64 @@
+{
+  "block": "adamson/featured-products",
+  "data": {
+    "nextLabel": "Next",
+    "slides": [
+      {
+        "name": "Vergence Group",
+        "word": "VERGENCE",
+        "logo": {
+          "seed": "featured-products/vgt-logo.svg",
+          "alt": "Vergence Group VGt"
+        },
+        "models": "XX models",
+        "background": null,
+        "product": {
+          "seed": "featured-products/vgt-product.png",
+          "alt": "Adamson VGt line array cabinet"
+        },
+        "thumbnail": {
+          "seed": "featured-products/vgt-background.png",
+          "alt": ""
+        },
+        "description": "Take a look at Adamson’s flagship product line.",
+        "button": {
+          "label": "Explore Line",
+          "url": "#"
+        },
+        "detailImage": {
+          "seed": "featured-products/vgx-detail.png",
+          "alt": "Close-up of the VGx grille"
+        },
+        "detailLink": "#"
+      },
+      {
+        "name": "XG Integration Amplifiers",
+        "word": "XG",
+        "logo": {
+          "seed": "products-in-action/xg-logo.png",
+          "alt": "XG"
+        },
+        "models": "",
+        "background": {
+          "seed": "featured-products/xg8.jpg",
+          "alt": "Adamson XG amplifier"
+        },
+        "product": null,
+        "thumbnail": {
+          "seed": "featured-products/xg8.jpg",
+          "alt": ""
+        },
+        "description": "",
+        "button": {
+          "label": "Explore Line",
+          "url": "#"
+        },
+        "detailImage": {
+          "seed": "featured-products/xg8-detail.jpg",
+          "alt": "Close-up of the XG amplifier's channel cards and front panel"
+        },
+        "detailLink": "#"
+      }
+    ]
+  }
+}

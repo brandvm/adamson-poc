@@ -1,0 +1,71 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "dark",
+    "description": "Content for this page is still being written; the sections follow the sitemap.",
+    "eyebrow": "6 areas",
+    "heading": "How an Adamson system is built",
+    "rows": [
+      {
+        "eyebrow": "Transducers",
+        "title": "Transducers",
+        "text": "Drivers designed and built in-house. Adamson designs and manufactures its own transducers, so every cabinet starts with parts made for it.",
+        "image": {
+          "seed": "technology/transducers-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Wave shaping",
+        "title": "Wave shaping",
+        "text": "Control where the sound goes. Waveguides and enclosure geometry keep coverage even and predictable from the front row to the back.",
+        "image": {
+          "seed": "products-page/series-cs.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Amplification",
+        "title": "Amplification",
+        "text": "Power matched to the box. Onboard modules and XG amplifiers are tuned to the loudspeakers they drive.",
+        "image": {
+          "seed": "technology/amplification-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "DSP and network",
+        "title": "DSP and network",
+        "text": "Milan from end to end. Processing and Milan AVB networking carry audio, control and monitoring over one connection.",
+        "image": {
+          "seed": "products-page/electronics-xg.png",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Software",
+        "title": "Software",
+        "text": "Design, deploy, diagnose. Blueprint AV and ArrayIntelligence take a system from prediction to show day.",
+        "image": {
+          "seed": "technology/software-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Research and development",
+        "title": "Research and development",
+        "text": "Engineered in Port Perry. Research, testing and manufacturing happen under one roof in Ontario, Canada.",
+        "image": {
+          "seed": "stats/building-loudspeakers.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

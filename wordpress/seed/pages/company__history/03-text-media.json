@@ -1,0 +1,33 @@
+{
+  "block": "adamson/text-media",
+  "data": {
+    "anchor": "",
+    "theme": "light",
+    "imageSide": "right",
+    "eyebrow": "Patents",
+    "heading": "Engineered first",
+    "text": "Adamson holds patents across transducer design, wave shaping and cabinet construction. The full patent list is being confirmed and will be published here.",
+    "button": {
+      "label": "Technology",
+      "url": "/technology"
+    },
+    "image": {
+      "seed": "technology/transducers-background.jpg",
+      "alt": "Adamson transducer"
+    },
+    "points": [
+      {
+        "value": "Kevlar®",
+        "label": "Cone technology"
+      },
+      {
+        "value": "Controlled",
+        "label": "Wave shaping"
+      },
+      {
+        "value": "In-house",
+        "label": "Transducers"
+      }
+    ]
+  }
+}

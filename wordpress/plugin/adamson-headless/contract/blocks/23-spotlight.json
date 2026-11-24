@@ -1,0 +1,17 @@
+{
+  "name": "adamson/spotlight",
+  "title": "Spotlight",
+  "description": "Dark section: large product photo on the right; eyebrow, big title, description, button and a row of tags on the left.",
+  "icon": "star-filled",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor", "help": "Section id for links, without #, e.g. immersive." },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button" },
+    { "key": "listLabel", "type": "text", "label": "Tags label", "help": "e.g. System models" },
+    { "key": "tags", "type": "text", "label": "Tags", "help": "Comma separated." },
+    { "key": "background", "type": "image", "label": "Studio background" },
+    { "key": "image", "type": "image", "label": "Product cut-out", "help": "Transparent PNG, same framing as the background." }
+  ]
+}

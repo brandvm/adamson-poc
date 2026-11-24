@@ -1,0 +1,23 @@
+{
+  "block": "adamson/applications",
+  "data": {
+    "cards": [
+      {
+        "word": "TOURING",
+        "label": "Applications",
+        "link": { "label": "Touring applications", "url": "/applications/touring" },
+        "background": { "seed": "applications/touring-background.jpg", "alt": "Singer performing on stage above an Adamson system under blue stage lights" },
+        "foreground": { "seed": "applications/touring-foreground.png", "alt": "" },
+        "tint": "cool"
+      },
+      {
+        "word": "INSTALL",
+        "label": "Installed sound",
+        "link": { "label": "Installed sound", "url": "/applications/installed-sound" },
+        "background": { "seed": "applications/install-background.jpg", "alt": "" },
+        "foreground": { "seed": "applications/install-foreground.png", "alt": "Technician standing next to a stack of Adamson loudspeakers in silhouette" },
+        "tint": "warm"
+      }
+    ]
+  }
+}

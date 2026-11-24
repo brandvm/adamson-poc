@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Contact",
+    "heading": "Find Adamson near you",
+    "button": {
+      "label": "Send a message",
+      "url": "#contact-form"
+    },
+    "wordmark": "CONTACT",
+    "background": {
+      "seed": "connect/background.jpg",
+      "alt": "Concert with an Adamson system"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

@@ -1,0 +1,48 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "systems",
+  "theme": "light",
+  "columns": "3",
+  "numbered": false,
+  "eyebrow": "Recommended systems",
+  "heading": "Systems that fit",
+  "description": "",
+  "button": {
+   "label": "All products",
+   "url": "/products"
+  },
+  "items": [
+   {
+    "title": "CS Series",
+    "meta": "Line source",
+    "text": "Left-centre-right systems for contemporary churches.",
+    "link": {
+     "label": "CS Series",
+     "url": "/products/loudspeakers/cs-series"
+    },
+    "image": null
+   },
+   {
+    "title": "IS Series",
+    "meta": "Line source",
+    "text": "Compact arrays for traditional and historic spaces.",
+    "link": {
+     "label": "IS Series",
+     "url": "/products/loudspeakers/is-series"
+    },
+    "image": null
+   },
+   {
+    "title": "S Series",
+    "meta": "Line source",
+    "text": "Small-format arrays for chapels and smaller sanctuaries.",
+    "link": {
+     "label": "S Series",
+     "url": "/products/loudspeakers/s-series"
+    },
+    "image": null
+   }
+  ]
+ }
+}

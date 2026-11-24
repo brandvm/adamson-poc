@@ -1,0 +1,39 @@
+{
+ "block": "adamson/page-hero",
+ "data": {
+  "eyebrow": "Installed Sound · Houses of Worship",
+  "heading": "Clear speech and full-band worship, simple enough for volunteer teams",
+  "button": {
+   "label": "See projects",
+   "url": "#projects"
+  },
+  "wordmark": "WORSHIP",
+  "background": {
+   "seed": "videos/stage-smoke.jpg",
+   "alt": "Worship stage with lighting"
+  },
+  "overlay": null,
+  "anchors": [
+   {
+    "label": "Challenges",
+    "meta": "What matters",
+    "url": "#challenges"
+   },
+   {
+    "label": "Systems",
+    "meta": "Recommended",
+    "url": "#systems"
+   },
+   {
+    "label": "Projects",
+    "meta": "Case studies",
+    "url": "#projects"
+   },
+   {
+    "label": "Contact",
+    "meta": "Talk to us",
+    "url": "/contact"
+   }
+  ]
+ }
+}

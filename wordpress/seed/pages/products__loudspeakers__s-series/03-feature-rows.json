@@ -1,0 +1,41 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "",
+    "eyebrow": "Set the standard",
+    "heading": "Why S Series",
+    "rows": [
+      {
+        "eyebrow": "Weight",
+        "title": "Light and loud",
+        "text": "High output from compact, light cabinets: easier to fly, faster to set up.",
+        "image": {
+          "seed": "products-page/series-s.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Range",
+        "title": "From fills to mains",
+        "text": "Line source, point source and subwoofers in one matched family.",
+        "image": {
+          "seed": "applications/install-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Rigging",
+        "title": "Quick to deploy",
+        "text": "Integrated rigging designed for fast, repeatable hangs.",
+        "image": {
+          "seed": "applications/touring-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

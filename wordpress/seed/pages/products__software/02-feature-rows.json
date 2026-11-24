@@ -1,0 +1,57 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "dark",
+    "description": "Design, deploy and diagnose an Adamson system with free tools.",
+    "eyebrow": "3 tools",
+    "heading": "Software",
+    "rows": [
+      {
+        "eyebrow": "Free · Windows",
+        "title": "ArrayIntelligence",
+        "text": "One platform to design, deploy and diagnose an Adamson system: room design, simulation, control and metering.",
+        "image": {
+          "seed": "products-page/software-laptop.png",
+          "alt": ""
+        },
+        "link": {
+          "label": "Download ArrayIntelligence",
+          "url": "/support/downloads"
+        }
+      },
+      {
+        "eyebrow": "Utilities",
+        "title": "Array Tools",
+        "text": "Field utilities for rigging, delay and system checks.",
+        "image": {
+          "seed": "technology/software-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Design",
+        "title": "Blueprint AV",
+        "text": "Prediction and design software for Adamson systems.",
+        "image": {
+          "seed": "technology/software-product.png",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Library",
+        "title": "Downloads and updates",
+        "text": "Installers, firmware and release notes, in Documentation & Downloads.",
+        "image": {
+          "seed": "products-page/software-bg.png",
+          "alt": ""
+        },
+        "link": {
+          "label": "Go to downloads",
+          "url": "/support/downloads"
+        }
+      }
+    ]
+  }
+}

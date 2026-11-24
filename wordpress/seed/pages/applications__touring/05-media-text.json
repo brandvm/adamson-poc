@@ -1,0 +1,37 @@
+{
+ "block": "adamson/media-text",
+ "data": {
+  "anchor": "support",
+  "theme": "dark",
+  "imagePosition": "right",
+  "eyebrow": "On the road",
+  "heading": "Support that travels with the tour",
+  "text": "From the first system design to the last show, Adamson engineers are part of the team.",
+  "points": [
+   {
+    "title": "System design",
+    "text": "Array Intelligence models and drawings for every venue on the routing."
+   },
+   {
+    "title": "Training",
+    "text": "Certification for system techs and crews, on site or at our facility."
+   },
+   {
+    "title": "24/7 tour support",
+    "text": "A direct line to Adamson engineers, wherever the show is."
+   },
+   {
+    "title": "Spares and service",
+    "text": "Parts and loan stock through our regional partners."
+   }
+  ],
+  "button": {
+   "label": "Contact support",
+   "url": "/support"
+  },
+  "image": {
+   "seed": "stats/shows-and-events.jpg",
+   "alt": "Crowd at a live event"
+  }
+ }
+}

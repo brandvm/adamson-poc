@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Loudspeakers",
+    "heading": "Vergence Group: Adamson’s flagship platform: line source, subwoofer and point source cabinets with onboard amplification, built to work as one system.",
+    "button": {
+      "label": "See the models",
+      "url": "#models"
+    },
+    "wordmark": "VERGENCE",
+    "background": {
+      "seed": "products-page/series-vergence.jpg",
+      "alt": "Vergence Group"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

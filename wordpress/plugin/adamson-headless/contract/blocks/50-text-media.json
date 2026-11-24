@@ -1,0 +1,93 @@
+{
+  "name": "adamson/text-media",
+  "title": "Text and image",
+  "description": "Eyebrow, title, paragraphs and a button beside a rounded photo, with an optional row of key facts. For story, manufacturing and sustainability sections.",
+  "icon": "align-pull-left",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Section id",
+      "help": "Optional, for links like #careers. Lowercase, no spaces."
+    },
+    {
+      "key": "theme",
+      "type": "select",
+      "label": "Theme",
+      "default": "dark",
+      "options": [
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Light (white)",
+          "value": "light"
+        }
+      ]
+    },
+    {
+      "key": "imageSide",
+      "type": "select",
+      "label": "Photo side",
+      "default": "right",
+      "options": [
+        {
+          "label": "Right",
+          "value": "right"
+        },
+        {
+          "label": "Left",
+          "value": "left"
+        }
+      ]
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow"
+    },
+    {
+      "key": "heading",
+      "type": "textarea",
+      "label": "Title"
+    },
+    {
+      "key": "text",
+      "type": "textarea",
+      "label": "Text",
+      "help": "Leave an empty line between paragraphs."
+    },
+    {
+      "key": "button",
+      "type": "link",
+      "label": "Button"
+    },
+    {
+      "key": "image",
+      "type": "image",
+      "label": "Photo",
+      "help": "4:3 landscape. Leave empty for text only."
+    },
+    {
+      "key": "points",
+      "type": "repeater",
+      "label": "Key facts",
+      "itemName": "fact",
+      "itemLabel": "value",
+      "fields": [
+        {
+          "key": "value",
+          "type": "text",
+          "label": "Value",
+          "help": "e.g. 1983 or 100%"
+        },
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Label"
+        }
+      ]
+    }
+  ]
+}

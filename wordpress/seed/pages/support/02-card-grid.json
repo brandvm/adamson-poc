@@ -1,0 +1,59 @@
+{
+  "block": "adamson/card-grid",
+  "data": {
+    "anchor": "",
+    "theme": "light",
+    "columns": "4",
+    "imageRatio": "landscape",
+    "eyebrow": "How can we help",
+    "heading": "Support",
+    "description": "Everything you need to design, run and maintain an Adamson system.",
+    "button": null,
+    "cards": [
+      {
+        "image": null,
+        "eyebrow": "Library",
+        "title": "Documentation & Downloads",
+        "text": "Manuals, data sheets, drawings, software and firmware in one searchable library.",
+        "tags": "330+ files",
+        "link": {
+          "label": "Open the library",
+          "url": "/support/downloads"
+        }
+      },
+      {
+        "image": null,
+        "eyebrow": "Learn",
+        "title": "Training & Education",
+        "text": "Courses, certification and videos for system technicians and integrators.",
+        "tags": "Online, In person",
+        "link": {
+          "label": "See courses",
+          "url": "/support/training"
+        }
+      },
+      {
+        "image": null,
+        "eyebrow": "Account",
+        "title": "Login",
+        "text": "Approved clients and admins sign in for pricing, technical resources and orders.",
+        "tags": "",
+        "link": {
+          "label": "Sign in",
+          "url": "/login"
+        }
+      },
+      {
+        "image": null,
+        "eyebrow": "Help",
+        "title": "Contact support",
+        "text": "Talk to an Adamson engineer or find your regional distributor.",
+        "tags": "24/7 touring",
+        "link": {
+          "label": "Contact us",
+          "url": "/contact"
+        }
+      }
+    ]
+  }
+}

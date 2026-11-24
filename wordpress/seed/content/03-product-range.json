@@ -1,0 +1,17 @@
+{
+  "block": "adamson/product-range",
+  "data": {
+    "eyebrow": "Loudspeakers",
+    "title": "Products",
+    "description": "Designed and Manufactured in Canada.",
+    "allLabel": "All",
+    "count": {
+      "label": "Loudspeaker models",
+      "value": "40",
+      "button": {
+        "label": "View Loudspeakers",
+        "url": "#"
+      }
+    }
+  }
+}

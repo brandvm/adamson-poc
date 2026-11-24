@@ -1,0 +1,39 @@
+{
+ "block": "adamson/page-hero",
+ "data": {
+  "eyebrow": "Applications · Installed Sound",
+  "heading": "Permanent systems for venues, designed with the integrators who build them",
+  "button": {
+   "label": "Start from your venue",
+   "url": "#venues"
+  },
+  "wordmark": "INSTALL",
+  "background": {
+   "seed": "applications/install-background.jpg",
+   "alt": "Installed Adamson loudspeakers"
+  },
+  "overlay": null,
+  "anchors": [
+   {
+    "label": "Integrators",
+    "meta": "Tools & support",
+    "url": "#integrators"
+   },
+   {
+    "label": "Venues",
+    "meta": "3 types",
+    "url": "#venues"
+   },
+   {
+    "label": "Why Adamson",
+    "meta": "4 reasons",
+    "url": "#why"
+   },
+   {
+    "label": "Projects",
+    "meta": "Case studies",
+    "url": "#projects"
+   }
+  ]
+ }
+}

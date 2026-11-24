@@ -1,0 +1,48 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "systems",
+  "theme": "light",
+  "columns": "3",
+  "numbered": false,
+  "eyebrow": "Recommended systems",
+  "heading": "Systems that fit",
+  "description": "",
+  "button": {
+   "label": "All products",
+   "url": "/products"
+  },
+  "items": [
+   {
+    "title": "IS Series",
+    "meta": "Line source",
+    "text": "Compact installation line arrays and point sources in custom finishes.",
+    "link": {
+     "label": "IS Series",
+     "url": "/products/loudspeakers/is-series"
+    },
+    "image": null
+   },
+   {
+    "title": "S Series",
+    "meta": "Line source",
+    "text": "Small-format line arrays with big-system sound.",
+    "link": {
+     "label": "S Series",
+     "url": "/products/loudspeakers/s-series"
+    },
+    "image": null
+   },
+   {
+    "title": "CS Series",
+    "meta": "Line source",
+    "text": "Network-ready arrays with built-in amplification for larger halls.",
+    "link": {
+     "label": "CS Series",
+     "url": "/products/loudspeakers/cs-series"
+    },
+    "image": null
+   }
+  ]
+ }
+}

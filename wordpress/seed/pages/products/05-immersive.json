@@ -1,0 +1,23 @@
+{
+  "block": "adamson/spotlight",
+  "data": {
+    "anchor": "immersive",
+    "eyebrow": "Immersive",
+    "heading": "FletcherMachine",
+    "description": "Reference class spatial audio rendering system.",
+    "button": {
+      "label": "Explore FletcherMachine",
+      "url": "/products/fletchermachine"
+    },
+    "listLabel": "System models",
+    "tags": "Virtual, Traveler Lite, Traveler, Stage, Stage Extended",
+    "background": {
+      "seed": "products-page/fm-layer1.png",
+      "alt": ""
+    },
+    "image": {
+      "seed": "products-page/fm-layer2.png",
+      "alt": "FletcherMachine spatial audio processor"
+    }
+  }
+}

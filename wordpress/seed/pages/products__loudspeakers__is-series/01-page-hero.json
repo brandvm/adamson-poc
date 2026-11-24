@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Loudspeakers",
+    "heading": "IS Series: Installation versions of Adamson’s touring designs, finished and rigged for permanent venues.",
+    "button": {
+      "label": "See the models",
+      "url": "#models"
+    },
+    "wordmark": "IS SERIES",
+    "background": {
+      "seed": "products-page/series-is.jpg",
+      "alt": "IS Series"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Company",
+    "heading": "Building loudspeakers in Canada since 1983",
+    "button": {
+      "label": "Our story",
+      "url": "#story"
+    },
+    "wordmark": "COMPANY",
+    "background": {
+      "seed": "stats/building-loudspeakers.jpg",
+      "alt": "Adamson loudspeaker on the production line"
+    },
+    "overlay": null,
+    "anchors": [
+      {
+        "label": "Story",
+        "meta": "Since 1983",
+        "url": "#story"
+      },
+      {
+        "label": "Team",
+        "meta": "Leadership",
+        "url": "#team"
+      },
+      {
+        "label": "Shows",
+        "meta": "Exhibitions",
+        "url": "#shows"
+      },
+      {
+        "label": "Sustainability",
+        "meta": "Made to last",
+        "url": "#sustainability"
+      }
+    ]
+  }
+}

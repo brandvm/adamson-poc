@@ -1,0 +1,41 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "",
+    "eyebrow": "Integration focused",
+    "heading": "Why IS Series",
+    "rows": [
+      {
+        "eyebrow": "Integration",
+        "title": "Built for the building",
+        "text": "Install hardware, weather options and finishes that sit quietly in the architecture.",
+        "image": {
+          "seed": "applications/install-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Coverage",
+        "title": "Point source to line source",
+        "text": "Twelve models cover everything from under-balcony fills to arena mains.",
+        "image": {
+          "seed": "products-page/series-is.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Support",
+        "title": "Designed with integrators",
+        "text": "Prediction files, drawings and specs for every model in Documentation & Downloads.",
+        "image": {
+          "seed": "technology/software-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

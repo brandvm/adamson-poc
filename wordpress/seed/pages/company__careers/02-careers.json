@@ -1,0 +1,44 @@
+{
+  "block": "adamson/careers",
+  "data": {
+    "anchor": "roles",
+    "eyebrow": "Open roles",
+    "heading": "Join the team",
+    "description": "Build the world’s most accurate loudspeakers in Port Perry, Ontario.",
+    "roles": [
+      {
+        "title": "Acoustic Engineer",
+        "team": "Research & Development",
+        "location": "Port Perry, ON",
+        "type": "Full-time",
+        "text": "Design and measure new loudspeaker systems from concept to production.\n\nYou have a degree in acoustics or electrical engineering and experience with measurement and prediction tools."
+      },
+      {
+        "title": "Applications Engineer, Touring",
+        "team": "Technical Services",
+        "location": "Remote · EMEA",
+        "type": "Full-time",
+        "text": "Support rental partners and touring productions across Europe, from system design to show day."
+      },
+      {
+        "title": "CNC Machinist",
+        "team": "Manufacturing",
+        "location": "Port Perry, ON",
+        "type": "Full-time",
+        "text": "Machine cabinet parts on our 5-axis CNC line to tight tolerances."
+      },
+      {
+        "title": "Embedded Software Developer",
+        "team": "Software",
+        "location": "Port Perry, ON · Hybrid",
+        "type": "Full-time",
+        "text": "Build firmware for the XG Series and Milan network devices."
+      }
+    ],
+    "noRolesText": "There are no open roles right now. Send us a general application below.",
+    "formEyebrow": "Apply",
+    "formTitle": "Send your application",
+    "formText": "Pick a role or send a general application. Attach your resume and, if you have one, a portfolio.",
+    "successText": "Thanks — your application is in. We’ll be in touch within two weeks."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "adamson/applications",
+  "title": "Applications",
+  "description": "Two large photo cards (Touring / Install) with a huge layered word across the top, a label and an arrow link.",
+  "icon": "format-gallery",
+  "fields": [
+    { "key": "cards", "type": "repeater", "label": "Cards", "itemName": "card", "itemLabel": "label", "max": 2,
+      "fields": [
+        { "key": "word", "type": "text", "label": "Big word", "help": "Huge word across the top of the card, e.g. TOURING. It is stretched to fill the card width." },
+        { "key": "label", "type": "text", "label": "Label", "help": "Bottom-left text, e.g. Applications." },
+        { "key": "link", "type": "link", "label": "Link", "help": "Where the card and its arrow go. Only the URL is used; the label above is the visible text." },
+        { "key": "background", "type": "image", "label": "Background image", "help": "Full-card photo behind the big word (about 765 × 770, anchored to the bottom)." },
+        { "key": "foreground", "type": "image", "label": "Foreground cut-out", "help": "Optional transparent PNG with the same framing as the background; it sits in front of the big word." },
+        { "key": "tint", "type": "select", "label": "Word tint", "default": "cool",
+          "options": [ { "label": "Cool (violet)", "value": "cool" }, { "label": "Warm (copper)", "value": "warm" } ] }
+      ] }
+  ]
+}

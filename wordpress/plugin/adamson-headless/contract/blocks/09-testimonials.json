@@ -1,0 +1,33 @@
+{
+  "name": "adamson/testimonials",
+  "title": "Trusted by top engineers",
+  "description": "Testimonials: section header, a large photo quote, a stat card with avatars and up to three quote cards.",
+  "icon": "format-quote",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "title", "type": "text", "label": "Title" },
+    { "key": "button", "type": "link", "label": "Header button" },
+    { "key": "featured", "type": "group", "label": "Featured quote (large photo card)",
+      "fields": [
+        { "key": "image", "type": "image", "label": "Photo" },
+        { "key": "quote", "type": "textarea", "label": "Quote" },
+        { "key": "name", "type": "text", "label": "Name" },
+        { "key": "role", "type": "text", "label": "Role" },
+        { "key": "button", "type": "link", "label": "Button", "help": "e.g. Watch Video. Leave the label empty to hide it." }
+      ] },
+    { "key": "stat", "type": "group", "label": "Stat card",
+      "fields": [
+        { "key": "value", "type": "text", "label": "Value", "help": "e.g. 27 FOH. The number counts up when scrolled into view." },
+        { "key": "label", "type": "text", "label": "Label" },
+        { "key": "avatars", "type": "repeater", "label": "Avatars", "itemName": "avatar", "max": 6,
+          "fields": [ { "key": "image", "type": "image", "label": "Photo" } ] }
+      ] },
+    { "key": "quotes", "type": "repeater", "label": "Quote cards", "itemName": "quote", "itemLabel": "name", "max": 3,
+      "fields": [
+        { "key": "quote", "type": "textarea", "label": "Quote" },
+        { "key": "name", "type": "text", "label": "Name" },
+        { "key": "role", "type": "text", "label": "Role" },
+        { "key": "button", "type": "link", "label": "Button", "help": "e.g. Watch Video. Leave the label empty to hide it." }
+      ] }
+  ]
+}

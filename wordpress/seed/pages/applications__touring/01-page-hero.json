@@ -1,0 +1,39 @@
+{
+ "block": "adamson/page-hero",
+ "data": {
+  "eyebrow": "Applications · Touring",
+  "heading": "Touring systems that sound the same every night, in every city",
+  "button": {
+   "label": "See touring projects",
+   "url": "#projects"
+  },
+  "wordmark": "TOURING",
+  "background": {
+   "seed": "products-page/hero-1.jpg",
+   "alt": "Concert crowd in front of Adamson line arrays"
+  },
+  "overlay": null,
+  "anchors": [
+   {
+    "label": "Systems",
+    "meta": "Vergence · CS · E",
+    "url": "#systems"
+   },
+   {
+    "label": "Why Adamson",
+    "meta": "4 reasons",
+    "url": "#why"
+   },
+   {
+    "label": "Partners",
+    "meta": "Rental network",
+    "url": "#partners"
+   },
+   {
+    "label": "On the road",
+    "meta": "Support",
+    "url": "#support"
+   }
+  ]
+ }
+}

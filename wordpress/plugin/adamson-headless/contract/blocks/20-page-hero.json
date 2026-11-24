@@ -1,0 +1,20 @@
+{
+  "name": "adamson/page-hero",
+  "title": "Page hero",
+  "description": "Top of an inner page: rounded photo panel with eyebrow, title, button and a large faint word along the bottom, then a row of links to the page's sections.",
+  "icon": "cover-image",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "textarea", "label": "Title", "help": "The page's main heading (H1)." },
+    { "key": "button", "type": "link", "label": "Button", "help": "Gold button under the title." },
+    { "key": "wordmark", "type": "text", "label": "Large word", "help": "Faint word along the bottom of the photo, e.g. PRODUCTS. Leave empty to hide." },
+    { "key": "background", "type": "image", "label": "Background photo" },
+    { "key": "overlay", "type": "image", "label": "Overlay image", "help": "Optional transparent PNG layered over the photo (same framing)." },
+    { "key": "anchors", "type": "repeater", "label": "Section links", "itemName": "link", "itemLabel": "label",
+      "fields": [
+        { "key": "label", "type": "text", "label": "Label", "help": "e.g. Loudspeakers" },
+        { "key": "meta", "type": "text", "label": "Small text", "help": "e.g. 6 series" },
+        { "key": "url", "type": "text", "label": "Link", "help": "A section's anchor (e.g. #loudspeakers) or a page URL." }
+      ] }
+  ]
+}

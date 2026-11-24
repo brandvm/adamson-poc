@@ -1,0 +1,15 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "light",
+    "button": {
+      "label": "Explore M Series",
+      "url": "/products/loudspeakers/monitors"
+    },
+    "description": "Low-profile stage monitors with the same voicing as the main system.",
+    "anchor": "monitors",
+    "eyebrow": "5 models",
+    "heading": "M Series",
+    "series": "M Series"
+  }
+}

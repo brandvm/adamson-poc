@@ -1,0 +1,41 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "This page replaces the separate FletcherMachine website. The online manual moves to the library.",
+    "eyebrow": "FletcherMachine",
+    "heading": "Built for immersive shows",
+    "rows": [
+      {
+        "eyebrow": "Hardware",
+        "title": "Hardware units",
+        "text": "From the Virtual software version to Stage Extended for the largest productions.",
+        "image": {
+          "seed": "products-page/fm-layer2.png",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Gallery",
+        "title": "Renders",
+        "text": "How objects move through the room, rendered for every seat.",
+        "image": {
+          "seed": "technology/software-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Shows",
+        "title": "In action",
+        "text": "Immersive productions running on FletcherMachine.",
+        "image": {
+          "seed": "stats/shows-and-events.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

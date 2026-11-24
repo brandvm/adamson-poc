@@ -1,0 +1,47 @@
+{
+  "block": "adamson/card-grid",
+  "data": {
+    "anchor": "team",
+    "theme": "dark",
+    "columns": "4",
+    "imageRatio": "landscape",
+    "eyebrow": "Team",
+    "heading": "Leadership",
+    "description": "The people behind the products.",
+    "button": null,
+    "cards": [
+      {
+        "image": null,
+        "eyebrow": "Founder",
+        "title": "Brock Adamson",
+        "text": "Founder and Chief Designer",
+        "tags": "",
+        "link": null
+      },
+      {
+        "image": null,
+        "eyebrow": "Leadership",
+        "title": "Marc Bertrand",
+        "text": "Chief Executive Officer",
+        "tags": "",
+        "link": null
+      },
+      {
+        "image": null,
+        "eyebrow": "Leadership",
+        "title": "Jeremiah Sullivan",
+        "text": "Director of Education",
+        "tags": "",
+        "link": null
+      },
+      {
+        "image": null,
+        "eyebrow": "Engineering",
+        "title": "Benoit Moreau",
+        "text": "Head of Research & Development",
+        "tags": "",
+        "link": null
+      }
+    ]
+  }
+}

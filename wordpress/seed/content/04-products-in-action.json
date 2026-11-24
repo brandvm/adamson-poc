@@ -1,0 +1,69 @@
+{
+  "block": "adamson/products-in-action",
+  "data": {
+    "eyebrow": "Adamson products in action",
+    "slides": [
+      {
+        "product": {
+          "seedProduct": "VGx"
+        },
+        "title": "L'auditorium de la Maison",
+        "background": {
+          "seed": "products-in-action/auditorium.jpg",
+          "alt": "Concert hall auditorium with a flown Adamson line array"
+        }
+      },
+      {
+        "product": {
+          "seedProduct": "VGt"
+        },
+        "title": "Touring stage",
+        "background": {
+          "seed": "applications/touring-background.jpg",
+          "alt": "Touring concert stage"
+        }
+      },
+      {
+        "product": {
+          "seedProduct": "VGd"
+        },
+        "title": "Festival main stage",
+        "background": {
+          "seed": "videos/stage-smoke.jpg",
+          "alt": "Festival stage with smoke and lights"
+        }
+      },
+      {
+        "product": {
+          "seedProduct": "VGo"
+        },
+        "title": "Open-air concert",
+        "background": {
+          "seed": "connect/background.jpg",
+          "alt": "Open-air concert stage with flown line arrays"
+        }
+      },
+      {
+        "product": {
+          "seedProduct": "XG"
+        },
+        "title": "Live events",
+        "background": {
+          "seed": "stats/shows-and-events.jpg",
+          "alt": "Live event production"
+        }
+      },
+      {
+        "product": {
+          "seedProduct": "M Series"
+        },
+        "title": "Installed sound",
+        "background": {
+          "seed": "applications/install-background.jpg",
+          "alt": "Installed sound system on stage"
+        }
+      }
+    ],
+    "buttonLabel": "Explore Product"
+  }
+}

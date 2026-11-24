@@ -1,0 +1,24 @@
+{
+  "fields": [
+    { "key": "application", "type": "select", "label": "Application", "help": "Drives the Application filter on the Projects page and which application pages list this project.",
+      "options": [ { "label": "—", "value": "" }, "Touring", "Performing Arts", "Stadiums & Arenas", "Houses of Worship" ] },
+    { "key": "region", "type": "select", "label": "Region", "help": "Drives the Region filter.",
+      "options": [ { "label": "—", "value": "" }, "Americas", "Europe, Middle East & Africa", "Asia Pacific" ] },
+    { "key": "location", "type": "text", "label": "Location", "help": "City and country, e.g. Warsaw, Poland." },
+    { "key": "year", "type": "text", "label": "Year" },
+    { "key": "products", "type": "text", "label": "Products used", "help": "Comma-separated model names, e.g. VGt, VGs, XG8. Drives the Product filter." },
+    { "key": "partner", "type": "text", "label": "Integrator / rental partner" },
+    { "key": "summary", "type": "textarea", "label": "Summary", "help": "One or two sentences. Shown on project cards and at the top of the case study." },
+    { "key": "image", "type": "image", "label": "Main photo", "help": "Landscape photo of the venue or show, at least 1600px wide." },
+    { "key": "challenge", "type": "textarea", "label": "The challenge" },
+    { "key": "solution", "type": "textarea", "label": "The solution" },
+    { "key": "result", "type": "textarea", "label": "The result" },
+    { "key": "stats", "type": "repeater", "label": "Key numbers", "itemName": "number", "itemLabel": "label", "max": 4,
+      "fields": [ { "key": "value", "type": "text", "label": "Number", "help": "e.g. 12,000" }, { "key": "label", "type": "text", "label": "Label", "help": "e.g. seats covered" } ] },
+    { "key": "quote", "type": "group", "label": "Quote",
+      "fields": [ { "key": "text", "type": "textarea", "label": "Quote" }, { "key": "name", "type": "text", "label": "Name" }, { "key": "role", "type": "text", "label": "Role" } ] },
+    { "key": "gallery", "type": "repeater", "label": "More photos", "itemName": "photo", "max": 4,
+      "fields": [ { "key": "image", "type": "image", "label": "Photo" } ] },
+    { "key": "featured", "type": "toggle", "label": "Featured", "help": "Featured projects show first and on application pages." }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Company",
+    "heading": "History & Patents",
+    "button": null,
+    "wordmark": "HISTORY",
+    "background": {
+      "seed": "videos/stage-smoke.jpg",
+      "alt": "Stage with smoke and lights"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

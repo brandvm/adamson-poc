@@ -1,0 +1,36 @@
+{
+  "block": "adamson/technology",
+  "data": {
+    "eyebrow": "Technology",
+    "heading": "Audio first",
+    "features": [
+      {
+        "eyebrow": "Transducers",
+        "title": "M140 MF compression driver",
+        "text": "The patent-pending M140 MF compression drivers introduce cutting edge technologies redefining the quality of the mid frequency range.",
+        "link": { "label": "Learn More", "url": "#" },
+        "background": { "seed": "technology/transducers-background.jpg", "alt": "" },
+        "image": { "seed": "technology/transducers-product.png", "alt": "Adamson M140 MF compression driver" },
+        "size": "wide"
+      },
+      {
+        "eyebrow": "Amplification",
+        "title": "XG Integration Amplifiers",
+        "text": "",
+        "link": { "label": "", "url": "#" },
+        "background": { "seed": "technology/amplification-background.jpg", "alt": "" },
+        "image": { "seed": "technology/amplification-product.png", "alt": "Adamson XG integration amplifier" },
+        "size": "narrow"
+      },
+      {
+        "eyebrow": "Software",
+        "title": "ArrayIntelligence",
+        "text": "",
+        "link": { "label": "", "url": "#" },
+        "background": { "seed": "technology/software-background.jpg", "alt": "" },
+        "image": { "seed": "technology/software-product.png", "alt": "ArrayIntelligence software running on a laptop" },
+        "size": "narrow"
+      }
+    ]
+  }
+}

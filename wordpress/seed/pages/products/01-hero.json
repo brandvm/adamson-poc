@@ -1,0 +1,13 @@
+{ "block": "adamson/page-hero", "data": {
+  "eyebrow": "Products",
+  "heading": "Professional Audio Products: Loudspeakers, Amplifiers & Software",
+  "button": { "label": "Explore all products", "url": "#loudspeakers" },
+  "wordmark": "PRODUCTS",
+  "background": { "seed": "products-page/hero-1.jpg", "alt": "Adamson line-array cabinets in a row" },
+  "overlay": { "seed": "products-page/hero-2.png", "alt": "" },
+  "anchors": [
+    { "label": "Loudspeakers", "meta": "6 series", "url": "#loudspeakers" },
+    { "label": "Electronics", "meta": "4 categories", "url": "#electronics" },
+    { "label": "Software", "meta": "2 tools", "url": "#software" },
+    { "label": "Immersive", "meta": "FletcherMachine", "url": "#immersive" }
+  ] } }

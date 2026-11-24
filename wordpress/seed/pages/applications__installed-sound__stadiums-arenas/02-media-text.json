@@ -1,0 +1,37 @@
+{
+ "block": "adamson/media-text",
+ "data": {
+  "anchor": "challenges",
+  "theme": "dark",
+  "imagePosition": "right",
+  "eyebrow": "Stadiums & Arenas",
+  "heading": "What the room needs",
+  "text": "Big bowls are loud, reflective and used for very different events. The system must reach the top tier clearly and switch from game night to concert night.",
+  "points": [
+   {
+    "title": "Long throw",
+    "text": "Line arrays that reach the upper tier without delay rings."
+   },
+   {
+    "title": "Speech first",
+    "text": "Announcements understood in every section."
+   },
+   {
+    "title": "Weather-ready",
+    "text": "Weatherised versions for open-air stadiums."
+   },
+   {
+    "title": "One network",
+    "text": "Milan AVB control and monitoring across the venue."
+   }
+  ],
+  "button": {
+   "label": "Talk to an application engineer",
+   "url": "/contact"
+  },
+  "image": {
+   "seed": "connect/background.jpg",
+   "alt": "Arena with flown line arrays"
+  }
+ }
+}

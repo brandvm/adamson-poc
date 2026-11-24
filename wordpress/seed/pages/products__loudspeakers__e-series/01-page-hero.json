@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Loudspeakers",
+    "heading": "E Series: Large-format line source for stadiums and festivals, proven on the world’s biggest tours.",
+    "button": {
+      "label": "See the models",
+      "url": "#models"
+    },
+    "wordmark": "E SERIES",
+    "background": {
+      "seed": "products-page/series-e.jpg",
+      "alt": "E Series"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "adamson/news",
+  "title": "News",
+  "description": "Section header and the latest news posts as cards. The cards come from Posts: edit them there.",
+  "icon": "megaphone",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "title", "type": "text", "label": "Title" },
+    { "key": "description", "type": "textarea", "label": "Description", "help": "Optional. Shown next to the button." },
+    { "key": "viewAll", "type": "link", "label": "\"View all\" button" },
+    { "key": "count", "type": "number", "label": "Number of posts", "default": 3, "help": "Latest published posts, three per row (1 to 6)." }
+  ]
+}

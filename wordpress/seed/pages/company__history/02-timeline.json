@@ -1,0 +1,28 @@
+{
+  "block": "adamson/timeline",
+  "data": {
+    "eyebrow": "Timeline",
+    "milestoneLabel": "Milestone",
+    "button": {
+      "label": "View Full Story",
+      "url": "#"
+    },
+    "milestones": [
+      {
+        "year": "1984",
+        "title": "Adamson is founded",
+        "text": "Brock Adamson starts building loudspeakers for professional audio in Vancouver."
+      },
+      {
+        "year": "2002",
+        "title": "Milestone title",
+        "text": "Placeholder: the Figma design shows the year only. Replace with the 2002 milestone."
+      },
+      {
+        "year": "2003",
+        "title": "Milestone title",
+        "text": "Placeholder: the Figma design shows the year only. Replace with the 2003 milestone."
+      }
+    ]
+  }
+}

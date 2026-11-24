@@ -1,0 +1,48 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "partners",
+  "theme": "light",
+  "columns": "3",
+  "numbered": false,
+  "eyebrow": "Rental partners",
+  "heading": "A network on every continent",
+  "description": "Certified rental partners stock Adamson systems and trained crews. Contact us to find the nearest one.",
+  "button": {
+   "label": "Find a partner",
+   "url": "/contact"
+  },
+  "items": [
+   {
+    "title": "Americas",
+    "meta": "Region",
+    "text": "Partners across Canada, the United States and Latin America.",
+    "link": {
+     "label": "Americas",
+     "url": "/contact"
+    },
+    "image": null
+   },
+   {
+    "title": "Europe, Middle East & Africa",
+    "meta": "Region",
+    "text": "Partners in the UK, mainland Europe, the Middle East and Africa.",
+    "link": {
+     "label": "Europe, Middle East & Africa",
+     "url": "/contact"
+    },
+    "image": null
+   },
+   {
+    "title": "Asia Pacific",
+    "meta": "Region",
+    "text": "Partners in Australia, Japan, China, Korea and South-East Asia.",
+    "link": {
+     "label": "Asia Pacific",
+     "url": "/contact"
+    },
+    "image": null
+   }
+  ]
+ }
+}

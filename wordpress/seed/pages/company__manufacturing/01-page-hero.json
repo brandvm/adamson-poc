@@ -1,0 +1,15 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Company",
+    "heading": "Manufacturing & Innovation",
+    "button": null,
+    "wordmark": "MADE IN CANADA",
+    "background": {
+      "seed": "technology/transducers-background.jpg",
+      "alt": "Adamson transducer close-up"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

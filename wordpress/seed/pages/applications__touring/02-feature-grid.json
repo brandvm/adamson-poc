@@ -1,0 +1,57 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "systems",
+  "theme": "dark",
+  "columns": "3",
+  "numbered": false,
+  "eyebrow": "Featured systems",
+  "heading": "Built for the road",
+  "description": "Rider-friendly systems that fly fast, pack tight and scale from clubs to stadiums.",
+  "button": {
+   "label": "All loudspeakers",
+   "url": "/products/loudspeakers"
+  },
+  "items": [
+   {
+    "title": "Vergence Group",
+    "meta": "Large format",
+    "text": "Our flagship line source: VGt, VGs and VGx for the largest tours and festivals.",
+    "link": {
+     "label": "Vergence Group",
+     "url": "/products/loudspeakers/vergence-group"
+    },
+    "image": {
+     "seed": "products-page/series-vergence.jpg",
+     "alt": "Vergence Group cabinets"
+    }
+   },
+   {
+    "title": "CS Series",
+    "meta": "Mid format",
+    "text": "Compact, network-ready line arrays for arenas, theatres and festival side stages.",
+    "link": {
+     "label": "CS Series",
+     "url": "/products/loudspeakers/cs-series"
+    },
+    "image": {
+     "seed": "products-page/series-cs.jpg",
+     "alt": "CS Series cabinets"
+    }
+   },
+   {
+    "title": "E Series",
+    "meta": "Large format",
+    "text": "The proven large-format touring workhorse, with E219 subwoofers.",
+    "link": {
+     "label": "E Series",
+     "url": "/products/loudspeakers/e-series"
+    },
+    "image": {
+     "seed": "products-page/series-e.jpg",
+     "alt": "E Series cabinets"
+    }
+   }
+  ]
+ }
+}

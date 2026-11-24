@@ -1,0 +1,21 @@
+{
+  "name": "adamson/global-support",
+  "title": "Global support",
+  "description": "Centered header over the dotted world map, with a pin and label for each support region.",
+  "icon": "admin-site-alt3",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "title", "type": "text", "label": "Title" },
+    { "key": "description", "type": "textarea", "label": "Text under the title", "rows": 2, "help": "E.g. the headquarters address." },
+    { "key": "regions", "type": "repeater", "label": "Regions on the map", "itemName": "region", "itemLabel": "label", "max": 8,
+      "fields": [
+        { "key": "label", "type": "text", "label": "Region code", "help": "Short code, e.g. AMER." },
+        { "key": "text", "type": "text", "label": "Region name", "help": "E.g. North and South America." },
+        { "key": "link", "type": "url", "label": "Link", "help": "Optional: contact page or a Google Maps link." },
+        { "key": "x", "type": "number", "label": "Pin position across (%)", "default": 50, "help": "0 = left edge of the map, 100 = right edge." },
+        { "key": "y", "type": "number", "label": "Pin position down (%)", "default": 50, "help": "0 = top of the map, 100 = bottom." },
+        { "key": "side", "type": "select", "label": "Label side", "default": "right",
+          "options": [ { "label": "Right of the pin", "value": "right" }, { "label": "Left of the pin", "value": "left" } ] }
+      ] }
+  ]
+}

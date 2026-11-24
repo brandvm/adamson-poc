@@ -1,0 +1,3226 @@
+[
+  {
+    "name": "VGt",
+    "type": "Line Source",
+    "series": "Vergence Group",
+    "range": "50 Hz – 20 kHz",
+    "spl": "151 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/vgt.png",
+      "alt": "Adamson VGt"
+    },
+    "cutout": {
+      "seed": "products-in-action/vgt.png",
+      "alt": "Adamson VGt"
+    },
+    "logo": null,
+    "url": "/products/p/vgt",
+    "inRange": true,
+    "order": 0,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/vergence-group",
+    "tagline": "Line Source · Vergence Group",
+    "overview": "VGt is part of the Vergence Group. Adamson’s flagship platform: line source, subwoofer and point source cabinets with onboard amplification, built to work as one system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "Vergence Group"
+      },
+      {
+        "label": "Frequency range",
+        "value": "50 Hz – 20 kHz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "151 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "VGt spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "VGt user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "CS10",
+    "type": "Line Source",
+    "series": "CS Series",
+    "range": "60 Hz – 18 kHz",
+    "spl": "141.3 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/cs10.png",
+      "alt": "Adamson CS10"
+    },
+    "cutout": null,
+    "logo": null,
+    "url": "/products/p/cs10",
+    "inRange": true,
+    "order": 1,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/cs-series",
+    "tagline": "Line Source · CS Series",
+    "overview": "CS10 is part of the CS Series. Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "CS Series"
+      },
+      {
+        "label": "Frequency range",
+        "value": "60 Hz – 18 kHz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "141.3 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS10 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS10 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "MG10",
+    "type": "Stage Monitor",
+    "series": "M Series",
+    "range": "60 Hz – 20 kHz",
+    "spl": "139 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/mg10.png",
+      "alt": "Adamson MG10"
+    },
+    "cutout": null,
+    "logo": null,
+    "url": "/products/p/mg10",
+    "inRange": true,
+    "order": 2,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/monitors",
+    "tagline": "Stage Monitor · M Series",
+    "overview": "MG10 is part of the M Series. Low-profile stage monitors with the same voicing as the main system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Stage Monitor"
+      },
+      {
+        "label": "Series",
+        "value": "M Series"
+      },
+      {
+        "label": "Frequency range",
+        "value": "60 Hz – 20 kHz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "139 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "MG10 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "MG10 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "IS7c",
+    "type": "Point Source",
+    "series": "IS Series",
+    "range": "80 Hz – 20 kHz",
+    "spl": "130 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS7c"
+    },
+    "cutout": null,
+    "logo": null,
+    "url": "/products/p/is7c",
+    "inRange": true,
+    "order": 3,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Point Source · IS Series",
+    "overview": "IS7c is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Frequency range",
+        "value": "80 Hz – 20 kHz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "130 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS7c spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS7c user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "S10",
+    "type": "Line Source",
+    "series": "S Series",
+    "range": "60 Hz – 18 kHz",
+    "spl": "141.3 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson S10"
+    },
+    "cutout": null,
+    "logo": null,
+    "url": "/products/p/s10",
+    "inRange": true,
+    "order": 4,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/s-series",
+    "tagline": "Line Source · S Series",
+    "overview": "S10 is part of the S Series. Lightweight, high-output line source for mid-sized touring and installs. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "S Series"
+      },
+      {
+        "label": "Frequency range",
+        "value": "60 Hz – 18 kHz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "141.3 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S10 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S10 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "VGs",
+    "type": "Subwoofer",
+    "series": "Vergence Group",
+    "range": "29 Hz – 100 Hz",
+    "spl": "138 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/vgs.png",
+      "alt": "Adamson VGs"
+    },
+    "cutout": null,
+    "logo": null,
+    "url": "/products/p/vgs",
+    "inRange": true,
+    "order": 5,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/vergence-group",
+    "tagline": "Subwoofer · Vergence Group",
+    "overview": "VGs is part of the Vergence Group. Adamson’s flagship platform: line source, subwoofer and point source cabinets with onboard amplification, built to work as one system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "Vergence Group"
+      },
+      {
+        "label": "Frequency range",
+        "value": "29 Hz – 100 Hz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "138 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "VGs spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "VGs user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "CS10p",
+    "type": "Point Source",
+    "series": "CS Series",
+    "range": "60 Hz – 18 kHz",
+    "spl": "139 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/cs10p.png",
+      "alt": "Adamson CS10p"
+    },
+    "cutout": null,
+    "logo": null,
+    "url": "/products/p/cs10p",
+    "inRange": true,
+    "order": 6,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/cs-series",
+    "tagline": "Point Source · CS Series",
+    "overview": "CS10p is part of the CS Series. Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "CS Series"
+      },
+      {
+        "label": "Frequency range",
+        "value": "60 Hz – 18 kHz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "139 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS10p spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS10p user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "S119",
+    "type": "Subwoofer",
+    "series": "S Series",
+    "range": "30 Hz – 80 Hz",
+    "spl": "138 dB",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s119.png",
+      "alt": "Adamson S119"
+    },
+    "cutout": null,
+    "logo": null,
+    "url": "/products/p/s119",
+    "inRange": true,
+    "order": 7,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/s-series",
+    "tagline": "Subwoofer · S Series",
+    "overview": "S119 is part of the S Series. Lightweight, high-output line source for mid-sized touring and installs. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "S Series"
+      },
+      {
+        "label": "Frequency range",
+        "value": "30 Hz – 80 Hz"
+      },
+      {
+        "label": "Max peak SPL",
+        "value": "138 dB"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S119 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S119 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "VGx",
+    "type": "Line Source",
+    "series": "Vergence Group",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/vgx.png",
+      "alt": "Adamson VGx"
+    },
+    "logo": {
+      "seed": "products-in-action/vgx-logo.svg",
+      "alt": "VGx"
+    },
+    "url": "/products/p/vgx",
+    "inRange": false,
+    "order": 8,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/vergence-group",
+    "tagline": "Line Source · Vergence Group",
+    "overview": "VGx is part of the Vergence Group. Adamson’s flagship platform: line source, subwoofer and point source cabinets with onboard amplification, built to work as one system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "Vergence Group"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "VGx spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "VGx user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "VGd",
+    "type": "Point Source",
+    "series": "Vergence Group",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/vgd.png",
+      "alt": "Adamson VGd"
+    },
+    "logo": {
+      "seed": "products-in-action/vgd-logo.png",
+      "alt": "VGd"
+    },
+    "url": "/products/p/vgd",
+    "inRange": false,
+    "order": 9,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/vergence-group",
+    "tagline": "Point Source · Vergence Group",
+    "overview": "VGd is part of the Vergence Group. Adamson’s flagship platform: line source, subwoofer and point source cabinets with onboard amplification, built to work as one system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "Vergence Group"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "VGd spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "VGd user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "VGo",
+    "type": "Point Source",
+    "series": "Vergence Group",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/vgo.png",
+      "alt": "Adamson VGo"
+    },
+    "logo": {
+      "seed": "products-in-action/vgo-logo.png",
+      "alt": "VGo"
+    },
+    "url": "/products/p/vgo",
+    "inRange": false,
+    "order": 10,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/vergence-group",
+    "tagline": "Point Source · Vergence Group",
+    "overview": "VGo is part of the Vergence Group. Adamson’s flagship platform: line source, subwoofer and point source cabinets with onboard amplification, built to work as one system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "Vergence Group"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "VGo spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "VGo user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ]
+  },
+  {
+    "name": "XG",
+    "type": "Amplifier",
+    "series": "",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/xg.png",
+      "alt": "Adamson XG"
+    },
+    "logo": {
+      "seed": "products-in-action/xg-logo.png",
+      "alt": "XG"
+    },
+    "url": "#",
+    "inRange": false,
+    "order": 11
+  },
+  {
+    "name": "M Series",
+    "type": "",
+    "series": "",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/m-series.png",
+      "alt": "Adamson M Series"
+    },
+    "logo": null,
+    "url": "#",
+    "inRange": false,
+    "order": 12
+  },
+  {
+    "name": "CS7",
+    "type": "Line Source",
+    "series": "CS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/cs10.png",
+      "alt": "Adamson CS7"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/cs-series",
+    "tagline": "Line Source · CS Series",
+    "overview": "CS7 is part of the CS Series. Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "CS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS7 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS7 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/cs7",
+    "order": 100
+  },
+  {
+    "name": "CS7p",
+    "type": "Point Source",
+    "series": "CS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/cs10.png",
+      "alt": "Adamson CS7p"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/cs-series",
+    "tagline": "Point Source · CS Series",
+    "overview": "CS7p is part of the CS Series. Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "CS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS7p spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS7p user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/cs7p",
+    "order": 101
+  },
+  {
+    "name": "CS10n",
+    "type": "Line Source",
+    "series": "CS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/cs10.png",
+      "alt": "Adamson CS10n"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/cs-series",
+    "tagline": "Line Source · CS Series",
+    "overview": "CS10n is part of the CS Series. Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "CS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS10n spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS10n user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/cs10n",
+    "order": 102
+  },
+  {
+    "name": "CS118",
+    "type": "Subwoofer",
+    "series": "CS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/cs10.png",
+      "alt": "Adamson CS118"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/cs-series",
+    "tagline": "Subwoofer · CS Series",
+    "overview": "CS118 is part of the CS Series. Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "CS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS118 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS118 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/cs118",
+    "order": 103
+  },
+  {
+    "name": "CS119",
+    "type": "Subwoofer",
+    "series": "CS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/cs10.png",
+      "alt": "Adamson CS119"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/cs-series",
+    "tagline": "Subwoofer · CS Series",
+    "overview": "CS119 is part of the CS Series. Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "CS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS119 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS119 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/cs119",
+    "order": 104
+  },
+  {
+    "name": "IS5c",
+    "type": "Point Source",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS5c"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Point Source · IS Series",
+    "overview": "IS5c is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS5c spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS5c user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is5c",
+    "order": 105
+  },
+  {
+    "name": "IS7",
+    "type": "Line Source",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS7"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Line Source · IS Series",
+    "overview": "IS7 is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS7 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS7 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is7",
+    "order": 106
+  },
+  {
+    "name": "IS7p",
+    "type": "Point Source",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS7p"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Point Source · IS Series",
+    "overview": "IS7p is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS7p spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS7p user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is7p",
+    "order": 107
+  },
+  {
+    "name": "IS7px",
+    "type": "Point Source",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS7px"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Point Source · IS Series",
+    "overview": "IS7px is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS7px spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS7px user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is7px",
+    "order": 108
+  },
+  {
+    "name": "IS10",
+    "type": "Line Source",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS10"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Line Source · IS Series",
+    "overview": "IS10 is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS10 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS10 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is10",
+    "order": 109
+  },
+  {
+    "name": "IS10n",
+    "type": "Line Source",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS10n"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Line Source · IS Series",
+    "overview": "IS10n is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS10n spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS10n user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is10n",
+    "order": 110
+  },
+  {
+    "name": "IS10p",
+    "type": "Point Source",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS10p"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Point Source · IS Series",
+    "overview": "IS10p is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS10p spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS10p user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is10p",
+    "order": 111
+  },
+  {
+    "name": "IS118",
+    "type": "Subwoofer",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS118"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Subwoofer · IS Series",
+    "overview": "IS118 is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS118 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS118 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is118",
+    "order": 112
+  },
+  {
+    "name": "IS119",
+    "type": "Subwoofer",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS119"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Subwoofer · IS Series",
+    "overview": "IS119 is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS119 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS119 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is119",
+    "order": 113
+  },
+  {
+    "name": "IS213",
+    "type": "Subwoofer",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS213"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Subwoofer · IS Series",
+    "overview": "IS213 is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS213 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS213 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is213",
+    "order": 114
+  },
+  {
+    "name": "IS219",
+    "type": "Subwoofer",
+    "series": "IS Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/is7c.png",
+      "alt": "Adamson IS219"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/is-series",
+    "tagline": "Subwoofer · IS Series",
+    "overview": "IS219 is part of the IS Series. Installation versions of Adamson’s touring designs, finished and rigged for permanent venues. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "IS Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "IS219 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "IS219 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/is219",
+    "order": 115
+  },
+  {
+    "name": "M10",
+    "type": "Stage Monitor",
+    "series": "M Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/mg10.png",
+      "alt": "Adamson M10"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/monitors",
+    "tagline": "Stage Monitor · M Series",
+    "overview": "M10 is part of the M Series. Low-profile stage monitors with the same voicing as the main system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Stage Monitor"
+      },
+      {
+        "label": "Series",
+        "value": "M Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "M10 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "M10 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/m10",
+    "order": 116
+  },
+  {
+    "name": "M12",
+    "type": "Stage Monitor",
+    "series": "M Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/mg10.png",
+      "alt": "Adamson M12"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/monitors",
+    "tagline": "Stage Monitor · M Series",
+    "overview": "M12 is part of the M Series. Low-profile stage monitors with the same voicing as the main system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Stage Monitor"
+      },
+      {
+        "label": "Series",
+        "value": "M Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "M12 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "M12 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/m12",
+    "order": 117
+  },
+  {
+    "name": "M15",
+    "type": "Stage Monitor",
+    "series": "M Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/mg10.png",
+      "alt": "Adamson M15"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/monitors",
+    "tagline": "Stage Monitor · M Series",
+    "overview": "M15 is part of the M Series. Low-profile stage monitors with the same voicing as the main system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Stage Monitor"
+      },
+      {
+        "label": "Series",
+        "value": "M Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "M15 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "M15 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/m15",
+    "order": 118
+  },
+  {
+    "name": "M212",
+    "type": "Stage Monitor",
+    "series": "M Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/mg10.png",
+      "alt": "Adamson M212"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/monitors",
+    "tagline": "Stage Monitor · M Series",
+    "overview": "M212 is part of the M Series. Low-profile stage monitors with the same voicing as the main system. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Stage Monitor"
+      },
+      {
+        "label": "Series",
+        "value": "M Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "M212 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "M212 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/m212",
+    "order": 119
+  },
+  {
+    "name": "E12",
+    "type": "Line Source",
+    "series": "E Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson E12"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/e-series",
+    "tagline": "Line Source · E Series",
+    "overview": "E12 is part of the E Series. Large-format line source for stadiums and festivals, proven on the world’s biggest tours. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "E Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "E12 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "E12 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/e12",
+    "order": 120
+  },
+  {
+    "name": "E15",
+    "type": "Line Source",
+    "series": "E Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson E15"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/e-series",
+    "tagline": "Line Source · E Series",
+    "overview": "E15 is part of the E Series. Large-format line source for stadiums and festivals, proven on the world’s biggest tours. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "E Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "E15 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "E15 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/e15",
+    "order": 121
+  },
+  {
+    "name": "E119",
+    "type": "Subwoofer",
+    "series": "E Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson E119"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/e-series",
+    "tagline": "Subwoofer · E Series",
+    "overview": "E119 is part of the E Series. Large-format line source for stadiums and festivals, proven on the world’s biggest tours. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "E Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "E119 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "E119 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/e119",
+    "order": 122
+  },
+  {
+    "name": "E219",
+    "type": "Subwoofer",
+    "series": "E Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson E219"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/e-series",
+    "tagline": "Subwoofer · E Series",
+    "overview": "E219 is part of the E Series. Large-format line source for stadiums and festivals, proven on the world’s biggest tours. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "E Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "E219 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "E219 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/e219",
+    "order": 123
+  },
+  {
+    "name": "S7",
+    "type": "Line Source",
+    "series": "S Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson S7"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/s-series",
+    "tagline": "Line Source · S Series",
+    "overview": "S7 is part of the S Series. Lightweight, high-output line source for mid-sized touring and installs. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "S Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S7 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S7 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/s7",
+    "order": 124
+  },
+  {
+    "name": "S7p",
+    "type": "Point Source",
+    "series": "S Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson S7p"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/s-series",
+    "tagline": "Point Source · S Series",
+    "overview": "S7p is part of the S Series. Lightweight, high-output line source for mid-sized touring and installs. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "S Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S7p spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S7p user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/s7p",
+    "order": 125
+  },
+  {
+    "name": "S10n",
+    "type": "Line Source",
+    "series": "S Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson S10n"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/s-series",
+    "tagline": "Line Source · S Series",
+    "overview": "S10n is part of the S Series. Lightweight, high-output line source for mid-sized touring and installs. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Line Source"
+      },
+      {
+        "label": "Series",
+        "value": "S Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S10n spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S10n user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/s10n",
+    "order": 126
+  },
+  {
+    "name": "S10p",
+    "type": "Point Source",
+    "series": "S Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s10.png",
+      "alt": "Adamson S10p"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/s-series",
+    "tagline": "Point Source · S Series",
+    "overview": "S10p is part of the S Series. Lightweight, high-output line source for mid-sized touring and installs. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Point Source"
+      },
+      {
+        "label": "Series",
+        "value": "S Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S10p spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S10p user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/s10p",
+    "order": 127
+  },
+  {
+    "name": "S118",
+    "type": "Subwoofer",
+    "series": "S Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": {
+      "seed": "product-range/s119.png",
+      "alt": "Adamson S118"
+    },
+    "cutout": null,
+    "logo": null,
+    "inRange": false,
+    "category": "Loudspeakers",
+    "seriesUrl": "/products/loudspeakers/s-series",
+    "tagline": "Subwoofer · S Series",
+    "overview": "S118 is part of the S Series. Lightweight, high-output line source for mid-sized touring and installs. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Subwoofer"
+      },
+      {
+        "label": "Series",
+        "value": "S Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S118 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S118 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/s118",
+    "order": 128
+  },
+  {
+    "name": "XG1",
+    "type": "Amplifier",
+    "series": "XG Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/xg.png",
+      "alt": "Adamson XG1"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Amplifier · XG Series",
+    "overview": "XG1 is part of the XG Series. XG Integration Amplifiers: DSP, Milan networking and Class D power in a 2U chassis. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Amplifier"
+      },
+      {
+        "label": "Series",
+        "value": "XG Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "XG1 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "XG1 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/xg1",
+    "order": 129
+  },
+  {
+    "name": "XG2",
+    "type": "Amplifier",
+    "series": "XG Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/xg.png",
+      "alt": "Adamson XG2"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Amplifier · XG Series",
+    "overview": "XG2 is part of the XG Series. XG Integration Amplifiers: DSP, Milan networking and Class D power in a 2U chassis. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Amplifier"
+      },
+      {
+        "label": "Series",
+        "value": "XG Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "XG2 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "XG2 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/xg2",
+    "order": 130
+  },
+  {
+    "name": "XG4",
+    "type": "Amplifier",
+    "series": "XG Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/xg.png",
+      "alt": "Adamson XG4"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Amplifier · XG Series",
+    "overview": "XG4 is part of the XG Series. XG Integration Amplifiers: DSP, Milan networking and Class D power in a 2U chassis. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Amplifier"
+      },
+      {
+        "label": "Series",
+        "value": "XG Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "XG4 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "XG4 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/xg4",
+    "order": 131
+  },
+  {
+    "name": "XG8",
+    "type": "Amplifier",
+    "series": "XG Series",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "products-in-action/xg.png",
+      "alt": "Adamson XG8"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Amplifier · XG Series",
+    "overview": "XG8 is part of the XG Series. XG Integration Amplifiers: DSP, Milan networking and Class D power in a 2U chassis. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Amplifier"
+      },
+      {
+        "label": "Series",
+        "value": "XG Series"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "XG8 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "XG8 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/xg8",
+    "order": 132
+  },
+  {
+    "name": "Gateway",
+    "type": "Media Converter",
+    "series": "Media Converters",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "technology/amplification-product.png",
+      "alt": "Adamson Gateway"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Media Converter · Media Converters",
+    "overview": "Gateway is part of the Media Converters. Bring analog, AES and USB sources onto a Milan network. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Media Converter"
+      },
+      {
+        "label": "Series",
+        "value": "Media Converters"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Gateway spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "Gateway user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/gateway",
+    "order": 133
+  },
+  {
+    "name": "Bridge",
+    "type": "Media Converter",
+    "series": "Media Converters",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "technology/amplification-product.png",
+      "alt": "Adamson Bridge"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Media Converter · Media Converters",
+    "overview": "Bridge is part of the Media Converters. Bring analog, AES and USB sources onto a Milan network. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Media Converter"
+      },
+      {
+        "label": "Series",
+        "value": "Media Converters"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Bridge spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "Bridge user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/bridge",
+    "order": 134
+  },
+  {
+    "name": "USB Milan Bridge",
+    "type": "Media Converter",
+    "series": "Media Converters",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "technology/amplification-product.png",
+      "alt": "Adamson USB Milan Bridge"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Media Converter · Media Converters",
+    "overview": "USB Milan Bridge is part of the Media Converters. Bring analog, AES and USB sources onto a Milan network. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Media Converter"
+      },
+      {
+        "label": "Series",
+        "value": "Media Converters"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "USB Milan Bridge spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "USB Milan Bridge user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/usb-milan-bridge",
+    "order": 135
+  },
+  {
+    "name": "MS8.2",
+    "type": "Network",
+    "series": "Network",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "technology/amplification-product.png",
+      "alt": "Adamson MS8.2"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Network · Network",
+    "overview": "MS8.2 is part of the Network. Milan-certified switching for Adamson systems. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Network"
+      },
+      {
+        "label": "Series",
+        "value": "Network"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "MS8.2 spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "MS8.2 user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/ms8-2",
+    "order": 136
+  },
+  {
+    "name": "E-Rack",
+    "type": "Rack",
+    "series": "Racks",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "technology/amplification-product.png",
+      "alt": "Adamson E-Rack"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Rack · Racks",
+    "overview": "E-Rack is part of the Racks. Pre-wired amplifier and distribution racks for touring systems. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Rack"
+      },
+      {
+        "label": "Series",
+        "value": "Racks"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "E-Rack spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "E-Rack user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/e-rack",
+    "order": 137
+  },
+  {
+    "name": "S-Rack",
+    "type": "Rack",
+    "series": "Racks",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "technology/amplification-product.png",
+      "alt": "Adamson S-Rack"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Rack · Racks",
+    "overview": "S-Rack is part of the Racks. Pre-wired amplifier and distribution racks for touring systems. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Rack"
+      },
+      {
+        "label": "Series",
+        "value": "Racks"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "S-Rack spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "S-Rack user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/s-rack",
+    "order": 138
+  },
+  {
+    "name": "CS-Rack",
+    "type": "Rack",
+    "series": "Racks",
+    "range": "",
+    "spl": "",
+    "splLabel": "Max peak SPL",
+    "render": null,
+    "cutout": {
+      "seed": "technology/amplification-product.png",
+      "alt": "Adamson CS-Rack"
+    },
+    "logo": null,
+    "inRange": false,
+    "category": "Electronics",
+    "seriesUrl": "/products/electronics",
+    "tagline": "Rack · Racks",
+    "overview": "CS-Rack is part of the Racks. Pre-wired amplifier and distribution racks for touring systems. Designed and manufactured by Adamson in Port Perry, Ontario.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Rack"
+      },
+      {
+        "label": "Series",
+        "value": "Racks"
+      },
+      {
+        "label": "Networking",
+        "value": "Milan / AVB"
+      }
+    ],
+    "features": [
+      {
+        "title": "Engineered in-house",
+        "text": "Transducers, enclosures and processing are designed and built by Adamson."
+      },
+      {
+        "title": "Predictable in the software",
+        "text": "Modelled in Blueprint AV and controlled with ArrayIntelligence."
+      },
+      {
+        "title": "Built to last",
+        "text": "Road-tested hardware and rigging, finished in Canada."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "CS-Rack spec sheet",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      },
+      {
+        "label": "CS-Rack user manual",
+        "url": "/support/downloads",
+        "meta": "PDF"
+      }
+    ],
+    "url": "/products/p/cs-rack",
+    "order": 139
+  }
+]

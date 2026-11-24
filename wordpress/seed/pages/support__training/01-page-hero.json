@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Support",
+    "heading": "Training & Education",
+    "button": {
+      "label": "See courses",
+      "url": "#courses"
+    },
+    "wordmark": "TRAINING",
+    "background": {
+      "seed": "stats/shows-and-events.jpg",
+      "alt": "Engineers at an Adamson training session"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

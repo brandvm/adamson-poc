@@ -1,0 +1,15 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "dark",
+    "button": {
+      "label": "Explore Vergence Group",
+      "url": "/products/loudspeakers/vergence-group"
+    },
+    "description": "Adamson’s flagship platform: line source, subwoofer and point source cabinets with onboard amplification, built to work as one system.",
+    "anchor": "vergence-group",
+    "eyebrow": "5 models",
+    "heading": "Vergence Group",
+    "series": "Vergence Group"
+  }
+}

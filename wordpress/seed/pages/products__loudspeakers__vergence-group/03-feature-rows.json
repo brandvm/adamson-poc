@@ -1,0 +1,41 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "",
+    "eyebrow": "State-of-the-art",
+    "heading": "Why Vergence Group",
+    "rows": [
+      {
+        "eyebrow": "Platform",
+        "title": "One system, five cabinets",
+        "text": "VGt, VGs, VGx, VGd and VGo share voicing, rigging and networking, so a show scales without re-tuning.",
+        "image": {
+          "seed": "featured-products/vgt-background.png",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Amplification",
+        "title": "Power on board",
+        "text": "Each cabinet carries its own amplification and DSP. Fewer racks, shorter set-up, less to go wrong.",
+        "image": {
+          "seed": "featured-products/vgx-detail.png",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Software",
+        "title": "Designed in Blueprint AV",
+        "text": "Model the room, place the arrays and hand the file straight to ArrayIntelligence on show day.",
+        "image": {
+          "seed": "technology/software-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

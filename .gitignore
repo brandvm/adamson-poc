@@ -1,0 +1,29 @@
+node_modules
+wordpress/site
+wordpress/plugin/adamson-headless/config.local.php
+web/.env.local
+web/.env.preview
+web/.next
+.next-preview
+.next-dev
+.tools
+web/public/wp-content
+web/snapshot
+web/.vercel
+deploy
+
+# Local secrets and backups of them
+web/.env*
+!web/.env.example
+*.playground-backup
+# Build output and caches
+.next-snap
+*.tsbuildinfo
+next-env.d.ts
+# Large or generated working files
+docs/*.zip
+docs/grok-keyframes/_work
+.DS_Store
+
+# Unzipped copy of the Grok package
+docs/grok-keyframes 2

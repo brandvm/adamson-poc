@@ -1,0 +1,30 @@
+{
+  "block": "adamson/text-media",
+  "data": {
+    "anchor": "",
+    "theme": "light",
+    "imageSide": "right",
+    "eyebrow": "Made in Canada",
+    "heading": "Built in-house, from transducer to cabinet",
+    "text": "Every Adamson cabinet is designed, machined, assembled and tested in our factory in Port Perry, Ontario. Building in-house means every part is made to the same standard, and every system sounds the same as the last.",
+    "button": null,
+    "image": {
+      "seed": "stats/building-loudspeakers.jpg",
+      "alt": "Loudspeaker on the production line"
+    },
+    "points": [
+      {
+        "value": "1",
+        "label": "Factory, Port Perry"
+      },
+      {
+        "value": "In-house",
+        "label": "Transducers"
+      },
+      {
+        "value": "100%",
+        "label": "Tested before shipping"
+      }
+    ]
+  }
+}

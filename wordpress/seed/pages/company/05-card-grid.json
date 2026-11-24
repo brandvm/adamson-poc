@@ -1,0 +1,57 @@
+{
+  "block": "adamson/card-grid",
+  "data": {
+    "anchor": "shows",
+    "theme": "light",
+    "columns": "3",
+    "imageRatio": "landscape",
+    "eyebrow": "Shows and exhibitions",
+    "heading": "Meet us",
+    "description": "Hear Adamson systems in our demo rooms at the industry’s biggest shows.",
+    "button": null,
+    "cards": [
+      {
+        "image": {
+          "seed": "stats/shows-and-events.jpg",
+          "alt": "Trade show crowd"
+        },
+        "eyebrow": "USA",
+        "title": "NAMM 2027",
+        "text": "Anaheim, USA · January 22–25. Booth and outdoor demo.",
+        "tags": "Demo room",
+        "link": {
+          "label": "Book a demo",
+          "url": "/contact"
+        }
+      },
+      {
+        "image": {
+          "seed": "applications/install-background.jpg",
+          "alt": "Installed system"
+        },
+        "eyebrow": "Spain",
+        "title": "ISE 2027",
+        "text": "Barcelona, Spain · February 2–5. Vergence Group and FletcherMachine demo room.",
+        "tags": "Demo room",
+        "link": {
+          "label": "Book a demo",
+          "url": "/contact"
+        }
+      },
+      {
+        "image": {
+          "seed": "applications/touring-background.jpg",
+          "alt": "Touring system"
+        },
+        "eyebrow": "Germany",
+        "title": "Prolight + Sound 2027",
+        "text": "Frankfurt, Germany · March 24–27. Outdoor line-array demo.",
+        "tags": "Outdoor demo",
+        "link": {
+          "label": "Book a demo",
+          "url": "/contact"
+        }
+      }
+    ]
+  }
+}

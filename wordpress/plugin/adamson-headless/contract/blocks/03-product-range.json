@@ -1,0 +1,55 @@
+{
+  "name": "adamson/product-range",
+  "title": "Products",
+  "description": "Light section: header, type filter pills and a horizontally scrolling row of product cards after a model-count card. The cards are the Products marked “Show in the Products section” (Products in the left menu).",
+  "icon": "products",
+  "fields": [
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow"
+    },
+    {
+      "key": "title",
+      "type": "text",
+      "label": "Title"
+    },
+    {
+      "key": "description",
+      "type": "textarea",
+      "label": "Description"
+    },
+    {
+      "key": "allLabel",
+      "type": "text",
+      "label": "\"All\" filter label",
+      "default": "All",
+      "help": "Filter pills are added automatically for the product types in use."
+    },
+    {
+      "key": "count",
+      "type": "group",
+      "label": "Count card (first card)",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Label",
+          "help": "e.g. Loudspeaker models"
+        },
+        {
+          "key": "value",
+          "type": "text",
+          "label": "Number",
+          "help": "e.g. 40. Counts up when scrolled into view."
+        },
+        {
+          "key": "button",
+          "type": "link",
+          "label": "Button",
+          "help": "e.g. View Loudspeakers"
+        }
+      ]
+    }
+  ]
+}

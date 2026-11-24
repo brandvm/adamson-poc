@@ -1,0 +1,64 @@
+{
+  "block": "adamson/stats",
+  "data": {
+    "eyebrow": "Why Adamson",
+    "heading": "Manufactured with passion",
+    "description": "Canada’s most recognized exporter of loudspeaker technology for the pro-audio sector.",
+    "button": {
+      "label": "About Adamson",
+      "url": "#"
+    },
+    "stats": [
+      {
+        "number": "45+ Years",
+        "title": "Building loudspeakers",
+        "description": "Founded by Brock Adamson in Ontario, Canada.",
+        "link": {
+          "label": "History & Patents",
+          "url": "#"
+        },
+        "background": "image",
+        "image": {
+          "seed": "stats/building-loudspeakers.jpg",
+          "alt": "Close-up of an Adamson loudspeaker grille"
+        }
+      },
+      {
+        "number": "+100k ft²",
+        "title": "Built in-house",
+        "description": "Custom-built factory in Port Perry, Ontario, from raw materials to finished systems.",
+        "link": {
+          "label": "Manufacturing & Innovation",
+          "url": "#"
+        },
+        "background": "raised",
+        "image": null
+      },
+      {
+        "number": "14+",
+        "title": "Patents",
+        "description": "[ Text needs to be provided ]",
+        "link": {
+          "label": "Patents",
+          "url": "#"
+        },
+        "background": "glow",
+        "image": null
+      },
+      {
+        "number": "2,000+",
+        "title": "Shows and events",
+        "description": "Concerts, stadiums, houses of worship and broadcast.",
+        "link": {
+          "label": "YouTube channel",
+          "url": "https://www.youtube.com/c/adamsonsystemsengineering"
+        },
+        "background": "image",
+        "image": {
+          "seed": "stats/shows-and-events.jpg",
+          "alt": "Adamson line arrays flown above a concert stage"
+        }
+      }
+    ]
+  }
+}

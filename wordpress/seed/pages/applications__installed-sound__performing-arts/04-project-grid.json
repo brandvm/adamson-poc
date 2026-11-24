@@ -1,0 +1,17 @@
+{
+ "block": "adamson/project-grid",
+ "data": {
+  "anchor": "projects",
+  "theme": "dark",
+  "eyebrow": "Projects",
+  "heading": "Performing Arts projects",
+  "description": "",
+  "button": {
+   "label": "All projects",
+   "url": "/applications/projects"
+  },
+  "applications": "Performing Arts",
+  "limit": 6,
+  "filters": false
+ }
+}

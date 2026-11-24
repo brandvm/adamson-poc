@@ -1,0 +1,39 @@
+{
+  "block": "adamson/video-scrub",
+  "data": {
+    "video": {
+      "seed": "scrub/driver-explode-alpha.webm",
+      "alt": "Adamson compression driver turning and separating into its three parts"
+    },
+    "poster": {
+      "seed": "scrub/driver-explode-poster.png",
+      "alt": "Exploded view of an Adamson compression driver"
+    },
+    "length": 3,
+    "eyebrow": "Inside the driver",
+    "overlays": [
+      {
+        "title": "Engineered in-house",
+        "text": "Every component designed and built in our own facility.",
+        "start": 5,
+        "end": 35,
+        "position": "top-left"
+      },
+      {
+        "title": "Precision at every layer",
+        "text": "Scroll to see how the parts come together.",
+        "start": 45,
+        "end": 80,
+        "position": "bottom-right"
+      }
+    ],
+    "mobileVideo": {
+      "seed": "scrub/driver-explode-alpha-mobile.webm",
+      "alt": "Adamson compression driver turning and separating into its three parts"
+    },
+    "videoFallback": {
+      "seed": "scrub/driver-explode-black.mp4",
+      "alt": "Adamson compression driver turning and separating into its three parts"
+    }
+  }
+}

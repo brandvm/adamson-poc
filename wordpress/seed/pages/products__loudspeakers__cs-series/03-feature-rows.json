@@ -1,0 +1,41 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "",
+    "eyebrow": "Compact intelligence",
+    "heading": "Why CS Series",
+    "rows": [
+      {
+        "eyebrow": "Self-powered",
+        "title": "Amplifier modules inside",
+        "text": "Each CS cabinet carries an Adamson amplifier module, driven and monitored over the network.",
+        "image": {
+          "seed": "technology/amplification-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Install and tour",
+        "title": "One family, two jobs",
+        "text": "Line source, point source and subwoofers that fly in theatres or travel in a truck pack.",
+        "image": {
+          "seed": "applications/install-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Network",
+        "title": "Milan from the start",
+        "text": "Audio, control and monitoring over a single Milan AVB connection.",
+        "image": {
+          "seed": "technology/software-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

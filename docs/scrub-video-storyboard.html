@@ -1,0 +1,350 @@
+<title>Driver Explode Storyboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<style>
+/* Layout: intro, then a 5-screen scroll track with a sticky line-art stage that anime.js seeks by scroll, then timing + spec. Line art in ink and Adamson gold. */
+:root {
+  /* Dark only, like the site: page black, stage charcoal, gold accent (site tokens: page #000, raised #232323, accent #ab9981). */
+  --bg: #000000; --panel: #111111; --ink: #ffffff; --muted: #949698; --line: #e8e3dc; --gold: #ab9981; --rule: #2a2a2a; --zone: rgb(171 153 129 / .08); --red: #ff3b4e;
+  --font: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.55; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1180px; margin: 0 auto; }
+h1, h2 { font-weight: 400; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 4.5vw, 48px); line-height: 1.05; }
+h2 { font-size: 24px; }
+.eyebrow { font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
+p { margin: 0; max-width: 68ch; }
+.muted { color: var(--muted); }
+.intro { padding-block: 48px 32px; display: grid; gap: 14px; }
+
+/* scroll track: 5 screens tall, the stage sticks while it scrolls */
+.track { height: 500vh; position: relative; }
+.sticky { position: sticky; top: env(safe-area-inset-top, 0px); height: 100vh; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; gap: 12px; padding-block: 16px; }
+.stagebox { min-height: 0; display: grid; place-items: center; container-type: size; }
+/* The stage is always exactly 16:9 like the video, so text and drawing share one frame. */
+.stage { position: relative; width: min(100cqw, calc(100cqh * 16 / 9)); aspect-ratio: 16 / 9; background: var(--panel); border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; container-type: inline-size; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Overlays sit in opposite corners (top-left, bottom-right), above and below the centred product. */
+.overlay { position: absolute; width: 30%; display: grid; gap: .5cqw; opacity: 0; pointer-events: none; }
+.overlay.left { left: 4%; top: 6%; } .overlay.right { right: 4%; bottom: 6%; text-align: right; }
+.overlay .t { font-size: 2.5cqw; line-height: 1.1; letter-spacing: -.02em; }
+.overlay .s { font-size: 1.2cqw; color: var(--muted); }
+.ovm { display: none; min-height: 3.2em; text-align: center; }
+.ovm .t { font-size: 18px; } .ovm .s { font-size: 13px; color: var(--muted); display: block; }
+@media (max-width: 700px) { .stage .overlay { display: none; } .ovm { display: block; } }
+.hud { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; }
+.hud .frame-n { font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+.hud .cap { font-size: 14px; color: var(--muted); min-width: 0; }
+.hud .cap b { color: var(--ink); font-weight: 500; }
+.hud .clock { font-variant-numeric: tabular-nums; font-size: 13px; white-space: nowrap; }
+.bar { height: 3px; background: var(--rule); border-radius: 3px; overflow: hidden; grid-column: 1 / -1; }
+.bar i { display: block; height: 100%; width: 0; background: var(--gold); }
+@media (max-width: 700px) { .hud { grid-template-columns: 1fr auto; } .hud .cap { grid-column: 1 / -1; grid-row: 2; } }
+
+.after { padding-block: 64px 80px; display: grid; gap: 56px; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+@media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 500; font-size: 12px; color: var(--muted); }
+ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 1px 6px; overflow-wrap: anywhere; }
+section { display: grid; gap: 18px; }
+.parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 760px) { .parts { grid-template-columns: minmax(0, 1fr); } }
+.part { border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 8px; }
+.part h3 { margin: 0; font-size: 16px; font-weight: 500; }
+</style>
+
+<div class="gutter"><div class="inner intro">
+  <p class="eyebrow">Home page · Video scrub section · Brief for motion</p>
+  <h1>Driver explode, step by step</h1>
+  <p class="muted">Scroll down. The drawing below moves exactly the way the video will on the site: scroll position is playback position. Every part, bolt hole and connector here is taken from the current poster render, so the final frame of the film should land on that image.</p>
+</div></div>
+
+<div class="track gutter" id="track">
+  <div class="sticky inner">
+    <div class="stagebox"><div class="stage" id="stage">
+      <svg id="svg" viewBox="0 0 1200 675" role="img" aria-label="Line drawing of the Adamson compression driver separating into its parts as you scroll"></svg>
+      <div class="overlay left" id="ov0"><span class="t">Engineered in-house</span><span class="s">Every component designed and built in our own facility.</span></div>
+      <div class="overlay right" id="ov1"><span class="t">Precision at every layer</span><span class="s">Scroll to see how the parts come together.</span></div>
+    </div></div>
+    <div class="ovm" id="ovm"></div>
+    <div class="hud">
+      <span class="frame-n" id="fn">Frame 1</span>
+      <span class="cap" id="cap"></span>
+      <span class="clock" id="clock">0% · 0.0 s</span>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gutter"><div class="inner after">
+  <section>
+    <div><p class="eyebrow">What's in the render</p><h2>The three parts and their details</h2></div>
+    <div class="parts">
+      <div class="part"><h3>1 · Waveguide housing (front)</h3><ul>
+        <li>Thick ring body with eight flat sides and rounded corners, dark bronze anodised finish.</li>
+        <li>Square mounting tab sticking out on its left side.</li>
+        <li>Six bolt holes around the front rim.</li>
+        <li>Inner opening with a stepped lip, filled by a gold woven mesh dome that bulges toward camera.</li>
+        <li>Moves toward camera-left. It's the part that travels furthest.</li>
+      </ul></div>
+      <div class="part"><h3>2 · Motor (middle)</h3><ul>
+        <li>Short polished cylinder; the front face is spun metal with fine circular brushing and a small raised centre cap.</li>
+        <li>A chamfered edge, then a wider flange ring at the back with screws.</li>
+        <li>A short steel coupling shaft with two grooves points at the waveguide's tab.</li>
+        <li>A red signal connector with a steel barrel sits on its right side.</li>
+        <li>Barely moves; everything separates around it.</li>
+      </ul></div>
+      <div class="part"><h3>3 · Mounting plate (rear)</h3><ul>
+        <li>Flat plate with eight sides and rounded corners, darker than the housing.</li>
+        <li>Large round opening with a stepped seat for the motor flange.</li>
+        <li>Ring of small mounting holes, and two long rounded pockets milled into the right side.</li>
+        <li>Moves back, to camera-right.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div style="display:grid;gap:14px;min-width:0">
+      <div><p class="eyebrow">Timing</p><h2>Scroll to video time</h2></div>
+      <p class="muted">The section is three screens of scroll on the site. Text shows over the video at these points, in the top-left and then bottom-right corner; keep that corner quiet while it shows.</p>
+      <div class="table-wrap"><table><thead><tr><th>Scroll</th><th>Time</th><th>What happens</th><th>Text</th></tr></thead><tbody id="timing"></tbody></table></div>
+    </div>
+    <div style="display:grid;gap:14px;min-width:0">
+      <div><p class="eyebrow">Delivery</p><h2>File spec</h2></div>
+      <ul>
+        <li><b>Length:</b> 8 s at 30 fps (240 frames). No sound.</li>
+        <li><b>Desktop:</b> 1920 × 1080, product centred; the product stays centred at every point; text sits in the top-left corner, then the bottom-right corner, so keep those corners clear.</li>
+        <li><b>Mobile:</b> 1080 × 1350 (4:5), same motion, camera pulled back so all three parts fit; text sits at the bottom on phones.</li>
+        <li><b>Background:</b> pure black #000, no vignette edge.</li>
+        <li><b>Camera:</b> locked. The driver itself turns from face-on to the 3/4 view (6–24% of the scroll), then holds that angle. No cuts.</li>
+        <li><b>Motion:</b> after the turn, parts travel only along the driver's axis with no further spin; each move eases in and out. Hold the first 6% and the last 14%.</li>
+        <li><b>Last frame</b> matches the poster <code>hero/hero-speaker.png</code>, which reduced-motion visitors see instead of the video.</li>
+        <li><b>Encoding:</b> every frame a keyframe so seeking is smooth: <code>ffmpeg -i in.mov -c:v libx264 -g 1 -crf 20 -pix_fmt yuv420p -movflags +faststart -an out.mp4</code></li>
+        <li><b>Size:</b> under 8 MB desktop, 4 MB mobile. Upload in WordPress → Home → Video scrub.</li>
+      </ul>
+    </div>
+  </section>
+</div></div>
+
+<script>
+// ---------- Projection ---------------------------------------------------------
+// The driver's axis turns from pointing at the camera (yaw 0: face-on, a circle)
+// to the 3/4 view of the poster (cos yaw = 0.34). A point on a disc face at
+// angle a, radius r, axial offset z maps to (CX + z*SIN + r*COS*cos a, CY + r*sin a).
+const VW = 1200, VH = 675, CX = 600, CY = 337, SCALE = 0.8; // parts drawn at 80% so the explode fits between the text zones
+const NS = "http://www.w3.org/2000/svg";
+let COS = 1, SIN = 0;
+const f = (n) => n.toFixed(1);
+const P = (z, r, a) => [z * SIN + r * COS * Math.cos(a), CY + r * Math.sin(a)];
+const pts = (arr) => "M" + arr.map((p) => p.map(f).join(",")).join("L") + "Z";
+function octa(z, r, k) {
+  const o = [];
+  for (let i = 0; i < 64; i++) { const a = (i / 64) * 2 * Math.PI; o.push(P(z, r * (1 - k * 0.1 * Math.cos(4 * a + Math.PI / 2 * 0) - k * 0.06 * 0), a)); }
+  return pts(o);
+}
+const ell = (z, r, cls = "") => { const [x] = P(z, 0, 0); return `<ellipse class="${cls}" cx="${f(x)}" cy="${CY}" rx="${f(Math.max(0.01, r * COS))}" ry="${f(r)}"/>`; };
+const ln = (a, b, cls = "") => `<line class="${cls}" x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}"/>`;
+// cylinder silhouette between two faces (top and bottom edges)
+const sil = (z0, z1, r) => ln(P(z0, r, -Math.PI / 2), P(z1, r, -Math.PI / 2)) + ln(P(z0, r, Math.PI / 2), P(z1, r, Math.PI / 2));
+const holes = (z, r, n, a0, size, cls = "thin") => Array.from({ length: n }, (_, i) => { const [x, y] = P(z, r, a0 + (i / n) * 2 * Math.PI); return `<ellipse class="${cls}" cx="${f(x)}" cy="${f(y)}" rx="${f(Math.max(.6, size * COS))}" ry="${size}"/>`; }).join("");
+// The front face is toward the camera (negative z); depth goes back (+z).
+
+// Part 3: mounting plate
+function plate() {
+  const R = 200, D = 26; let s = "";
+  s += `<path class="hid" d="${octa(D, R, .9)}"/>` + sil(0, D, R * 0.95);
+  s += `<path class="face" d="${octa(0, R, .9)}"/>`;
+  s += ell(0, 142) + ell(0, 132, "thin") + ell(6, 124, "thin");          // stepped seat
+  s += holes(0, 172, 12, 0.26, 4);                                        // mounting holes
+  for (const [a0, a1] of [[-0.95, -0.35], [0.35, 0.95]]) {                // two milled pockets, right side
+    const o = [];
+    for (let j = 0; j <= 10; j++) o.push(P(0, 188, a0 + (a1 - a0) * j / 10));
+    for (let j = 10; j >= 0; j--) o.push(P(0, 152, a0 + (a1 - a0) * j / 10));
+    s += `<path class="thin" d="${pts(o)}"/>`;
+  }
+  return s;
+}
+// Part 2: motor
+function motor() {
+  const R = 132, D = 62; let s = "";
+  s += ell(D + 14, 150, "hid") + sil(D, D + 14, 150) + ell(D, 150, "face");      // rear flange
+  s += holes(D, 142, 4, 0.8, 3.5);
+  s += sil(0, D, R) + ell(0, R, "face") + ell(-3, R - 8, "thin");                 // body, front face, chamfer
+  for (let r = 20; r < R - 12; r += 9) s += ell(-4, r, "brush");                  // spun brushing
+  s += ell(-4, 16) + ell(-6, 9, "thin");                                          // centre cap
+  // red connector + steel barrel on the right side of the body
+  const [cx, cy] = P(D * 0.5, R + 4, 0.12);
+  s += `<rect class="face" x="${f(cx + 2)}" y="${f(cy - 7)}" width="${f(8 + 26 * Math.max(COS, .3))}" height="14" rx="4"/><circle class="red" cx="${f(cx)}" cy="${f(cy)}" r="9"/>`;
+  // coupling shaft toward the waveguide (along the axis, so it shortens face-on), two grooves
+  const s0 = P(-80, 0, 0)[0], s1 = P(0, 0, 0)[0];
+  s += `<rect class="face" x="${f(Math.min(s0, s1))}" y="${CY - 11}" width="${f(Math.max(1, Math.abs(s1 - s0)))}" height="22" rx="4"/>`;
+  for (const z of [-56, -42]) { const x = P(z, 0, 0)[0]; s += ln([x, CY - 11], [x, CY + 11], "thin"); }
+  return s;
+}
+// Part 1: waveguide housing
+function waveguide() {
+  const R = 200, D = 64; let s = "";
+  s += `<path class="hid" d="${octa(D, R, 1)}"/>` + sil(0, D, R * 0.93);
+  // left mounting tab: a short block on the side
+  const t0 = P(0, R * 0.97, Math.PI * 0.94), t1 = P(0, R * 0.97, Math.PI * 1.06), w = 26;
+  s += `<path class="face" d="M${f(t0[0])},${f(t0[1])} L${f(t0[0] - w)},${f(t0[1] + 6)} L${f(t1[0] - w)},${f(t1[1] - 6)} L${f(t1[0])},${f(t1[1])}Z"/>`;
+  s += `<path class="face" d="${octa(0, R, 1)}"/>`;
+  s += holes(0, 184, 6, 0.52, 5);                                         // six bolt holes
+  s += ell(0, 168) + ell(4, 160, "thin");                                 // stepped lip
+  // gold woven mesh dome, clipped to the opening; the dome bulges toward camera
+  const [mx] = P(0, 0, 0);
+  s += `<clipPath id="mc"><ellipse cx="${f(mx)}" cy="${CY}" rx="${f(Math.max(.01, 158 * COS))}" ry="158"/></clipPath><g clip-path="url(#mc)">`;
+  for (let k = -200; k <= 200; k += 11) s += ln([mx - 170, CY + k - 60], [mx + 170, CY + k + 60], "mesh") + ln([mx - 170, CY + k + 60], [mx + 170, CY + k - 60], "mesh");
+  s += `</g>`;
+  for (let k = 1; k <= 4; k++) s += ell(-k * 6, 158 * (1 - k * 0.2), "dome");
+  return s;
+}
+
+// ---------- Scene ----------------------------------------------------------------
+const svg = document.getElementById("svg");
+svg.innerHTML = `
+  <style>
+    #svg path, #svg ellipse, #svg line, #svg rect { fill: none; stroke: var(--line); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    #svg .face { fill: var(--panel); stroke-width: 1.9; }
+    #svg .thin { stroke-width: 1.1; }
+    #svg .brush { stroke-width: .6; opacity: .5; }
+    #svg .hid { stroke-width: 1.1; opacity: .3; stroke-dasharray: 4 5; }
+    #svg .mesh { stroke: var(--gold); stroke-width: .9; opacity: .75; }
+    #svg .dome { stroke: var(--gold); stroke-width: 1.2; opacity: .75; }
+    #svg .red { fill: var(--red); stroke: none; }
+    #svg .axis { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 9; opacity: .45; }
+    #svg .zone { fill: none; }
+    #svg .lbl line { stroke: var(--muted); stroke-width: 1.2; }
+    #svg .lbl circle { fill: var(--gold); }
+    #svg .lbl text { font: 400 19px Outfit, sans-serif; fill: var(--ink); }
+    #svg .arr { stroke: var(--gold); stroke-width: 2.6; fill: none; }
+  </style>
+  <rect width="${VW}" height="${VH}" fill="var(--panel)"/>
+  <rect id="zone0" class="zone" x="0" y="0" width="420" height="165" opacity="0"/>
+  <rect id="zone1" class="zone" x="780" y="${VH - 165}" width="420" height="165" opacity="0"/>
+  <g id="cam" transform="translate(${CX} ${CY}) scale(${SCALE}) translate(0 ${-CY})">
+    <line id="axis" class="axis" x1="0" y1="${CY}" x2="0" y2="${CY}"/>
+    <g id="gPlate"></g><g id="gMotor"></g><g id="gWave"></g>
+    <g id="arrows"></g><g id="labels"></g>
+  </g>`;
+const $ = (id) => document.getElementById(id);
+
+// ---------- Motion (anime.js timeline, seeked by scroll) ---------------------------
+// z = position of each part along the driver's axis (camera side is negative).
+const state = { yaw: 0, W: -64, M: -10, P: 74, shift: 1, labels: 0 };
+const DUR = 1000; // 1 unit = 0.1% of scroll
+const STEPS = [
+  { at: 0,  title: "Face-on, centred", note: "Open straight on the front of the closed driver, centred in frame: the waveguide's eight-sided rim, six bolt holes and the gold mesh dome. Hold still." },
+  { at: 6,  title: "Turn to 3/4", note: "The driver turns on its vertical axis, front swinging to camera-left, until it reaches the poster's 3/4 view. Nothing separates yet. First text reads in the top-left corner." },
+  { at: 24, title: "Mounting plate releases", note: "With the turn finished, the rear plate slides back to camera-right. A gap of light opens behind the motor flange; the stepped seat and pockets come into view." },
+  { at: 40, title: "Front stack eases forward", note: "Motor and waveguide ease a little toward camera-left together, framing the gap. The product stays centred the whole time." },
+  { at: 52, title: "Waveguide comes forward", note: "The front housing travels toward camera-left, uncovering the gold mesh dome, the coupling shaft and the motor's spun face. Second text is in the bottom-right corner." },
+  { at: 75, title: "Fully exploded", note: "All three parts land with even gaps along the axis. Light rakes across the mesh weave and machined edges." },
+  { at: 84, title: "Hold, centred", note: "Text has gone. The open driver sits exactly in the centre of the frame, horizontally and vertically, and holds to the end. (Labels are for the designer only, not in the video.)" },
+];
+const TEXTS = [
+  { from: 5, to: 35, t: "Engineered in-house", s: "Every component designed and built in our own facility." },
+  { from: 45, to: 80, t: "Precision at every layer", s: "Scroll to see how the parts come together." },
+];
+const tl = anime.timeline({ autoplay: false, easing: "easeInOutSine", duration: DUR });
+tl.add({ targets: state, yaw: 1, duration: 180 }, 60)                  // 6–24%: rotate face-on → 3/4
+  .add({ targets: state, P: 160, duration: 160 }, 240)                 // 24–40%: plate back
+  .add({ targets: state, W: -90, M: -34, duration: 120 }, 400)         // 40–52%: front stack eases forward
+  .add({ targets: state, W: -330, M: -90, duration: 230 }, 520)        // 52–75%: waveguide forward
+  .add({ targets: state, W: -370, M: -110, duration: 110 }, 640)
+  .add({ targets: state, labels: 1, duration: 50, easing: "linear" }, 860);
+
+// Labels: [part, anchor dx, anchor dy, text, lane y]. Lanes sit above and below the parts, so nothing overlaps them.
+const LABELS = [
+  ["W", -30, -170, "Six bolt holes", 70],
+  ["W", -20, 110, "Gold woven mesh dome", 640],
+  ["W", -78, -10, "Mounting tab", 600],
+  ["M", 10, -60, "Spun front face, centre cap", 110],
+  ["M", -40, 0, "Coupling shaft", 560],
+  ["M", 70, 50, "Red signal connector", 600],
+  ["P", 30, -130, "Mounting plate, stepped seat", 70],
+  ["P", 40, 120, "Milled pockets, mounting holes", 640],
+];
+
+function render(p) {
+  const yaw = state.yaw * Math.acos(0.34);
+  COS = Math.cos(yaw); SIN = Math.sin(yaw);
+  $("gPlate").innerHTML = plate(); $("gMotor").innerHTML = motor(); $("gWave").innerHTML = waveguide();
+  // Centre the open product: measure the drawn parts' real edges and move them so their midpoint is the frame centre.
+  const base = { W: state.W * SIN, M: state.M * SIN, P: state.P * SIN };
+  let dx = 0;
+  if (state.shift > 0) {
+    const bw = $("gWave").getBBox(), bm = $("gMotor").getBBox(), bp = $("gPlate").getBBox();
+    const left = Math.min(bw.x + base.W, bm.x + base.M, bp.x + base.P);
+    const right = Math.max(bw.x + bw.width + base.W, bm.x + bm.width + base.M, bp.x + bp.width + base.P);
+    dx = -((left + right) / 2) * state.shift;
+  }
+  const X = { W: base.W + dx, M: base.M + dx, P: base.P + dx };
+  $("gPlate").setAttribute("transform", `translate(${f(X.P)} 0)`);
+  $("gMotor").setAttribute("transform", `translate(${f(X.M)} 0)`);
+  $("gWave").setAttribute("transform", `translate(${f(X.W)} 0)`);
+  // Axis line: through the frame centre, extending the same distance past the parts on both sides.
+  {
+    const bw = $("gWave").getBBox(), bp = $("gPlate").getBBox(), bm = $("gMotor").getBBox();
+    const l = Math.min(bw.x + X.W, bm.x + X.M, bp.x + X.P), r = Math.max(bw.x + bw.width + X.W, bm.x + bm.width + X.M, bp.x + bp.width + X.P);
+    const half = Math.max(Math.abs(l), Math.abs(r)) + 90 * SIN;
+    const ax = $("axis"); ax.setAttribute("x1", f(-half)); ax.setAttribute("x2", f(half)); ax.style.opacity = SIN > 0.05 ? "" : "0";
+  }
+  // arrows: the part that is moving now, drawn above it
+  const arr = (x, y, dir) => `<g class="arr"><line class="arr" x1="${f(x)}" y1="${y}" x2="${f(x + dir * 70)}" y2="${y}"/><polyline class="arr" points="${f(x + dir * 58)},${y - 8} ${f(x + dir * 70)},${y} ${f(x + dir * 58)},${y + 8}"/></g>`;
+  let a = "";
+  if (p > 6 && p < 24) a += `<path class="arr" d="M -90 ${CY - 245} Q 0 ${CY - 275} 90 ${CY - 245}"/><polyline class="arr" points="-78,${CY - 258} -92,${CY - 245} -76,${CY - 236}"/>`;
+  if (p > 24 && p < 40) a += arr(X.P + 20, CY - 235, 1);
+  if (p > 52 && p < 75) a += arr(X.W - 20, CY - 235, -1);
+  $("arrows").innerHTML = a;
+  // labels (designer notes for the final pose)
+  const L = $("labels");
+  L.setAttribute("opacity", state.labels.toFixed(3));
+  L.innerHTML = state.labels > 0.01 ? LABELS.map(([g, dx, dy, t, ly]) => {
+    const px = X[g] + dx, py = CY + dy;
+    return `<g class="lbl"><line x1="${f(px)}" y1="${py}" x2="${f(px)}" y2="${ly + (ly < CY ? 8 : -22)}"/><circle cx="${f(px)}" cy="${py}" r="4"/><text x="${f(px)}" y="${ly}" text-anchor="middle">${t}</text></g>`;
+  }).join("") : "";
+}
+
+// ---------- Scroll ------------------------------------------------------------------
+const track = $("track");
+let queued = false;
+function update() {
+  queued = false;
+  const r = track.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight))) * 100;
+  tl.seek((p / 100) * DUR);
+  render(p);
+  let shown = null;
+  TEXTS.forEach((t, i) => {
+    const fade = 4; let o = 0;
+    if (p >= t.from - fade && p <= t.to + fade) o = p < t.from ? (p - (t.from - fade)) / fade : p > t.to ? 1 - (p - t.to) / fade : 1;
+    $("ov" + i).style.opacity = o.toFixed(3); $("zone" + i).setAttribute("opacity", o.toFixed(3));
+    if (o > 0.5) shown = t;
+  });
+  $("ovm").innerHTML = shown ? `<span class="t">${shown.t}</span><span class="s">${shown.s}</span>` : "";
+  let i = 0; while (i < STEPS.length - 1 && p >= STEPS[i + 1].at) i++;
+  $("fn").textContent = `Frame ${i + 1} of ${STEPS.length}`;
+  $("cap").innerHTML = `<b>${STEPS[i].title}.</b> ${STEPS[i].note}`;
+  $("clock").textContent = `${p.toFixed(0)}% · ${(p / 100 * 8).toFixed(1)} s`;
+  $("bar").style.width = p.toFixed(2) + "%";
+}
+const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+addEventListener("scroll", onScroll, { passive: true });
+addEventListener("resize", onScroll);
+update();
+
+$("timing").innerHTML = STEPS.map((s, i) => {
+  const next = STEPS[i + 1] ? STEPS[i + 1].at : 100;
+  const t = TEXTS.find((x) => s.at >= x.from && s.at < x.to);
+  return `<tr><td>${s.at}–${next}%</td><td>${(s.at * .08).toFixed(1)}–${(next * .08).toFixed(1)} s</td><td>${s.title}</td><td>${t ? (t === TEXTS[0] ? "Top-left: " : "Bottom-right: ") + t.t : "None"}</td></tr>`;
+}).join("");
+</script>

@@ -1,0 +1,18 @@
+{
+  "name": "adamson/timeline",
+  "title": "Timeline",
+  "description": "Company history: huge stacked years with a milestone slider (arrows step through the milestones).",
+  "icon": "backup",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow", "default": "Timeline" },
+    { "key": "milestoneLabel", "type": "text", "label": "Milestone label", "default": "Milestone", "help": "Small gold label above each milestone title." },
+    { "key": "button", "type": "link", "label": "Button", "help": "Outline button under the milestone (e.g. View Full Story)." },
+    { "key": "milestones", "type": "repeater", "label": "Milestones", "itemName": "milestone", "itemLabel": "year",
+      "help": "Oldest first. The first milestone is shown when the page loads; its year sits at the bottom and later years stack above it.",
+      "fields": [
+        { "key": "year", "type": "text", "label": "Year" },
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "text", "type": "textarea", "label": "Text" }
+      ] }
+  ]
+}

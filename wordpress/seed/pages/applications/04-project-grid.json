@@ -1,0 +1,17 @@
+{
+ "block": "adamson/project-grid",
+ "data": {
+  "anchor": "projects",
+  "theme": "light",
+  "eyebrow": "Projects",
+  "heading": "Adamson in action",
+  "description": "Tours, theatres, arenas and churches around the world.",
+  "button": {
+   "label": "All projects",
+   "url": "/applications/projects"
+  },
+  "applications": "",
+  "limit": 3,
+  "filters": false
+ }
+}

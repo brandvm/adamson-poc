@@ -1,0 +1,33 @@
+{
+  "block": "adamson/text-media",
+  "data": {
+    "anchor": "service",
+    "theme": "dark",
+    "imageSide": "left",
+    "eyebrow": "Service",
+    "heading": "Repairs, parts and support on the road",
+    "text": "Every Adamson cabinet is built in Port Perry, and so is every replacement part. Our service team repairs, re-cones and tests systems to factory specification.\n\nFor touring productions, regional engineers support systems on the road, from first rig to final show.",
+    "button": {
+      "label": "Request service",
+      "url": "/contact"
+    },
+    "image": {
+      "seed": "stats/building-loudspeakers.jpg",
+      "alt": "Adamson technician testing a loudspeaker"
+    },
+    "points": [
+      {
+        "value": "48 h",
+        "label": "Parts dispatch"
+      },
+      {
+        "value": "3",
+        "label": "Regional service hubs"
+      },
+      {
+        "value": "24/7",
+        "label": "Touring support line"
+      }
+    ]
+  }
+}

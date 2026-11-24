@@ -1,0 +1,57 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "venues",
+  "theme": "light",
+  "columns": "3",
+  "numbered": false,
+  "eyebrow": "Venues",
+  "heading": "Start from your venue",
+  "description": "",
+  "button": {
+   "label": "",
+   "url": ""
+  },
+  "items": [
+   {
+    "title": "Performing Arts",
+    "meta": "Installed sound",
+    "text": "Theatres, opera houses and concert halls: natural sound that stays out of sight.",
+    "link": {
+     "label": "Performing Arts",
+     "url": "/applications/installed-sound/performing-arts"
+    },
+    "image": {
+     "seed": "news/warsaw-theatre-brooklyn.jpg",
+     "alt": "Historic theatre interior"
+    }
+   },
+   {
+    "title": "Stadiums & Arenas",
+    "meta": "Installed sound",
+    "text": "Long throw, clear speech and concert-grade impact for the biggest rooms.",
+    "link": {
+     "label": "Stadiums & Arenas",
+     "url": "/applications/installed-sound/stadiums-arenas"
+    },
+    "image": {
+     "seed": "connect/background.jpg",
+     "alt": "Arena with flown line arrays"
+    }
+   },
+   {
+    "title": "Houses of Worship",
+    "meta": "Installed sound",
+    "text": "Clear speech and full-band worship, simple enough for volunteer teams.",
+    "link": {
+     "label": "Houses of Worship",
+     "url": "/applications/installed-sound/houses-of-worship"
+    },
+    "image": {
+     "seed": "videos/stage-smoke.jpg",
+     "alt": "Stage with lighting and haze"
+    }
+   }
+  ]
+ }
+}

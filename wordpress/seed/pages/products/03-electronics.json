@@ -1,0 +1,55 @@
+{
+  "block": "adamson/category-bento",
+  "data": {
+    "anchor": "electronics",
+    "theme": "dark",
+    "featurePosition": "left",
+    "eyebrow": "4 categories",
+    "heading": "Electronics",
+    "description": "Amplification, DSP, media conversion and audio distribution, built in Port Perry, Ontario, Canada.",
+    "button": {
+      "label": "Explore Electronics",
+      "url": "/products/electronics"
+    },
+    "feature": {
+      "eyebrow": "Amplifiers",
+      "title": "XG Integration Amplifiers",
+      "text": "High-efficiency Class-D, up to 16 kW, for high-SPL and multichannel installs.",
+      "link": {
+        "label": "Explore XG Series",
+        "url": "/products/electronics#amplifiers"
+      },
+      "background": {
+        "seed": "products-page/electronics-xg.png",
+        "alt": "XG integration amplifier with its lid off"
+      },
+      "image": null
+    },
+    "categories": [
+      {
+        "title": "Media Converters",
+        "text": "AVB on-ramp, 16x16 matrix and Milan bridges to analog, AES/EBU and USB-C.",
+        "tags": "Gateway, Bridge, USB Milan Bridge",
+        "link": {
+          "url": "/products/electronics#media-converters"
+        }
+      },
+      {
+        "title": "Network",
+        "text": "Redundant audio and control over one cable, Milan AVB-ready switching.",
+        "tags": "NDS, MS8.2",
+        "link": {
+          "url": "/products/electronics#network"
+        }
+      },
+      {
+        "title": "Racks",
+        "text": "Turn-key power distribution, network and switching.",
+        "tags": "E-Rack, S-Rack, CS-Rack, PDS",
+        "link": {
+          "url": "/products/electronics#racks"
+        }
+      }
+    ]
+  }
+}

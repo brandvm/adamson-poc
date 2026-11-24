@@ -1,0 +1,39 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Support",
+    "heading": "Service and support for every Adamson system, wherever it plays",
+    "button": {
+      "label": "Find a document",
+      "url": "/support/downloads"
+    },
+    "wordmark": "SUPPORT",
+    "background": {
+      "seed": "applications/install-background.jpg",
+      "alt": "Adamson loudspeakers installed in a venue"
+    },
+    "overlay": null,
+    "anchors": [
+      {
+        "label": "Downloads",
+        "meta": "Manuals, software",
+        "url": "/support/downloads"
+      },
+      {
+        "label": "Training",
+        "meta": "Courses, certification",
+        "url": "/support/training"
+      },
+      {
+        "label": "Login",
+        "meta": "Clients, admins",
+        "url": "/login"
+      },
+      {
+        "label": "Service",
+        "meta": "Repairs, parts",
+        "url": "#service"
+      }
+    ]
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "logo": {
+    "seed": "global/logo.png",
+    "alt": "Adamson"
+  },
+  "nav": [
+    {
+      "label": "Products",
+      "url": "/products",
+      "dropdown": true,
+      "children": [
+        {
+          "label": "Loudspeakers",
+          "url": "/products/loudspeakers",
+          "text": "Six series, from line arrays to monitors"
+        },
+        {
+          "label": "Electronics",
+          "url": "/products/electronics",
+          "text": "Amplifiers, media converters, network, racks"
+        },
+        {
+          "label": "Software",
+          "url": "/products/software",
+          "text": "ArrayIntelligence, Array Tools, Blueprint AV"
+        },
+        {
+          "label": "FletcherMachine",
+          "url": "/products/fletchermachine",
+          "text": "Immersive sound system"
+        },
+        {
+          "label": "All products",
+          "url": "/products",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "label": "Technology",
+      "url": "/technology",
+      "dropdown": false
+    },
+    {
+      "label": "Applications",
+      "url": "/applications",
+      "dropdown": true,
+      "children": [
+        {
+          "label": "Touring",
+          "url": "/applications/touring",
+          "text": "Systems built for the road"
+        },
+        {
+          "label": "Installed Sound",
+          "url": "/applications/installed-sound",
+          "text": "For integrators and venues"
+        },
+        {
+          "label": "Performing Arts",
+          "url": "/applications/installed-sound/performing-arts",
+          "text": ""
+        },
+        {
+          "label": "Stadiums & Arenas",
+          "url": "/applications/installed-sound/stadiums-arenas",
+          "text": ""
+        },
+        {
+          "label": "Houses of Worship",
+          "url": "/applications/installed-sound/houses-of-worship",
+          "text": ""
+        },
+        {
+          "label": "Projects",
+          "url": "/applications/projects",
+          "text": "Case studies around the world"
+        }
+      ]
+    },
+    {
+      "label": "Support",
+      "url": "/support",
+      "dropdown": true,
+      "children": [
+        {
+          "label": "Documentation & Downloads",
+          "url": "/support/downloads",
+          "text": "Manuals, software, drawings"
+        },
+        {
+          "label": "Training & Education",
+          "url": "/support/training",
+          "text": "Courses and certification"
+        },
+        {
+          "label": "Login",
+          "url": "/login",
+          "text": "Clients and partners"
+        },
+        {
+          "label": "Support home",
+          "url": "/support",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "label": "Company",
+      "url": "/company",
+      "dropdown": true,
+      "children": [
+        {
+          "label": "About Adamson",
+          "url": "/company",
+          "text": "Who we are"
+        },
+        {
+          "label": "History & Patents",
+          "url": "/company/history",
+          "text": ""
+        },
+        {
+          "label": "Manufacturing & Innovation",
+          "url": "/company/manufacturing",
+          "text": ""
+        },
+        {
+          "label": "Careers",
+          "url": "/company/careers",
+          "text": ""
+        },
+        {
+          "label": "News",
+          "url": "/company/news",
+          "text": ""
+        },
+        {
+          "label": "Contact",
+          "url": "/contact",
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "login": {
+    "label": "Login",
+    "url": "/login"
+  },
+  "cta": {
+    "label": "Contact Us",
+    "url": "/contact"
+  }
+}

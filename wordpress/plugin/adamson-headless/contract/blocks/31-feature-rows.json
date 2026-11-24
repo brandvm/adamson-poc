@@ -1,0 +1,21 @@
+{
+  "name": "adamson/feature-rows",
+  "title": "Feature rows",
+  "description": "Section header, then numbered rows that alternate a photo and text (eyebrow, title, text, optional button).",
+  "icon": "align-pull-left",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor", "help": "Section id for links, without #." },
+    { "key": "tone", "type": "select", "label": "Background", "options": [ { "label": "Dark", "value": "dark" }, { "label": "Light", "value": "light" } ], "default": "dark" },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "rows", "type": "repeater", "label": "Rows", "itemName": "row", "itemLabel": "title",
+      "fields": [
+        { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+        { "key": "title", "type": "text", "label": "Title", "help": "Also the row's anchor (e.g. Wave shaping → #wave-shaping)." },
+        { "key": "text", "type": "textarea", "label": "Text" },
+        { "key": "image", "type": "image", "label": "Photo", "help": "4:3." },
+        { "key": "link", "type": "link", "label": "Button" }
+      ] }
+  ]
+}

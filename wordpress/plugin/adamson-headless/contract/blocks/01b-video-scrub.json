@@ -1,0 +1,22 @@
+{
+  "name": "adamson/video-scrub",
+  "title": "Video scrub",
+  "description": "A video that plays forwards and backwards as the visitor scrolls. Upload a scrub-ready MP4 (a keyframe every 1–5 frames).",
+  "icon": "video-alt3",
+  "fields": [
+    { "key": "video", "type": "video", "label": "Video (desktop)", "help": "MP4, H.264, no audio, keyframe every 1–5 frames, fast start." },
+    { "key": "mobileVideo", "type": "video", "label": "Video (mobile, optional)" },
+    { "key": "videoFallback", "type": "video", "label": "Video fallback (MP4, optional)", "help": "For browsers that can't play the main video, e.g. when the main video is a transparent WebM." },
+    { "key": "poster", "type": "image", "label": "Poster image", "help": "Shown before the video loads and to visitors who turned off motion." },
+    { "key": "length", "type": "number", "label": "Scroll length (screen heights)", "default": 3 },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "overlays", "type": "repeater", "label": "Text overlays", "itemName": "overlay", "itemLabel": "title",
+      "fields": [
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "text", "type": "textarea", "label": "Text" },
+        { "key": "start", "type": "number", "label": "Appears at (% of scroll)", "default": 0 },
+        { "key": "end", "type": "number", "label": "Disappears at (% of scroll)", "default": 30 },
+        { "key": "position", "type": "select", "label": "Position", "options": [ { "label": "Left", "value": "left" }, { "label": "Right", "value": "right" }, { "label": "Centre", "value": "center" }, { "label": "Top left", "value": "top-left" }, { "label": "Bottom right", "value": "bottom-right" } ] }
+      ] }
+  ]
+}

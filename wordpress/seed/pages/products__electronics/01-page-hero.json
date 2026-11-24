@@ -1,0 +1,39 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Products",
+    "heading": "Electronics: amplification, conversion, networking and racks",
+    "button": {
+      "label": "See amplifiers",
+      "url": "#amplifiers"
+    },
+    "wordmark": "ELECTRONICS",
+    "background": {
+      "seed": "products-page/electronics-xg.png",
+      "alt": "XG amplifier"
+    },
+    "overlay": null,
+    "anchors": [
+      {
+        "label": "Amplifiers",
+        "meta": "XG Series",
+        "url": "#amplifiers"
+      },
+      {
+        "label": "Media Converters",
+        "meta": "3 models",
+        "url": "#media-converters"
+      },
+      {
+        "label": "Network",
+        "meta": "MS8.2",
+        "url": "#network"
+      },
+      {
+        "label": "Racks",
+        "meta": "3 models",
+        "url": "#racks"
+      }
+    ]
+  }
+}

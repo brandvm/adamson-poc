@@ -1,0 +1,91 @@
+{
+  "name": "adamson/careers",
+  "title": "Careers",
+  "description": "Open roles as an expandable list, then an application form with resume and portfolio upload.",
+  "icon": "businessperson",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Section id",
+      "help": "Optional, for links like #careers. Lowercase, no spaces."
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow",
+      "default": "Open roles"
+    },
+    {
+      "key": "heading",
+      "type": "text",
+      "label": "Title"
+    },
+    {
+      "key": "description",
+      "type": "textarea",
+      "label": "Description"
+    },
+    {
+      "key": "roles",
+      "type": "repeater",
+      "label": "Open roles",
+      "itemName": "role",
+      "itemLabel": "title",
+      "fields": [
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Title"
+        },
+        {
+          "key": "team",
+          "type": "text",
+          "label": "Team"
+        },
+        {
+          "key": "location",
+          "type": "text",
+          "label": "Location"
+        },
+        {
+          "key": "type",
+          "type": "text",
+          "label": "Type",
+          "help": "e.g. Full-time"
+        },
+        {
+          "key": "text",
+          "type": "textarea",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "key": "noRolesText",
+      "type": "textarea",
+      "label": "Text when there are no roles"
+    },
+    {
+      "key": "formEyebrow",
+      "type": "text",
+      "label": "Form eyebrow",
+      "default": "Apply"
+    },
+    {
+      "key": "formTitle",
+      "type": "text",
+      "label": "Form title"
+    },
+    {
+      "key": "formText",
+      "type": "textarea",
+      "label": "Form text"
+    },
+    {
+      "key": "successText",
+      "type": "textarea",
+      "label": "Message after sending"
+    }
+  ]
+}

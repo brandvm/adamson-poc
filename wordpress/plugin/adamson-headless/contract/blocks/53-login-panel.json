@@ -1,0 +1,71 @@
+{
+  "name": "adamson/login-panel",
+  "title": "Login",
+  "description": "What each access level gets, beside a sign-in card. Sign-in is not connected to accounts yet.",
+  "icon": "lock",
+  "fields": [
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow",
+      "default": "Login"
+    },
+    {
+      "key": "heading",
+      "type": "textarea",
+      "label": "Title"
+    },
+    {
+      "key": "text",
+      "type": "textarea",
+      "label": "Text"
+    },
+    {
+      "key": "levels",
+      "type": "repeater",
+      "label": "Access levels",
+      "itemName": "level",
+      "itemLabel": "title",
+      "fields": [
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Title"
+        },
+        {
+          "key": "text",
+          "type": "textarea",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "key": "formTitle",
+      "type": "text",
+      "label": "Card title",
+      "default": "Sign in"
+    },
+    {
+      "key": "submitLabel",
+      "type": "text",
+      "label": "Button text",
+      "default": "Sign in"
+    },
+    {
+      "key": "requestText",
+      "type": "textarea",
+      "label": "Request access text"
+    },
+    {
+      "key": "requestLink",
+      "type": "link",
+      "label": "Request access button"
+    },
+    {
+      "key": "notConnected",
+      "type": "textarea",
+      "label": "Message after submit",
+      "help": "Shown while sign-in isn't connected."
+    }
+  ]
+}

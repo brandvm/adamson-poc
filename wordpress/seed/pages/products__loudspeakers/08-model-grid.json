@@ -1,0 +1,15 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "light",
+    "button": {
+      "label": "Explore S Series",
+      "url": "/products/loudspeakers/s-series"
+    },
+    "description": "Lightweight, high-output line source for mid-sized touring and installs.",
+    "anchor": "s-series",
+    "eyebrow": "7 models",
+    "heading": "S Series",
+    "series": "S Series"
+  }
+}

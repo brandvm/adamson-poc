@@ -1,0 +1,12 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "light",
+    "button": null,
+    "description": "MS8.2 switch and Milan networking, plus the NDS and PDS distribution units.",
+    "anchor": "network",
+    "eyebrow": "Network",
+    "heading": "Network",
+    "series": "Network"
+  }
+}

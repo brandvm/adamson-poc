@@ -1,0 +1,24 @@
+{
+  "name": "adamson/feature-grid",
+  "title": "Feature grid",
+  "description": "Section header and a grid of cards: photo cards (with an image) or numbered text cards (without). For reasons, services, venue types, partners.",
+  "icon": "grid-view",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor", "help": "Section id for links, without #." },
+    { "key": "theme", "type": "select", "label": "Theme", "default": "dark", "options": [ { "label": "Dark", "value": "dark" }, { "label": "Light", "value": "light" } ] },
+    { "key": "columns", "type": "select", "label": "Columns on desktop", "default": "3", "options": [ "2", "3", "4" ] },
+    { "key": "numbered", "type": "toggle", "label": "Number the text cards", "help": "Shows 01, 02 … on cards without a photo." },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button" },
+    { "key": "items", "type": "repeater", "label": "Cards", "itemName": "card", "itemLabel": "title",
+      "fields": [
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "meta", "type": "text", "label": "Small label", "help": "Above the title, e.g. a region or a category." },
+        { "key": "text", "type": "textarea", "label": "Text" },
+        { "key": "link", "type": "link", "label": "Link", "help": "Optional. Makes the whole card clickable." },
+        { "key": "image", "type": "image", "label": "Photo", "help": "Optional. With a photo the card becomes a tall photo card." }
+      ] }
+  ]
+}

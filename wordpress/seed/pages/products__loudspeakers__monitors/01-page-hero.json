@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Loudspeakers",
+    "heading": "M Series: Low-profile stage monitors with the same voicing as the main system.",
+    "button": {
+      "label": "See the models",
+      "url": "#models"
+    },
+    "wordmark": "MONITORS",
+    "background": {
+      "seed": "products-page/series-m.jpg",
+      "alt": "M Series"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

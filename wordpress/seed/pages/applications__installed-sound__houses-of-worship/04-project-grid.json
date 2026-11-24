@@ -1,0 +1,17 @@
+{
+ "block": "adamson/project-grid",
+ "data": {
+  "anchor": "projects",
+  "theme": "dark",
+  "eyebrow": "Projects",
+  "heading": "Houses of Worship projects",
+  "description": "",
+  "button": {
+   "label": "All projects",
+   "url": "/applications/projects"
+  },
+  "applications": "Houses of Worship",
+  "limit": 6,
+  "filters": false
+ }
+}

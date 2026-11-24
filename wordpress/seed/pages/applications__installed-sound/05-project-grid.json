@@ -1,0 +1,17 @@
+{
+ "block": "adamson/project-grid",
+ "data": {
+  "anchor": "projects",
+  "theme": "light",
+  "eyebrow": "Projects",
+  "heading": "Installed sound projects",
+  "description": "",
+  "button": {
+   "label": "All projects",
+   "url": "/applications/projects"
+  },
+  "applications": "Performing Arts, Stadiums & Arenas, Houses of Worship",
+  "limit": 6,
+  "filters": false
+ }
+}

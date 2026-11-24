@@ -1,0 +1,10 @@
+{
+  "block": "adamson/news",
+  "data": {
+    "eyebrow": "News",
+    "title": "Making Waves",
+    "description": "",
+    "viewAll": { "label": "All News", "url": "/company/news" },
+    "count": 3
+  }
+}

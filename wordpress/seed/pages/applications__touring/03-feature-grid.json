@@ -1,0 +1,58 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "why",
+  "theme": "dark",
+  "columns": "4",
+  "numbered": true,
+  "eyebrow": "Why Adamson",
+  "heading": "Why productions choose Adamson",
+  "description": "",
+  "button": {
+   "label": "",
+   "url": ""
+  },
+  "items": [
+   {
+    "title": "Consistent from night to night",
+    "meta": "",
+    "text": "Array Intelligence models travel with the show, so the tuning is the same in every venue.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   },
+   {
+    "title": "Fast to fly",
+    "meta": "",
+    "text": "Captive rigging and pre-wired XG racks cut load-in time on every date.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   },
+   {
+    "title": "Engineered in Canada",
+    "meta": "",
+    "text": "Transducers, cabinets and electronics designed and built in-house in Port Perry, Ontario.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   },
+   {
+    "title": "A global rider",
+    "meta": "",
+    "text": "Adamson systems are stocked by rental partners on every continent, so the rig is there when you land.",
+    "link": {
+     "label": "",
+     "url": ""
+    },
+    "image": null
+   }
+  ]
+ }
+}

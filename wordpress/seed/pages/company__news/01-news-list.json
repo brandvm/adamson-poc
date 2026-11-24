@@ -1,0 +1,10 @@
+{
+  "block": "adamson/news-list",
+  "data": {
+    "anchor": "news",
+    "eyebrow": "News",
+    "heading": "Making Waves",
+    "description": "Press releases, product launches and tours.",
+    "allLabel": "All news"
+  }
+}

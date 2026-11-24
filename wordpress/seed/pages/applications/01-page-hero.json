@@ -1,0 +1,39 @@
+{
+ "block": "adamson/page-hero",
+ "data": {
+  "eyebrow": "Applications",
+  "heading": "Loudspeaker systems for touring, installed sound and every venue in between",
+  "button": {
+   "label": "Explore projects",
+   "url": "/applications/projects"
+  },
+  "wordmark": "APPLICATIONS",
+  "background": {
+   "seed": "stats/shows-and-events.jpg",
+   "alt": "Crowd at a live event"
+  },
+  "overlay": null,
+  "anchors": [
+   {
+    "label": "Touring",
+    "meta": "Rental & production",
+    "url": "/applications/touring"
+   },
+   {
+    "label": "Installed Sound",
+    "meta": "3 venue types",
+    "url": "/applications/installed-sound"
+   },
+   {
+    "label": "Projects",
+    "meta": "Case studies",
+    "url": "/applications/projects"
+   },
+   {
+    "label": "Partners",
+    "meta": "Find one near you",
+    "url": "/contact"
+   }
+  ]
+ }
+}

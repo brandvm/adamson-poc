@@ -1,0 +1,21 @@
+.adamson-field { margin-bottom: 16px; }
+.adamson-field__thumb { display: block; width: 100%; max-height: 140px; object-fit: cover; border-radius: 4px; background: #111; margin-bottom: 8px; }
+.adamson-field__empty { padding: 16px; border: 1px dashed #ccc; border-radius: 4px; color: #757575; text-align: center; margin-bottom: 8px; }
+.adamson-field__media-actions { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.adamson-field__group { border-left: 2px solid #ddd; padding-left: 12px; }
+.adamson-field__group-label { font-size: 11px; font-weight: 500; text-transform: uppercase; margin-bottom: 8px; }
+.adamson-field__repeater { display: flex; flex-direction: column; gap: 6px; }
+.adamson-field__item { border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.adamson-field__item-head { display: flex; align-items: center; gap: 2px; padding: 2px 4px; }
+.adamson-field__item-toggle { flex: 1; text-align: left; background: none; border: 0; padding: 8px 4px; cursor: pointer; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.adamson-field__item.is-open .adamson-field__item-toggle { font-weight: 600; }
+.adamson-field__item-body { padding: 12px; border-top: 1px solid #eee; }
+
+.adamson-block { position: relative; }
+.adamson-block__label { position: absolute; top: 8px; left: 8px; z-index: 2; background: #8a6e4b; color: #fff; font: 500 11px/1 system-ui, sans-serif; padding: 5px 8px; border-radius: 99px; pointer-events: none; }
+.adamson-preview { position: relative; overflow: hidden; background: #000; }
+.adamson-preview iframe { border: 0; transform-origin: 0 0; display: block; pointer-events: none; }
+.adamson-preview__loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #999; font: 13px system-ui, sans-serif; }
+
+.adamson-settings { max-width: 720px; background: #fff; padding: 24px; border: 1px solid #ddd; margin-top: 16px; }
+.adamson-settings__fields { margin-bottom: 24px; }

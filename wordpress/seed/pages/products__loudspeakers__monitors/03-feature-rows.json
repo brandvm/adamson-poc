@@ -1,0 +1,41 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "",
+    "eyebrow": "Stage worthy",
+    "heading": "Why M Series",
+    "rows": [
+      {
+        "eyebrow": "On stage",
+        "title": "Low profile, high output",
+        "text": "Wedges that stay out of sight lines and keep up with the loudest performers.",
+        "image": {
+          "seed": "products-page/series-m.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Consistent",
+        "title": "Same voice as the mains",
+        "text": "Monitors share the Adamson voicing, so the stage and the room sound like one system.",
+        "image": {
+          "seed": "applications/touring-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Built to travel",
+        "title": "Road-ready hardware",
+        "text": "Rugged cabinets and handles made for nightly load-ins.",
+        "image": {
+          "seed": "stats/shows-and-events.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

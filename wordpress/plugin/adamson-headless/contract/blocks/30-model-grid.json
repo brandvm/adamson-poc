@@ -1,0 +1,15 @@
+{
+  "name": "adamson/model-grid",
+  "title": "Model grid",
+  "description": "Section header and a grid of product cards, filled automatically from Products whose Series is in the list. Each card links to its product page.",
+  "icon": "screenoptions",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor", "help": "Section id for links, without #." },
+    { "key": "tone", "type": "select", "label": "Background", "options": [ { "label": "Dark", "value": "dark" }, { "label": "Light", "value": "light" } ], "default": "dark" },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button" },
+    { "key": "series", "type": "text", "label": "Series to list", "help": "Comma-separated, exactly as in the products' Series field, e.g. CS Series, IS Series." }
+  ]
+}

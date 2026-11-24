@@ -1,0 +1,50 @@
+{
+  "name": "adamson/document-library",
+  "title": "Document library",
+  "description": "Searchable list of every document in WordPress → Documents, with Product, File type and Language filters and a Show discontinued switch.",
+  "icon": "media-document",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Section id",
+      "help": "Optional, for links like #careers. Lowercase, no spaces."
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow",
+      "default": "Library"
+    },
+    {
+      "key": "heading",
+      "type": "text",
+      "label": "Title",
+      "default": "Documentation & Downloads"
+    },
+    {
+      "key": "description",
+      "type": "textarea",
+      "label": "Description"
+    },
+    {
+      "key": "searchPlaceholder",
+      "type": "text",
+      "label": "Search placeholder",
+      "default": "Search by product, file or keyword"
+    },
+    {
+      "key": "discontinuedLabel",
+      "type": "text",
+      "label": "Discontinued switch label",
+      "default": "Show discontinued products",
+      "help": "Never call these “Legacy”."
+    },
+    {
+      "key": "emptyText",
+      "type": "text",
+      "label": "No results text",
+      "default": "No files match. Try another product or clear the filters."
+    }
+  ]
+}

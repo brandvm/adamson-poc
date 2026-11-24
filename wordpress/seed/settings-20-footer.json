@@ -1,0 +1,123 @@
+{
+  "footer": {
+    "logo": {
+      "seed": "footer/logo.png",
+      "alt": "Adamson"
+    },
+    "address": "1401 Scugog Line 6, Port Perry, Ontario, Canada",
+    "phone": "+1 905-982-0520",
+    "columns": [
+      {
+        "title": "Products",
+        "links": [
+          {
+            "label": "Loudspeakers",
+            "url": "/products/loudspeakers"
+          },
+          {
+            "label": "Electronics",
+            "url": "/products/electronics"
+          },
+          {
+            "label": "Software",
+            "url": "/products/software"
+          }
+        ]
+      },
+      {
+        "title": "Support",
+        "links": [
+          {
+            "label": "Documentation & Downloads",
+            "url": "/support/downloads"
+          },
+          {
+            "label": "Training & Education",
+            "url": "/support/training"
+          },
+          {
+            "label": "Login",
+            "url": "/login"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "History & Patents",
+            "url": "/company/history"
+          },
+          {
+            "label": "Careers",
+            "url": "/company/careers"
+          },
+          {
+            "label": "News",
+            "url": "/company/news"
+          },
+          {
+            "label": "Contact",
+            "url": "/contact"
+          }
+        ]
+      }
+    ],
+    "newsletter": {
+      "title": "Newsletter",
+      "text": "Sign up for our quarterly newsletter to stay informed with industry news and product updates.",
+      "placeholder": "Email address",
+      "button": "Subscribe",
+      "action": ""
+    },
+    "social": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/adamson-systems-engineering"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/adamsonsystems"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/AdamsonSystems"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@AdamsonSystems"
+      }
+    ],
+    "copyright": "© 2026 Adamson Systems. All Rights Reserved.",
+    "legal": [
+      {
+        "label": "Privacy",
+        "url": "/privacy"
+      },
+      {
+        "label": "English",
+        "url": "/"
+      },
+      {
+        "label": "Français",
+        "url": "/fr"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/adamsonsystems"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/adamson-systems-engineering"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/AdamsonSystems"
+      },
+      {
+        "label": "Vimeo",
+        "url": "https://vimeo.com/adamsonsystems"
+      }
+    ]
+  }
+}

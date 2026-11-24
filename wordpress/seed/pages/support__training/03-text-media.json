@@ -1,0 +1,20 @@
+{
+  "block": "adamson/text-media",
+  "data": {
+    "anchor": "",
+    "theme": "dark",
+    "imageSide": "right",
+    "eyebrow": "Certification",
+    "heading": "Become Adamson certified",
+    "text": "Certified technicians and integrators are listed on our partner directory and get priority technical support.\n\nCertification lasts two years and renews with a short online update course.",
+    "button": {
+      "label": "Ask about certification",
+      "url": "/contact"
+    },
+    "image": {
+      "seed": "stats/shows-and-events.jpg",
+      "alt": "Training session"
+    },
+    "points": []
+  }
+}

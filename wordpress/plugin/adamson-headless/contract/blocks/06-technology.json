@@ -1,0 +1,21 @@
+{
+  "name": "adamson/technology",
+  "title": "Technology",
+  "description": "Light section: header (eyebrow + big title) and a row of technology cards over dark product photos.",
+  "icon": "admin-generic",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow", "default": "Technology" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "features", "type": "repeater", "label": "Feature cards", "itemName": "feature", "itemLabel": "title",
+      "fields": [
+        { "key": "eyebrow", "type": "text", "label": "Eyebrow", "help": "Small gold label, e.g. Transducers." },
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "text", "type": "textarea", "label": "Description", "help": "Optional. Usually only on the wide card." },
+        { "key": "link", "type": "link", "label": "Link", "help": "With a label it shows as a button (e.g. Learn More); with only a URL the whole card is clickable." },
+        { "key": "background", "type": "image", "label": "Background photo", "help": "Studio photo; it is darkened behind the product." },
+        { "key": "image", "type": "image", "label": "Product cut-out", "help": "Transparent PNG with the same framing as the background photo." },
+        { "key": "size", "type": "select", "label": "Card width", "default": "narrow",
+          "options": [ { "label": "Wide (about half the row)", "value": "wide" }, { "label": "Narrow (about a quarter)", "value": "narrow" } ] }
+      ] }
+  ]
+}

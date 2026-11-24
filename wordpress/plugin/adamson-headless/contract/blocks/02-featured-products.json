@@ -1,0 +1,23 @@
+{
+  "name": "adamson/featured-products",
+  "title": "Featured products",
+  "description": "Dark full-width product slider: one slide per product line, with a teaser for the next slide.",
+  "icon": "slides",
+  "fields": [
+    { "key": "nextLabel", "type": "text", "label": "Next label", "default": "Next", "help": "Small label under the next slide's name, top right." },
+    { "key": "slides", "type": "repeater", "label": "Slides", "itemName": "slide", "itemLabel": "name",
+      "fields": [
+        { "key": "name", "type": "text", "label": "Product line name", "help": "Shown in the previous slide's Next teaser, and instead of the logo if no logo is set." },
+        { "key": "word", "type": "text", "label": "Background word", "help": "Huge word behind the product, e.g. VERGENCE." },
+        { "key": "logo", "type": "image", "label": "Logo", "help": "Gold-White product logo (SVG or transparent PNG), shown about 42px tall." },
+        { "key": "models", "type": "text", "label": "Models line", "help": "e.g. 12 models" },
+        { "key": "background", "type": "image", "label": "Background image (optional)", "help": "Leave empty for the built-in studio backdrop. If the slide has a product cut-out, the background must not contain the product (it moves separately with parallax). Without a cut-out, a full product photo works here." },
+        { "key": "product", "type": "image", "label": "Product image", "help": "Transparent PNG with the same framing as the background; it sits in front of the background word." },
+        { "key": "thumbnail", "type": "image", "label": "Teaser thumbnail", "help": "Small image shown in the Next teaser on the previous slide." },
+        { "key": "description", "type": "textarea", "label": "Description" },
+        { "key": "button", "type": "link", "label": "Button", "help": "e.g. Explore Line" },
+        { "key": "detailImage", "type": "image", "label": "Detail image", "help": "Close-up shown in the card at the bottom centre. Leave empty and the card is hidden for this slide." },
+        { "key": "detailLink", "type": "url", "label": "Detail link", "help": "Where the + button on the detail card goes (product page)." }
+      ] }
+  ]
+}

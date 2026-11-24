@@ -1,0 +1,47 @@
+{
+  "name": "adamson/products-in-action",
+  "title": "Products in action",
+  "description": "One slide per product: a full-width photo of the product in use and a heading. The product's card (name, logo, cut-out, link) comes from Products. Up to 6.",
+  "icon": "format-gallery",
+  "fields": [
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow"
+    },
+    {
+      "key": "buttonLabel",
+      "type": "text",
+      "label": "Card button label",
+      "default": "Explore Product",
+      "help": "Links to each product's page (set on the product)."
+    },
+    {
+      "key": "slides",
+      "type": "repeater",
+      "label": "Slides",
+      "itemName": "slide",
+      "itemLabel": "title",
+      "max": 6,
+      "fields": [
+        {
+          "key": "product",
+          "type": "product",
+          "label": "Product"
+        },
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Slide heading",
+          "help": "Where it's used, e.g. the venue name."
+        },
+        {
+          "key": "background",
+          "type": "image",
+          "label": "Slide photo",
+          "help": "Full-width photo of this product in use. The bottom is darkened for the cards."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "adamson-poc",
+  "private": true,
+  "description": "Headless WordPress + Next.js proof of concept, built from the Adamson homepage design.",
+  "scripts": {
+    "setup": "node scripts/setup.mjs && npm --prefix web install",
+    "wp": "npx -y @wp-playground/cli@latest server --port 9400 --login --mount-before-install ./wordpress/site:/wordpress --mount ./wordpress/plugin/adamson-headless:/wordpress/wp-content/plugins/adamson-headless --mount ./wordpress/seed:/seed --blueprint ./wordpress/blueprint.json --wordpress-install-mode install-from-existing-files-if-needed",
+    "seed": "node scripts/seed.mjs",
+    "web:build": "npm --prefix web run build",
+    "www": "npm --prefix web run start:www",
+    "preview": "npm --prefix web run start:preview",
+    "dev": "npm --prefix web run dev",
+    "snapshot": "node scripts/snapshot.mjs"
+  }
+}

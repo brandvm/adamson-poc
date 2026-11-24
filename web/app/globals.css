@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Design tokens from the Adamson Figma file (variables + text styles).
+   Sizes are in rem. 1rem = 16 design px at the 1680px design width.
+   ------------------------------------------------------------------ */
+@theme {
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  --color-page: #000000;
+  --color-raised: #232323;
+  --color-gold: #8a6e4b;
+  --color-gold-50: #f4f2ef;
+  --color-ink: #ffffff;
+  --color-muted: #7e8182;
+  --color-secondary: #686b6d;
+  --color-charcoal-400: #949698;
+  /* Dark-mode values of color/text/accent and color/text/secondary */
+  --color-accent: #ab9981;
+  --color-subtle: #c0c1c2;
+  --color-card: #1f1f1f; /* product cards on dark photos */
+  --color-line: rgb(255 255 255 / 0.2);
+  --color-line-subtle: rgb(255 255 255 / 0.1);
+  --color-glass: rgb(0 0 0 / 0.24);
+  --color-action-secondary: rgb(157 137 111 / 0.04);
+  --color-action-secondary-hover: rgb(157 137 111 / 0.1);
+  --color-action-secondary-border-hover: rgb(157 137 111 / 0.4);
+
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+
+  --spacing-margin: 4.25rem; /* layout/margin 68px */
+  --spacing-section: 7.5rem; /* space/120 */
+
+  --blur-glass-s: 10px;
+  --blur-glass-m: 32px;
+  --blur-glass-l: 64px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Text styles (Figma: Display / Heading / Body / Label). Display and heading
+   styles have smaller values below 1024px. */
+@utility type-wordmark { font-size: 18.5rem; line-height: 0.86; font-weight: 400; @media (width < 64rem) { font-size: 23vw; } }
+@utility type-number-xl { font-size: 18.75rem; line-height: 14.75rem; font-weight: 500; letter-spacing: -0.05em; @media (width < 64rem) { font-size: 6rem; line-height: 5rem; } }
+@utility type-number-l { font-size: 12.5rem; line-height: 11.25rem; font-weight: 400; letter-spacing: -0.05em; @media (width < 64rem) { font-size: 5rem; line-height: 4.5rem; } }
+@utility type-number-m { font-size: 6.25rem; line-height: 6.875rem; font-weight: 400; letter-spacing: -0.05em; @media (width < 64rem) { font-size: 3.25rem; line-height: 3.5rem; } }
+@utility type-h1 { font-size: 6rem; line-height: 5.625rem; font-weight: 400; letter-spacing: -0.03em; @media (width < 64rem) { font-size: 2.75rem; line-height: 2.875rem; } }
+@utility type-h2 { font-size: 3.5rem; line-height: 3.75rem; font-weight: 400; letter-spacing: -0.03em; @media (width < 64rem) { font-size: 2.25rem; line-height: 2.5rem; } }
+@utility type-h3 { font-size: 2.5rem; line-height: 2.875rem; font-weight: 400; letter-spacing: -0.025em; @media (width < 64rem) { font-size: 1.75rem; line-height: 2.125rem; } }
+@utility type-h4 { font-size: 2rem; line-height: 2.375rem; font-weight: 400; letter-spacing: -0.025em; @media (width < 64rem) { font-size: 1.5rem; line-height: 1.875rem; } }
+@utility type-h5 { font-size: 1.5rem; line-height: 1.875rem; font-weight: 400; letter-spacing: -0.02em; @media (width < 64rem) { font-size: 1.25rem; line-height: 1.625rem; } }
+@utility type-h6 { font-size: 1.25rem; line-height: 1.625rem; font-weight: 400; letter-spacing: -0.01em; @media (width < 64rem) { font-size: 1.125rem; line-height: 1.5rem; } }
+@utility type-quote { font-size: 1.375rem; line-height: 1.875rem; font-weight: 400; @media (width < 64rem) { font-size: 1.125rem; line-height: 1.625rem; } }
+@utility type-body-l { font-size: 1.125rem; line-height: 1.625rem; font-weight: 400; }
+@utility type-body-m { font-size: 1rem; line-height: 1.5rem; font-weight: 400; }
+@utility type-body-s { font-size: 0.875rem; line-height: 1.25rem; font-weight: 400; }
+@utility type-body-s-strong { font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; }
+@utility type-body-xs { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 400; }
+@utility type-nav { font-size: 0.875rem; line-height: 1.25rem; font-weight: 400; letter-spacing: -0.01em; }
+@utility type-button { font-size: 0.875rem; line-height: 1.1; font-weight: 500; letter-spacing: -0.02em; }
+@utility type-button-l { font-size: 1rem; line-height: 1.1; font-weight: 500; letter-spacing: -0.02em; }
+@utility type-eyebrow { font-size: 0.75rem; line-height: 1rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+@utility type-tag { font-size: 0.75rem; line-height: 1rem; font-weight: 500; letter-spacing: -0.02em; }
+@utility type-marquee { font-size: 1.25rem; line-height: 1.625rem; font-weight: 500; letter-spacing: -0.01em; }
+@utility type-counter { font-size: 1.75rem; line-height: 2rem; font-weight: 300; @media (width < 64rem) { font-size: 1.5rem; line-height: 1.75rem; } }
+@utility type-footer { font-size: 0.625rem; line-height: 0.875rem; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; }
+
+/* wf-template names for the type roles (conventions §3), as aliases of the
+   styles above, so the style guide's class names work in code too. */
+@utility d0 { @apply type-wordmark; }
+@utility display-xl { @apply type-number-xl; }
+@utility display-l { @apply type-number-l; }
+@utility display-m { @apply type-number-m; }
+@utility d1 { @apply type-h1; }
+@utility d2 { @apply type-h2; }
+@utility d3 { @apply type-h3; }
+@utility d4 { @apply type-h4; }
+@utility d5 { @apply type-h5; }
+@utility d6 { @apply type-h6; }
+@utility quote { @apply type-quote; }
+@utility body-l { @apply type-body-l; }
+@utility body { @apply type-body-m; }
+@utility body-s { @apply type-body-s; }
+@utility body-xs { @apply type-body-xs; }
+@utility label-text { @apply type-eyebrow; }
+@utility chip-text { @apply type-tag; }
+@utility button-text { @apply type-button; }
+@utility nav-link-text { @apply type-nav; }
+
+/* Page width: sections are designed at 1680px. */
+@utility site-container { width: 100%; max-width: 105rem; margin-inline: auto; }
+
+/* ------------------------------------------------------------------
+   Viewport scaling (ported from wf-template's scaling system).
+   - 1024px and up: the 1680px design scales proportionally with the window
+     (every size is in rem), up to 2560px wide, so wide screens are filled.
+   - Below 1024px (tablets, phones): a fixed 16px base; sections switch to
+     their stacked layouts with `max-lg:` classes, and the heading/display
+     styles and spacing tokens below take their small-screen values.
+   ------------------------------------------------------------------ */
+html {
+  font-size: 16px;
+  background: var(--color-page);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+@media (width >= 64rem) {
+  html { font-size: clamp(9.75px, calc(100vw / 105), 24.381px); }
+}
+img, video { max-width: none; }
+
+/* Small screens: tighter page margin and section spacing. */
+@media (width < 64rem) {
+  :root {
+    --spacing-margin: 1.25rem;
+    --spacing-section: 4.5rem;
+  }
+}
+
+/* Lenis smooth scrolling (ported from wf-template recipes/smooth-scroll) */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
+
+/* Hide scrollbars on horizontal tracks */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

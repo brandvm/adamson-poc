@@ -1,0 +1,39 @@
+{
+ "block": "adamson/page-hero",
+ "data": {
+  "eyebrow": "Installed Sound · Performing Arts",
+  "heading": "Natural sound for theatres, opera houses and concert halls",
+  "button": {
+   "label": "See projects",
+   "url": "#projects"
+  },
+  "wordmark": "THEATRE",
+  "background": {
+   "seed": "news/warsaw-theatre-brooklyn.jpg",
+   "alt": "Historic theatre interior"
+  },
+  "overlay": null,
+  "anchors": [
+   {
+    "label": "Challenges",
+    "meta": "What matters",
+    "url": "#challenges"
+   },
+   {
+    "label": "Systems",
+    "meta": "Recommended",
+    "url": "#systems"
+   },
+   {
+    "label": "Projects",
+    "meta": "Case studies",
+    "url": "#projects"
+   },
+   {
+    "label": "Contact",
+    "meta": "Talk to us",
+    "url": "/contact"
+   }
+  ]
+ }
+}

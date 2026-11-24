@@ -1,0 +1,17 @@
+{
+ "block": "adamson/project-grid",
+ "data": {
+  "anchor": "projects",
+  "theme": "light",
+  "eyebrow": "Tours in action",
+  "heading": "Touring projects",
+  "description": "",
+  "button": {
+   "label": "All projects",
+   "url": "/applications/projects"
+  },
+  "applications": "Touring",
+  "limit": 6,
+  "filters": false
+ }
+}

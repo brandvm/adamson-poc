@@ -1,0 +1,10 @@
+{
+  "block": "adamson/connect",
+  "data": {
+    "title": "Let’s connect",
+    "description": "We’re here to collaborate, answer questions, and problem solve.",
+    "button": { "label": "Contact Us", "url": "/contact" },
+    "background": { "seed": "connect/background.jpg", "alt": "" },
+    "foreground": { "seed": "connect/speaker-array-cutout.png", "alt": "" }
+  }
+}

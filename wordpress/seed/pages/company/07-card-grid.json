@@ -1,0 +1,48 @@
+{
+  "block": "adamson/card-grid",
+  "data": {
+    "anchor": "",
+    "theme": "dark",
+    "columns": "3",
+    "imageRatio": "landscape",
+    "eyebrow": "More about Adamson",
+    "heading": "Company",
+    "description": "",
+    "button": null,
+    "cards": [
+      {
+        "image": null,
+        "eyebrow": "Since 1983",
+        "title": "History & Patents",
+        "text": "From the first cabinets in 1983 to the Vergence Group.",
+        "tags": "",
+        "link": {
+          "label": "Read the history",
+          "url": "/company/history"
+        }
+      },
+      {
+        "image": null,
+        "eyebrow": "Made in Canada",
+        "title": "Manufacturing & Innovation",
+        "text": "Built in-house in Port Perry, tested to the same standard.",
+        "tags": "",
+        "link": {
+          "label": "How we build",
+          "url": "/company/manufacturing"
+        }
+      },
+      {
+        "image": null,
+        "eyebrow": "Join us",
+        "title": "Careers",
+        "text": "Join the team building the world’s most accurate loudspeakers.",
+        "tags": "",
+        "link": {
+          "label": "Open roles",
+          "url": "/company/careers"
+        }
+      }
+    ]
+  }
+}

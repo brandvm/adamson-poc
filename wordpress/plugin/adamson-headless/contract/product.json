@@ -1,0 +1,168 @@
+{
+  "fields": [
+    {
+      "key": "type",
+      "type": "select",
+      "label": "Type",
+      "help": "Drives the filter pills in the Products section.",
+      "options": [
+        {
+          "label": "—",
+          "value": ""
+        },
+        "Line Source",
+        "Point Source",
+        "Subwoofer",
+        "Stage Monitor",
+        "Amplifier",
+        "Media Converter",
+        "Network",
+        "Rack"
+      ]
+    },
+    {
+      "key": "series",
+      "type": "text",
+      "label": "Series",
+      "help": "e.g. Vergence Group"
+    },
+    {
+      "key": "range",
+      "type": "text",
+      "label": "Frequency range",
+      "help": "e.g. 50 Hz – 20 kHz"
+    },
+    {
+      "key": "spl",
+      "type": "text",
+      "label": "Max peak SPL",
+      "help": "e.g. 151 dB"
+    },
+    {
+      "key": "splLabel",
+      "type": "text",
+      "label": "SPL label",
+      "default": "Max peak SPL"
+    },
+    {
+      "key": "render",
+      "type": "image",
+      "label": "Studio render",
+      "help": "Product on a dark studio background, 540 × 460 ratio. Used on the Products section cards."
+    },
+    {
+      "key": "cutout",
+      "type": "image",
+      "label": "Product cut-out",
+      "help": "Transparent PNG of the product. Used on small product cards (e.g. Products in action)."
+    },
+    {
+      "key": "logo",
+      "type": "image",
+      "label": "Logo",
+      "help": "Optional gold/white wordmark, cropped tight. Without it, the name is shown next to the Adamson mark."
+    },
+    {
+      "key": "url",
+      "type": "url",
+      "label": "Product page link",
+      "help": "Normally /products/p/<slug> (the product page built from these fields)."
+    },
+    {
+      "key": "category",
+      "type": "select",
+      "label": "Category",
+      "options": [
+        "Loudspeakers",
+        "Electronics",
+        "Software"
+      ]
+    },
+    {
+      "key": "seriesUrl",
+      "type": "url",
+      "label": "Series page link",
+      "help": "Back link on the product page, e.g. /products/loudspeakers/cs-series"
+    },
+    {
+      "key": "tagline",
+      "type": "text",
+      "label": "Tagline",
+      "help": "Short line under the name on the product page."
+    },
+    {
+      "key": "overview",
+      "type": "textarea",
+      "label": "Overview"
+    },
+    {
+      "key": "specs",
+      "type": "repeater",
+      "label": "Key specs",
+      "itemName": "spec",
+      "itemLabel": "label",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Label"
+        },
+        {
+          "key": "value",
+          "type": "text",
+          "label": "Value"
+        }
+      ]
+    },
+    {
+      "key": "features",
+      "type": "repeater",
+      "label": "Features",
+      "itemName": "feature",
+      "itemLabel": "title",
+      "fields": [
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Title"
+        },
+        {
+          "key": "text",
+          "type": "textarea",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "key": "downloads",
+      "type": "repeater",
+      "label": "Downloads",
+      "itemName": "download",
+      "itemLabel": "label",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Label"
+        },
+        {
+          "key": "url",
+          "type": "url",
+          "label": "File or page URL"
+        },
+        {
+          "key": "meta",
+          "type": "text",
+          "label": "Meta",
+          "help": "e.g. PDF · 2 MB"
+        }
+      ]
+    },
+    {
+      "key": "inRange",
+      "type": "toggle",
+      "label": "Show in the Products section",
+      "help": "The Products section on the homepage lists every product with this switched on, in the order set by Order (Page Attributes)."
+    }
+  ]
+}

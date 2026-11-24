@@ -1,0 +1,30 @@
+{
+  "block": "adamson/login-panel",
+  "data": {
+    "eyebrow": "Login",
+    "heading": "Sign in to Adamson",
+    "text": "One sign-in for three levels of access. Adamson approves every account.",
+    "levels": [
+      {
+        "title": "Public",
+        "text": "Anyone can browse products, download manuals and data sheets, and read news. No account needed."
+      },
+      {
+        "title": "Approved clients",
+        "text": "Rental companies, integrators and distributors get pricing, technical resources, reference designs and order history."
+      },
+      {
+        "title": "Admins",
+        "text": "Adamson sales directors and admins approve accounts and manage what each client can see."
+      }
+    ],
+    "formTitle": "Sign in",
+    "submitLabel": "Sign in",
+    "requestText": "No account yet? Adamson approves each one.",
+    "requestLink": {
+      "label": "Request access",
+      "url": "/contact"
+    },
+    "notConnected": "Sign-in isn’t connected yet in this preview. Please contact your Adamson representative."
+  }
+}

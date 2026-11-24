@@ -1,0 +1,20 @@
+{
+  "block": "adamson/text-media",
+  "data": {
+    "anchor": "",
+    "theme": "light",
+    "imageSide": "left",
+    "eyebrow": "Quality and testing",
+    "heading": "The same sound, every time",
+    "text": "Each transducer and cabinet is measured in our test chamber and matched to its reference response. Systems leave the factory ready to deploy without re-tuning.",
+    "button": {
+      "label": "See the technology",
+      "url": "/technology"
+    },
+    "image": {
+      "seed": "technology/amplification-background.jpg",
+      "alt": "Adamson amplification"
+    },
+    "points": []
+  }
+}

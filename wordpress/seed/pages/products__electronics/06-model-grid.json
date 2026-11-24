@@ -1,0 +1,12 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "dark",
+    "button": null,
+    "description": "Turn-key power distribution, network and switching.",
+    "anchor": "racks",
+    "eyebrow": "3 models",
+    "heading": "Racks",
+    "series": "Racks"
+  }
+}

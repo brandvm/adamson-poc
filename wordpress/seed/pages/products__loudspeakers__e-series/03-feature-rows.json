@@ -1,0 +1,41 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "",
+    "eyebrow": "Proven performance",
+    "heading": "Why E Series",
+    "rows": [
+      {
+        "eyebrow": "Scale",
+        "title": "For the biggest rooms",
+        "text": "Long throw and high output for stadiums, arenas and festival main stages.",
+        "image": {
+          "seed": "applications/touring-background.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Low end",
+        "title": "Subwoofers to match",
+        "text": "E119 and E219 bring controlled, cardioid-capable low frequency to the array.",
+        "image": {
+          "seed": "products-page/series-e.jpg",
+          "alt": ""
+        },
+        "link": null
+      },
+      {
+        "eyebrow": "Proven",
+        "title": "Trusted on tour",
+        "text": "Used by touring engineers around the world, night after night.",
+        "image": {
+          "seed": "stats/shows-and-events.jpg",
+          "alt": ""
+        },
+        "link": null
+      }
+    ]
+  }
+}

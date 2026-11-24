@@ -1,0 +1,39 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Products",
+    "heading": "Software: the brilliance behind the scenes",
+    "button": {
+      "label": "Downloads and updates",
+      "url": "/support/downloads"
+    },
+    "wordmark": "SOFTWARE",
+    "background": {
+      "seed": "products-page/software-bg.png",
+      "alt": ""
+    },
+    "overlay": null,
+    "anchors": [
+      {
+        "label": "ArrayIntelligence",
+        "meta": "Control",
+        "url": "#arrayintelligence"
+      },
+      {
+        "label": "Array Tools",
+        "meta": "Utilities",
+        "url": "#array-tools"
+      },
+      {
+        "label": "Blueprint AV",
+        "meta": "Design",
+        "url": "#blueprint-av"
+      },
+      {
+        "label": "Downloads",
+        "meta": "Updates",
+        "url": "#downloads-and-updates"
+      }
+    ]
+  }
+}

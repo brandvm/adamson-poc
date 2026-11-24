@@ -1,0 +1,93 @@
+{
+  "block": "adamson/series-grid",
+  "data": {
+    "anchor": "loudspeakers",
+    "eyebrow": "6 series",
+    "heading": "Loudspeakers",
+    "description": "Intelligently designed for the main stage.",
+    "button": {
+      "label": "Explore Loudspeakers",
+      "url": "/products/loudspeakers"
+    },
+    "series": [
+      {
+        "name": "Vergence Group",
+        "tag": "State-of-the-art",
+        "meta": "5 models",
+        "image": {
+          "seed": "products-page/series-vergence.jpg",
+          "alt": "Vergence Group cabinet"
+        },
+        "link": {
+          "url": "/products/loudspeakers/vergence-group"
+        },
+        "dim": false
+      },
+      {
+        "name": "CS Series",
+        "tag": "Compact intelligence",
+        "meta": "7 models",
+        "image": {
+          "seed": "products-page/series-cs.jpg",
+          "alt": "CS Series cabinet grille"
+        },
+        "link": {
+          "url": "/products/loudspeakers/cs-series"
+        },
+        "dim": false
+      },
+      {
+        "name": "IS Series",
+        "tag": "Integration focused",
+        "meta": "12 models",
+        "image": {
+          "seed": "products-page/series-is.jpg",
+          "alt": "IS Series cabinets"
+        },
+        "link": {
+          "url": "/products/loudspeakers/is-series"
+        },
+        "dim": false
+      },
+      {
+        "name": "M Series",
+        "tag": "Stage worthy",
+        "meta": "5 models",
+        "image": {
+          "seed": "products-page/series-m.jpg",
+          "alt": "M Series stage monitor"
+        },
+        "link": {
+          "url": "/products/loudspeakers/monitors"
+        },
+        "dim": false
+      },
+      {
+        "name": "E Series",
+        "tag": "Proven performance",
+        "meta": "4 models",
+        "image": {
+          "seed": "products-page/series-e.jpg",
+          "alt": "E Series grille"
+        },
+        "link": {
+          "url": "/products/loudspeakers/e-series"
+        },
+        "dim": false
+      },
+      {
+        "name": "S Series",
+        "tag": "Set the standard",
+        "meta": "7 models",
+        "image": {
+          "seed": "products-page/series-s.jpg",
+          "alt": "S Series cabinet"
+        },
+        "link": {
+          "url": "/products/loudspeakers/s-series"
+        },
+        "dim": true
+      }
+    ]
+  }
+}

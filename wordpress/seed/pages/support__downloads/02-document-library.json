@@ -1,0 +1,12 @@
+{
+  "block": "adamson/document-library",
+  "data": {
+    "anchor": "library",
+    "eyebrow": "Library",
+    "heading": "Find a file",
+    "description": "Every manual, data sheet, drawing, software release and firmware update for current and discontinued products.",
+    "searchPlaceholder": "Search by product, file or keyword",
+    "discontinuedLabel": "Show discontinued products",
+    "emptyText": "No files match. Try another product or clear the filters."
+  }
+}

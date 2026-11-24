@@ -1,0 +1,39 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Products",
+    "heading": "Loudspeakers: six series, one Adamson voice",
+    "button": {
+      "label": "See all series",
+      "url": "#series"
+    },
+    "wordmark": "LOUDSPEAKERS",
+    "background": {
+      "seed": "products-page/hero-2.png",
+      "alt": "Adamson cabinets"
+    },
+    "overlay": null,
+    "anchors": [
+      {
+        "label": "Vergence Group",
+        "meta": "5 models",
+        "url": "#vergence-group"
+      },
+      {
+        "label": "CS Series",
+        "meta": "7 models",
+        "url": "#cs-series"
+      },
+      {
+        "label": "IS Series",
+        "meta": "12 models",
+        "url": "#is-series"
+      },
+      {
+        "label": "M Series",
+        "meta": "5 models",
+        "url": "#monitors"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "adamson/series-grid",
+  "title": "Series grid",
+  "description": "Light section: header (eyebrow, big title, description, button) and a 3-column grid of photo cards with a tag, name and model count.",
+  "icon": "grid-view",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor", "help": "Section id for links, without #, e.g. loudspeakers." },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button" },
+    { "key": "series", "type": "repeater", "label": "Series cards", "itemName": "series", "itemLabel": "name",
+      "fields": [
+        { "key": "name", "type": "text", "label": "Name" },
+        { "key": "tag", "type": "text", "label": "Tag", "help": "Small pill top-left, e.g. State-of-the-art." },
+        { "key": "meta", "type": "text", "label": "Model count", "help": "e.g. 5 models" },
+        { "key": "image", "type": "image", "label": "Photo" },
+        { "key": "link", "type": "link", "label": "Link", "help": "Only the URL is used: the whole card is clickable." },
+        { "key": "dim", "type": "toggle", "label": "Darken photo", "help": "Adds a 50% black layer for bright photos." }
+      ] }
+  ]
+}

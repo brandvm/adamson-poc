@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Company",
+    "heading": "Careers at Adamson",
+    "button": {
+      "label": "See open roles",
+      "url": "#roles"
+    },
+    "wordmark": "CAREERS",
+    "background": {
+      "seed": "products-in-action/auditorium.jpg",
+      "alt": "Auditorium with an Adamson system"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "adamson/hero",
+  "title": "Hero",
+  "description": "Opening section: headline, two buttons, background, product image and the artist strip.",
+  "icon": "cover-image",
+  "fields": [
+    { "key": "heading", "type": "textarea", "label": "Heading", "rows": 2 },
+    { "key": "primary", "type": "link", "label": "Primary button (gold)" },
+    { "key": "secondary", "type": "link", "label": "Secondary button (outline)" },
+    { "key": "background", "type": "image", "label": "Background image (optional)", "help": "Leave empty for the built-in studio backdrop. If you upload one, it must not contain the product: the product image moves separately with parallax." },
+    { "key": "product", "type": "image", "label": "Product image", "help": "Transparent PNG. The ADAMSON wordmark passes between its left and right halves." },
+    { "key": "artists", "type": "repeater", "label": "Artist strip", "itemName": "artist", "itemLabel": "name",
+      "fields": [ { "key": "name", "type": "text", "label": "Name" } ] }
+  ]
+}

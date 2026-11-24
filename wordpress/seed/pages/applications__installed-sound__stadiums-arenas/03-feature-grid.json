@@ -1,0 +1,48 @@
+{
+ "block": "adamson/feature-grid",
+ "data": {
+  "anchor": "systems",
+  "theme": "light",
+  "columns": "3",
+  "numbered": false,
+  "eyebrow": "Recommended systems",
+  "heading": "Systems that fit",
+  "description": "",
+  "button": {
+   "label": "All products",
+   "url": "/products"
+  },
+  "items": [
+   {
+    "title": "Vergence Group",
+    "meta": "Line source",
+    "text": "Flagship line source for the largest stadiums.",
+    "link": {
+     "label": "Vergence Group",
+     "url": "/products/loudspeakers/vergence-group"
+    },
+    "image": null
+   },
+   {
+    "title": "CS Series",
+    "meta": "Line source",
+    "text": "Centre-hung and distributed arrays for arenas.",
+    "link": {
+     "label": "CS Series",
+     "url": "/products/loudspeakers/cs-series"
+    },
+    "image": null
+   },
+   {
+    "title": "XG Amplifiers",
+    "meta": "Electronics",
+    "text": "High-density amplification on a Milan network.",
+    "link": {
+     "label": "XG Amplifiers",
+     "url": "/products/electronics"
+    },
+    "image": null
+   }
+  ]
+ }
+}

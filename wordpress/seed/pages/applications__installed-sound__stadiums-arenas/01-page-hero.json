@@ -1,0 +1,39 @@
+{
+ "block": "adamson/page-hero",
+ "data": {
+  "eyebrow": "Installed Sound · Stadiums & Arenas",
+  "heading": "Long throw, clear speech and concert impact for the biggest rooms",
+  "button": {
+   "label": "See projects",
+   "url": "#projects"
+  },
+  "wordmark": "ARENAS",
+  "background": {
+   "seed": "connect/background.jpg",
+   "alt": "Arena with flown line arrays"
+  },
+  "overlay": null,
+  "anchors": [
+   {
+    "label": "Challenges",
+    "meta": "What matters",
+    "url": "#challenges"
+   },
+   {
+    "label": "Systems",
+    "meta": "Recommended",
+    "url": "#systems"
+   },
+   {
+    "label": "Projects",
+    "meta": "Case studies",
+    "url": "#projects"
+   },
+   {
+    "label": "Contact",
+    "meta": "Talk to us",
+    "url": "/contact"
+   }
+  ]
+ }
+}

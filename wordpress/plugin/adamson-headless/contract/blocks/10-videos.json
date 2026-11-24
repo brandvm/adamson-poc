@@ -1,0 +1,22 @@
+{
+  "name": "adamson/videos",
+  "title": "Featured videos",
+  "description": "Behind the Curtain: stage background, stacked section header and a list of video cards that play in a pop-up.",
+  "icon": "video-alt3",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "title", "type": "text", "label": "Title" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button" },
+    { "key": "background", "type": "image", "label": "Background image", "help": "Shown at 50% opacity and faded to black top and bottom." },
+    { "key": "cardLabel", "type": "text", "label": "Card label", "default": "Video", "help": "Small gold label on every video card." },
+    { "key": "videos", "type": "repeater", "label": "Videos", "itemName": "video", "itemLabel": "title",
+      "fields": [
+        { "key": "thumbnail", "type": "image", "label": "Thumbnail" },
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "credit", "type": "text", "label": "Credit", "help": "e.g. FOH engineer Jim Ebdon" },
+        { "key": "duration", "type": "text", "label": "Duration", "help": "Format: 4 m or 2 m 30 s" },
+        { "key": "url", "type": "url", "label": "Video URL", "help": "YouTube, Vimeo or a direct .mp4/.webm link plays in a pop-up; any other link opens in a new tab." }
+      ] }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "adamson/stats",
+  "title": "Why Adamson (stats)",
+  "description": "Dark section: stacked header with a button on the left, a 2 × 2 grid of stat cards with count-up numbers on the right.",
+  "icon": "chart-bar",
+  "fields": [
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow", "default": "Why Adamson" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button", "help": "e.g. About Adamson" },
+    { "key": "stats", "type": "repeater", "label": "Stat cards", "itemName": "stat", "itemLabel": "title", "max": 4,
+      "fields": [
+        { "key": "number", "type": "text", "label": "Number", "help": "Shown large and counted up from 0, e.g. 45+ Years, +100k ft², 2,000+." },
+        { "key": "title", "type": "text", "label": "Title" },
+        { "key": "description", "type": "textarea", "label": "Description" },
+        { "key": "link", "type": "link", "label": "Link", "help": "Where the card and its arrow go. Only the URL is used." },
+        { "key": "background", "type": "select", "label": "Background", "default": "image",
+          "options": [ { "label": "Photo", "value": "image" }, { "label": "Raised (grey)", "value": "raised" }, { "label": "Gold glow", "value": "glow" } ] },
+        { "key": "image", "type": "image", "label": "Photo", "help": "Used when Background is Photo. Darkened at the top and bottom so the text stays readable." }
+      ] }
+  ]
+}

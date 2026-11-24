@@ -1,0 +1,16 @@
+{
+  "block": "adamson/videos",
+  "data": {
+    "eyebrow": "Featured videos",
+    "title": "Behind the Curtain",
+    "description": "Real conversations with the people behind live productions, sharing their experience with Adamson Systems Engineering products.",
+    "button": { "label": "View More Videos", "url": "/news?filter=videos" },
+    "background": { "seed": "videos/stage-smoke.jpg", "alt": "" },
+    "cardLabel": "Video",
+    "videos": [
+      { "thumbnail": { "seed": "videos/linkin-park.jpg", "alt": "Behind the Curtain: Linkin Park" }, "title": "Linkin Park", "credit": "FOH engineers Ricki Cook & Bill Chase", "duration": "4 m", "url": "" },
+      { "thumbnail": { "seed": "videos/linkin-park-from-zero.jpg", "alt": "Behind the Curtain: Linkin Park at Stade de France" }, "title": "Linkin Park · From Zero World Tour", "credit": "FOH engineer Jim Ebdon", "duration": "2 m 30 s", "url": "" },
+      { "thumbnail": { "seed": "videos/imagine-dragons.jpg", "alt": "Behind the Curtain: Imagine Dragons at The Gorge" }, "title": "Imagine Dragons", "credit": "Systems Tech Liam Walker", "duration": "2 m 30 s", "url": "" }
+    ]
+  }
+}

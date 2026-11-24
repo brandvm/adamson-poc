@@ -1,0 +1,18 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Loudspeakers",
+    "heading": "S Series: Lightweight, high-output line source for mid-sized touring and installs.",
+    "button": {
+      "label": "See the models",
+      "url": "#models"
+    },
+    "wordmark": "S SERIES",
+    "background": {
+      "seed": "products-page/series-s.jpg",
+      "alt": "S Series"
+    },
+    "overlay": null,
+    "anchors": []
+  }
+}

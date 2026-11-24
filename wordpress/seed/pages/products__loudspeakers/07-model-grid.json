@@ -1,0 +1,15 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "dark",
+    "button": {
+      "label": "Explore E Series",
+      "url": "/products/loudspeakers/e-series"
+    },
+    "description": "Large-format line source for stadiums and festivals, proven on the world’s biggest tours.",
+    "anchor": "e-series",
+    "eyebrow": "4 models",
+    "heading": "E Series",
+    "series": "E Series"
+  }
+}

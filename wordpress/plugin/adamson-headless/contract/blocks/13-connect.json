@@ -1,0 +1,13 @@
+{
+  "name": "adamson/connect",
+  "title": "Let's connect",
+  "description": "Closing call to action over a concert photo, with the large ADAMSON wordmark.",
+  "icon": "email-alt",
+  "fields": [
+    { "key": "title", "type": "text", "label": "Title" },
+    { "key": "description", "type": "textarea", "label": "Text", "rows": 2 },
+    { "key": "button", "type": "link", "label": "Button (white)" },
+    { "key": "background", "type": "image", "label": "Background photo", "help": "Landscape photo, about 1680 × 1120. It is toned gold and darkened automatically." },
+    { "key": "foreground", "type": "image", "label": "Foreground cut-out", "help": "Optional transparent PNG cut from the same photo (e.g. a loudspeaker array), drawn in front of the ADAMSON wordmark. Must line up with the background photo." }
+  ]
+}

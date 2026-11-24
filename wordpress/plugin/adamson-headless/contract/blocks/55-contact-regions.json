@@ -1,0 +1,117 @@
+{
+  "name": "adamson/contact-regions",
+  "title": "Contact: regions and form",
+  "description": "Region tabs (Americas, EMEA, Asia Pacific) with offices and distributors, then a contact form.",
+  "icon": "location",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Section id",
+      "help": "Optional, for links like #careers. Lowercase, no spaces."
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow",
+      "default": "Find us"
+    },
+    {
+      "key": "heading",
+      "type": "text",
+      "label": "Title"
+    },
+    {
+      "key": "description",
+      "type": "textarea",
+      "label": "Description"
+    },
+    {
+      "key": "regions",
+      "type": "repeater",
+      "label": "Regions",
+      "itemName": "region",
+      "itemLabel": "name",
+      "fields": [
+        {
+          "key": "name",
+          "type": "text",
+          "label": "Region",
+          "help": "Full name, e.g. Europe, Middle East and Africa"
+        },
+        {
+          "key": "offices",
+          "type": "repeater",
+          "label": "Offices and distributors",
+          "itemName": "office",
+          "itemLabel": "name",
+          "fields": [
+            {
+              "key": "name",
+              "type": "text",
+              "label": "Name"
+            },
+            {
+              "key": "kind",
+              "type": "text",
+              "label": "Kind",
+              "help": "e.g. Head office, Distributor"
+            },
+            {
+              "key": "country",
+              "type": "text",
+              "label": "Country"
+            },
+            {
+              "key": "address",
+              "type": "textarea",
+              "label": "Address"
+            },
+            {
+              "key": "phone",
+              "type": "text",
+              "label": "Phone"
+            },
+            {
+              "key": "email",
+              "type": "text",
+              "label": "Email"
+            },
+            {
+              "key": "website",
+              "type": "url",
+              "label": "Website"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "formEyebrow",
+      "type": "text",
+      "label": "Form eyebrow",
+      "default": "Contact"
+    },
+    {
+      "key": "formTitle",
+      "type": "text",
+      "label": "Form title"
+    },
+    {
+      "key": "formText",
+      "type": "textarea",
+      "label": "Form text"
+    },
+    {
+      "key": "topics",
+      "type": "textarea",
+      "label": "Topics",
+      "help": "One per line, shown in the Topic menu."
+    },
+    {
+      "key": "successText",
+      "type": "textarea",
+      "label": "Message after sending"
+    }
+  ]
+}

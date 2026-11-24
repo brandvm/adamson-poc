@@ -1,0 +1,35 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Technology",
+    "heading": "Engineered in-house, from transducer to software",
+    "button": {
+      "label": "Start with transducers",
+      "url": "#transducers"
+    },
+    "wordmark": "TECHNOLOGY",
+    "background": {
+      "seed": "technology/transducers-background.jpg",
+      "alt": ""
+    },
+    "overlay": null,
+    "anchors": [
+      {
+        "label": "Transducers",
+        "url": "#transducers"
+      },
+      {
+        "label": "Wave shaping",
+        "url": "#wave-shaping"
+      },
+      {
+        "label": "Amplification",
+        "url": "#amplification"
+      },
+      {
+        "label": "Software",
+        "url": "#software"
+      }
+    ]
+  }
+}

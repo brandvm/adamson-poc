@@ -1,0 +1,15 @@
+{
+  "block": "adamson/model-grid",
+  "data": {
+    "tone": "light",
+    "button": {
+      "label": "Explore CS Series",
+      "url": "/products/loudspeakers/cs-series"
+    },
+    "description": "Compact, self-powered cabinets with Milan networking for installs and tours that need a smaller footprint.",
+    "anchor": "cs-series",
+    "eyebrow": "7 models",
+    "heading": "CS Series",
+    "series": "CS Series"
+  }
+}

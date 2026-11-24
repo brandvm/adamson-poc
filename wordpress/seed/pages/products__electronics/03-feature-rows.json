@@ -1,0 +1,38 @@
+{
+  "block": "adamson/feature-rows",
+  "data": {
+    "tone": "light",
+    "description": "The amplifier modules inside Vergence and CS cabinets, side by side.",
+    "anchor": "modules",
+    "eyebrow": "Amplifiers",
+    "heading": "Loudspeaker Modules",
+    "rows": [
+      {
+        "eyebrow": "Vergence Group",
+        "title": "Vergence modules",
+        "text": "Onboard amplification and DSP for every Vergence cabinet, monitored over the network.",
+        "image": {
+          "seed": "featured-products/vgx-detail.png",
+          "alt": ""
+        },
+        "link": {
+          "label": "Vergence Group",
+          "url": "/products/loudspeakers/vergence-group"
+        }
+      },
+      {
+        "eyebrow": "CS Series",
+        "title": "CS modules",
+        "text": "Self-powered CS cabinets carry their own module, with Milan audio and control.",
+        "image": {
+          "seed": "technology/amplification-background.jpg",
+          "alt": ""
+        },
+        "link": {
+          "label": "CS Series",
+          "url": "/products/loudspeakers/cs-series"
+        }
+      }
+    ]
+  }
+}

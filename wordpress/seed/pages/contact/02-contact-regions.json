@@ -1,0 +1,112 @@
+{
+  "block": "adamson/contact-regions",
+  "data": {
+    "anchor": "regions",
+    "eyebrow": "Find us",
+    "heading": "Offices and distributors",
+    "description": "Pick your region to find the nearest Adamson office or distributor.",
+    "regions": [
+      {
+        "name": "Americas",
+        "offices": [
+          {
+            "name": "Adamson Systems Engineering",
+            "kind": "Head office",
+            "country": "Canada",
+            "address": "1401 Scugog Line 6\nPort Perry, Ontario L9L 1B2",
+            "phone": "+1 905-982-0520",
+            "email": "info@adamsonsystems.com",
+            "website": "https://adamson.ai"
+          },
+          {
+            "name": "Adamson USA",
+            "kind": "Office",
+            "country": "USA",
+            "address": "Nashville, Tennessee",
+            "phone": "+1 615-000-0000",
+            "email": "usa@adamsonsystems.com",
+            "website": ""
+          },
+          {
+            "name": "Audio Brasil",
+            "kind": "Distributor",
+            "country": "Brazil",
+            "address": "São Paulo",
+            "phone": "+55 11 0000-0000",
+            "email": "vendas@example.com",
+            "website": ""
+          }
+        ]
+      },
+      {
+        "name": "Europe, Middle East and Africa",
+        "offices": [
+          {
+            "name": "Adamson EMEA",
+            "kind": "Office",
+            "country": "Belgium",
+            "address": "Brussels",
+            "phone": "+32 2 000 00 00",
+            "email": "emea@adamsonsystems.com",
+            "website": ""
+          },
+          {
+            "name": "Sound Partners UK",
+            "kind": "Distributor",
+            "country": "United Kingdom",
+            "address": "London",
+            "phone": "+44 20 0000 0000",
+            "email": "sales@example.com",
+            "website": ""
+          },
+          {
+            "name": "Gulf Audio",
+            "kind": "Distributor",
+            "country": "UAE",
+            "address": "Dubai",
+            "phone": "+971 4 000 0000",
+            "email": "info@example.com",
+            "website": ""
+          }
+        ]
+      },
+      {
+        "name": "Asia Pacific",
+        "offices": [
+          {
+            "name": "Adamson APAC",
+            "kind": "Office",
+            "country": "Singapore",
+            "address": "Singapore",
+            "phone": "+65 6000 0000",
+            "email": "apac@adamsonsystems.com",
+            "website": ""
+          },
+          {
+            "name": "Pro Audio Australia",
+            "kind": "Distributor",
+            "country": "Australia",
+            "address": "Melbourne",
+            "phone": "+61 3 0000 0000",
+            "email": "sales@example.com",
+            "website": ""
+          },
+          {
+            "name": "Tokyo Sound",
+            "kind": "Distributor",
+            "country": "Japan",
+            "address": "Tokyo",
+            "phone": "+81 3 0000 0000",
+            "email": "info@example.com",
+            "website": ""
+          }
+        ]
+      }
+    ],
+    "formEyebrow": "Contact",
+    "formTitle": "Send us a message",
+    "formText": "Tell us about your project or question and the right person will reply.",
+    "topics": "General enquiry\nSales and pricing\nTechnical support\nService and repairs\nTraining\nPress",
+    "successText": "Thanks — we’ll be in touch within one business day."
+  }
+}

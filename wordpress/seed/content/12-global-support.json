@@ -1,0 +1,13 @@
+{
+  "block": "adamson/global-support",
+  "data": {
+    "eyebrow": "Global company",
+    "title": "Worldwide support",
+    "description": "Headquarters  1401 Scugog Line 6, Port Perry, Ontario, Canada",
+    "regions": [
+      { "label": "AMER", "text": "North and South America", "link": "/contact", "x": 25.25, "y": 32.37, "side": "left" },
+      { "label": "EMEA", "text": "Europe, Middle East and Africa", "link": "/contact", "x": 48.22, "y": 26.4, "side": "right" },
+      { "label": "APAC", "text": "Asia Pacific", "link": "/contact", "x": 78.22, "y": 47.07, "side": "right" }
+    ]
+  }
+}

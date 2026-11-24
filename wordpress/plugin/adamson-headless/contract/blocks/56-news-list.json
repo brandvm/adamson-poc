@@ -1,0 +1,37 @@
+{
+  "name": "adamson/news-list",
+  "title": "News list",
+  "description": "Every news post, newest first, filterable by type (the post's tag: Press release, Launch, Tour). The newest is shown large.",
+  "icon": "admin-post",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Section id",
+      "help": "Optional, for links like #careers. Lowercase, no spaces."
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow",
+      "default": "News"
+    },
+    {
+      "key": "heading",
+      "type": "text",
+      "label": "Title",
+      "default": "Making Waves"
+    },
+    {
+      "key": "description",
+      "type": "textarea",
+      "label": "Description"
+    },
+    {
+      "key": "allLabel",
+      "type": "text",
+      "label": "“All” filter label",
+      "default": "All news"
+    }
+  ]
+}

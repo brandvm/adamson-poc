@@ -1,0 +1,15 @@
+{
+  "fields": [
+    { "key": "product", "type": "text", "label": "Product", "help": "Model or family the file is for, e.g. CS10 or XG Series. Drives the Product filter." },
+    { "key": "series", "type": "text", "label": "Series", "help": "e.g. CS Series" },
+    { "key": "fileType", "type": "select", "label": "File type", "default": "Manual",
+      "options": [ "Manual", "Data sheet", "Spec sheet", "Drawing", "Software", "Firmware", "Certificate", "Brochure", "Guide" ] },
+    { "key": "language", "type": "select", "label": "Language", "default": "English",
+      "options": [ "English", "Français", "Español", "Deutsch" ] },
+    { "key": "version", "type": "text", "label": "Version", "help": "e.g. v2.3 or Rev C" },
+    { "key": "size", "type": "text", "label": "File size", "help": "e.g. 4.2 MB" },
+    { "key": "file", "type": "url", "label": "File URL", "help": "Link to the PDF or download." },
+    { "key": "summary", "type": "textarea", "label": "Summary", "help": "One or two sentences shown on the document page." },
+    { "key": "discontinued", "type": "toggle", "label": "Discontinued product", "help": "Hidden from the library unless the visitor turns on “Show discontinued”. Never labelled “Legacy”." }
+  ]
+}

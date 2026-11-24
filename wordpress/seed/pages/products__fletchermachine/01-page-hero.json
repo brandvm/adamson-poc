@@ -1,0 +1,39 @@
+{
+  "block": "adamson/page-hero",
+  "data": {
+    "eyebrow": "Immersive",
+    "heading": "FletcherMachine: reference class spatial audio rendering",
+    "button": {
+      "label": "See the system",
+      "url": "#system"
+    },
+    "wordmark": "FLETCHER",
+    "background": {
+      "seed": "products-page/fm-layer1.png",
+      "alt": ""
+    },
+    "overlay": null,
+    "anchors": [
+      {
+        "label": "Hardware",
+        "meta": "5 models",
+        "url": "#hardware-units"
+      },
+      {
+        "label": "Renders",
+        "meta": "Gallery",
+        "url": "#renders"
+      },
+      {
+        "label": "In action",
+        "meta": "Shows",
+        "url": "#in-action"
+      },
+      {
+        "label": "Manual",
+        "meta": "Library",
+        "url": "/support/downloads"
+      }
+    ]
+  }
+}

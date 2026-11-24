@@ -1,0 +1,47 @@
+{
+  "block": "adamson/card-grid",
+  "data": {
+    "anchor": "",
+    "theme": "dark",
+    "columns": "4",
+    "imageRatio": "landscape",
+    "eyebrow": "Process",
+    "heading": "From raw material to the road",
+    "description": "",
+    "button": null,
+    "cards": [
+      {
+        "image": null,
+        "eyebrow": "01",
+        "title": "Design",
+        "text": "Acoustic and mechanical design in-house, proven in prediction and prototypes.",
+        "tags": "",
+        "link": null
+      },
+      {
+        "image": null,
+        "eyebrow": "02",
+        "title": "Build",
+        "text": "Cabinets machined and assembled in Port Perry from certified Baltic birch.",
+        "tags": "",
+        "link": null
+      },
+      {
+        "image": null,
+        "eyebrow": "03",
+        "title": "Transducers",
+        "text": "Kevlar® cones and drivers built by Adamson, not bought in.",
+        "tags": "",
+        "link": null
+      },
+      {
+        "image": null,
+        "eyebrow": "04",
+        "title": "Test",
+        "text": "Every cabinet measured against its reference before it ships.",
+        "tags": "",
+        "link": null
+      }
+    ]
+  }
+}

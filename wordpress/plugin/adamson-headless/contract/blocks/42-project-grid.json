@@ -1,0 +1,17 @@
+{
+  "name": "adamson/project-grid",
+  "title": "Projects",
+  "description": "Case study cards from WordPress → Projects (featured first), with optional filters for application, region and product.",
+  "icon": "location-alt",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor", "help": "Section id for links, without #." },
+    { "key": "theme", "type": "select", "label": "Theme", "default": "dark", "options": [ { "label": "Dark", "value": "dark" }, { "label": "Light", "value": "light" } ] },
+    { "key": "eyebrow", "type": "text", "label": "Eyebrow" },
+    { "key": "heading", "type": "text", "label": "Heading" },
+    { "key": "description", "type": "textarea", "label": "Description" },
+    { "key": "button", "type": "link", "label": "Button" },
+    { "key": "applications", "type": "text", "label": "Only these applications", "help": "Comma separated, e.g. Performing Arts, Houses of Worship. Empty shows all." },
+    { "key": "limit", "type": "number", "label": "Maximum cards", "help": "0 shows all." },
+    { "key": "filters", "type": "toggle", "label": "Show filters", "help": "Application, region and product filters above the cards." }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "name": "adamson/card-grid",
+  "title": "Card grid",
+  "description": "Section head over 2–4 columns of cards (photo, eyebrow, title, text, chips, link). For hub pages, courses, team, shows and values.",
+  "icon": "grid-view",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Section id",
+      "help": "Optional, for links like #careers. Lowercase, no spaces."
+    },
+    {
+      "key": "theme",
+      "type": "select",
+      "label": "Theme",
+      "default": "dark",
+      "options": [
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Light (white)",
+          "value": "light"
+        }
+      ]
+    },
+    {
+      "key": "columns",
+      "type": "select",
+      "label": "Columns",
+      "default": "3",
+      "options": [
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "3",
+          "value": "3"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "key": "imageRatio",
+      "type": "select",
+      "label": "Photo shape",
+      "default": "landscape",
+      "options": [
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        }
+      ]
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Eyebrow"
+    },
+    {
+      "key": "heading",
+      "type": "text",
+      "label": "Title"
+    },
+    {
+      "key": "description",
+      "type": "textarea",
+      "label": "Description"
+    },
+    {
+      "key": "button",
+      "type": "link",
+      "label": "Button"
+    },
+    {
+      "key": "cards",
+      "type": "repeater",
+      "label": "Cards",
+      "itemName": "card",
+      "itemLabel": "title",
+      "fields": [
+        {
+          "key": "image",
+          "type": "image",
+          "label": "Photo",
+          "help": "Optional."
+        },
+        {
+          "key": "eyebrow",
+          "type": "text",
+          "label": "Eyebrow"
+        },
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Title"
+        },
+        {
+          "key": "text",
+          "type": "textarea",
+          "label": "Text"
+        },
+        {
+          "key": "tags",
+          "type": "text",
+          "label": "Chips",
+          "help": "Comma-separated, e.g. Online, 2 days"
+        },
+        {
+          "key": "link",
+          "type": "link",
+          "label": "Link",
+          "help": "Makes the whole card clickable."
+        }
+      ]
+    }
+  ]
+}

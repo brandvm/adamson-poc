@@ -1,0 +1,37 @@
+{
+ "block": "adamson/media-text",
+ "data": {
+  "anchor": "challenges",
+  "theme": "dark",
+  "imagePosition": "right",
+  "eyebrow": "Houses of Worship",
+  "heading": "What the room needs",
+  "text": "A service moves from the spoken word to a full band in minutes, often run by volunteers. The system must be clear, powerful and easy to operate.",
+  "points": [
+   {
+    "title": "Clear message",
+    "text": "Intelligible speech in reverberant spaces."
+   },
+   {
+    "title": "Worship band",
+    "text": "Concert impact without loud low end on stage."
+   },
+   {
+    "title": "Easy to run",
+    "text": "Simple presets for volunteer operators."
+   },
+   {
+    "title": "Fits the room",
+    "text": "From modern auditoriums to historic stone churches."
+   }
+  ],
+  "button": {
+   "label": "Talk to an application engineer",
+   "url": "/contact"
+  },
+  "image": {
+   "seed": "videos/stage-smoke.jpg",
+   "alt": "Worship stage with lighting"
+  }
+ }
+}
