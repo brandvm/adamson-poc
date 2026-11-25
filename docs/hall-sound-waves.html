@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hall Sound Waves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#000; --accent:#ab9981; }
+  html,body { margin:0; height:100%; background:var(--bg); overflow:hidden; }
+  .stage { position:fixed; inset:0; width:100vw; height:100vh; height:100dvh; background:#000; cursor:pointer;
+           -webkit-tap-highlight-color:transparent; outline:none; }
+  .stage:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+  .hint { position:absolute; left:50%; bottom:5%; transform:translateX(-50%); white-space:nowrap; pointer-events:none;
+          padding:.9em 1.4em .9em 1.72em; border-radius:999px; background:rgba(0,0,0,.5); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+          font:300 clamp(10px,.9vw,13px)/1 'Outfit',system-ui,sans-serif; letter-spacing:.32em; text-transform:uppercase;
+          color:#fff; opacity:.85; transition:opacity .8s ease; }
+  .hint.gone { opacity:0; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .fallback { position:absolute; inset:0; background:#000 url(hall-auditorium.webp) 55% 32% / cover no-repeat; display:none; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage" tabindex="0" role="button" aria-label="Adamson line array in a concert hall. Activate to send a sound wave from the speaker.">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="fallback" id="fallback"></div>
+  <div class="hint" id="hint">Click to send a wave</div>
+</div>
+
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+const DUR    = 3.4;                       // seconds one wave takes to cross the hall
+const MAXW   = 4;                         // waves that can overlap if clicked quickly
+const IMG    = { w: 2000, h: 1105 };      // hall-auditorium.webp
+const FOCUS  = { x: 1105, y: 352 };       // centre of the line array, image px
+const ZOOM   = 1.0;                       // 1 = whole photo (cover); >1 pushes in on the product
+
+const frag = /* glsl */`
+precision highp float;
+uniform sampler2D uImg;
+uniform vec2  uImgSize, uRes, uCenter, uFocus;
+uniform float uPx;      // image px per device px
+uniform float uAge[${MAXW}];   // seconds since each wave was sent, < 0 = unused
+uniform float uStill;
+uniform float uBoost;         // QA only (?boost=4) — exaggerates the wave to check its shape         // 1 = reduced motion: ring fades in place instead of travelling
+#define PI 3.14159265
+#define DUR ${DUR.toFixed(3)}
+
+vec2 toImg(vec2 frag){ vec2 d = frag - 0.5*uRes; d.y = -d.y; return uCenter + d*uPx; }
+vec3 tap(vec2 ip, float lod){ return textureLod(uImg, clamp(ip/uImgSize, 0.001, 0.999), lod).rgb; }
+
+// ---- the room, in image px: where sound can travel (>0 = air, <0 = solid surface) ----
+float sdEll(vec2 p, vec2 c, vec2 r){ vec2 q = (p - c)/r; return (length(q) - 1.) * min(r.x, r.y); }
+float smin(float a, float b, float k){ float h = clamp(.5 + .5*(b - a)/k, 0., 1.); return mix(b, a, h) - k*h*(1. - h); }
+float roomSD(vec2 p){
+  float cloud  = sdEll(p, vec2(1000., 0.), vec2(440., 300.));   // acoustic cloud right above the array
+  float ceil_  = p.y - 205.;                                     // upper ceiling either side of the cloud
+  float floor_ = 1075. - p.y;                                    // stage / stalls
+  float walls  = min(p.x - 20., 1980. - p.x);                    // side walls
+  return smin(smin(cloud, ceil_, 40.), smin(floor_, walls, 40.), 40.);
+}
+
+// ---- directivity of the rig: one smooth fan aimed at the audience ----
+// angle from straight down (image y is down). The two J-hangs aim ~40° either side of down,
+// the centre cluster straight down; nothing is aimed at the ceiling.
+float coverage(vec2 dir){
+  float th = abs(atan(dir.x, dir.y));                    // 0 = down, PI = up
+  float fan = smoothstep(2.35, 1.05, th);                // full ±60°, gone ~45° above horizontal
+  float hangs = exp(-pow((th - 0.70)/0.45, 2.));         // slight extra throw along each hang's axis
+  return fan * (0.86 + 0.14*hangs);
+}
+
+void main(){
+  vec2 ip0 = toImg(gl_FragCoord.xy);
+  float aa = uPx * 1.2;
+
+  vec2  halfView = 0.5 * uRes * uPx;
+  float rMax = length(abs(uCenter - uFocus) + halfView) * 1.25;
+  float room = roomSD(ip0);
+  vec2  refr = vec2(0.);
+  float light = 0., shade = 0.;
+  for (int i = 0; i < ${MAXW}; i++){
+    if (uAge[i] < 0.) continue;
+    float f = uAge[i] / DUR;
+    if (f >= 1.) continue;
+    float R = uStill > 0.5 ? rMax*0.32 : mix(40., rMax, pow(f, 0.8));
+    vec2  d = ip0 - uFocus;
+    float r = length(d);
+    vec2  dir = d / max(r, 1e-3);
+    float cov = coverage(dir);
+    // the front travels further where the boxes point: a directional, lobed front, not a circle
+    float speed = 0.32 + 0.68*cov;
+    float front = r - R*speed;                         // < 0 behind the front (~px)
+    // flatten against surfaces: the wave is the free-field front clipped by the room
+    float sd = max(front, -room);                      // < 0 inside the travelling wave
+    float onWall = smoothstep(-6., 6., -room - front); // 1 where a surface, not the free front, is the edge
+    float env = uStill > 0.5 ? smoothstep(0., 0.25, f) * (1. - smoothstep(0.5, 1., f))
+                             : smoothstep(0., 0.10, f) * (1. - smoothstep(0.40, 1., f));
+    float gain = (0.12 + 0.88*cov) * env;
+    // on a surface: the pressed-flat band only glows just behind the arriving front, then is absorbed
+    gain *= mix(1., 0.55 * exp(front / (40. + R*0.05)), onWall);
+    float inside = 1. - smoothstep(-aa*1.5, aa*1.5, sd);
+    float depth  = max(R*speed, 1.);
+    float fres   = pow(clamp(1. + sd/depth, 0., 1.), 14.) * inside;
+    float line   = exp(-pow((sd + aa)/(aa*1.6 + 0.6), 2.));
+    float inner  = exp(-pow((sd + depth*0.03)/(3. + R*0.005), 2.)) * inside * (1. - onWall);
+    float key    = 0.85 + 0.30*max(dot(dir, normalize(vec2(-0.6, -0.8))), 0.);
+    light += (fres*0.20 + line*0.55 + inner*0.10) * gain * key;
+    shade += exp(-pow((sd + aa*4.)/(aa*2.5 + 1.), 2.)) * inside * gain;
+    refr  -= dir * fres * gain * 6.;
+  }
+  vec2 ip = ip0 + refr;
+
+  // full photo, untouched — only the waves are added
+  vec3 col = tap(ip, 0.);
+
+  // glass edge: faint dark inner edge + white rim, so it reads on bright wood
+  col *= 1. - 0.22*shade*uBoost;
+  col += vec3(0.93, 0.95, 1.0) * light * 0.85*uBoost;
+
+  // vignette in screen space
+  vec2 q = gl_FragCoord.xy / uRes - 0.5;
+  col *= 1. - 0.18*smoothstep(0.45, 0.85, length(q*vec2(1., 0.8)));   // very light vignette
+  gl_FragColor = vec4(col, 1.);
+}
+`;
+
+const canvas = document.getElementById('gl');
+const stage  = document.getElementById('stage');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias:false, alpha:false, powerPreference:'high-performance' });
+} catch (e) {
+  document.getElementById('fallback').style.display = 'block';
+  throw e;
+}
+renderer.setClearColor(0x000000, 1);
+
+const scene  = new THREE.Scene();
+const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+const uniforms = {
+  uImg: { value: null }, uImgSize: { value: new THREE.Vector2(IMG.w, IMG.h) },
+  uRes: { value: new THREE.Vector2(1, 1) }, uCenter: { value: new THREE.Vector2(FOCUS.x, FOCUS.y) },
+  uFocus: { value: new THREE.Vector2(FOCUS.x, FOCUS.y) }, uPx: { value: 1 },
+  uAge: { value: new Array(MAXW).fill(-1) }, uStill: { value: 0 },
+  uBoost: { value: parseFloat(new URLSearchParams(location.search).get('boost')) || 1 },
+};
+const mat = new THREE.ShaderMaterial({
+  uniforms, depthTest:false, depthWrite:false,
+  vertexShader: 'void main(){ gl_Position = vec4(position.xy, 0., 1.); }',
+  fragmentShader: frag,
+});
+scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat));
+
+// ---- framing: cover the viewport, centred on the product (works for portrait too) ----
+function frame(){
+  const W = uniforms.uRes.value.x, H = uniforms.uRes.value.y;
+  const s = Math.max(W / IMG.w, H / IMG.h) * ZOOM;      // device px per image px
+  const vw = W / s, vh = H / s;
+  // put the array a little above centre, but never show past the photo's edges
+  const cx = Math.min(Math.max(FOCUS.x, vw/2), IMG.w - vw/2);
+  const cy = Math.min(Math.max(FOCUS.y + vh*0.10, vh/2), IMG.h - vh/2);   // centred on the photo when it all fits
+  uniforms.uPx.value = 1 / s;
+  uniforms.uCenter.value.set(cx, cy);
+}
+
+let dprCap = 2;
+function resize(){
+  const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
+  renderer.setPixelRatio(dpr);
+  renderer.setSize(stage.clientWidth, stage.clientHeight, false);
+  renderer.getDrawingBufferSize(uniforms.uRes.value);
+  frame();
+  if (!running) render();
+}
+
+// ---- waves on demand: one per click / tap / Enter ----
+const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
+const PREVIEW = parseFloat(new URLSearchParams(location.search).get('t'));   // ?t=1.2 → still of one wave at that age
+let waves = [];                 // send times on our own clock (seconds)
+let clock = 0, running = false, raf = 0, last = 0, ready = false;
+
+function render(){ if (ready) renderer.render(scene, camera); }
+function pushAges(){
+  const ages = uniforms.uAge.value;
+  for (let i = 0; i < MAXW; i++) ages[i] = i < waves.length ? clock - waves[i] : -1;
+  uniforms.uStill.value = reduceMQ.matches ? 1 : 0;
+}
+
+function tick(now){
+  const dt = last ? Math.min((now - last)/1000, 0.1) : 0;
+  last = now;
+  clock += dt;
+  waves = waves.filter(t0 => clock - t0 < DUR);
+  pushAges();
+  render();
+  if (waves.length && !document.hidden) raf = requestAnimationFrame(tick);
+  else running = false;                       // idle: nothing animates until the next click
+}
+function start(){
+  if (running || !ready) return;
+  running = true; last = 0; raf = requestAnimationFrame(tick);
+}
+function sendWave(){
+  if (!ready) return;
+  if (waves.length >= MAXW) waves.shift();
+  waves.push(clock);
+  document.getElementById('hint').classList.add('gone');
+  start();
+}
+
+stage.addEventListener('click', sendWave);
+stage.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sendWave(); }
+});
+if (matchMedia('(pointer: coarse)').matches) document.getElementById('hint').textContent = 'Tap to send a wave';
+// pause mid-wave in a background tab, carry on where it left off when back
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { cancelAnimationFrame(raf); running = false; } else if (waves.length) start();
+});
+
+new THREE.TextureLoader().load('hall-auditorium.webp', (tex) => {
+  tex.flipY = false;
+  tex.generateMipmaps = true;
+  tex.minFilter = THREE.LinearMipmapLinearFilter;
+  tex.magFilter = THREE.LinearFilter;
+  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  uniforms.uImg.value = tex;
+  ready = true;
+  resize();
+  if (!isNaN(PREVIEW)) { waves = [0]; clock = PREVIEW; pushAges(); render(); document.getElementById('hint').classList.add('gone'); }
+}, undefined, () => { document.getElementById('fallback').style.display = 'block'; });
+
+new ResizeObserver(resize).observe(stage);
+</script>
+</body>
+</html>
