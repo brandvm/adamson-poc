@@ -58,6 +58,7 @@ precision highp float;
 uniform vec2  uRes;
 uniform float uTime;
 uniform mat3  uRot;     // face local → world (columns: face x, face y, face normal)
+uniform vec2  uAxis[2]; // each wave's direction, frozen at the moment it left the dome
 #define PI 3.14159265
 #define LOOP ${LOOP.toFixed(3)}
 
@@ -257,12 +258,13 @@ void main(){
   vec2  refr = vec2(0.);
   float light = 0.;
   float pulse = 0.;
-  // the face normal seen on screen: shells are pushed out along it, so they follow the tilt
-  vec2  axis = uRot[2].xy;
-  float axisL = length(axis);
-  vec2  axisN = axisL > 1e-4 ? axis / axisL : vec2(0.);
   for(int i=0; i<N; i++){
     float f = fract(t + float(i)/float(N));
+    // a wave keeps the direction the face pointed when it was emitted: turning the face
+    // afterwards only changes the next wave, like real sound already in the air
+    vec2  axis = uAxis[i];
+    float axisL = length(axis);
+    vec2  axisN = axisL > 1e-4 ? axis / axisL : vec2(0.);
     float R = mix(196., max(1320., length(0.5*uRes)*k*1.05) * (1. + axisL), pow(f, 0.82));  // always clears the corners
     vec2  cen = axis * R * 0.62;                             // a sphere travelling along the axis
     vec2  dv  = p - cen;
@@ -333,7 +335,8 @@ renderer.setClearColor(0x000000, 1);
 
 const scene  = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-const uniforms = { uRes:{ value:new THREE.Vector2(1,1) }, uTime:{ value:0 }, uRot:{ value:new THREE.Matrix3() } };
+const uniforms = { uRes:{ value:new THREE.Vector2(1,1) }, uTime:{ value:0 }, uRot:{ value:new THREE.Matrix3() },
+                   uAxis:{ value:[new THREE.Vector2(), new THREE.Vector2()] } };
 const mat = new THREE.ShaderMaterial({
   uniforms,
   vertexShader: 'void main(){ gl_Position = vec4(position.xy, 0., 1.); }',
@@ -443,6 +446,17 @@ function applyTilt(dt) {
   const Y = [n[1] * X[2] - n[2] * X[1], n[2] * X[0] - n[0] * X[2], n[0] * X[1] - n[1] * X[0]];  // n × X
   uniforms.uRot.value.set(X[0], Y[0], n[0], X[1], Y[1], n[1], X[2], Y[2], n[2]);
   tilt.ax = n[0]; tilt.ay = n[1];
+}
+// per-wave emission direction: captured when a wave is born (its loop phase wraps to 0)
+const waveAxis = [[0, 0], [0, 0]];
+const wavePhase = [1, 1];
+function latchWaves(loopT, force) {
+  for (let i = 0; i < 2; i++) {
+    const f = (loopT / LOOP + i / 2) % 1;
+    if (force || f < wavePhase[i]) { waveAxis[i][0] = tilt.ax; waveAxis[i][1] = tilt.ay; }
+    wavePhase[i] = f;
+    uniforms.uAxis.value[i].set(waveAxis[i][0], waveAxis[i][1]);
+  }
 }
 applyTilt(0);
 
@@ -566,8 +580,9 @@ function stepSand(dt, loopT){
     const sm = (e0,e1,x) => { const t = Math.min(Math.max((x-e0)/(e1-e0),0),1); return t*t*(3-2*t); };
     const env = sm(0, 0.10, f) * (1 - sm(0.45, 1, f));
     energy += sm(0, 0.06, f) * (1 - sm(0.06, 0.32, f));
-    const Rs = 196 + (rMax*(1 + Math.hypot(tilt.ax, tilt.ay)) - 196)*Math.pow(f, 0.82);
-    shells.push(Rs, env, tilt.ax*Rs*0.62, tilt.ay*Rs*0.62);
+    const [wx, wy] = waveAxis[i];
+    const Rs = 196 + (rMax*(1 + Math.hypot(wx, wy)) - 196)*Math.pow(f, 0.82);
+    shells.push(Rs, env, wx*Rs*0.62, wy*Rs*0.62);
   }
   energy += aud.vol * 3.0;
   const u = dt * 0.45;
@@ -655,6 +670,7 @@ function tick(now){
   uniforms.uTime.value = time;
   syncBeats(time);
   applyTilt(dt);
+  latchWaves(time);
   stepSand(dt, time);
   render();
   // adaptive resolution: if frames are consistently slow, lower the DPR cap
@@ -674,6 +690,7 @@ function update(){
   if (audio.ctx && audio.on) { if (should) { audio.lastBeat = -1; audio.ctx.resume(); } else audio.ctx.suspend(); }
   if (frozen) {
     uniforms.uTime.value = isNaN(FREEZE) ? STATIC_T : FREEZE % LOOP;
+    latchWaves(uniforms.uTime.value, true);
     if (!sandSettled) { for (let i = 0; i < 240; i++) stepSand(1/30, uniforms.uTime.value); sandSettled = true; }
     render();
   }
