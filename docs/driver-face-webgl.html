@@ -313,36 +313,42 @@ const SAND = {
   color: [138/255, 110/255, 75/255],   // #8A6E4B bronze
   alpha: 1.0,
   size: 1.5,                  // CSS px
+  spread: 5,                  // CSS px — max offset of each grain from its line (band ≈ 2×spread wide)
 };
 const sPos = new Float32Array(SAND.count * 2);
 const sVel = new Float32Array(SAND.count * 2);
 const sAlp = new Float32Array(SAND.count);
 const sBase = new Float32Array(SAND.count);
+const sOff = new Float32Array(SAND.count * 2);   // fixed per-grain scatter, CSS px
 let rngState = 0x9e3779b9;
 const rnd = () => { rngState ^= rngState << 13; rngState ^= rngState >>> 17; rngState ^= rngState << 5; return (rngState >>> 0) / 4294967296; };
 for (let i = 0; i < SAND.count; i++) {
   sPos[i*2] = rnd()*2 - 1; sPos[i*2+1] = rnd()*2 - 1;
   sBase[i] = 0.25 + rnd()*0.75;
+  // gaussian-ish scatter (σ ≈ spread/2, clipped at spread) so lines read as soft sandy bands
+  const ang = rnd()*Math.PI*2, rad = Math.min(Math.sqrt(-2*Math.log(1 - rnd()*0.9999)) * SAND.spread*0.5, SAND.spread);
+  sOff[i*2] = Math.cos(ang)*rad; sOff[i*2+1] = Math.sin(ang)*rad;
 }
 const sandGeo = new THREE.BufferGeometry();
 const sandPosAttr = new THREE.BufferAttribute(sPos, 2).setUsage(THREE.DynamicDrawUsage);
 const sandAlpAttr = new THREE.BufferAttribute(sAlp, 1).setUsage(THREE.DynamicDrawUsage);
 sandGeo.setAttribute('position', sandPosAttr);
 sandGeo.setAttribute('aAlpha', sandAlpAttr);
+sandGeo.setAttribute('aOff', new THREE.BufferAttribute(sOff, 2));
 sandGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 2);   // 2D points: skip three's 3D bounds calc
 const sandUniforms = {
   uSize: { value: SAND.size }, uColor: { value: new THREE.Vector4(...SAND.color, SAND.alpha) },
-  uRes: uniforms.uRes,
+  uRes: uniforms.uRes, uDpr: { value: 1 },
 };
 const sandMat = new THREE.RawShaderMaterial({
   uniforms: sandUniforms,
   vertexShader: `
     precision highp float;
-    attribute vec2 position; attribute float aAlpha;
-    uniform float uSize; uniform vec2 uRes;
+    attribute vec2 position; attribute float aAlpha; attribute vec2 aOff;
+    uniform float uSize; uniform vec2 uRes; uniform float uDpr;
     varying float vA;
     void main(){
-      gl_Position = vec4(position, 0., 1.);
+      gl_Position = vec4(position + aOff * uDpr * 2. / uRes, 0., 1.);
       gl_PointSize = uSize;
       // fade out around the driver so the sand frames it rather than covers it
       float k = 1080. / min(uRes.y, uRes.x*1.1);
@@ -550,6 +556,7 @@ function resize(){
   renderer.setSize(stage.clientWidth, stage.clientHeight, false);
   renderer.getDrawingBufferSize(uniforms.uRes.value);
   sandUniforms.uSize.value = SAND.size * dpr;
+  sandUniforms.uDpr.value = dpr;
   if (!running) render();
 }
 new ResizeObserver(resize).observe(stage);
