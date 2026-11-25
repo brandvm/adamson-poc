@@ -1,0 +1,88 @@
+---
+/**
+ * Adamson logo with a "volume up" intro.
+ *
+ * 1. The striped mark is revealed by a triangular window anchored at its bottom-right
+ *    corner that grows to full size, so the stripes appear right-to-left like a volume ramp.
+ * 2. Then the ADAMSON wordmark rises into place, all letters together.
+ * Both use cubic-bezier(0.64, 0.05, 0, 1).
+ *
+ * Props:
+ *   animate  – play the intro on load (default true). Re-run it with `replayLogo(el)`.
+ *   color    – fill colour (default white).
+ *   width    – CSS width (default 320px).
+ *   label    – accessible name (default "Adamson").
+ */
+interface Props { animate?: boolean; color?: string; width?: string; label?: string }
+const { animate = true, color = '#fff', width = '320px', label = 'Adamson' } = Astro.props;
+---
+
+<svg
+  class:list={['adamson-logo', { 'is-animated': animate }]}
+  style={`--logo-color:${color}; width:${width};`}
+  viewBox="0 0 600 580"
+  role="img"
+  aria-label={label}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <!-- window the wordmark rises through -->
+    <clipPath id="adamson-word-window"><rect x="-2" y="474" width="604" height="108" /></clipPath>
+  </defs>
+
+  <g class="mark">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M218.35 262.58L351.95 31.18L333.95 0L68.7695 459.3H83.8695L207.9 244.48L218.35 262.58ZM240.85 301.55L374.45 70.15L356.45 38.97L113.77 459.3H128.87L230.4 283.45L240.85 301.55ZM263.35 340.52L396.95 109.12L378.95 77.94L158.77 459.3H173.87L252.9 322.42L263.35 340.52ZM285.85 379.49L419.45 148.09L401.45 116.91L203.77 459.3H218.87L275.4 361.39L285.85 379.49ZM308.35 418.46L441.95 187.06L423.95 155.88L248.77 459.3H263.87L297.9 400.36L308.35 418.46ZM330.85 457.44L464.45 226.03L446.45 194.86L293.77 459.3H308.87L320.4 439.34L330.85 457.44ZM338.77 459.3H374.77L486.95 265L468.95 233.83L338.77 459.3ZM383.77 459.3H419.77L509.45 303.98L491.45 272.8L383.77 459.3ZM428.77 459.3H464.77L531.95 342.95L513.95 311.77L428.77 459.3ZM473.77 459.3H509.77L554.45 381.92L536.45 350.74L473.77 459.3ZM518.77 459.3H554.77L576.95 420.89L558.95 389.71L518.77 459.3ZM581.45 428.68L563.77 459.3H599.13L581.45 428.68Z" />
+  </g>
+
+  <g clip-path="url(#adamson-word-window)">
+    <g class="word">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M57.3898 480.1H76.4498V577.6H67.0498V545H34.4998L15.3098 577.6H0.00976562L57.3898 480.1ZM39.9698 535.7H67.0498V489.68L39.9698 535.7ZM84.8498 480.1H113.8C126.729 480.1 139.129 485.236 148.271 494.379C157.414 503.521 162.55 515.921 162.55 528.85C162.55 541.779 157.414 554.179 148.271 563.321C139.129 572.464 126.729 577.6 113.8 577.6H84.8498V480.1ZM94.5498 489.75V567.95H113.8C124.17 567.95 134.115 563.831 141.448 556.498C148.78 549.165 152.9 539.22 152.9 528.85C152.9 518.48 148.78 508.535 141.448 501.202C134.115 493.869 124.17 489.75 113.8 489.75H94.5498ZM193.1 480.1H202.7L241.9 577.6H231.8L218.69 545H177.11L164.01 577.6H153.91L193.1 480.1ZM197.9 493.28L214.95 535.7H180.85L197.9 493.28ZM248.55 480.1H262.46L298.15 561.26L333.84 480.1H347.75V577.6H338.15V493.72L301.27 577.6H295.03L258.15 493.72V577.6H248.55V480.1ZM405.24 504.55C405.352 499.804 404.134 495.122 401.724 491.032C399.315 486.942 395.809 483.608 391.604 481.405C387.399 479.203 382.662 478.221 377.928 478.569C373.194 478.918 368.652 480.584 364.814 483.378C360.977 486.173 357.998 489.985 356.214 494.383C354.429 498.782 353.91 503.592 354.716 508.27C355.522 512.948 357.62 517.308 360.773 520.856C363.926 524.404 368.009 527 372.56 528.35L384.77 531.97C388.101 532.959 391.092 534.856 393.405 537.45C395.718 540.044 397.263 543.231 397.866 546.653C398.469 550.076 398.106 553.599 396.818 556.827C395.53 560.055 393.368 562.86 390.575 564.927C387.782 566.995 384.467 568.243 381.004 568.532C377.541 568.821 374.065 568.139 370.968 566.563C367.871 564.987 365.274 562.579 363.469 559.609C361.664 556.639 360.722 553.225 360.75 549.75H351.35C351.322 554.969 352.749 560.092 355.47 564.546C358.19 568.999 362.098 572.607 366.753 574.965C371.409 577.323 376.63 578.338 381.83 577.896C387.03 577.454 392.004 575.572 396.195 572.462C400.386 569.352 403.628 565.136 405.558 560.287C407.488 555.438 408.029 550.148 407.121 545.008C406.213 539.869 403.892 535.084 400.417 531.19C396.943 527.296 392.453 524.446 387.45 522.96L375.23 519.34C372.352 518.485 369.771 516.84 367.781 514.591C365.791 512.342 364.472 509.581 363.974 506.62C363.475 503.659 363.817 500.618 364.961 497.841C366.104 495.065 368.004 492.665 370.443 490.915C372.883 489.164 375.764 488.133 378.76 487.938C381.757 487.744 384.747 488.394 387.393 489.814C390.038 491.234 392.232 493.368 393.725 495.973C395.219 498.578 395.951 501.549 395.84 504.55H405.24ZM411.4 528.85C411.4 515.364 416.757 502.43 426.293 492.894C435.83 483.357 448.763 478 462.25 478C475.736 478 488.67 483.357 498.206 492.894C507.742 502.43 513.1 515.364 513.1 528.85C513.1 542.336 507.742 555.27 498.206 564.806C488.67 574.343 475.736 579.7 462.25 579.7C448.763 579.7 435.83 574.343 426.293 564.806C416.757 555.27 411.4 542.336 411.4 528.85ZM420.9 528.85C420.9 517.883 425.256 507.366 433.011 499.611C440.766 491.857 451.283 487.5 462.25 487.5C473.216 487.5 483.734 491.857 491.489 499.611C499.243 507.366 503.6 517.883 503.6 528.85C503.6 539.817 499.243 550.334 491.489 558.089C483.734 565.843 473.216 570.2 462.25 570.2C451.283 570.2 440.766 565.843 433.011 558.089C425.256 550.334 420.9 539.817 420.9 528.85ZM522.35 480.1H534.91L590.35 563.46V480.1H599.75V577.6H588.2L531.75 492.71V577.6H522.35V480.1Z" />
+    </g>
+  </g>
+</svg>
+
+<script is:inline>
+  // Restart the intro on a given logo (or all logos on the page).
+  window.replayLogo = function (el) {
+    const logos = el ? [el] : document.querySelectorAll('.adamson-logo.is-animated');
+    logos.forEach((svg) => {
+      svg.classList.remove('is-animated');
+      void svg.getBoundingClientRect();   // force a style flush so the animation restarts
+      svg.classList.add('is-animated');
+    });
+  };
+</script>
+
+<style>
+  .adamson-logo {
+    --ease: cubic-bezier(0.64, 0.05, 0, 1);
+    --mark-dur: 1.6s;
+    --word-dur: 1.1s;
+    --word-delay: 1.25s;    /* the mark has reached full volume visually by now */
+    display: block; height: auto; max-width: 100%; overflow: visible;
+    fill: var(--logo-color);
+  }
+
+  /* 1 ── volume up: a triangle the same shape as the mark, anchored at its bottom-right
+     corner, grows from nothing to full size. Percentages are of the mark's own box. */
+  .is-animated .mark {
+    animation: adamson-volume var(--mark-dur) var(--ease) both;
+  }
+  @keyframes adamson-volume {
+    from { clip-path: polygon(101% 101%, 101% 101%, 101% 101%); }
+    to   { clip-path: polygon(50% -2%, -2% 101%, 101% 101%); }
+  }
+
+  /* 2 ── the name rises into place as one piece */
+  .is-animated .word {
+    animation: adamson-word var(--word-dur) var(--ease) var(--word-delay) both;
+  }
+  @keyframes adamson-word {
+    from { transform: translateY(104px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-animated .mark, .is-animated .word { animation: none; }
+  }
+</style>

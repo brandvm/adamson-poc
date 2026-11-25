@@ -1,0 +1,35 @@
+---
+import AdamsonLogo from '../components/AdamsonLogo.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={base + 'favicon.svg'} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap" rel="stylesheet" />
+    <title>Logo Intro</title>
+  </head>
+  <body>
+    <main>
+      <AdamsonLogo width="min(320px, 62vw)" />
+    </main>
+    <button type="button" class="replay" onclick="replayLogo()">Replay</button>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; height: 100%; background: #000; }
+  main { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; }
+  .replay {
+    position: fixed; left: 50%; bottom: clamp(20px, 6vh, 48px); transform: translateX(-50%);
+    padding: .8em 1.5em .8em 1.82em; border-radius: 999px; cursor: pointer;
+    border: 1px solid rgba(171, 153, 129, .35); background: transparent; color: #ab9981;
+    font: 300 12px/1 'Outfit', system-ui, sans-serif; letter-spacing: .32em; text-transform: uppercase;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .replay:hover { border-color: rgba(171, 153, 129, .8); color: #d8c7ad; }
+  .replay:focus-visible { outline: 1px solid #ab9981; outline-offset: 3px; }
+</style>
