@@ -17,6 +17,13 @@
           font:300 clamp(10px,.9vw,13px)/1 'Outfit',system-ui,sans-serif; letter-spacing:.32em; text-transform:uppercase;
           color:#fff; opacity:.85; transition:opacity .8s ease; }
   .hint.gone { opacity:0; }
+  .back { position:absolute; top:clamp(14px,3vh,28px); left:clamp(14px,2.5vw,32px); z-index:5;
+          display:inline-flex; align-items:center; gap:.7em; padding:.6em 1.1em .6em 1em; border-radius:999px;
+          border:1px solid rgba(171,153,129,.35); background:rgba(0,0,0,.35); color:#ab9981; text-decoration:none;
+          font:300 clamp(10px,.85vw,12px)/1 'Outfit',system-ui,sans-serif; letter-spacing:.28em; text-transform:uppercase;
+          -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:border-color .2s ease, color .2s ease; }
+  .back:hover { border-color:rgba(171,153,129,.8); color:#d8c7ad; }
+  .back:focus-visible { outline:1px solid #ab9981; outline-offset:3px; }
   canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
   .fallback { position:absolute; inset:0; background:#000 url(hall-auditorium.webp) 55% 32% / cover no-repeat; display:none; }
 </style>
@@ -25,6 +32,7 @@
 <div class="stage" id="stage" tabindex="0" role="button" aria-label="Adamson line array in a concert hall. Activate to send a sound wave from the speaker.">
   <canvas id="gl" aria-hidden="true"></canvas>
   <div class="fallback" id="fallback"></div>
+  <a class="back" href="./"><span aria-hidden="true">&larr;</span>Studies</a>
   <div class="hint" id="hint">Click to send a wave</div>
 </div>
 
@@ -51,25 +59,66 @@ uniform float uBoost;         // QA only (?boost=4) — exaggerates the wave to 
 vec2 toImg(vec2 frag){ vec2 d = frag - 0.5*uRes; d.y = -d.y; return uCenter + d*uPx; }
 vec3 tap(vec2 ip, float lod){ return textureLod(uImg, clamp(ip/uImgSize, 0.001, 0.999), lod).rgb; }
 
-// ---- the room, in image px: where sound can travel (>0 = air, <0 = solid surface) ----
-float sdEll(vec2 p, vec2 c, vec2 r){ vec2 q = (p - c)/r; return (length(q) - 1.) * min(r.x, r.y); }
-float smin(float a, float b, float k){ float h = clamp(.5 + .5*(b - a)/k, 0., 1.); return mix(b, a, h) - k*h*(1. - h); }
-float roomSD(vec2 p){
-  float cloud  = sdEll(p, vec2(1000., 0.), vec2(440., 300.));   // acoustic cloud right above the array
-  float ceil_  = p.y - 205.;                                     // upper ceiling either side of the cloud
-  float floor_ = 1075. - p.y;                                    // stage / stalls
-  float walls  = min(p.x - 20., 1980. - p.x);                    // side walls
-  return smin(smin(cloud, ceil_, 40.), smin(floor_, walls, 40.), 40.);
+// ---- the room's real surfaces, traced from the photo (image px, y down) ----
+// Sound only reaches what the rig can "see": a surface stops the wave, the front presses flat
+// along it and the surface lights up as it is struck. Chains of segments; the free ends of each
+// chain are soft so the cut-off fans out gently instead of leaving a hard radial edge.
+#define NSEG 19
+const vec4 SEG[NSEG] = vec4[NSEG](
+  // underside of the acoustic cloud the rig hangs from
+  vec4( 560.,180.,  700.,245.), vec4( 700.,245.,  800.,275.), vec4( 800.,275.,  930.,296.),
+  vec4( 930.,296., 1070.,292.), vec4(1070.,292., 1250.,250.), vec4(1250.,250., 1320.,200.),
+  vec4(1320.,200., 1370.,110.), vec4(1370.,110., 1380., 30.),
+  // left mid balcony front
+  vec4( 260.,500.,  470.,565.), vec4( 470.,565.,  650.,600.),
+  // left lower balcony front
+  vec4( 390.,695.,  690.,780.),
+  // stage-surround wall: back of the stage, curving down past the right seating
+  vec4( 690.,780.,  950.,785.), vec4( 950.,785., 1180.,780.), vec4(1180.,780., 1300.,790.),
+  vec4(1300.,790., 1500.,810.), vec4(1500.,810., 1700.,850.), vec4(1700.,850., 1800.,880.),
+  // right seating front rail
+  vec4(1760.,875., 1880.,838.), vec4(1880.,838., 2000.,800.)
+);
+// 1 = this end of the segment is a free chain end (soft), 0 = joined to the next segment
+const vec2 SOFT[NSEG] = vec2[NSEG](
+  vec2(1,0), vec2(0,0), vec2(0,0), vec2(0,0), vec2(0,0), vec2(0,0), vec2(0,0), vec2(0,1),
+  vec2(1,0), vec2(0,1),
+  vec2(1,1),
+  vec2(1,0), vec2(0,0), vec2(0,0), vec2(0,0), vec2(0,0), vec2(0,1),
+  vec2(1,0), vec2(0,1)
+);
+float segDist(vec2 p, vec2 a, vec2 b){ vec2 pa = p - a, ba = b - a; return length(pa - ba*clamp(dot(pa,ba)/dot(ba,ba), 0., 1.)); }
+float cross2(vec2 a, vec2 b){ return a.x*b.y - a.y*b.x; }
+// how much of P the source S can reach (1 = clear line of sight), and the distance to the nearest surface
+vec2 sight(vec2 S, vec2 P){
+  float blocked = 0., dS = 1e5;
+  vec2 sp = P - S;
+  for (int i = 0; i < NSEG; i++){
+    vec2 a = SEG[i].xy, b = SEG[i].zw, ab = b - a;
+    dS = min(dS, segDist(P, a, b));
+    float den = cross2(sp, ab);
+    if (abs(den) < 1e-4) continue;
+    float t = cross2(a - S, ab) / den;     // along S→P
+    float u = cross2(a - S, sp) / den;     // along the segment
+    if (t <= 0.002 || t >= 1. || u < 0. || u > 1.) continue;
+    float w = 1.;
+    if (SOFT[i].x > 0.5) w *= smoothstep(0., 0.12, u);
+    if (SOFT[i].y > 0.5) w *= smoothstep(1., 0.88, u);
+    blocked = max(blocked, w);
+  }
+  return vec2(1. - blocked, dS);
 }
 
-// ---- directivity of the rig: one smooth fan aimed at the audience ----
-// angle from straight down (image y is down). The two J-hangs aim ~40° either side of down,
-// the centre cluster straight down; nothing is aimed at the ceiling.
+// ---- directivity: the two J-hangs aim down-left (left seating / balconies) and down-right
+// (right seating), a little fill straight down onto the stage, almost nothing at the ceiling ----
+float smax(float a, float b, float k){ float h = clamp(.5 + .5*(a - b)/k, 0., 1.); return mix(b, a, h) + k*h*(1. - h); }
+float lobe(vec2 dir, vec2 axis, float half_){ return smoothstep(cos(half_), cos(half_*0.3), dot(dir, axis)); }
 float coverage(vec2 dir){
-  float th = abs(atan(dir.x, dir.y));                    // 0 = down, PI = up
-  float fan = smoothstep(2.35, 1.05, th);                // full ±60°, gone ~45° above horizontal
-  float hangs = exp(-pow((th - 0.70)/0.45, 2.));         // slight extra throw along each hang's axis
-  return fan * (0.86 + 0.14*hangs);
+  float l = lobe(dir, normalize(vec2(-0.826, 0.563)), 0.78);
+  float r = lobe(dir, normalize(vec2( 0.767, 0.642)), 0.78);
+  float c = lobe(dir, vec2(0., 1.), 0.80) * 0.62;          // the hangs' coverage overlaps into one fan
+  // smooth max: a hard max() leaves a crease where lobes meet, which the glass shading draws as a line
+  return smax(smax(l, r, 0.3), c, 0.3);
 }
 
 void main(){
@@ -78,7 +127,7 @@ void main(){
 
   vec2  halfView = 0.5 * uRes * uPx;
   float rMax = length(abs(uCenter - uFocus) + halfView) * 1.25;
-  float room = roomSD(ip0);
+  vec2  vis = sight(uFocus, ip0);          // x: line of sight from the rig, y: distance to nearest surface
   vec2  refr = vec2(0.);
   float light = 0., shade = 0.;
   for (int i = 0; i < ${MAXW}; i++){
@@ -91,25 +140,37 @@ void main(){
     vec2  dir = d / max(r, 1e-3);
     float cov = coverage(dir);
     // the front travels further where the boxes point: a directional, lobed front, not a circle
-    float speed = 0.32 + 0.68*cov;
+    float speed = 0.28 + 0.72*cov;
     float front = r - R*speed;                         // < 0 behind the front (~px)
-    // flatten against surfaces: the wave is the free-field front clipped by the room
-    float sd = max(front, -room);                      // < 0 inside the travelling wave
-    float onWall = smoothstep(-6., 6., -room - front); // 1 where a surface, not the free front, is the edge
+    // flatten against surfaces: inside the wave, the edge is whichever is nearer — the free front
+    // or the surface it has reached
+    float sd = max(front, -vis.y);                     // < 0 inside the travelling wave
+    float onWall = smoothstep(-6., 6., -vis.y - front); // 1 where a surface, not the free front, is the edge
     float env = uStill > 0.5 ? smoothstep(0., 0.25, f) * (1. - smoothstep(0.5, 1., f))
                              : smoothstep(0., 0.10, f) * (1. - smoothstep(0.40, 1., f));
-    float gain = (0.12 + 0.88*cov) * env;
-    // on a surface: the pressed-flat band only glows just behind the arriving front, then is absorbed
-    gain *= mix(1., 0.55 * exp(front / (40. + R*0.05)), onWall);
-    float inside = 1. - smoothstep(-aa*1.5, aa*1.5, sd);
-    float depth  = max(R*speed, 1.);
-    float fres   = pow(clamp(1. + sd/depth, 0., 1.), 14.) * inside;
-    float line   = exp(-pow((sd + aa)/(aa*1.6 + 0.6), 2.));
-    float inner  = exp(-pow((sd + depth*0.03)/(3. + R*0.005), 2.)) * inside * (1. - onWall);
-    float key    = 0.85 + 0.30*max(dot(dir, normalize(vec2(-0.6, -0.8))), 0.);
-    light += (fres*0.20 + line*0.55 + inner*0.10) * gain * key;
-    shade += exp(-pow((sd + aa*4.)/(aa*2.5 + 1.), 2.)) * inside * gain;
-    refr  -= dir * fres * gain * 6.;
+    float gain = (0.06 + 0.94*cov) * env * vis.x;      // nothing beyond a surface: it was absorbed
+    // struck surface: bright the moment the front arrives, then fading as it's absorbed
+    gain *= mix(1., 1.15 * exp(front / (55. + R*0.06)), onWall);
+    // Rim profile measured from the reference clip (same as the driver page): a faint soft step
+    // at the edge, a broad glow peaking just *inside* it, a faint second surface, a milky veil.
+    // dIn is the distance inside the wave, so the profile also follows the flattened wall edges.
+    float depth = max(R*speed, 1.);
+    float dIn   = -sd;
+    float edge  = smoothstep(-2.*aa - 1.5, 2.*aa + 1.5, dIn);
+    float bandW = 5. + depth*0.011;
+    float band  = exp(-pow((dIn - (4. + depth*0.018)) / bandW, 2.));
+    float veil  = edge * smoothstep(0., depth*0.06, dIn) * exp(-dIn / (depth*0.30));
+    float inner = exp(-pow((dIn - depth*0.062) / (3. + depth*0.006), 2.)) * edge * (1. - onWall);
+    float key   = 0.85 + 0.30*max(dot(dir, normalize(vec2(-0.6, -0.8))), 0.);
+    // gentle uneven sheen along the arc (whole-number frequencies: no seam where atan wraps)
+    float ang   = atan(dir.y, dir.x);
+    float sheen = 0.82 + 0.18*sin(ang*3. + float(i)*2.1) * sin(ang*2. - float(i));
+    light += (edge*0.30 + band*1.05 + veil*0.16 + inner*0.22) * gain * key * sheen;
+    shade += edge * (1. - smoothstep(0., 6. + depth*0.01, dIn)) * gain;     // whisper of a dark outer lip
+    refr  -= dir * (band*0.7 + veil*0.3) * gain * 6.;
+    // the struck surface itself lights up along its edge as the front lands, then fades (absorbed)
+    float strike = exp(-pow(vis.y / (2.5 + aa*1.5), 2.)) * step(front, 0.) * exp(front / (70. + R*0.08));
+    light += strike * 1.3 * (0.06 + 0.94*cov) * env * vis.x;
   }
   vec2 ip = ip0 + refr;
 
@@ -117,8 +178,9 @@ void main(){
   vec3 col = tap(ip, 0.);
 
   // glass edge: faint dark inner edge + white rim, so it reads on bright wood
-  col *= 1. - 0.22*shade*uBoost;
-  col += vec3(0.93, 0.95, 1.0) * light * 0.85*uBoost;
+  // screen blend: milky glass over the photo, like the reference, never blown out
+  col *= 1. - 0.06*shade*uBoost;
+  col = 1. - (1. - col) * (1. - clamp(light * 0.55 * uBoost, 0., 1.) * vec3(0.95, 0.96, 1.0));
 
   // vignette in screen space
   vec2 q = gl_FragCoord.xy / uRes - 0.5;
@@ -211,7 +273,7 @@ function sendWave(){
   start();
 }
 
-stage.addEventListener('click', sendWave);
+stage.addEventListener('click', (e) => { if (!e.target.closest('a')) sendWave(); });
 stage.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sendWave(); }
 });

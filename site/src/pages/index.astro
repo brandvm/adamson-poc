@@ -23,6 +23,19 @@ const studies = [
     page: 'logo/',
     thumb: 'thumbs/logo.jpg',
   },
+  {
+    title: 'Driver build-up',
+    blurb: 'The driver face is drawn as a vector, with anchors and handles. A fill sweeps round, then the render resolves into it.',
+    page: 'driver-build.html',
+    thumb: 'thumbs/driver-build.jpg',
+  },
+  {
+    title: 'Page transition',
+    blurb: 'Stripes sweep top-left to bottom-right with the logo intro inside them. Plays into and out of this page only.',
+    page: 'transition/',
+    thumb: 'thumbs/transition.jpg',
+    transition: true,
+  },
 ];
 ---
 
@@ -32,6 +45,7 @@ const studies = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={href('favicon.svg')} />
+    <script is:inline src={base + 'transition.js'}></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400&display=swap" rel="stylesheet" />
     <title>Adamson Studies</title>
@@ -44,7 +58,7 @@ const studies = [
 
     <main>
       {studies.map((s) => (
-        <a class="card" href={href(s.page)}>
+        <a class="card" href={href(s.page)} data-transition={s.transition ? true : undefined}>
           <img src={href(s.thumb)} alt="" width="960" height="540" loading="lazy" />
           <span class="text">
             <span class="title">{s.title}</span>

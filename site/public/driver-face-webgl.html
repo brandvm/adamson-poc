@@ -17,6 +17,13 @@
              font-weight:300; font-size:clamp(10px,1.05vw,14px); letter-spacing:.32em;
              text-transform:uppercase; opacity:.7; pointer-events:none; }
   .fallback { position:absolute; inset:0; display:none; align-items:center; justify-content:center; }
+  .back { position:absolute; top:clamp(14px,3vh,28px); left:clamp(14px,2.5vw,32px); z-index:5;
+          display:inline-flex; align-items:center; gap:.7em; padding:.6em 1.1em .6em 1em; border-radius:999px;
+          border:1px solid rgba(171,153,129,.35); background:rgba(0,0,0,.35); color:#ab9981; text-decoration:none;
+          font:300 clamp(10px,.85vw,12px)/1 'Outfit',system-ui,sans-serif; letter-spacing:.28em; text-transform:uppercase;
+          -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:border-color .2s ease, color .2s ease; }
+  .back:hover { border-color:rgba(171,153,129,.8); color:#d8c7ad; }
+  .back:focus-visible { outline:1px solid #ab9981; outline-offset:3px; }
   .sound { position:absolute; top:clamp(14px,3vh,28px); right:clamp(14px,2.5vw,32px);
            display:flex; align-items:center; gap:.7em; padding:.6em 1em; border:1px solid rgba(171,153,129,.35);
            border-radius:999px; background:rgba(0,0,0,.35); color:var(--accent); cursor:pointer;
@@ -34,6 +41,7 @@
 </head>
 <body>
 <div class="stage" id="stage">
+  <a class="back" href="./"><span aria-hidden="true">&larr;</span>Studies</a>
   <canvas id="gl" aria-label="Adamson compression driver face with radiating sound waves" role="img"></canvas>
   <div class="caption">Compression Driver</div>
   <div class="fallback" id="fallback">WebGL is not available in this browser.</div>
@@ -49,6 +57,7 @@ const frag = /* glsl */`
 precision highp float;
 uniform vec2  uRes;
 uniform float uTime;
+uniform mat3  uRot;     // face local → world (columns: face x, face y, face normal)
 #define PI 3.14159265
 #define LOOP ${LOOP.toFixed(3)}
 
@@ -79,6 +88,8 @@ float sdOct(vec2 p, vec2 h, float c, float r){
 // Reference units: the face is drawn in 1080-tall "image pixels", centre at 0.
 const float DOME_R = 201.;
 const vec2  BOLT   = vec2(147.,175.);
+const float DOME_H = 84.;     // how far the dome bulges out of the face
+const float CAM    = 3000.;   // camera distance, reference units (gentle perspective)
 
 float housingSD(vec2 p){
   float o = sdOct(p, vec2(242.,247.), 357., 16.);
@@ -119,8 +130,8 @@ vec3 shadeHousing(vec2 p, float aa){
   float grain = noise(p*0.9 + 13.)*0.6 + noise(p*2.3)*0.4;
   base *= 0.9 + 0.14*mott + 0.06*(grain-0.5);
   // soft studio light from top-left, plus a broad fill
-  vec3 L = normalize(vec3(-0.38, 0.55, 0.74));
-  vec3 V = vec3(0.,0.,1.);
+  vec3 L = normalize(transpose(uRot) * vec3(-0.38, 0.55, 0.74));
+  vec3 V = transpose(uRot) * vec3(0.,0.,1.);
   float diff = max(dot(n,L), 0.);
   float spec = pow(max(dot(reflect(-L,n),V),0.), 18.);
   float rim  = 1. - n.z;
@@ -188,7 +199,7 @@ vec3 shadeDome(vec2 p, float pulse){
   vec2 wn = mat2(cos(a),sin(a),-sin(a),cos(a)) * w.yz;
   vec3 nw = normalize(n + vec3(wn*0.75*amt, 0.));
 
-  vec3 L  = normalize(vec3(-0.32, 0.42, 0.85));
+  vec3 L  = normalize(transpose(uRot) * vec3(-0.32, 0.42, 0.85));
   float dS = max(dot(n,  L), 0.);
   float dW = max(dot(nw, L), 0.);
   vec3 deep = vec3(0.46,0.28,0.05);
@@ -198,7 +209,7 @@ vec3 shadeDome(vec2 p, float pulse){
   col *= mix(1., 0.55 + 0.50*w.x, amt);
   col *= mix(1., 0.45 + 0.75*dW/max(dS, 0.25), amt) * mix(0.78 + 0.30*dS, 1., amt);
   // broad, soft satin sheen rather than a hard specular
-  float sheen = pow(max(dot(reflect(-L,nw), vec3(0,0,1)), 0.), 4.);
+  float sheen = pow(max(dot(reflect(-L,nw), transpose(uRot) * vec3(0,0,1)), 0.), 4.);
   col += hi*sheen*0.16*(0.6+0.4*w.x);
   // tiny fuzz so it reads as cloth, not metal mesh
   col *= 0.97 + 0.06*noise(uv*1.7);
@@ -216,16 +227,15 @@ vec3 shadeDome(vec2 p, float pulse){
   return col;
 }
 
-vec3 face(vec2 p, float aa, float pulse){
+vec3 face(vec2 p, vec2 pd, float hitDome, float aa, float pulse){
   float d = housingSD(p);
   float cover = 1. - smoothstep(-aa, aa, d);
   vec3 col = vec3(0.);
   if(cover > 0.){
-    float r = length(p);
     vec3 metal = shadeHousing(p, aa);
-    if(r < DOME_R + 2.){
-      vec3 dome = shadeDome(p, pulse);
-      metal = mix(dome, metal, smoothstep(DOME_R-aa, DOME_R+aa, r));
+    if(hitDome > 0.){
+      vec3 dome = shadeDome(pd, pulse);
+      metal = mix(dome, metal, smoothstep(DOME_R-aa, DOME_R+aa, length(pd)));
     }
     col = metal*cover;
   }
@@ -243,33 +253,66 @@ void main(){
   float t  = uTime / LOOP;
 
   // ---- sound-wave shells (glassy spheres, rim-lit) ----
-  const int N = 3;
+  const int N = 2;
   vec2  refr = vec2(0.);
   float light = 0.;
   float pulse = 0.;
-  float r = length(p);
-  vec2  dir = r > 1e-3 ? p/r : vec2(0.);
-  float ang = atan(p.y, p.x);
+  // the face normal seen on screen: shells are pushed out along it, so they follow the tilt
+  vec2  axis = uRot[2].xy;
+  float axisL = length(axis);
+  vec2  axisN = axisL > 1e-4 ? axis / axisL : vec2(0.);
   for(int i=0; i<N; i++){
     float f = fract(t + float(i)/float(N));
-    float R = mix(196., max(1320., length(0.5*uRes)*k*1.05), pow(f, 0.82));  // always clears the corners
+    float R = mix(196., max(1320., length(0.5*uRes)*k*1.05) * (1. + axisL), pow(f, 0.82));  // always clears the corners
+    vec2  cen = axis * R * 0.62;                             // a sphere travelling along the axis
+    vec2  dv  = p - cen;
+    float r   = length(dv);
+    vec2  dir = r > 1e-3 ? dv/r : vec2(0.);
+    float ang = atan(dir.y, dir.x);
     float env = smoothstep(0., 0.10, f) * (1. - smoothstep(0.45, 1., f));
     pulse += smoothstep(0., 0.06, f) * (1. - smoothstep(0.06, 0.32, f));
-    float x = r / R;
-    float inside = 1. - smoothstep(R - aa*1.5, R + aa*1.5, r);
-    float fres = pow(clamp(x, 0., 1.), 12.) * inside;
-    float line  = exp(-pow((r - R + 1.2)/(1.4 + aa), 2.));
-    float inner = exp(-pow((r - R*0.972)/(4. + R*0.006), 2.)) * inside;
-    // brighter on the flanks + a soft top-left highlight, like a lit glass bubble
-    float flank = 0.45 + 0.55*pow(abs(cos(ang)), 1.4);
-    float key   = 0.75 + 0.5*max(dot(dir, normalize(vec2(-0.6, 0.8))), 0.);
-    float s = (fres*0.22 + line*0.55 + inner*0.10) * flank * key * env;
+    // Rim profile measured from the reference clip (thick glass seen edge-on):
+    // a faint soft step at the outer edge, a broad glow peaking ~2.5% of R *inside* the edge,
+    // then a milky veil that fades slowly toward the centre. No hard line anywhere.
+    float dIn   = R - r;                                     // > 0 inside the shell
+    float edge  = smoothstep(-2.*aa - 1.5, 2.*aa + 1.5, dIn);
+    float bandW = 5. + R*0.011;
+    float band  = exp(-pow((dIn - (4. + R*0.018)) / bandW, 2.));
+    float veil  = edge * smoothstep(0., R*0.06, dIn) * exp(-dIn / (R*0.30));
+    float inner = exp(-pow((dIn - R*0.062) / (3. + R*0.006), 2.)) * edge;    // faint second surface
+    // like the reference: strongest on the flanks, fading over the top and bottom,
+    // with a gentle uneven sheen along the arc
+    // flank/key shading is measured from the face, so the shell's moving centre leaves no dark band
+    vec2  dirF  = length(p) > 1e-3 ? normalize(p) : dir;
+    float flank = 0.15 + 0.85*pow(abs(dirF.x), 1.6);
+    float key   = 0.80 + 0.40*max(dot(dirF, normalize(vec2(-0.6, 0.8))), 0.);
+    // whole-number frequencies only: atan() wraps at ±PI (left horizontal), so anything else leaves a seam there
+    float sheen = 0.80 + 0.20*sin(ang*3. + float(i)*2.1) * sin(ang*2. - float(i));
+    float aim = 1. + 1.6*axisL*dot(dir, axisN);            // brighter on the side the face points to
+    float s = (edge*0.30 + band*1.05 + veil*0.16 + inner*0.22) * flank * key * sheen * env * aim;
     light += s;
-    refr  -= dir * fres * env * 7.;
+    refr  -= dir * band * env * flank * 6.;                    // bend only at the rim (centre can sit beside the face)
   }
 
-  vec3 col = face(p + refr, aa, pulse);
-  col += vec3(0.93, 0.95, 1.0) * light * 0.75;
+  // ---- tilt: a ray from a camera in front hits the turned face (plane) or its dome (ellipsoid) ----
+  vec2 ps = p + refr;
+  mat3 toL = transpose(uRot);
+  vec3 ro = vec3(0., 0., CAM);
+  vec3 rd = normalize(vec3(ps, 0.) - ro);
+  vec3 nz = uRot[2];
+  vec2 pp = (toL * (ro + rd * (-dot(nz, ro) / dot(nz, rd)))).xy;
+  vec3 oL = (toL * ro) / vec3(DOME_R, DOME_R, DOME_H);
+  vec3 dL = (toL * rd) / vec3(DOME_R, DOME_R, DOME_H);
+  float qa = dot(dL, dL), qb = dot(oL, dL), qc = dot(oL, oL) - 1.;
+  float disc = qb*qb - qa*qc;
+  vec2 pd = pp; float hitDome = 0.;
+  if (disc > 0.) {
+    vec3 h = (oL + dL * ((-qb - sqrt(disc)) / qa)) * vec3(DOME_R, DOME_R, DOME_H);
+    if (h.z >= 0.) { pd = h.xy; hitDome = 1.; }
+  }
+  vec3 col = face(pp, pd, hitDome, aa, pulse);
+  // screen blend: soft milky glass on the bronze/gold, never blows out
+  col = 1. - (1. - col) * (1. - clamp(light * 0.26, 0., 1.) * vec3(0.95, 0.96, 1.0));
   // keep the darks pure black, very soft vignette
   col *= 1. - 0.18*smoothstep(500., 1150., length(p*vec2(0.8,1.)));
   col = pow(col, vec3(0.97));
@@ -290,7 +333,7 @@ renderer.setClearColor(0x000000, 1);
 
 const scene  = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-const uniforms = { uRes:{ value:new THREE.Vector2(1,1) }, uTime:{ value:0 } };
+const uniforms = { uRes:{ value:new THREE.Vector2(1,1) }, uTime:{ value:0 }, uRot:{ value:new THREE.Matrix3() } };
 const mat = new THREE.ShaderMaterial({
   uniforms,
   vertexShader: 'void main(){ gl_Position = vec4(position.xy, 0., 1.); }',
@@ -372,6 +415,37 @@ scene.add(sand);
 
 const plate = { n: 3, m: 3, a: 1.2, b: 0.2, seed: 0 };
 
+// ---- tilt: the face turns toward the pointer; distance from the centre sets how far ----
+const MAX_TILT = 24 * Math.PI / 180;
+const tilt = { x: 0, y: 0, tx: 0, ty: 0, ax: 0, ay: 0 };    // x right / y up, as fractions of MAX_TILT
+const tiltParam = new URLSearchParams(location.search).get('tilt');   // ?tilt=0.8,0.3 freezes it (QA)
+if (tiltParam) { const [a, b] = tiltParam.split(',').map(Number); tilt.x = tilt.tx = a || 0; tilt.y = tilt.ty = b || 0; }
+stage.addEventListener('pointermove', (e) => {
+  if (tiltParam || stage.classList.contains('is-building')) return;
+  const r = stage.getBoundingClientRect();
+  const R = Math.min(r.width, r.height) * 0.5;
+  const dx = (e.clientX - (r.left + r.width / 2)) / R;
+  const dy = -(e.clientY - (r.top + r.height / 2)) / R;
+  const d = Math.hypot(dx, dy);
+  const s = Math.min(d / 1.5, 1);                          // further from the centre → stronger tilt
+  tilt.tx = d > 1e-4 ? dx / d * s : 0;
+  tilt.ty = d > 1e-4 ? dy / d * s : 0;
+});
+['pointerleave', 'pointercancel'].forEach(t => stage.addEventListener(t, () => { if (!tiltParam) tilt.tx = tilt.ty = 0; }));
+function applyTilt(dt) {
+  const k = dt > 0 ? 1 - Math.exp(-dt * 5) : 1;
+  tilt.x += (tilt.tx - tilt.x) * k; tilt.y += (tilt.ty - tilt.y) * k;
+  const m = Math.hypot(tilt.x, tilt.y), a = m * MAX_TILT;
+  const ux = m > 1e-5 ? tilt.x / m : 0, uy = m > 1e-5 ? tilt.y / m : 0;
+  const n = [ux * Math.sin(a), uy * Math.sin(a), Math.cos(a)];          // face normal
+  const xl = Math.hypot(n[2], n[0]);
+  const X = [n[2] / xl, 0, -n[0] / xl];                                   // up × n
+  const Y = [n[1] * X[2] - n[2] * X[1], n[2] * X[0] - n[0] * X[2], n[0] * X[1] - n[1] * X[0]];  // n × X
+  uniforms.uRot.value.set(X[0], Y[0], n[0], X[1], Y[1], n[1], X[2], Y[2], n[2]);
+  tilt.ax = n[0]; tilt.ay = n[1];
+}
+applyTilt(0);
+
 // ---- pointer: stir the sand (mouse/pen hover, or touch drag) ----
 const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
 let mouseOn = false;
@@ -431,7 +505,7 @@ function beat(){
 }
 function syncBeats(loopT){
   if (!audio.on) return;
-  const idx = Math.floor((loopT / LOOP) * 3);            // a shell is born every LOOP/3 seconds
+  const idx = Math.floor((loopT / LOOP) * 2);            // a shell is born every LOOP/2 seconds
   if (audio.lastBeat !== -1 && idx !== audio.lastBeat) beat();
   audio.lastBeat = idx;
 }
@@ -487,12 +561,13 @@ function stepSand(dt, loopT){
   const rMax = Math.max(1320, Math.hypot(W/2, H/2)*k*1.05);
   const shells = [];
   let energy = 0;
-  for (let i = 0; i < 3; i++) {
-    const f = (loopT/LOOP + i/3) % 1;
+  for (let i = 0; i < 2; i++) {
+    const f = (loopT/LOOP + i/2) % 1;
     const sm = (e0,e1,x) => { const t = Math.min(Math.max((x-e0)/(e1-e0),0),1); return t*t*(3-2*t); };
     const env = sm(0, 0.10, f) * (1 - sm(0.45, 1, f));
     energy += sm(0, 0.06, f) * (1 - sm(0.06, 0.32, f));
-    shells.push(196 + (rMax-196)*Math.pow(f, 0.82), env);
+    const Rs = 196 + (rMax*(1 + Math.hypot(tilt.ax, tilt.ay)) - 196)*Math.pow(f, 0.82);
+    shells.push(Rs, env, tilt.ax*Rs*0.62, tilt.ay*Rs*0.62);
   }
   energy += aud.vol * 3.0;
   const u = dt * 0.45;
@@ -522,9 +597,10 @@ function stepSand(dt, loopT){
     const absL = Math.abs(L);
     let jit = base + absL*vib;
     // wave-front kick: extra scatter while a shell's rim sweeps across this grain
-    const px = x*halfW, py = y*halfH + 22, r = Math.sqrt(px*px + py*py);
-    for (let j = 0; j < 6; j += 2) {
-      const d = r - shells[j];
+    const px = x*halfW, py = y*halfH - 22;                  // face-relative, like the shader
+    for (let j = 0; j < shells.length; j += 4) {
+      const ex = px - shells[j+2], ey = py - shells[j+3];
+      const d = Math.sqrt(ex*ex + ey*ey) - shells[j];
       if (d > -60 && d < 8) jit += 0.006 * shells[j+1] * (1 - Math.abs(d + 26)/34);
     }
     x += vx*u + (rnd() - 0.5)*jit;
@@ -578,6 +654,7 @@ function tick(now){
   time = (time + dt) % LOOP;
   uniforms.uTime.value = time;
   syncBeats(time);
+  applyTilt(dt);
   stepSand(dt, time);
   render();
   // adaptive resolution: if frames are consistently slow, lower the DPR cap

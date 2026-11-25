@@ -1,0 +1,55 @@
+---
+// Page-transition POC. The sweep plays only on links marked data-transition: the hub card
+// that leads here and the back link on this page. "Play again" runs it in place.
+import AdamsonLogo from '../components/AdamsonLogo.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={base + 'favicon.svg'} />
+    <script is:inline src={base + 'transition.js'}></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400&display=swap" rel="stylesheet" />
+    <title>Page Transition</title>
+  </head>
+  <body>
+    <a class="back" href={base} data-transition><span aria-hidden="true">&larr;</span>Studies</a>
+
+    <main>
+      <AdamsonLogo animate={false} width="min(200px, 44vw)" />
+      <h1>Page transition</h1>
+      <p>
+        Stripes at the mark's 60° angle sweep from the top-left to the bottom-right, cover the page while
+        the logo plays its intro inside them, then clear in the same direction on the next page.
+      </p>
+      <p class="note">It runs only when you come into this page from the studies and when you leave it.</p>
+      <button type="button" class="play" onclick="adamsonTransition.demo()">Play again</button>
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; min-height: 100%; background: #000; }
+  :global(body) { color: #e9e2d8; font-family: 'Outfit', system-ui, sans-serif; font-weight: 300; }
+  main {
+    min-height: 100vh; min-height: 100dvh; box-sizing: border-box; padding: 96px 20px 64px;
+    display: grid; place-content: center; justify-items: center; text-align: center; gap: 18px;
+  }
+  h1 { margin: 22px 0 0; font-weight: 300; font-size: clamp(28px, 4vw, 44px); }
+  p { margin: 0; max-width: 34em; color: #a89f93; font-size: 16px; line-height: 1.6; }
+  .note { color: #7d756b; font-size: 14px; }
+  .play, .back {
+    border: 1px solid rgba(171, 153, 129, .35); color: #ab9981; background: transparent;
+    font: 300 12px/1 'Outfit', system-ui, sans-serif; letter-spacing: .28em; text-transform: uppercase;
+    border-radius: 999px; cursor: pointer; text-decoration: none;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .play { margin-top: 14px; padding: .9em 1.6em .9em 1.88em; }
+  .back { position: fixed; top: clamp(14px, 3vh, 28px); left: clamp(14px, 2.5vw, 32px);
+    display: inline-flex; align-items: center; gap: .7em; padding: .6em 1.1em .6em 1em; }
+  .play:hover, .back:hover { border-color: rgba(171, 153, 129, .8); color: #d8c7ad; }
+  .play:focus-visible, .back:focus-visible { outline: 1px solid #ab9981; outline-offset: 3px; }
+</style>
