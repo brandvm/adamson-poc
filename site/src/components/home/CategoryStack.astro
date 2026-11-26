@@ -207,7 +207,7 @@ const a = (f: string) => `${base}home/${f}`;
       // The sand background takes the active card's vibration mode (re-forms on each change)
       if (current !== lastMode) {
         lastMode = current;
-        sand?.dispatchEvent(new CustomEvent('chladni:mode', { detail: current }));
+        sand?.dispatchEvent(new CustomEvent('chladni:mode', { detail: current, bubbles: true }));
       }
       words.forEach((w, k) => w.classList.toggle('is-current', k === current));
     };
