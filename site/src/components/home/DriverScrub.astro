@@ -1,0 +1,126 @@
+---
+// "Inside the driver", ported from the preview (web/components/blocks/VideoScrub.tsx, content
+// from adamson-preview.vercel.app). The section is three screens tall; the video stays pinned
+// while the scroll position sets its playback time, so the compression driver turns and
+// separates into its parts as you scroll. Two captions fade in at set points, and a gold line
+// at the bottom shows progress. Reduced motion: the exploded poster with the first caption.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+
+const LENGTH = 3;   // screens of scroll
+// start / end: the scroll percentages where each caption is fully shown (fading 4% either side)
+const overlays = [
+  { title: 'Engineered in-house', text: 'Every component designed and built in our own facility.', start: 5, end: 35, pos: 'top-left' },
+  { title: 'Precision at every layer', text: 'Scroll to see how the parts come together.', start: 45, end: 80, pos: 'bottom-right' },
+];
+---
+
+<section class="scrub" data-theme="dark" aria-label="Inside the driver" style={`--len: ${LENGTH}`}
+  data-src={a('driver-explode-alpha.webm')} data-src-mobile={a('driver-explode-alpha-mobile.webm')} data-fallback={a('driver-explode-black.mp4')}>
+  <div class="stage">
+    <video muted playsinline preload="auto" aria-label="Adamson compression driver turning and separating into its three parts"></video>
+    <img class="poster" src={a('driver-explode-poster.png')} alt="Exploded view of an Adamson compression driver" loading="lazy" />
+    <div class="shade" aria-hidden="true"></div>
+    <p class="eyebrow">Inside the driver</p>
+    {overlays.map((o) => (
+      <div class:list={['overlay', o.pos]} data-start={o.start} data-end={o.end}>
+        <h2>{o.title}</h2>
+        <p>{o.text}</p>
+      </div>
+    ))}
+    <div class="progress" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<style>
+  .scrub { position: relative; height: calc(var(--len) * 100vh); background: #000; }
+  .stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  video, .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .poster { display: none; }
+  .shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 50%, rgba(0, 0, 0, 0.3)); pointer-events: none; }
+
+  .eyebrow {
+    position: absolute; top: 4em; left: max(var(--margin), (100% - var(--container)) / 2); margin: 0;
+    font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light);
+  }
+  .overlay {
+    position: absolute; max-width: 28em; display: grid; gap: 0.75em;
+    opacity: 0; translate: 0 1.5em; pointer-events: none;
+  }
+  .overlay.top-left { top: 8em; left: max(var(--margin), (100% - var(--container)) / 2); }
+  .overlay.bottom-right { bottom: 6em; right: max(var(--margin), (100% - var(--container)) / 2); text-align: right; justify-items: end; }
+  .overlay h2 { margin: 0; font: 400 2.5em/1.15 var(--font); letter-spacing: -0.025em; color: #fff; }
+  .overlay p { margin: 0; font: 400 1.125em/1.4444 var(--font); color: #9a9a9a; }
+
+  .progress { position: absolute; bottom: 2.5em; left: max(var(--margin), (100% - var(--container)) / 2); right: max(var(--margin), (100% - var(--container)) / 2); height: 1px; background: rgba(255, 255, 255, 0.1); }
+  .progress i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: var(--gold); }
+
+  /* Reduced motion: one screen, the exploded poster and the first caption */
+  @media (prefers-reduced-motion: reduce) {
+    .scrub { height: 100vh; }
+    video, .progress { display: none; }
+    .poster { display: block; }
+    .overlay.top-left { opacity: 1; translate: 0 0; }
+  }
+
+  @media (max-width: 991px) {
+    .stage { height: 100svh; }
+    .overlay, .overlay.top-left, .overlay.bottom-right {
+      top: auto; bottom: 5em; left: var(--margin); right: var(--margin); max-width: 22em; margin-inline: auto;
+      text-align: center; justify-items: center;
+    }
+    .overlay h2 { font-size: 1.75em; }
+    .overlay p { font-size: 1em; }
+  }
+</style>
+
+<script>
+  // Scroll position → video time. Seeking eases towards the target each frame so it looks smooth
+  // between keyframes; it only seeks when the previous seek has finished.
+  document.querySelectorAll<HTMLElement>('.scrub').forEach((section) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const v = section.querySelector('video')!;
+    const overlays = [...section.querySelectorAll<HTMLElement>('.overlay')];
+    const FADE = 4;
+
+    // Phones get the smaller file. The transparent WebM comes first; MP4 (on black) is the fallback.
+    const src = matchMedia('(max-width: 768px)').matches ? section.dataset.srcMobile! : section.dataset.src!;
+    for (const [url, type] of [[src, 'video/webm'], [section.dataset.fallback!, 'video/mp4']]) {
+      const s = document.createElement('source'); s.src = url; s.type = type; v.appendChild(s);
+    }
+    v.load();
+    // iOS Safari only allows seeking after the video has been played once
+    addEventListener('touchstart', () => v.play().then(() => v.pause()).catch(() => {}), { once: true, passive: true });
+
+    let target = 0, shown = 0, raf = 0;
+    const progress = () => {
+      const r = section.getBoundingClientRect();
+      return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+    };
+    const tick = () => {
+      raf = 0;
+      if (!v.duration) return;
+      shown += (target - shown) * 0.25;
+      if (Math.abs(target - shown) < 0.005) shown = target;
+      if (!v.seeking && Math.abs(v.currentTime - shown) > 0.01) v.currentTime = shown;
+      if (shown !== target) raf = requestAnimationFrame(tick);
+    };
+    const update = () => {
+      const p = progress(), pc = p * 100;
+      section.style.setProperty('--p', p.toFixed(4));
+      overlays.forEach((o) => {
+        const s = Number(o.dataset.start), e = Number(o.dataset.end);
+        const op = pc < s - FADE || pc > e + FADE ? 0 : pc < s ? (pc - (s - FADE)) / FADE : pc > e ? 1 - (pc - e) / FADE : 1;
+        o.style.opacity = op.toFixed(3);
+        o.style.translate = `0 ${((1 - op) * 1.5).toFixed(3)}em`;
+        o.toggleAttribute('aria-hidden', op < 0.5);
+      });
+      target = p * (v.duration || 0);
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    v.addEventListener('loadedmetadata', () => { shown = target = progress() * v.duration; v.currentTime = shown; update(); });
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+  });
+</script>
