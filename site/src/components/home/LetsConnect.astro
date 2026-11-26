@@ -10,7 +10,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const a = (f: string) => `${base}home/${f}`;
 ---
 
-<section class="connect" data-theme="dark" aria-labelledby="connect-title">
+<section class="connect" id="lets-connect" data-theme="dark" aria-labelledby="connect-title">
   <div class="photo" aria-hidden="true"><img src={a('connect-photo.jpg')} alt="" loading="lazy" /></div>
   <div class="fade-top" aria-hidden="true"></div>
   <img class="hang" src={a('connect-hang.png')} alt="" loading="lazy" aria-hidden="true" />
