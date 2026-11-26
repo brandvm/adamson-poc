@@ -34,6 +34,7 @@ export type Slide = {
   image: string; // background-removed cut-out in public/home/
   thumb: string;
   wordmark: string; // big frosted word behind the product
+  cardWordmark?: string; // overrides it on the /home-stack cards
   wordmarkSvg?: boolean; // true = use the exported Figma vector (Vergence only)
 };
 
@@ -52,6 +53,7 @@ export const slides: Slide[] = [
     image: 'product-vergence.png',
     thumb: 'thumb-base.png',
     wordmark: 'VERGENCE',
+    cardWordmark: 'LOUDSPEAKERS',
     wordmarkSvg: true,
   },
   {

@@ -1,5 +1,4 @@
 ---
-import Chladni from './Chladni.astro';
 import SoundWaves from './SoundWaves.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const a = (f: string) => `${base}home/${f}`;
@@ -7,8 +6,6 @@ const a = (f: string) => `${base}home/${f}`;
 
 <section class="hero" aria-labelledby="hero-title" style={`--mask: url(${a('hero-wordmark-mask.svg')})`}>
   <div class="stage">
-    <!-- Figma "Chaldni Pattern" (632:5026): behind everything in the stage. 24% in Figma reads as almost invisible on screen, so 40%. -->
-    <Chladni opacity={0.4} />
     <img class="glow gold" src={a('glow-gold.svg')} alt="" />
     <img class="glow grey" src={a('glow-grey.svg')} alt="" />
 
