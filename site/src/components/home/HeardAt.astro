@@ -1,0 +1,55 @@
+---
+import { heardAt } from '../../data/home';
+// Rendered twice so the marquee loops seamlessly; the copy is hidden from screen readers.
+---
+
+<section class="proof" aria-labelledby="heard-at">
+  <div class="container">
+    <h2 id="heard-at">Heard At</h2>
+    <div class="track">
+      <ul>
+        {[0, 1].map((copy) =>
+          heardAt.map((item) => (
+            <li aria-hidden={copy ? 'true' : undefined}>{item.name} <span>{item.context}</span></li>
+          ))
+        )}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Figma "Home - Section - Proof" 627:4925 */
+  .proof { border-top: 1px solid rgba(255, 255, 255, 0.12); }
+  .container { display: flex; align-items: center; gap: 2em; padding-block: 1.5em; }
+  h2 { flex: none; margin: 0; font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); }
+
+  /* Edge fades as a mask, so the strip works on any background */
+  .track {
+    flex: 1; min-width: 0; overflow: hidden;
+    -webkit-mask: linear-gradient(to right, transparent, #000 8.9375em, #000 calc(100% - 8.9375em), transparent);
+    mask: linear-gradient(to right, transparent, #000 8.9375em, #000 calc(100% - 8.9375em), transparent);
+  }
+  ul { display: flex; gap: 1em; width: max-content; animation: marquee 48s linear infinite; }
+  .track:hover ul { animation-play-state: paused; }
+
+  /* 13px text; spacing relative to it */
+  li {
+    display: flex; align-items: center; gap: 0.7692em; padding: 0.1538em 0.1538em 0.1538em 0.9231em;
+    border-radius: 1.8462em; background: #232323; white-space: nowrap;
+    font: 400 0.8125em/1 var(--font); color: rgba(255, 255, 255, 0.48);
+  }
+  li span { padding: 0.1538em 0.4615em; border-radius: 1.8462em; background: #000; font-weight: 300; }
+
+  /* Two identical copies plus one gap: moving by half the width (and half a gap) loops cleanly */
+  @keyframes marquee { to { transform: translateX(calc(-50% - 0.5em)); } }
+  @media (prefers-reduced-motion: reduce) { ul { animation: none; } }
+
+  @media (max-width: 991px) {
+    .container { flex-direction: column; align-items: stretch; gap: 0.75em; padding-block: 1.25em; }
+    .track {
+      -webkit-mask: linear-gradient(to right, transparent, #000 3em, #000 calc(100% - 3em), transparent);
+      mask: linear-gradient(to right, transparent, #000 3em, #000 calc(100% - 3em), transparent);
+    }
+  }
+</style>

@@ -1,0 +1,165 @@
+---
+// Concept B for the category section (reference: uncommondesign.group, "We design for impact").
+// The sentence is pinned in the centre of the screen; one featured product card per category
+// scrolls up over it, with the sentence showing again between cards. Each card zooms in as it
+// rises to the middle and back out as it leaves (the product counter-zooms inside it), like the
+// reference. A card's word in the sentence turns gold a little before the card comes into view.
+// Clicking a word scrolls its card into view.
+import Sentence from './Sentence.astro';
+import Wordmark from './Wordmark.astro';
+import { slides } from '../../data/home';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="stack" id="categories" aria-label="What Adamson makes">
+  <div class="pin">
+    <Sentence />
+  </div>
+
+  <div class="cards">
+    {slides.map((s, i) => (
+      <div class="slot container grid">
+        <article class="card" data-card={i} aria-labelledby={`card-${i}`}>
+          <p class="eyebrow">{s.category} · {pad(i + 1)} / {pad(slides.length)}</p>
+          <Wordmark slide={s} class="card-wordmark" />
+          <img class="product" src={a(s.image)} alt="" loading="lazy" />
+          <div class="copy">
+            <h3 id={`card-${i}`}>{s.name}</h3>
+            <p>{s.description}</p>
+          </div>
+          <div class="buttons">
+            <a class="btn btn-lg btn-primary" href="#">{s.primary}</a>
+            <a class="btn btn-lg btn-outline" href="#">{s.secondary}</a>
+          </div>
+        </article>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* --sentence-h is measured by the script below (fallback: the design's 196px) */
+  .stack { --sentence-h: 12.25em; --centre: calc(50svh - var(--sentence-h) / 2); position: relative; padding-top: 5em; }
+
+  /* The sentence follows "Heard at" with normal section spacing and scrolls up normally;
+     once its middle reaches the middle of the screen it sticks there, behind the cards */
+  .pin { position: sticky; top: var(--centre); z-index: 0; padding-inline: var(--margin); }
+
+  /* The first card follows the sentence at half the distance that would put it just below the
+     screen when the sentence sticks, so it's already rising into view by then. The gaps let the
+     sentence show through again between cards; the bottom padding brings it back to the centre
+     on its own before the section scrolls away. */
+  .cards {
+    position: relative; z-index: 1; margin-top: calc(var(--centre) * 0.5);
+    display: grid; gap: 40vh; padding-bottom: var(--centre);
+  }
+
+  /* Card: columns 4–17 of the 20-column grid, a constant 16:10 (1058 × 661 at the frame).
+     Everything inside is em, so the fixed ratio keeps the contents in the same proportions at
+     every desktop size. On very short screens the whole card narrows to stay within 86% of the
+     screen height. --s is the scroll zoom from the script (1 = resting size, mid-screen). */
+  .card {
+    grid-column: 4 / 18; justify-self: center; position: relative; overflow: hidden;
+    width: min(100%, 86svh * 1.6); aspect-ratio: 16 / 10; padding: 2.5em;
+    transform: scale(var(--s, 1)); will-change: transform;
+    display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto 1fr auto; column-gap: 2em;
+    border-radius: 1.25em; border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Opaque: the frosted wordmark's soft-light layers blend with this */
+    background: radial-gradient(60% 40% at 50% 62%, #262019, transparent 70%), linear-gradient(#111, #060606);
+    box-shadow: 0 2.5em 5em rgba(0, 0, 0, 0.6);
+  }
+  .eyebrow {
+    grid-column: 1 / -1; margin: 0;
+    font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light);
+  }
+  /* Rows: eyebrow / wordmark / product space / copy + buttons. The product overlaps the
+     wordmark row so it sits in front of the big word, as on the slider. */
+  .card :global(.card-wordmark) { grid-column: 1 / -1; grid-row: 2; margin-top: 1em; --wordmark-size: 12.5em; }
+  /* The product sits in the space below the wordmark and only tucks up into its bottom edge
+     (as on the Figma slider), so the big word stays readable.
+     Counter-zoom: the product is a little larger while the card is small, like the reference. */
+  .product {
+    grid-column: 1 / -1; grid-row: 3; align-self: end; justify-self: center; z-index: 1;
+    width: 82%; height: calc(100% + 2.5em); min-height: 0; margin-top: -2.5em;
+    object-fit: contain; object-position: center bottom;
+    scale: calc(1 + (1 - var(--s, 1)) * 0.3); transform-origin: 50% 100%;
+  }
+  .copy { grid-column: 1; grid-row: 4; align-self: end; display: grid; gap: 0.5em; z-index: 1; }
+  h3 { margin: 0; font: 400 2em/1.1875 var(--font); letter-spacing: -0.025em; }
+  .copy p { margin: 0; max-width: 22em; font: 400 1em/1.5 var(--font); color: #cfcfcf; }
+  .buttons { grid-column: 2; grid-row: 4; align-self: end; display: flex; gap: 0.75em; z-index: 1; }
+
+  @media (max-width: 991px) {
+    .stack { padding-top: 3.5em; }
+    .cards { gap: 34vh; }
+    .card {
+      grid-column: 1 / -1; width: 100%; aspect-ratio: auto; min-height: 30em; padding: 1.5em;
+      grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto auto; row-gap: 1em;
+    }
+    .card :global(.card-wordmark) { --wordmark-size: 5em; }
+    .product { grid-row: 3; width: 100%; height: auto; }
+    .copy { grid-column: 1; grid-row: 4; }
+    .buttons { grid-column: 1; grid-row: 5; flex-wrap: wrap; }
+  }
+</style>
+
+<script>
+  const stack = document.querySelector<HTMLElement>('.stack');
+  const sentence = stack?.querySelector<HTMLElement>('.sentence');
+  if (stack && sentence) {
+    const slots = [...stack.querySelectorAll<HTMLElement>('.slot')];
+    const cards = slots.map((s) => s.querySelector<HTMLElement>('.card')!);
+    const words = [...sentence.querySelectorAll<HTMLElement>('.word')];
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const wide = window.matchMedia('(min-width: 992px)');
+
+    // The sticky offset centres the sentence, so it needs the sentence's real height.
+    new ResizeObserver(([entry]) =>
+      stack.style.setProperty('--sentence-h', `${entry.borderBoxSize[0].blockSize}px`)
+    ).observe(sentence);
+
+    const MIN = 0.72; // card scale at the edges of the screen
+    const ease = (t: number) => t * t * (3 - 2 * t);
+
+    // Measured on the slots, which never transform, so the zoom doesn't feed back into itself.
+    const update = () => {
+      const vh = window.innerHeight;
+      let current = -1;
+      slots.forEach((slot, k) => {
+        const r = slot.getBoundingClientRect();
+        // Zoom: 0 as the card enters at the bottom, 0.5 centred, 1 as it leaves at the top.
+        // Full size across the middle 30% of that journey, easing down to MIN at either edge.
+        const p = (vh - r.top) / (vh + r.height);
+        const t = Math.min(1, Math.max(0, (Math.abs(p - 0.5) * 2 - 0.3) / 0.7));
+        const s = still.matches || !wide.matches ? 1 : 1 - (1 - MIN) * ease(t);
+        cards[k].style.setProperty('--s', s.toFixed(4));
+        // Highlight starts while the card is still below the fold and holds until the card is
+        // covering the sentence (its middle above 60% of the screen). The sentence is hidden at
+        // that point, so the next card's word can already light up before that card comes in.
+        // The first card waits until its top meets the bottom of the screen, so the sentence is
+        // first seen in its resting state, with no word picked out.
+        const start = k === 0 ? 1 : 1.35;
+        if (current === -1 && r.top < vh * start && (r.top + r.bottom) / 2 > vh * 0.6) current = k;
+      });
+      sentence.classList.toggle('has-current', current !== -1);
+      words.forEach((w, k) => w.classList.toggle('is-current', k === current));
+    };
+
+    words.forEach((w) =>
+      w.addEventListener('click', () => cards[Number(w.dataset.go)]?.scrollIntoView({ behavior: 'smooth', block: 'center' }))
+    );
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    wide.addEventListener('change', update);
+    still.addEventListener('change', update);
+    update();
+  }
+</script>
