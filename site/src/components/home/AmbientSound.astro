@@ -84,7 +84,7 @@
     };
 
     // The driver note: pitched-down thump plus a rising air burst (from the driver study)
-    const thump = (t: number, level = 0.6) => {
+    const thump = (t: number, level = 0.6, air = 0.07) => {
       const o = ctx!.createOscillator(); o.type = 'sine';
       o.frequency.setValueAtTime(130, t); o.frequency.exponentialRampToValueAtTime(42, t + 0.28);
       const g = ctx!.createGain(); g.gain.setValueAtTime(0.0001, t);
@@ -94,12 +94,12 @@
       const bp = ctx!.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 1.4;
       bp.frequency.setValueAtTime(1800, t); bp.frequency.exponentialRampToValueAtTime(6500, t + 0.5);
       const ng = ctx!.createGain(); ng.gain.setValueAtTime(0.0001, t);
-      ng.gain.exponentialRampToValueAtTime(0.07, t + 0.04); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
+      ng.gain.exponentialRampToValueAtTime(air, t + 0.04); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
       n.connect(bp); bp.connect(ng); ng.connect(bus); ng.connect(verb); n.start(t); n.stop(t + 0.6);
     };
     // Soft bell: the note plus a quieter inharmonic partial, long decay into the reverb
-    const bell = (f: number, t: number) => {
-      [[1, 0.16, 3], [2.76, 0.04, 1.4]].forEach(([mul, lvl, dur]) => {
+    const bell = (f: number, t: number, level = 1) => {
+      [[1, 0.16 * level, 3], [2.76, 0.04 * level, 1.4]].forEach(([mul, lvl, dur]) => {
         const o = ctx!.createOscillator(); o.type = 'sine'; o.frequency.value = f * mul;
         const g = ctx!.createGain(); g.gain.setValueAtTime(0.0001, t);
         g.gain.exponentialRampToValueAtTime(lvl, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
@@ -115,7 +115,8 @@
       const t = ctx.currentTime + 0.01;
       if (t - lastNote < 0.25) return;   // fast scrolling: don't stack notes
       lastNote = t;
-      thump(t, 0.45); bell(NOTES[k % NOTES.length], t + 0.04);
+      // About 30% quieter than the hero thump, so the card notes sit inside the pad
+      thump(t, 0.32, 0.05); bell(NOTES[k % NOTES.length], t + 0.04, 0.7);
     }) as EventListener);
 
     // Hero click: the thump goes out with the sound wave (same rule as SoundWaves: not on links)
