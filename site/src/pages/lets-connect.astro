@@ -1,0 +1,23 @@
+---
+// Standalone study: the "Let’s connect" section on its own page.
+import HomeLayout from '../layouts/HomeLayout.astro';
+import LetsConnect from '../components/home/LetsConnect.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<HomeLayout title="Adamson · Let’s connect" description="The closing call to action: a glowing gold ring over the concert photo.">
+  <main class="solo">
+    <LetsConnect />
+  </main>
+  <a class="back" href={base}>← Studies</a>
+</HomeLayout>
+
+<style>
+  .solo { min-height: 100vh; display: grid; align-content: center; background: #000; }
+  .back {
+    position: fixed; top: 1.25em; left: 1.25em; z-index: 50; padding: 0.6em 1.1em; border-radius: 999px;
+    border: 1px solid rgba(171, 153, 129, 0.35); background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(6px);
+    color: var(--gold-light); text-decoration: none; font: 400 0.6875em/1 var(--font); letter-spacing: 0.24em; text-transform: uppercase;
+  }
+  .back:hover { border-color: var(--gold-light); }
+</style>
