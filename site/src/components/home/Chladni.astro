@@ -85,6 +85,29 @@ const { opacity = 0.24, reactToWave = false, class: className } = Astro.props;
 
     // ---- the plate and the sand ----
     const plate = { n: 3, m: 3, a: 1.2, b: 0.2, seed: 0 };
+
+    // Modes: pages can pick a vibration mode by dispatching `chladni:mode` on the canvas with an
+    // index (or -1 / null for none). Each mode is a distinct figure that still drifts a little
+    // around its own n, m; with no mode the plate wanders freely, as in the study. Switching
+    // modes shakes the plate and throws part of the sand off its lines, so it visibly re-forms.
+    const MODES = [
+      { n: 2, m: 5, a: 1.2, b: 0.3 },   // 0 loudspeakers: long vertical bands
+      { n: 4, m: 4, a: 1.0, b: 0.9 },   // 1 electronics: near-symmetric grid of curves
+      { n: 6, m: 2, a: 1.2, b: 0.2 },   // 2 software: horizontal bands
+      { n: 3, m: 7, a: 1.0, b: 1.0 },   // 3 immersive audio: dense rings and diagonals
+    ];
+    let mode: (typeof MODES)[number] | null = null;
+    let burst = 0;   // 1 right after a mode change, decays to 0
+    canvas.addEventListener('chladni:mode', ((e: CustomEvent<number | null>) => {
+      const next = e.detail == null || e.detail < 0 ? null : MODES[e.detail % MODES.length];
+      if (next === mode) return;
+      mode = next;
+      burst = 1;
+      for (let j = 0; j < N * 0.35; j++) {   // throw a third of the sand off its lines
+        const k = (rnd() * N) | 0;
+        pos[k * 2] = rnd() * 2 - 1; pos[k * 2 + 1] = rnd() * 2 - 1; vel[k * 2] = vel[k * 2 + 1] = 0;
+      }
+    }) as EventListener);
     const mouse = { x: 0, y: 0, tx: 0, ty: 0, on: false };
     let scatterTimer = 0;
     function step(dt: number) {
@@ -92,10 +115,18 @@ const { opacity = 0.24, reactToWave = false, class: className } = Astro.props;
       const ax = W >= H ? 1 : W / H, ay = W >= H ? H / W : 1;   // keep the figure square
       plate.seed += dt * 0.15;
       const s = plate.seed, lerp = Math.min(dt * 4, 1);
-      plate.n += (3 + Math.sin(s) * 2.5 - plate.n) * lerp;
-      plate.m += (3 + Math.cos(s * 1.3) * 2.5 - plate.m) * lerp;
-      plate.a += (1.2 + Math.sin(s * 0.7) * 0.2 - plate.a) * lerp;
-      plate.b += (0.2 + Math.cos(s * 0.5) * 0.2 - plate.b) * lerp;
+      if (mode) {   // drift gently around the current mode's figure
+        plate.n += (mode.n + Math.sin(s) * 0.45 - plate.n) * lerp;
+        plate.m += (mode.m + Math.cos(s * 1.3) * 0.45 - plate.m) * lerp;
+        plate.a += (mode.a + Math.sin(s * 0.7) * 0.1 - plate.a) * lerp;
+        plate.b += (mode.b + Math.cos(s * 0.5) * 0.1 - plate.b) * lerp;
+      } else {      // free drift, as in the study
+        plate.n += (3 + Math.sin(s) * 2.5 - plate.n) * lerp;
+        plate.m += (3 + Math.cos(s * 1.3) * 2.5 - plate.m) * lerp;
+        plate.a += (1.2 + Math.sin(s * 0.7) * 0.2 - plate.a) * lerp;
+        plate.b += (0.2 + Math.cos(s * 0.5) * 0.2 - plate.b) * lerp;
+      }
+      burst *= Math.exp(-dt * 2.2);
       const { n, m, a, b } = plate, pn = Math.PI * n, pm = Math.PI * m;
       if (mouse.on) { const ml = Math.min(dt * 15, 1); mouse.x += (mouse.tx - mouse.x) * ml; mouse.y += (mouse.ty - mouse.y) * ml; }
       const mx = mouse.x * ax, my = mouse.y * ay;
@@ -115,6 +146,7 @@ const { opacity = 0.24, reactToWave = false, class: className } = Astro.props;
         }
       }
 
+      energy = Math.max(energy, burst);   // a mode change shakes the plate like a wave does
       const u = dt * 0.45;
       const pull = -2 * 0.2 * (1.2 + energy * 0.6) * u * (1.1 + energy * 1.5), pullX = pull * ax, pullY = pull * ay;
       const vib = (0.08 + energy * 0.35) * 0.045, jitBase = 0.001125;
