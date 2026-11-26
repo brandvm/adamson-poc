@@ -18,6 +18,17 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   </head>
   <body>
     <slot />
+    <script>
+      // Theme switch: whichever [data-theme] section crosses the middle of the screen sets the
+      // page theme; CSS cross-fades the background and text.
+      const sections = document.querySelectorAll<HTMLElement>('[data-theme]');
+      if (sections.length) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) document.documentElement.dataset.theme = (e.target as HTMLElement).dataset.theme;
+        }, { rootMargin: '-50% 0px -50% 0px' });
+        sections.forEach((s) => io.observe(s));
+      }
+    </script>
   </body>
 </html>
 
@@ -47,6 +58,20 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     --gold: #8a6e4b;
     --gold-light: #ab9981;
     --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    /* Page theme. Sections carry data-theme; the one crossing the middle of the screen sets it
+       on <html> (script below), and the page background and text cross-fade, like the Uncommon
+       site's switch to light after its projects. */
+    --page-bg: #000;
+    --fg: #fff;
+    --fg-2: rgba(255, 255, 255, 0.6);
+    --line: rgba(255, 255, 255, 0.2);
+  }
+  html[data-theme='light'] {
+    --page-bg: #fff;
+    --fg: #000;
+    --fg-2: #686b6d;
+    --line: rgba(0, 0, 0, 0.14);
   }
   @media screen and (max-width: 991px) {
     :root { --size-font: 1rem; --columns: 4; --gutter: 1em; --margin: 1em; }
@@ -56,10 +81,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .grid { display: grid; grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); column-gap: var(--gutter); }
 
   *, *::before, *::after { box-sizing: border-box; }
-  html { background: #000; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html { background: var(--page-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transition: background-color 0.9s ease; }
   /* clip, not hidden: overflow hidden would break position: sticky */
   html, body { overflow-x: clip; }
-  body { margin: 0; background: #000; color: #fff; font-family: var(--font); font-size: var(--size-font); }
+  body { margin: 0; background: var(--page-bg); color: var(--fg); font-family: var(--font); font-size: var(--size-font); transition: background-color 0.9s ease, color 0.9s ease; }
   img { display: block; max-width: 100%; }
   ul { margin: 0; padding: 0; list-style: none; }
 
@@ -90,6 +115,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
 
   .end { display: grid; justify-items: center; gap: 1.5em; padding: 7.5em 1em 10em; text-align: center; }
-  .end p { margin: 0; font: 300 1em/1.5 var(--font); color: rgba(255, 255, 255, 0.48); }
-  .end p a { color: var(--gold-light); }
+  .end p { margin: 0; font: 300 1em/1.5 var(--font); color: var(--fg-2); transition: color 0.9s ease; }
+  .end p a { color: var(--gold); }
 </style>

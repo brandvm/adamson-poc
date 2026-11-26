@@ -1,0 +1,297 @@
+---
+// Figma: "03 Products · Tab · Loudspeakers · Series" (636:7407). A light section: title, short
+// description and prev/next arrows, category tabs, and a horizontal track of dark tiles that
+// bleeds off the right edge. The page switches to the light theme as this section arrives
+// (data-theme, handled in HomeLayout), like the Uncommon site after its projects.
+import { productTabs } from '../../data/home';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, '-');
+---
+
+<section
+  class="products"
+  data-theme="light"
+  aria-labelledby="products-title"
+  style={`--chev-l: url(${a('icon-chevron-left-dark.svg')}); --chev-r: url(${a('icon-chevron-right-dark.svg')}); --arrow: url(${a('icon-arrow-right.svg')})`}
+>
+  <div class="container head">
+    <h2 id="products-title">Products</h2>
+    <div class="aside">
+      <p>Touring loudspeakers, integration amplifiers and software. Designed and manufactured in Canada.</p>
+      <div class="arrows">
+        <button class="arrow prev" type="button" aria-label="Scroll back"></button>
+        <button class="arrow next" type="button" aria-label="Scroll forward"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container tabs" role="tablist" aria-label="Product categories">
+    {productTabs.map((t, i) => (
+      <button class="tab" type="button" role="tab" id={`tab-${slug(t.label)}`} aria-controls="products-panel" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+        {t.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- One track for every category: changing tab collapses the tiles that don't match and grows
+       the ones that do (as on adamson-preview.vercel.app), and the count tile counts to the new number -->
+  <div class="track" role="tabpanel" id="products-panel" aria-labelledby={`tab-${slug(productTabs[0].label)}`} aria-live="polite">
+    <ul>
+      <li class="tile count" data-counts={JSON.stringify(productTabs.map((t) => t.count))}>
+        <span class="count-label">{productTabs[0].count.label}</span>
+        <span class="count-value">{productTabs[0].count.value}</span>
+        <a class="btn btn-glass" href="#">{productTabs[0].count.cta}</a>
+      </li>
+      {productTabs.flatMap((t, i) => t.items.map((item) => (
+        <li class="tile series" data-cat={i} hidden={i !== 0}>
+          <div class="inner">
+            {item.image && <img src={a(item.image)} alt="" loading="lazy" />}
+            <div class="top">{item.models && <span class="tag">{item.models} models</span>}</div>
+            <div class="bottom">
+              <div class="name">
+                <h3>{item.name}</h3>
+                <p>{item.tagline}</p>
+              </div>
+              <a class="go" href="#" aria-label={`Explore ${item.name}`}></a>
+            </div>
+          </div>
+        </li>
+      )))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Text and lines follow the page theme (HomeLayout), so they cross-fade with the background */
+  .products { padding-block: 7.5em; }
+  .products :is(h2, .aside p, .tab, .arrow) { transition: color 0.9s ease, background-color 0.9s ease, border-color 0.9s ease; }
+
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 3em; }
+  h2 { margin: 0; font: 400 6em/0.9375 var(--font); letter-spacing: -0.03em; color: var(--fg); }
+  .aside { display: flex; align-items: center; gap: 3em; padding-bottom: 0.3125em; }
+  .aside p { margin: 0; width: 24.375em; font: 400 1em/1.5 var(--font); color: var(--fg-2); }
+  .arrows { display: flex; gap: 0.625em; }
+  .arrow {
+    width: 2.75em; aspect-ratio: 1; border-radius: 999px; border: 1px solid var(--line); background: none; cursor: pointer;
+    color: var(--fg); display: grid; place-items: center;
+  }
+  .arrow::before { content: ''; width: 0.875em; aspect-ratio: 1; background: currentColor; -webkit-mask: var(--chev-l) center / contain no-repeat; mask: var(--chev-l) center / contain no-repeat; }
+  .arrow.next::before { -webkit-mask-image: var(--chev-r); mask-image: var(--chev-r); }
+  .arrow:disabled { opacity: 0.3; cursor: default; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 0.5em; margin-top: 2em; }
+  .tab {
+    height: 2.5714em; padding: 0 1.1429em; border-radius: 999px; cursor: pointer;
+    font: 500 0.875em/1.1 var(--font); letter-spacing: -0.02em;
+    border: 1px solid var(--line); background: none; color: var(--fg);
+  }
+  .tab[aria-selected='true'] { background: var(--fg); border-color: var(--fg); color: var(--page-bg); }
+
+  /* Track: starts on the container's left edge, bleeds off the right of the screen */
+  .track {
+    --inset: max(var(--margin), (100% - var(--container)) / 2);
+    margin-top: 4em; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--inset);
+    padding-inline: var(--inset); scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .track ul { display: flex; gap: 1em; width: max-content; }
+
+  /* The tile's width animates during a filter; its .inner keeps the full width, so the content
+     is clipped and gently scaled rather than squashed */
+  .tile { --w: 33.75em; position: relative; flex: none; width: var(--w); height: 28.75em; border-radius: 1.25em; overflow: hidden; scroll-snap-align: start; color: #fff; }
+  .tile[hidden] { display: none; }
+
+  /* Count tile: 340 × 460 */
+  .count {
+    --w: 21.25em; padding: 1.75em;
+    background: radial-gradient(80% 60% at 100% 9%, rgba(139, 111, 76, 0.42), rgba(139, 111, 76, 0) 57%), #000;
+    display: grid; grid-template-rows: auto 1fr auto; justify-items: start;
+  }
+  .count-label { font: 400 0.875em/1.4286 var(--font); color: #7e8182; }
+  .count-value { font-variant-numeric: tabular-nums; align-self: center; margin-left: -0.02em; font: 400 12.5em/0.9 var(--font); letter-spacing: -0.05em; }
+
+  /* Series tile: 540 × 460, full-bleed render under shades and a gold glow */
+  .series { background: #1f1f1f; }
+  .inner {
+    position: relative; width: var(--w); height: 100%; padding: 1.5em 1.5em 1.75em; isolation: isolate;
+    display: flex; flex-direction: column; justify-content: space-between; transform-origin: 50% 50%;
+  }
+  .series img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
+  /* Layers: render (-2), glow and shades (-1), content on top */
+  .inner::before, .inner::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .inner::before { background: radial-gradient(70% 80% at 0% 100%, rgba(139, 111, 76, 0.72), rgba(139, 111, 76, 0) 57%); }
+  .inner::after {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.45), transparent 7.5em),
+      linear-gradient(to top, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.6) 45%, transparent 18.75em);
+  }
+  .top, .bottom { display: flex; align-items: flex-end; justify-content: space-between; }
+  .top { min-height: 2.25em; }
+  .tag {
+    padding: 0.5833em 1em; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(5px);
+    font: 500 0.75em/1.3333 var(--font); letter-spacing: -0.02em;
+  }
+  .bottom { padding-left: 0.25em; gap: 1.5em; }
+  .name { display: grid; gap: 0.375em; }
+  .name h3 { margin: 0; font: 400 2em/1.1875 var(--font); letter-spacing: -0.025em; }
+  .name p { margin: 0; font: 400 0.875em/1.4286 var(--font); color: #c0c1c2; }
+  /* The arrow is the link; its ::after covers the whole tile, so the tile is one click target */
+  .go {
+    flex: none; width: 3.75em; aspect-ratio: 1; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(157, 137, 111, 0.04); backdrop-filter: blur(5px);
+    display: grid; place-items: center; transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .go::before { content: ''; width: 1.25em; aspect-ratio: 1; background: #fff; -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat; }
+  .go::after { content: ''; position: absolute; inset: 0; }
+  .series:hover .go { background: var(--gold); border-color: var(--gold); }
+
+  @media (max-width: 991px) {
+    .products { padding-block: 4.5em; }
+    .head { flex-direction: column; align-items: flex-start; gap: 1.5em; }
+    h2 { font-size: 3.5em; }
+    .aside { width: 100%; justify-content: space-between; gap: 1.5em; }
+    .aside p { width: auto; }
+    .track { margin-top: 2em; }
+    .tile { height: 24em; }
+    .count { --w: 16em; }
+    .count-value { font-size: 9em; }
+    .series { --w: min(85vw, 26em); }
+  }
+</style>
+
+<script>
+  // Filter animation ported from the preview (web/components/blocks/ProductRange.tsx), with the
+  // Web Animations API instead of GSAP: leaving tiles close to zero width (their negative margin
+  // cancels the gap) and fade, entering tiles open from zero; the content inside scales 0.92 ↔ 1.
+  type Count = { label: string; value: number; cta: string };
+  const IN_OUT = 'cubic-bezier(0.65, 0, 0.35, 1)';   // power3.inOut
+  const OUT = 'cubic-bezier(0.33, 1, 0.68, 1)';      // power3.out
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll<HTMLElement>('.products').forEach((section) => {
+    const tabs = [...section.querySelectorAll<HTMLButtonElement>('.tab')];
+    const track = section.querySelector<HTMLElement>('.track')!;
+    const tiles = [...track.querySelectorAll<HTMLElement>('.series')];
+    const countTile = track.querySelector<HTMLElement>('.count')!;
+    const counts: Count[] = JSON.parse(countTile.dataset.counts || '[]');
+    const label = countTile.querySelector<HTMLElement>('.count-label')!;
+    const value = countTile.querySelector<HTMLElement>('.count-value')!;
+    const cta = countTile.querySelector<HTMLElement>('.btn')!;
+    const prev = section.querySelector<HTMLButtonElement>('.arrow.prev')!;
+    const next = section.querySelector<HTMLButtonElement>('.arrow.next')!;
+    let current = 0, snapTimer = 0;
+
+    const syncArrows = () => {
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+
+    // ---- Count: eases from the shown number to the target (cubic ease-out, like CountUp.tsx) ----
+    let shown = 0, countRaf = 0;
+    const countTo = (to: number, ms = 1600) => {
+      cancelAnimationFrame(countRaf);
+      if (reduce.matches) { shown = to; value.textContent = String(to); return; }
+      const from = shown, t0 = performance.now();
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - t0) / ms);
+        shown = Math.round(from + (to - from) * (1 - (1 - t) ** 3));
+        value.textContent = String(shown);
+        if (t < 1) countRaf = requestAnimationFrame(tick);
+      };
+      countRaf = requestAnimationFrame(tick);
+    };
+    // First time the section shows, count up from 0
+    value.textContent = '0';
+    new IntersectionObserver((entries, io) => {
+      if (entries.some((e) => e.isIntersecting)) { io.disconnect(); countTo(counts[current].value); }
+    }, { threshold: 0.4 }).observe(countTile);
+
+    // Label and button: a quick cross-fade as the text swaps
+    const swapText = (el: HTMLElement, text: string) => {
+      if (el.textContent === text) return;
+      if (reduce.matches) { el.textContent = text; return; }
+      el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-0.4em)' }], { duration: 180, easing: 'ease-in' })
+        .finished.then(() => {
+          el.textContent = text;
+          el.animate([{ opacity: 0, transform: 'translateY(0.4em)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: OUT });
+        }).catch(() => {});
+    };
+
+    // ---- Tiles ----
+    const inner = (el: HTMLElement) => el.querySelector<HTMLElement>('.inner')!;
+    const stop = (el: HTMLElement) => {
+      // Freeze where an interrupted animation is, so the next one starts from there
+      const cs = getComputedStyle(el);
+      const from = { width: cs.width, marginRight: cs.marginRight, opacity: cs.opacity, scale: getComputedStyle(inner(el)).transform };
+      el.getAnimations().forEach((a) => a.cancel());
+      inner(el).getAnimations().forEach((a) => a.cancel());
+      return from;
+    };
+    const leave = (el: HTMLElement) => {
+      const animating = el.getAnimations().length > 0;
+      const f = stop(el);
+      const scaleFrom = animating && f.scale !== 'none' ? f.scale : 'scale(1)';
+      el.dataset.out = '1';
+      const a = el.animate(
+        [{ width: f.width, marginRight: animating ? f.marginRight : '0px', opacity: animating ? f.opacity : 1 }, { width: '0px', marginRight: '-1em', opacity: 0 }],
+        { duration: 600, easing: IN_OUT, fill: 'forwards' },
+      );
+      inner(el).animate([{ transform: scaleFrom }, { transform: 'scale(0.92)' }], { duration: 600, easing: IN_OUT, fill: 'forwards' });
+      a.finished.then(() => { el.hidden = true; delete el.dataset.out; stop(el); syncArrows(); }).catch(() => {});
+    };
+    const enter = (el: HTMLElement) => {
+      const animating = el.getAnimations().length > 0;
+      const f = stop(el);
+      el.hidden = false; delete el.dataset.out;
+      const w = inner(el).offsetWidth;   // the full width the inner keeps
+      el.animate(
+        [{ width: animating ? f.width : '0px', marginRight: animating ? f.marginRight : '-1em', opacity: animating ? f.opacity : 0 }, { width: `${w}px`, marginRight: '0px', opacity: 1 }],
+        { duration: 700, easing: OUT },
+      ).finished.then(() => syncArrows()).catch(() => {});
+      inner(el).animate([{ transform: animating && f.scale !== 'none' ? f.scale : 'scale(0.92)' }, { transform: 'scale(1)' }], { duration: 800, easing: OUT });
+    };
+
+    const select = (i: number) => {
+      if (i === current) return;
+      current = i;
+      tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      track.setAttribute('aria-labelledby', tabs[i].id);
+
+      const c = counts[i];
+      swapText(label, c.label); swapText(cta, c.cta); countTo(c.value, 1000);
+
+      for (const el of tiles) {
+        const match = Number(el.dataset.cat) === i;
+        if (reduce.matches) { el.hidden = !match; continue; }
+        const shown = !el.hidden && el.dataset.out !== '1';   // out = closing, not yet hidden
+        if (match && !shown) enter(el);
+        else if (!match && shown) leave(el);
+      }
+
+      // Snap would fight the changing widths: pause it, and glide the track back to the start
+      clearTimeout(snapTimer);
+      track.style.scrollSnapType = 'none';
+      track.scrollTo({ left: 0, behavior: reduce.matches ? 'auto' : 'smooth' });
+      snapTimer = window.setTimeout(() => { track.style.scrollSnapType = ''; syncArrows(); }, 900);
+    };
+
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      t.addEventListener('keydown', (e) => {   // arrow keys move between tabs
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        const j = (i + d + tabs.length) % tabs.length;
+        select(j); tabs[j].focus();
+      });
+    });
+    // Arrows scroll by one tile (plus the gap)
+    const step = () => { const t = tiles.find((el) => !el.hidden); return t ? t.offsetWidth + 16 : track.clientWidth * 0.8; };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', syncArrows, { passive: true });
+    window.addEventListener('resize', syncArrows);
+    syncArrows();
+  });
+</script>
