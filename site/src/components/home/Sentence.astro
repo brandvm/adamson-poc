@@ -39,13 +39,14 @@ const em = (px: number) => `${px / 16}em`;
     font-weight: 400;
   }
   /* 56px words; 52px category pills (Figma Heading/H2) */
-  .plain { font: 400 3.5em/1.0714 var(--font); letter-spacing: -0.03em; }
+  .plain { font: 400 3.5em/1.0714 var(--font); letter-spacing: -0.03em; color: var(--fg); }
   .word {
     position: relative; z-index: 1; height: 1.1538em; padding: 0 0.1923em; border-radius: 0.2308em;
-    border: 1px solid rgba(255, 255, 255, 0.24); background: none; cursor: pointer;
-    font: 400 3.25em/1 var(--font); letter-spacing: -0.03em; color: #fff; white-space: nowrap;
+    border: 1px solid var(--line); background: none; cursor: pointer;
+    font: 400 3.25em/1 var(--font); letter-spacing: -0.03em; color: var(--fg); white-space: nowrap;
   }
-  .plain, .word { transition: opacity 0.35s ease, color 0.35s ease; }
+  /* colours follow the page theme (HomeLayout), so the sentence darkens with the page */
+  .plain, .word { transition: opacity 0.35s ease, color 0.35s ease, border-color 0.9s ease; }
 
   /* Hovered/focused word, or the page's current word: the rest dims, that word turns gold */
   .sentence:is(.has-focus, .has-current) :is(.plain, .word) { opacity: 0.24; }

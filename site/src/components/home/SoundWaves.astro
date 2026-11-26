@@ -1,5 +1,5 @@
 ---
-// A sound wave leaves the gold dome of the hero driver every 5 seconds: a glassy ring that grows
+// Clicking the hero sends a sound wave from the gold dome of the driver: a glassy ring that grows
 // past the edges of the hero, with the same directional physics as the driver study
 // (public/driver-face-webgl.html):
 //   - the wave travels in the direction the dome faces. The hero render doesn't move, so that
@@ -8,19 +8,36 @@
 //   - the ring's centre travels along that direction as it grows, and it's brighter on that side;
 //   - the rim profile (soft outer step, glow just inside the edge, milky veil, faint second
 //     surface) is the study's, measured from the reference clip.
+// The hero's whole panel ripples as the rim passes, like the study's refraction: an SVG
+// displacement filter on the panel bends its rendered image (wordmark, driver, headline, text,
+// buttons) along a band just inside the rim. The filter is only applied while a wave is out.
 // The current wave is shared on window.__adamsonWave so the Chladni sand can react to it.
 // Drawn on its own canvas with screen blending, over the driver. Needs a sibling `.speaker` image.
-interface Props { every?: number; class?: string }
-const { every = 5, class: className } = Astro.props;
+interface Props { class?: string }
+const { class: className } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<canvas class:list={['sound-waves', className]} data-every={every} aria-hidden="true"></canvas>
+<canvas class:list={['sound-waves', className]} aria-hidden="true"></canvas>
+
+<!-- Ripple: a radial "outward" map, masked to the rim band, over neutral grey, displaces the panel -->
+<svg class="ripple-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="hero-ripple" x="0" y="0" width="1" height="1" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-color="rgb(128,128,128)" result="neutral" />
+    <feImage class="ripple-dir" href={`${base}home/wave-direction-map.png`} preserveAspectRatio="none" x="0" y="0" width="1" height="1" result="dir" />
+    <feImage class="ripple-mask" href={`${base}home/wave-ring-mask.png`} preserveAspectRatio="none" x="0" y="0" width="1" height="1" result="mask" />
+    <feComposite in="dir" in2="mask" operator="in" result="ring" />
+    <feComposite in="ring" in2="neutral" operator="over" result="map" />
+    <feDisplacementMap class="ripple-disp" in="SourceGraphic" in2="map" scale="0" xChannelSelector="R" yChannelSelector="G" />
+  </filter>
+</svg>
 
 <style>
   .sound-waves {
     position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
     mix-blend-mode: screen;   /* black = no change; the rings add light */
   }
+  .ripple-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 </style>
 
 <script>
@@ -56,9 +73,13 @@ const { every = 5, class: className } = Astro.props;
       float band  = exp(-pow((dIn - (4. + R*0.018)) / bandW, 2.));
       float veil  = edge * smoothstep(0., R*0.06, dIn) * exp(-dIn / (R*0.30));
       float inner = exp(-pow((dIn - R*0.062) / (3. + R*0.006), 2.)) * edge;
+      // Flank/key shading is measured from the dome. Its direction flips at the dome's exact
+      // centre, which leaves a pinprick there (hidden behind the face in the study, visible over
+      // the flat render here), so fade both to neutral near the centre.
       vec2  dirF  = length(p) > 1e-3 ? normalize(p) : dir;
-      float flank = 0.15 + 0.85*pow(abs(dirF.x), 1.6);
-      float key   = 0.80 + 0.40*max(dot(dirF, normalize(vec2(-0.6, 0.8))), 0.);
+      float nearC = smoothstep(20., 160., length(p));
+      float flank = mix(0.55, 0.15 + 0.85*pow(abs(dirF.x), 1.6), nearC);
+      float key   = mix(1.0, 0.80 + 0.40*max(dot(dirF, normalize(vec2(-0.6, 0.8))), 0.), nearC);
       float sheen = 0.80 + 0.20*sin(ang*3. + uSeed*2.1) * sin(ang*2. - uSeed);
       float aim   = 1. + 1.6*axisL*dot(dir, axisN);
       float light = (edge*0.30 + band*1.05 + veil*0.16 + inner*0.22) * flank * key * sheen * uEnv * aim;
@@ -76,7 +97,6 @@ const { every = 5, class: className } = Astro.props;
     const img = stage.querySelector<HTMLImageElement>('.speaker');
     const gl = canvas.getContext('webgl', { alpha: false, antialias: false, powerPreference: 'low-power' });
     if (!img || !gl) return;
-    const every = Number(canvas.dataset.every || 5);
 
     const sh = (t: number, s: string) => { const o = gl.createShader(t)!; gl.shaderSource(o, s); gl.compileShader(o); return o; };
     const prog = gl.createProgram()!;
@@ -93,6 +113,10 @@ const { every = 5, class: className } = Astro.props;
 
     // ---- where the dome is (CSS px in the stage, y down) ----
     const dome = { x: 0, y: 0, rPx: 1, k: 1, dpr: 1 };
+    // Ripple filter parts (in the panel), and how far the rim band bends the image
+    const fDir = stage.querySelector('.ripple-dir'), fMask = stage.querySelector('.ripple-mask'), fDisp = stage.querySelector('.ripple-disp');
+    const RIPPLE = 26;   // reference units of displacement at the rim band's peak (~20px at the frame)
+    let rippling = false;
     function measure() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = Math.max(1, Math.round(canvas.clientWidth * dpr)), h = Math.max(1, Math.round(canvas.clientHeight * dpr));
@@ -108,25 +132,26 @@ const { every = 5, class: className } = Astro.props;
       dome.rPx = DOME.r * s;
       dome.k = dome.rPx / 201;        // CSS px per reference unit
       dome.dpr = dpr;
+
     }
 
-    // ---- run loop: a wave every `every` seconds while the hero is visible ----
+    // ---- a wave on each click in the hero; the loop runs only while one is out ----
     const still = matchMedia('(prefers-reduced-motion: reduce)');
-    let inView = false, running = false, raf = 0, nextAt = 0, seed = 0, wave: Wave | null = null;
+    let running = false, raf = 0, seed = 0, wave: Wave | null = null;
     function emit(now: number) {
+      measure();   // the speaker floats, so find the dome where it is right now
       const [ax, ay] = AXIS;
       const W = canvas.clientWidth, H = canvas.clientHeight;
       const far = Math.max(Math.hypot(dome.x, dome.y), Math.hypot(W - dome.x, dome.y), Math.hypot(dome.x, H - dome.y), Math.hypot(W - dome.x, H - dome.y));
       wave = { t0: now, life: LIFE, cx: dome.x, cy: dome.y, ax, ay, k: dome.k, rMax: Math.max(1320, (far / dome.k) * 1.05) };
       window.__adamsonWave = wave;
       seed = (seed + 1) % 7;
-      nextAt = now + every * 1000;
     }
     function draw(now: number) {
       gl.clear(gl.COLOR_BUFFER_BIT);
       if (!wave) return;
       const f = (now - wave.t0) / 1000 / wave.life;
-      if (f >= 1) { wave = null; window.__adamsonWave = null; return; }
+      if (f >= 1) { wave = null; window.__adamsonWave = null; release(); return; }
       const axisL = Math.hypot(wave.ax, wave.ay);
       const R = 196 + (wave.rMax * (1 + axisL) - 196) * Math.pow(f, 0.82);   // always clears the corners
       const env = sm(0, 0.10, f) * (1 - sm(0.45, 1, f));
@@ -136,24 +161,41 @@ const { every = 5, class: className } = Astro.props;
       gl.uniform1f(uR, R); gl.uniform1f(uEnv, env);
       gl.uniform2f(uAxis, wave.ax, wave.ay); gl.uniform1f(uSeed, seed);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+      // Ripple: move and size the rim band to this ring, and bend by the wave's strength.
+      const k = wave.k, rPx = R * k;
+      const scx = wave.cx + wave.ax * rPx * 0.62, scy = wave.cy - wave.ay * rPx * 0.62;
+      for (const fe of [fDir, fMask]) {
+        fe?.setAttribute('x', (scx - rPx).toFixed(1)); fe?.setAttribute('y', (scy - rPx).toFixed(1));
+        fe?.setAttribute('width', (2 * rPx).toFixed(1)); fe?.setAttribute('height', (2 * rPx).toFixed(1));
+      }
+      fDisp?.setAttribute('scale', (-RIPPLE * k * env).toFixed(2));
+      if (!rippling) { stage.style.filter = 'url(#hero-ripple)'; rippling = true; }
+    }
+    function release() {
+      if (!rippling) return;
+      stage.style.filter = '';
+      fDisp?.setAttribute('scale', '0');
+      rippling = false;
     }
     function tick(now: number) {
-      raf = requestAnimationFrame(tick);
-      if (now >= nextAt) emit(now);
       draw(now);
+      if (wave) raf = requestAnimationFrame(tick);
+      else { running = false; gl.clear(gl.COLOR_BUFFER_BIT); }
     }
-    function update() {
-      const should = inView && !document.hidden && !still.matches;
-      if (should && !running) { running = true; nextAt = performance.now() + 600; raf = requestAnimationFrame(tick); }
-      else if (!should && running) { running = false; cancelAnimationFrame(raf); wave = null; window.__adamsonWave = null; gl.clear(gl.COLOR_BUFFER_BIT); }
-    }
+    stage.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a, button') || still.matches) return;   // links and buttons keep their own job
+      emit(performance.now());
+      if (!running) { running = true; raf = requestAnimationFrame(tick); }
+    });
+    // A tab switch mid-wave would leave it frozen half-way, so drop it.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && running) { cancelAnimationFrame(raf); running = false; wave = null; window.__adamsonWave = null; release(); gl.clear(gl.COLOR_BUFFER_BIT); }
+    });
 
     measure();
     gl.clear(gl.COLOR_BUFFER_BIT);
     new ResizeObserver(measure).observe(stage);
-    new IntersectionObserver(([e]) => { inView = e.isIntersecting; update(); }).observe(canvas);
-    document.addEventListener('visibilitychange', update);
-    still.addEventListener('change', update);
   }
 
   document.querySelectorAll<HTMLCanvasElement>('canvas.sound-waves').forEach(start);

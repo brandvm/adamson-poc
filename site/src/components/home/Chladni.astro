@@ -233,10 +233,12 @@ const { opacity = 0.24, reactToWave = false, class: className } = Astro.props;
       frames++; if (dt > 0.021) slow++;
       if (frames >= 90) { if (slow > 45 && dprCap > 1) { dprCap = Math.max(1, dprCap - 0.5); resize(); } frames = slow = 0; }
     }
-    let ready = false;
+    let ready = false, active = true;
+    // Pages can switch the sand off while it's hidden (e.g. faded out): `chladni:active` with true/false.
+    canvas.addEventListener('chladni:active', ((e: CustomEvent<boolean>) => { active = !!e.detail; update(); }) as EventListener);
     function update() {
       if (!ready) return;
-      const should = inView && !document.hidden && !still.matches;
+      const should = inView && active && !document.hidden && !still.matches;
       if (should && !running) { running = true; last = 0; raf = requestAnimationFrame(tick); }
       else if (!should && running) { running = false; cancelAnimationFrame(raf); }
       if (!should) draw();

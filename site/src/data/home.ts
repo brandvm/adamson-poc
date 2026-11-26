@@ -34,7 +34,9 @@ export type Slide = {
   image: string; // background-removed cut-out in public/home/
   thumb: string;
   wordmark: string; // big frosted word behind the product
-  cardWordmark?: string; // overrides it on the /home-stack cards
+  // /home-stack cards explain the category (the product image stays as proof of it).
+  // Copy is a draft for approval; families come from the sitemap and adamson.ai.
+  card: { wordmark: string; title: string; text: string; families: string[]; primary: string; secondary: string; imageMax?: number /* em; for tall products */ };
   wordmarkSvg?: boolean; // true = use the exported Figma vector (Vergence only)
 };
 
@@ -53,7 +55,14 @@ export const slides: Slide[] = [
     image: 'product-vergence.png',
     thumb: 'thumb-base.png',
     wordmark: 'VERGENCE',
-    cardWordmark: 'LOUDSPEAKERS',
+    card: {
+      wordmark: 'LOUDSPEAKERS',
+      title: 'Loudspeakers',
+      text: 'Line arrays, subwoofers and monitors for the world’s biggest stages and the rooms built around them.',
+      families: ['Vergence', 'CS', 'IS', 'M', 'E', 'S'],
+      primary: 'Explore loudspeakers',
+      secondary: 'Find the right system',
+    },
     wordmarkSvg: true,
   },
   {
@@ -69,6 +78,14 @@ export const slides: Slide[] = [
     image: 'product-xg.png',
     thumb: 'thumb-2.png',
     wordmark: 'XG',
+    card: {
+      wordmark: 'ELECTRONICS',
+      title: 'Electronics',
+      text: 'Amplification and networking that power and connect every Adamson system.',
+      families: ['XG amplifiers', 'Media converters', 'Network', 'Racks'],
+      primary: 'Explore electronics',
+      secondary: 'XG amplifiers',
+    },
   },
   {
     word: 'software',
@@ -84,6 +101,15 @@ export const slides: Slide[] = [
     image: 'product-array-intelligence.png',
     thumb: 'thumb-3.png',
     wordmark: 'ARRAY',
+    card: {
+      wordmark: 'SOFTWARE',
+      title: 'Software',
+      text: 'Design, predict and control your system, before and during the show.',
+      families: ['Array Intelligence', 'Array Tools'],
+      primary: 'Explore software',
+      secondary: 'Download Array Intelligence',
+      imageMax: 15.5,   // the laptop is much taller than the other products
+    },
   },
   {
     word: 'immersive audio.',
@@ -95,6 +121,14 @@ export const slides: Slide[] = [
     image: 'product-fletcher.png',
     thumb: 'thumb-4.png',
     wordmark: 'FLETCHER',
+    card: {
+      wordmark: 'IMMERSIVE',
+      title: 'Immersive audio',
+      text: 'Spatial audio that places sound anywhere in the room.',
+      families: ['Fletcher Machine'],
+      primary: 'Explore immersive',
+      secondary: 'See it in action',
+    },
   },
 ];
 
@@ -117,4 +151,56 @@ export const tiles: { x: number; y: number; img: string }[][] = [
     { x: 396, y: 55, img: 'float-4.png' }, { x: 297, y: 123, img: 'float-5.png' },
     { x: 705, y: 107, img: 'float-1.png' }, { x: 470, y: 203, img: 'float-3.png' },
   ],
+];
+
+// Products section (Figma "03 Products · Tab · Loudspeakers · Series", node 636:7407).
+// Loudspeakers is from Figma; the other tabs are filled from the same families as the category
+// cards. Images: Figma has none yet for E and S Series, so those cards show without one.
+export type ProductTile = { name: string; tagline: string; models?: number; image?: string };
+export type ProductTab = {
+  label: string;
+  // The big number on the first tile; it counts to the new value when the tab changes.
+  // Counts are the product pages per category in the sitemap (the "+N" under each series):
+  // Loudspeakers 5+7+12+5+4+7 = 40, Electronics 4+3+2 = 9 (≈50 product pages in all).
+  // Software has no product pages listed yet, so it counts its two tools.
+  count: { label: string; value: number; cta: string };
+  items: ProductTile[];
+};
+export const productTabs: ProductTab[] = [
+  {
+    label: 'Loudspeakers',
+    count: { label: 'Loudspeaker models', value: 40, cta: 'View Loudspeakers' },
+    items: [
+      { name: 'Vergence Group', tagline: 'State-of-the-art', models: 5, image: 'series-vergence.png' },
+      { name: 'CS Series', tagline: 'Compact intelligence', models: 7, image: 'series-cs.png' },
+      { name: 'IS Series', tagline: 'Integration focused', models: 12, image: 'series-is.png' },
+      { name: 'Monitors', tagline: 'Stage worthy', models: 5, image: 'series-monitors.png' },
+      { name: 'E Series', tagline: 'Proven performance', models: 4 },
+      { name: 'S Series', tagline: 'Set the standard', models: 7 },
+    ],
+  },
+  {
+    label: 'Electronics',
+    count: { label: 'Electronics models', value: 9, cta: 'View Electronics' },
+    items: [
+      { name: 'XG Series Amplifiers', tagline: 'Power for every integration project', models: 4, image: 'thumb-2.png' },
+      { name: 'Loudspeaker Modules', tagline: 'Amplification built into the cabinet' },
+      { name: 'Media Converters', tagline: 'Gateway, Bridge and USB Milan Bridge', models: 3 },
+      { name: 'Network', tagline: 'Switches built for Milan networks' },
+      { name: 'Racks', tagline: 'Touring and install rack systems', models: 2 },
+    ],
+  },
+  {
+    label: 'Software',
+    count: { label: 'Software tools', value: 2, cta: 'View Software' },
+    items: [
+      { name: 'Array Intelligence', tagline: 'Design and control your Adamson system with ease', image: 'thumb-3.png' },
+      { name: 'Array Tools', tagline: 'Utilities for system set-up and tuning' },
+    ],
+  },
+  {
+    label: 'Immersive',
+    count: { label: 'Immersive systems', value: 1, cta: 'View Immersive' },
+    items: [{ name: 'Fletcher Machine', tagline: 'Spatial audio, perfected', image: 'thumb-4.png' }],
+  },
 ];

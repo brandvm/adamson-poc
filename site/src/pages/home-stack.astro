@@ -6,21 +6,22 @@ import Header from '../components/home/Header.astro';
 import Hero from '../components/home/Hero.astro';
 import HeardAt from '../components/home/HeardAt.astro';
 import CategoryStack from '../components/home/CategoryStack.astro';
+import ProductsSection from '../components/home/ProductsSection.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <HomeLayout title="Adamson · Homepage concept (stack)" description="Homepage concept for Adamson Systems Engineering: the category sentence stays in the centre while featured products scroll over it.">
   <Header />
   <main>
-    <div class="first-screen">
+    <div class="first-screen" data-theme="dark">
       <Hero />
       <HeardAt />
     </div>
     <CategoryStack />
-    <section class="end">
+    <ProductsSection />
+    <section class="end" data-theme="light">
       <p>Concept ends here. Next sections: Products in action, Applications, Technology…</p>
       <p><a href={base + 'home/'}>Compare: pinned full-screen slider</a></p>
-      <a class="btn btn-outline" href={base}>Back to studies</a>
     </section>
   </main>
 </HomeLayout>

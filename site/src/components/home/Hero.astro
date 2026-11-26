@@ -18,8 +18,8 @@ const a = (f: string) => `${base}home/${f}`;
 
     <img class="speaker" src={a('exploded-speaker.png')} alt="Exploded view of the Adamson M140 compression driver" width="1673" height="940" />
 
-    <!-- A directional sound wave leaves the gold dome every 5s (same physics as the driver study) -->
-    <SoundWaves every={5} />
+    <!-- Click the hero: a directional sound wave leaves the gold dome (same physics as the driver study) -->
+    <SoundWaves />
 
     <div class="content">
       <h1 id="hero-title">Adamson Systems Engineering:<br />Professional Loudspeaker Systems</h1>
@@ -30,6 +30,9 @@ const a = (f: string) => `${base}home/${f}`;
       </div>
     </div>
   </div>
+
+  <!-- Custom cursor over the hero until the first click (fine pointers only) -->
+  <div class="hero-cursor" aria-hidden="true"><span>Click</span></div>
 </section>
 
 <style>
@@ -71,7 +74,35 @@ const a = (f: string) => `${base}home/${f}`;
   .speaker {
     position: absolute; left: 50.34%; top: 56.2%; width: min(103cqw, 186cqh); max-width: none; height: auto;
     transform: translate(-50%, -50%) rotate(8.46deg); pointer-events: none;
+    /* Floats: a slow bob and a slower, slight tilt on separate cycles so the motion never quite
+       repeats. Uses the individual translate/rotate properties, which add to the transform. */
+    animation: float-y 7s ease-in-out infinite, float-r 11s ease-in-out infinite;
   }
+  @keyframes float-y { 50% { translate: 0 -0.625em; } }
+  @keyframes float-r { 0%, 100% { rotate: -0.25deg; } 50% { rotate: 0.3deg; } }
+  @media (prefers-reduced-motion: reduce) { .speaker { animation: none; } }
+
+  /* ---- "Click" cursor ---- */
+  .stage.has-cursor { cursor: none; }
+  .stage.has-cursor :is(a, button) { cursor: pointer; }
+  .hero-cursor {
+    position: fixed; left: 0; top: 0; z-index: 30; pointer-events: none;
+    width: 5em; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(10, 10, 10, 0.35); border: 1px solid rgba(255, 255, 255, 0.35);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    transform: translate3d(var(--x, -100px), var(--y, -100px), 0) translate(-50%, -50%) scale(var(--cs, 0.4));
+    opacity: 0; transition: opacity 0.25s ease, --cs 0.25s ease;
+  }
+  .hero-cursor.is-on { opacity: 1; --cs: 1; }
+  .hero-cursor span { font: 500 0.75em/1 var(--font); letter-spacing: 0.12em; text-transform: uppercase; color: #fff; }
+  /* A soft gold ring keeps leaving the cursor, hinting at the sound wave */
+  .hero-cursor::after {
+    content: ''; position: absolute; inset: -1px; border-radius: 50%;
+    border: 1px solid rgba(201, 168, 119, 0.6); animation: cursor-ping 1.8s ease-out infinite;
+  }
+  @keyframes cursor-ping { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.7); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .hero-cursor::after { animation: none; } }
+  @property --cs { syntax: '<number>'; inherits: false; initial-value: 0.4; }
 
   /* Content sits on the 1520px (95em) container: 60px in from the 1640 stage at the frame */
   .content {
@@ -92,3 +123,35 @@ const a = (f: string) => `${base}home/${f}`;
     .content { position: relative; left: auto; bottom: auto; width: auto; transform: none; }
   }
 </style>
+
+<script>
+  // "Click" cursor: follows the pointer over the hero panel (eased), steps aside for the hero's
+  // links and buttons, and retires for good after the first click on the panel.
+  const stage = document.querySelector<HTMLElement>('.hero .stage');
+  const cur = document.querySelector<HTMLElement>('.hero-cursor');
+  if (stage && cur && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    stage.classList.add('has-cursor');
+    let x = -100, y = -100, tx = -100, ty = -100, raf = 0, done = false;
+    const follow = () => {
+      x += (tx - x) * 0.25; y += (ty - y) * 0.25;
+      cur.style.setProperty('--x', `${x.toFixed(1)}px`); cur.style.setProperty('--y', `${y.toFixed(1)}px`);
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? requestAnimationFrame(follow) : 0;
+    };
+    const onMove = (e: PointerEvent) => {
+      if (done) return;
+      tx = e.clientX; ty = e.clientY;
+      if (!cur.classList.contains('is-on')) { x = tx; y = ty; }           // appear where the pointer is
+      cur.classList.toggle('is-on', !(e.target as Element).closest('a, button'));
+      if (!raf) raf = requestAnimationFrame(follow);
+    };
+    stage.addEventListener('pointermove', onMove);
+    stage.addEventListener('pointerleave', () => cur.classList.remove('is-on'));
+    stage.addEventListener('click', (e) => {
+      if (done || (e.target as Element).closest('a, button')) return;
+      done = true;
+      cur.classList.remove('is-on');
+      stage.classList.remove('has-cursor');
+      stage.removeEventListener('pointermove', onMove);
+    });
+  }
+</script>

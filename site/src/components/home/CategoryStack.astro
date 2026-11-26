@@ -14,7 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const a = (f: string) => `${base}home/${f}`;
 ---
 
-<section class="stack" id="categories" aria-label="What Adamson makes">
+<section class="stack" id="categories" data-theme="dark" aria-label="What Adamson makes">
   <!-- Chladni sand (Figma "Chaldni Pattern"): a full-screen background pinned for the whole
        section, behind the sentence and the cards -->
   <div class="backdrop" aria-hidden="true">
@@ -28,16 +28,19 @@ const a = (f: string) => `${base}home/${f}`;
   <div class="cards">
     {slides.map((s, i) => (
       <div class="slot container grid">
-        <article class="card" style={`--chars: ${(s.cardWordmark ?? s.wordmark).length}`} data-card={i} aria-labelledby={`card-${i}`}>
-          <Wordmark slide={s} text={s.cardWordmark} class="card-wordmark" />
-          <img class="product" src={a(s.image)} alt="" loading="lazy" />
+        <article class="card" style={`--chars: ${s.card.wordmark.length}${s.card.imageMax ? `; --product-max: ${s.card.imageMax}em` : ''}`} data-card={i} aria-labelledby={`card-${i}`}>
+          <Wordmark slide={s} text={s.card.wordmark} class="card-wordmark" />
+          <img class="product" src={a(s.image)} alt={s.name} loading="lazy" />
           <div class="copy">
-            <h3 id={`card-${i}`}>{s.name}</h3>
-            <p>{s.description}</p>
+            <h3 id={`card-${i}`}>{s.card.title}</h3>
+            <p>{s.card.text}</p>
+            <ul class="families" aria-label={`${s.card.title} families`}>
+              {s.card.families.map((f) => <li>{f}</li>)}
+            </ul>
           </div>
           <div class="buttons">
-            <a class="btn btn-lg btn-primary" href="#">{s.primary}</a>
-            <a class="btn btn-lg btn-outline" href="#">{s.secondary}</a>
+            <a class="btn btn-lg btn-primary" href="#">{s.card.primary}</a>
+            <a class="btn btn-lg btn-outline" href="#">{s.card.secondary}</a>
           </div>
         </article>
       </div>
@@ -60,6 +63,8 @@ const a = (f: string) => `${base}home/${f}`;
     -webkit-mask: linear-gradient(transparent, #000 12%, #000 88%, transparent);
     mask: linear-gradient(transparent, #000 12%, #000 88%, transparent);
   }
+
+  /* The sand and the sentence fade out together after the last card (script), before Products */
 
   /* The sentence follows "Heard at" with normal section spacing and scrolls up normally;
      once its middle reaches the middle of the screen it sticks there, behind the cards */
@@ -100,13 +105,19 @@ const a = (f: string) => `${base}home/${f}`;
      Counter-zoom: the product is a little larger while the card is small, like the reference. */
   .product {
     grid-column: 1 / -1; grid-row: 2; align-self: end; justify-self: center; z-index: 1;
-    width: 82%; height: calc(100% + 2.5em); max-height: 20em; min-height: 0; margin-top: -2.5em;
+    width: 82%; height: calc(100% + 2.5em); max-height: var(--product-max, 20em); min-height: 0; margin-top: -2.5em;
     object-fit: contain; object-position: center bottom;
     scale: calc(1 + (1 - var(--s, 1)) * 0.3); transform-origin: 50% 100%;
   }
   .copy { grid-column: 1; grid-row: 3; align-self: end; display: grid; gap: 0.5em; z-index: 1; }
   h3 { margin: 0; font: 400 2em/1.1875 var(--font); letter-spacing: -0.025em; }
-  .copy p { margin: 0; max-width: 22em; font: 400 1em/1.5 var(--font); color: #cfcfcf; }
+  .copy p { margin: 0; max-width: 24em; font: 400 1em/1.5 var(--font); color: #cfcfcf; }
+  /* The families in this category: what makes it concrete */
+  .families { display: flex; flex-wrap: wrap; gap: 0.375em; margin-top: 0.5em; }
+  .families li {
+    padding: 0.4615em 0.9231em; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.24);
+    font: 400 0.8125em/1.2 var(--font); color: #e6e6e6; white-space: nowrap;
+  }
   .buttons { grid-column: 2; grid-row: 3; align-self: end; display: flex; gap: 0.75em; z-index: 1; }
 
   @media (max-width: 991px) {
@@ -146,9 +157,21 @@ const a = (f: string) => `${base}home/${f}`;
 
     // Measured on the slots, which never transform, so the zoom doesn't feed back into itself.
     const sand = stack.querySelector<HTMLCanvasElement>('.backdrop canvas.chladni');
-    let lastMode = -1;
+    const backdrop = stack.querySelector<HTMLElement>('.backdrop');
+    const pin = stack.querySelector<HTMLElement>('.pin');
+    let lastMode = -1, sandOn = true;
     const update = () => {
       const vh = window.innerHeight;
+
+      // Outro: once the last card has gone up past the middle, the sand and the pinned sentence
+      // fade out together while the sentence is still in the centre. Full until the last card's
+      // bottom is 45% down the screen, gone at 5%, just before the light section takes over.
+      const last = cards[cards.length - 1].getBoundingClientRect().bottom;
+      const fade = Math.min(1, Math.max(0, (last - vh * 0.05) / (vh * 0.4)));
+      const o = fade.toFixed(3);
+      if (backdrop) backdrop.style.opacity = o;
+      if (pin) { pin.style.opacity = o; pin.style.visibility = fade > 0 ? '' : 'hidden'; }
+      if ((fade > 0) !== sandOn) { sandOn = fade > 0; sand?.dispatchEvent(new CustomEvent('chladni:active', { detail: sandOn })); }
       let current = -1;
       slots.forEach((slot, k) => {
         const r = slot.getBoundingClientRect();
