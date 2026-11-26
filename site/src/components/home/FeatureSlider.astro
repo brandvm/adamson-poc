@@ -90,10 +90,12 @@ const slides: Slide[] = [
      Electronics 1764 × 1130, Software 1680 × 998 (17px low), Immersive 1858 × 1104 (37px left) */
   .bg, .product {
     position: absolute; left: var(--x, 50%); top: var(--y, 50%); width: var(--w, 105%); height: var(--h, 113.2%); max-width: none;
-    object-fit: cover; translate: -50% -50%;
-    transform: scale(1.04); transition: transform 1.4s var(--ease-out);
+    object-fit: cover;
+    /* Centring lives in the transform: the build's CSS minifier drops a separate translate
+       property when the rule also has a transform */
+    transform: translate(-50%, -50%) scale(1.04); transition: transform 1.4s var(--ease-out);
   }
-  .slide.is-active :is(.bg, .product) { transform: none; }
+  .slide.is-active :is(.bg, .product) { transform: translate(-50%, -50%); }
 
   .software { --w: 100%; --h: 100%; --y: calc(50% + 1.0625em); }
   .immersive { --w: 110.6%; --h: 110.6%; --x: calc(50% - 2.3125em); }

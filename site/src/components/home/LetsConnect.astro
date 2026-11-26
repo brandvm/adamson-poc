@@ -1,0 +1,101 @@
+---
+// Figma "13 Let's connect" (574:3869 / 578:3910). The closing call to action: a gold ring with
+// the logo mark, title, line and Contact button, over a concert photo whose line-array hang
+// rises out of the dark.
+// The ring in Figma is a screen recording (not exportable), so here it's drawn in CSS: a glowing
+// gold rim with light travelling slowly round it and a faint outer ring.
+// Layers, bottom to top: photo (gold hue, darkened), black fade over its top, the hang cut-out
+// (so it stands above the fade), the ring, the bottom fade, the copy.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+---
+
+<section class="connect" data-theme="dark" aria-labelledby="connect-title">
+  <div class="photo" aria-hidden="true"><img src={a('connect-photo.jpg')} alt="" loading="lazy" /></div>
+  <div class="fade-top" aria-hidden="true"></div>
+  <img class="hang" src={a('connect-hang.png')} alt="" loading="lazy" aria-hidden="true" />
+  <div class="rings" aria-hidden="true">
+    <span class="outer"></span>
+    <span class="ring"><i class="sweep"></i></span>
+  </div>
+  <div class="fade-bottom" aria-hidden="true"></div>
+
+  <div class="copy">
+    <img class="mark" src={a('logo-mark-gold.svg')} alt="" width="65" height="56" />
+    <h2 id="connect-title">Let’s connect</h2>
+    <p>We’re here to collaborate, answer questions, and problem solve.</p>
+    <a class="cta" href="#">Contact Us</a>
+  </div>
+</section>
+
+<style>
+  /* 1680 × 1389 at the frame; everything placed in em from the Figma coordinates (px / 16) */
+  .connect { position: relative; height: 86.8125em; overflow: hidden; background: #000; isolation: isolate; color: #fff; }
+
+  /* Photo at y 620: gold hue and a darkening fade down */
+  .photo { position: absolute; left: 0; top: 38.75em; width: 100%; aspect-ratio: 1682 / 1122; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .photo::before { content: ''; position: absolute; inset: 0; background: #8b6f4c; mix-blend-mode: hue; }
+  .photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)); }
+  /* Black over the top of the photo (Figma's flipped fade) */
+  .fade-top { position: absolute; left: 0; right: 0; top: 38.75em; height: 61.6875em; background: linear-gradient(#000 15%, transparent); }
+  /* The hang cut-out, aligned with the photo, so it stands above the fade */
+  .hang {
+    position: absolute; left: 0; top: 38.75em; width: 100%; height: auto; max-width: none;
+    /* soften the image's hard top edge into the dark */
+    -webkit-mask: linear-gradient(transparent, #000 12%); mask: linear-gradient(transparent, #000 12%);
+  }
+  .fade-bottom { position: absolute; left: 0; right: 0; top: 79.52em; height: 32.08em; background: linear-gradient(transparent, #000 85%); }
+
+  /* ---- Rings: 582px gold ring, 714px faint outer ring, centred on the copy ---- */
+  .rings { position: absolute; left: 50%; top: 24.6em; translate: -50% -50%; width: 44.625em; aspect-ratio: 1; display: grid; place-items: center; }
+  .outer { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.07); }
+  .ring {
+    position: relative; width: 36.375em; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26, 19, 12, 0.95) 0%, rgba(10, 8, 6, 0.96) 62%, rgba(10, 8, 6, 0.9) 70%);
+    /* The rim: a bright core line, a warm halo outside and inside */
+    box-shadow:
+      0 0 0 0.125em #c9a26e,
+      0 0 0 0.25em rgba(231, 199, 154, 0.35),
+      0 0 1.75em 0.35em rgba(201, 150, 90, 0.55),
+      0 0 4.5em 0.5em rgba(139, 111, 76, 0.35),
+      inset 0 0 2.25em 0.2em rgba(201, 150, 90, 0.4);
+    animation: breathe 6s ease-in-out infinite;
+  }
+  /* Light travelling round the rim: a conic highlight masked to the rim band */
+  .sweep {
+    position: absolute; inset: -0.5em; border-radius: 50%;
+    background: conic-gradient(from var(--a), transparent 0deg, rgba(255, 236, 205, 0.95) 28deg, transparent 70deg, transparent 180deg, rgba(255, 236, 205, 0.5) 208deg, transparent 250deg);
+    -webkit-mask: radial-gradient(circle closest-side, transparent calc(100% - 0.75em), #000 calc(100% - 0.6em), #000 calc(100% - 0.4em), transparent calc(100% - 0.1em));
+    mask: radial-gradient(circle closest-side, transparent calc(100% - 0.75em), #000 calc(100% - 0.6em), #000 calc(100% - 0.4em), transparent calc(100% - 0.1em));
+    filter: blur(0.15em);
+    animation: sweep 9s linear infinite;
+  }
+  @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  @keyframes sweep { to { --a: 360deg; } }
+  @keyframes breathe { 50% { scale: 1.012; } }
+  @media (prefers-reduced-motion: reduce) { .ring, .sweep { animation: none; } }
+
+  /* ---- Copy, centred, top 242 ---- */
+  .copy { position: absolute; left: 50%; top: 15.125em; translate: -50% 0; z-index: 1; display: grid; justify-items: center; gap: 1.75em; text-align: center; width: max-content; }
+  .mark { width: 4.0833em; height: auto; }
+  h2 { margin: 0; font: 400 3.5em/1.0714 var(--font); letter-spacing: -0.03em; }
+  .copy p { margin: 0; font: 400 1em/1.5 var(--font); color: #c0c1c2; }
+  .cta {
+    display: inline-flex; align-items: center; padding: 0.75em 1.375em; border-radius: 999px;
+    background: #fff; color: #000; text-decoration: none; font: 500 1em/1.1 var(--font); letter-spacing: -0.02em;
+    transition: background-color 0.2s ease;
+  }
+  .cta:hover { background: #e9e2d8; }
+
+  @media (max-width: 991px) {
+    .connect { height: 52em; }
+    .rings { top: 17em; width: min(30em, 92vw); }
+    .ring { width: 81%; }
+    .copy { top: 10em; width: min(20em, 80vw); }
+    h2 { font-size: 2.5em; }
+    .photo, .fade-top, .hang { top: 26em; }
+    .photo, .hang { width: 180%; left: -40%; }
+    .fade-bottom { top: 44em; height: 12em; }
+  }
+</style>
