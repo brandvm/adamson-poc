@@ -1,0 +1,160 @@
+---
+// A sound wave leaves the gold dome of the hero driver every 5 seconds: a glassy ring that grows
+// past the edges of the hero, with the same directional physics as the driver study
+// (public/driver-face-webgl.html):
+//   - the wave travels in the direction the dome faces. The hero render doesn't move, so that
+//     direction is fixed (a little to the left, as the dome is turned in the image) and the
+//     pointer doesn't steer it, unlike the study;
+//   - the ring's centre travels along that direction as it grows, and it's brighter on that side;
+//   - the rim profile (soft outer step, glow just inside the edge, milky veil, faint second
+//     surface) is the study's, measured from the reference clip.
+// The current wave is shared on window.__adamsonWave so the Chladni sand can react to it.
+// Drawn on its own canvas with screen blending, over the driver. Needs a sibling `.speaker` image.
+interface Props { every?: number; class?: string }
+const { every = 5, class: className } = Astro.props;
+---
+
+<canvas class:list={['sound-waves', className]} data-every={every} aria-hidden="true"></canvas>
+
+<style>
+  .sound-waves {
+    position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
+    mix-blend-mode: screen;   /* black = no change; the rings add light */
+  }
+</style>
+
+<script>
+  // Dome of the gold mesh in exploded-speaker.png (1673 × 940), measured from the image.
+  const IMG_W = 1673, IMG_H = 940;
+  const DOME = { x: 689, y: 507, r: 160 };   // centre and (vertical) radius, image px
+  const LIFE = 3.4;                            // seconds a wave takes to clear the hero (study's loop)
+  // Direction the dome faces in the render, as the study's face-normal xy (|axis| ≤ sin 24°):
+  // a little to the left and slightly up.
+  const AXIS: [number, number] = [-0.35, 0.05];
+
+  const FRAG = `
+    precision highp float;
+    uniform vec2 uC;      // dome centre, device px (GL coords, y up)
+    uniform float uK;     // device px per reference unit (dome radius = 201 units, as in the study)
+    uniform float uR;     // ring radius, reference units
+    uniform float uEnv;   // fade in/out
+    uniform vec2 uAxis;   // direction latched at emission (study's face normal xy)
+    uniform float uSeed;
+    void main(){
+      vec2 p = (gl_FragCoord.xy - uC) / uK;
+      float aa = 0.9 / uK;
+      float axisL = length(uAxis);
+      vec2 axisN = axisL > 1e-4 ? uAxis / axisL : vec2(0.);
+      float R = uR;
+      vec2 cen = uAxis * R * 0.62;                 // a sphere travelling along the axis
+      vec2 dv = p - cen; float r = length(dv);
+      vec2 dir = r > 1e-3 ? dv / r : vec2(0.);
+      float ang = atan(dir.y, dir.x);
+      float dIn   = R - r;
+      float edge  = smoothstep(-2.*aa - 1.5, 2.*aa + 1.5, dIn);
+      float bandW = 5. + R*0.011;
+      float band  = exp(-pow((dIn - (4. + R*0.018)) / bandW, 2.));
+      float veil  = edge * smoothstep(0., R*0.06, dIn) * exp(-dIn / (R*0.30));
+      float inner = exp(-pow((dIn - R*0.062) / (3. + R*0.006), 2.)) * edge;
+      vec2  dirF  = length(p) > 1e-3 ? normalize(p) : dir;
+      float flank = 0.15 + 0.85*pow(abs(dirF.x), 1.6);
+      float key   = 0.80 + 0.40*max(dot(dirF, normalize(vec2(-0.6, 0.8))), 0.);
+      float sheen = 0.80 + 0.20*sin(ang*3. + uSeed*2.1) * sin(ang*2. - uSeed);
+      float aim   = 1. + 1.6*axisL*dot(dir, axisN);
+      float light = (edge*0.30 + band*1.05 + veil*0.16 + inner*0.22) * flank * key * sheen * uEnv * aim;
+      gl_FragColor = vec4(vec3(0.95, 0.96, 1.0) * clamp(light * 0.26, 0., 1.), 1.);
+    }`;
+  const VERT = `attribute vec2 aP; void main(){ gl_Position = vec4(aP, 0., 1.); }`;
+
+  type Wave = { t0: number; life: number; cx: number; cy: number; ax: number; ay: number; k: number; rMax: number };
+  declare global { interface Window { __adamsonWave?: Wave | null } }
+
+  const sm = (e0: number, e1: number, x: number) => { const t = Math.min(Math.max((x - e0) / (e1 - e0), 0), 1); return t * t * (3 - 2 * t); };
+
+  function start(canvas: HTMLCanvasElement) {
+    const stage = canvas.parentElement!;
+    const img = stage.querySelector<HTMLImageElement>('.speaker');
+    const gl = canvas.getContext('webgl', { alpha: false, antialias: false, powerPreference: 'low-power' });
+    if (!img || !gl) return;
+    const every = Number(canvas.dataset.every || 5);
+
+    const sh = (t: number, s: string) => { const o = gl.createShader(t)!; gl.shaderSource(o, s); gl.compileShader(o); return o; };
+    const prog = gl.createProgram()!;
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'aP'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const U = (n: string) => gl.getUniformLocation(prog, n);
+    const uC = U('uC'), uK = U('uK'), uR = U('uR'), uEnv = U('uEnv'), uAxis = U('uAxis'), uSeed = U('uSeed');
+    gl.clearColor(0, 0, 0, 1);
+
+    // ---- where the dome is (CSS px in the stage, y down) ----
+    const dome = { x: 0, y: 0, rPx: 1, k: 1, dpr: 1 };
+    function measure() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(canvas.clientWidth * dpr)), h = Math.max(1, Math.round(canvas.clientHeight * dpr));
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+      gl.viewport(0, 0, w, h);
+      // The image is rotated about its centre, so its bounding box shares that centre.
+      const sr = stage.getBoundingClientRect(), ir = img.getBoundingClientRect();
+      const s = img.offsetWidth / IMG_W;
+      const rot = (8.46 * Math.PI) / 180;
+      const lx = (DOME.x - IMG_W / 2) * s, ly = (DOME.y - IMG_H / 2) * s;
+      dome.x = ir.left + ir.width / 2 - sr.left + lx * Math.cos(rot) - ly * Math.sin(rot);
+      dome.y = ir.top + ir.height / 2 - sr.top + lx * Math.sin(rot) + ly * Math.cos(rot);
+      dome.rPx = DOME.r * s;
+      dome.k = dome.rPx / 201;        // CSS px per reference unit
+      dome.dpr = dpr;
+    }
+
+    // ---- run loop: a wave every `every` seconds while the hero is visible ----
+    const still = matchMedia('(prefers-reduced-motion: reduce)');
+    let inView = false, running = false, raf = 0, nextAt = 0, seed = 0, wave: Wave | null = null;
+    function emit(now: number) {
+      const [ax, ay] = AXIS;
+      const W = canvas.clientWidth, H = canvas.clientHeight;
+      const far = Math.max(Math.hypot(dome.x, dome.y), Math.hypot(W - dome.x, dome.y), Math.hypot(dome.x, H - dome.y), Math.hypot(W - dome.x, H - dome.y));
+      wave = { t0: now, life: LIFE, cx: dome.x, cy: dome.y, ax, ay, k: dome.k, rMax: Math.max(1320, (far / dome.k) * 1.05) };
+      window.__adamsonWave = wave;
+      seed = (seed + 1) % 7;
+      nextAt = now + every * 1000;
+    }
+    function draw(now: number) {
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      if (!wave) return;
+      const f = (now - wave.t0) / 1000 / wave.life;
+      if (f >= 1) { wave = null; window.__adamsonWave = null; return; }
+      const axisL = Math.hypot(wave.ax, wave.ay);
+      const R = 196 + (wave.rMax * (1 + axisL) - 196) * Math.pow(f, 0.82);   // always clears the corners
+      const env = sm(0, 0.10, f) * (1 - sm(0.45, 1, f));
+      const H = canvas.height;
+      gl.uniform2f(uC, wave.cx * dome.dpr, H - wave.cy * dome.dpr);
+      gl.uniform1f(uK, wave.k * dome.dpr);
+      gl.uniform1f(uR, R); gl.uniform1f(uEnv, env);
+      gl.uniform2f(uAxis, wave.ax, wave.ay); gl.uniform1f(uSeed, seed);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    function tick(now: number) {
+      raf = requestAnimationFrame(tick);
+      if (now >= nextAt) emit(now);
+      draw(now);
+    }
+    function update() {
+      const should = inView && !document.hidden && !still.matches;
+      if (should && !running) { running = true; nextAt = performance.now() + 600; raf = requestAnimationFrame(tick); }
+      else if (!should && running) { running = false; cancelAnimationFrame(raf); wave = null; window.__adamsonWave = null; gl.clear(gl.COLOR_BUFFER_BIT); }
+    }
+
+    measure();
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    new ResizeObserver(measure).observe(stage);
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; update(); }).observe(canvas);
+    document.addEventListener('visibilitychange', update);
+    still.addEventListener('change', update);
+  }
+
+  document.querySelectorAll<HTMLCanvasElement>('canvas.sound-waves').forEach(start);
+</script>
