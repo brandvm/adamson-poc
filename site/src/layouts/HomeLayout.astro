@@ -1,0 +1,95 @@
+---
+// Shared shell for the homepage concepts: fonts, wf-template scaling, grid tokens, buttons.
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={base + 'favicon.svg'} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* Scaling: the Osmo Scaling System from brandvm/wf-template (src/styles.css §01).
+     Every size is in em, so scaling the BODY font-size scales the whole design.
+     1em = 16px at the 1680px Figma frame. It keeps scaling with the viewport up to 2240px
+     (1em = 21.33px there) and holds above; it shrinks down to 1440px and holds from there
+     to 992px. 991px and below: a fixed 1rem, and the components' own breakpoints do the
+     resizing. The root stays at 16px. */
+  :root {
+    --size-unit: 16;
+    --size-container-ideal: 1680;
+    --size-container-min: 1440px;
+    --size-container-max: 2240px;
+    --size-container: clamp(var(--size-container-min), 100vw, var(--size-container-max));
+    --size-font: calc(var(--size-container) / (var(--size-container-ideal) / var(--size-unit)));
+
+    /* Layout grid from Figma: 1520px content (95em) inside the 1680 frame, 20 columns,
+       20px (1.25em) gaps, so 80px (5em) side margins at the frame. */
+    --container: 95em;
+    --columns: 20;
+    --gutter: 1.25em;
+    --margin: 5em;
+
+    --font: 'Outfit', system-ui, sans-serif;
+    --gold: #8a6e4b;
+    --gold-light: #ab9981;
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  @media screen and (max-width: 991px) {
+    :root { --size-font: 1rem; --columns: 4; --gutter: 1em; --margin: 1em; }
+  }
+
+  .container { width: min(var(--container), 100% - 2 * var(--margin)); margin-inline: auto; }
+  .grid { display: grid; grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); column-gap: var(--gutter); }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: #000; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  /* clip, not hidden: overflow hidden would break position: sticky */
+  html, body { overflow-x: clip; }
+  body { margin: 0; background: #000; color: #fff; font-family: var(--font); font-size: var(--size-font); }
+  img { display: block; max-width: 100%; }
+  ul { margin: 0; padding: 0; list-style: none; }
+
+  /* Buttons (Figma "Button": size S = 36px). Font 14px = 0.875em; padding and height
+     are relative to that font size. */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 2.5714em; padding: 0 1.1429em; border-radius: 999px; border: 1px solid transparent;
+    font: 500 0.875em/1.1 var(--font); letter-spacing: -0.02em; color: #fff;
+    text-decoration: none; white-space: nowrap; cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .btn-lg { min-height: 2.8571em; padding: 0 1.4286em; letter-spacing: 0; }
+  .btn-primary { background: var(--gold); }
+  .btn-primary:hover { background: #9c7e58; }
+  .btn-glass { background: rgba(157, 137, 111, 0.04); border-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); }
+  .btn-outline { border-color: rgba(255, 255, 255, 0.5); }
+  .btn-glass:hover, .btn-outline:hover { border-color: #fff; }
+  .btn-contrast { background: #fff; color: #000; }
+  .btn-contrast:hover { background: #e9e2d8; }
+
+  :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+
+  /* Hero + Heard at fill exactly one screen on desktop; the hero takes what the strip leaves */
+  @media (min-width: 992px) {
+    .first-screen { display: flex; flex-direction: column; height: 100vh; height: 100dvh; min-height: 40em; }
+    .first-screen > .hero { flex: 1; min-height: 0; }
+  }
+
+  .end { display: grid; justify-items: center; gap: 1.5em; padding: 7.5em 1em 10em; text-align: center; }
+  .end p { margin: 0; font: 300 1em/1.5 var(--font); color: rgba(255, 255, 255, 0.48); }
+  .end p a { color: var(--gold-light); }
+</style>

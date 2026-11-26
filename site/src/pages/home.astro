@@ -1,0 +1,26 @@
+---
+// Homepage concept A, built from Figma: Adamson › Exploration › "Page - Home" (node 627:5019).
+// The sentence scrolls away, then the category slider pins full screen.
+import HomeLayout from '../layouts/HomeLayout.astro';
+import Header from '../components/home/Header.astro';
+import Hero from '../components/home/Hero.astro';
+import HeardAt from '../components/home/HeardAt.astro';
+import CategorySlider from '../components/home/CategorySlider.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<HomeLayout title="Adamson · Homepage concept" description="Homepage concept for Adamson Systems Engineering: hero, Heard at strip and the category slider.">
+  <Header />
+  <main>
+    <div class="first-screen">
+      <Hero />
+      <HeardAt />
+    </div>
+    <CategorySlider />
+    <section class="end">
+      <p>Concept ends here. Next sections: Products in action, Applications, Technology…</p>
+      <p><a href={base + 'home-stack/'}>Compare: sentence with products scrolling over it</a></p>
+      <a class="btn btn-outline" href={base}>Back to studies</a>
+    </section>
+  </main>
+</HomeLayout>

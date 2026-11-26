@@ -1,0 +1,43 @@
+---
+// Big frosted category word behind a product (Figma "Vergence Frosted").
+// VERGENCE uses the three exported vector layers; the others are live text in the same layering:
+// a soft-light white layer over #D7D7D7 at 20%, fading out towards the bottom.
+// It needs an opaque background behind it: soft-light has nothing to blend with otherwise.
+// Animate the `.layer` elements, never the wrapper: opacity or transform on the wrapper isolates
+// it, and the soft-light layers would flash flat white.
+import type { Slide } from '../../data/home';
+interface Props { slide: Slide; class?: string }
+const { slide, class: className } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+---
+
+{slide.wordmarkSvg ? (
+  <div class:list={['wordmark', className]} aria-hidden="true" style={`--mask: url(${a('vergence-mask.svg')})`}>
+    <img class="layer soft" src={a('vergence-1.svg')} alt="" />
+    <img class="layer" src={a('vergence-2.svg')} alt="" />
+    <img class="layer soft" src={a('vergence-3.svg')} alt="" />
+  </div>
+) : (
+  <div class:list={['wordmark text', className]} aria-hidden="true">
+    <span class="layer soft">{slide.wordmark}</span>
+    <span class="layer">{slide.wordmark}</span>
+  </div>
+)}
+
+<style>
+  .wordmark { display: grid; }
+  .layer { grid-area: 1 / 1; }
+  .soft { mix-blend-mode: soft-light; }
+  img.layer {
+    width: 100%; height: auto;
+    -webkit-mask: var(--mask) top / 100% 103% no-repeat; mask: var(--mask) top / 100% 103% no-repeat;
+  }
+  .text .layer {
+    justify-self: center; white-space: nowrap;
+    font: 300 var(--wordmark-size, 19.875em) / 0.733 var(--font); letter-spacing: -0.02em;
+    color: rgba(215, 215, 215, 0.2);
+    -webkit-mask: linear-gradient(#000 24%, transparent); mask: linear-gradient(#000 24%, transparent);
+  }
+  .text .soft { color: #fff; }
+</style>

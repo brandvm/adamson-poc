@@ -1,0 +1,102 @@
+---
+// "Adamson designs and builds loudspeakers, electronics, software and immersive audio."
+// Figma: "Home - Section - Product Group" (632:5193) and its four hover states.
+// At rest it's all white. Hovering or focusing a category word dims the rest to 24%, turns the
+// word gold and gathers that category's product tiles around it.
+// Pages can also mark a word as current from outside (e.g. while its product is on screen) by
+// setting `has-current` on the sentence and `is-current` on the word; hover wins over it.
+// Each word carries data-go={index}; the page decides what clicking it does.
+import { slides, tiles } from '../../data/home';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+const em = (px: number) => `${px / 16}em`;
+---
+
+<h2 class="sentence">
+  <span class="plain">Adamson designs and builds</span>
+  {slides.map((s, i) => (
+    <>
+      {i === slides.length - 1 && <span class="plain">and</span>}
+      <button class="word" type="button" data-go={i} aria-label={`${s.word.replace(/[,.]$/, '')}: go to ${s.name}`}>{s.word}</button>
+    </>
+  ))}
+  {tiles.map((group, i) => (
+    <span class="tiles" aria-hidden="true">
+      {group.map((t, k) => (
+        <span class="tile" style={`left:${em(t.x)}; top:${em(t.y)}; --k:${k}; background-image:url(${a(t.img)}), url(${a('thumb-base.png')})`}></span>
+      ))}
+    </span>
+  ))}
+</h2>
+
+<style>
+  /* --sentence-scale sizes the whole block (words, pills, spacing and tile positions are all em),
+     so the hover tiles stay where the Figma states put them. 0.929 = 52px words at the frame. */
+  .sentence {
+    font-size: var(--sentence-scale, 0.929em);
+    position: relative; max-width: 47.625em; margin: 0 auto;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5em 0.875em;
+    font-weight: 400;
+  }
+  /* 56px words; 52px category pills (Figma Heading/H2) */
+  .plain { font: 400 3.5em/1.0714 var(--font); letter-spacing: -0.03em; }
+  .word {
+    position: relative; z-index: 1; height: 1.1538em; padding: 0 0.1923em; border-radius: 0.2308em;
+    border: 1px solid rgba(255, 255, 255, 0.24); background: none; cursor: pointer;
+    font: 400 3.25em/1 var(--font); letter-spacing: -0.03em; color: #fff; white-space: nowrap;
+  }
+  .plain, .word { transition: opacity 0.35s ease, color 0.35s ease; }
+
+  /* Hovered/focused word, or the page's current word: the rest dims, that word turns gold */
+  .sentence:is(.has-focus, .has-current) :is(.plain, .word) { opacity: 0.24; }
+  .sentence.has-focus .word.is-focus,
+  .sentence.has-current:not(.has-focus) .word.is-current { opacity: 1; color: var(--gold); }
+
+  /* Product tiles: one group per word, in front of the words, hidden until that word is hovered.
+     One element per tile; the product and the base gradient are stacked backgrounds. */
+  .tiles { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  .tile {
+    position: absolute; width: 5em; height: 3.25em; border-radius: 0.75em;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background-size: cover, 100% 100%; background-position: center, bottom;
+    opacity: 0; transform: translateY(0.75em) scale(0.85);
+    transition: opacity 0.3s ease, transform 0.5s var(--ease-out);
+  }
+  .tiles.is-shown .tile {
+    opacity: 1; transform: none;
+    transition-delay: calc(var(--k) * 45ms);
+    animation: bob 5s ease-in-out calc(0.6s + var(--k) * -1.1s) infinite;
+  }
+  @keyframes bob { 50% { translate: 0 -0.375em; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tiles.is-shown .tile { animation: none; }
+    .tile, .word, .plain { transition: none; }
+  }
+  @media (max-width: 991px) {
+    .sentence { font-size: 1em; gap: 0.375em 0.5em; }
+    .plain { font-size: 1.875em; }
+    .word { font-size: 1.75em; }
+    .tiles { display: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.sentence').forEach((sentence) => {
+    const words = [...sentence.querySelectorAll<HTMLElement>('.word')];
+    const groups = [...sentence.querySelectorAll<HTMLElement>('.tiles')];
+    const focusWord = (i: number | null) => {
+      sentence.classList.toggle('has-focus', i !== null);
+      words.forEach((w, k) => w.classList.toggle('is-focus', k === i));
+      groups.forEach((g, k) => g.classList.toggle('is-shown', k === i));
+    };
+    words.forEach((w, i) => {
+      w.addEventListener('pointerenter', () => focusWord(i));
+      w.addEventListener('focus', () => focusWord(i));
+    });
+    sentence.addEventListener('pointerleave', () => focusWord(null));
+    sentence.addEventListener('focusout', (e) => {
+      if (!sentence.contains(e.relatedTarget as Node)) focusWord(null);
+    });
+  });
+</script>

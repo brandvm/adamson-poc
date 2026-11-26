@@ -1,0 +1,212 @@
+---
+// Figma: "Home - Section - Product Group" (632:5193) + "Home - Section - Product Slider" (634:6544).
+// The sentence (Sentence.astro) is an intro that scrolls away; clicking a word jumps to its slide.
+// The slider then pins full screen; each scroll step moves to the next category.
+// Under 992px nothing pins: it's a plain tap slider.
+import Sentence from './Sentence.astro';
+import Wordmark from './Wordmark.astro';
+import { slides } from '../../data/home';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="intro" aria-label="What Adamson makes">
+  <Sentence />
+</section>
+
+<section class="slider-track" id="categories" aria-label="Product categories" style={`--n: ${slides.length}`}>
+  <div class="slider">
+    <div class="container grid">
+      {slides.map((s, i) => (
+        <article class:list={['slide', { 'is-active': i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'} inert={i === 0 ? undefined : true}>
+          <Wordmark slide={s} class="slide-wordmark" />
+
+          <img class="product" src={a(s.image)} alt={s.name} loading={i === 0 ? 'eager' : 'lazy'} />
+
+          <div class="copy">
+            <p class="eyebrow">{s.category} · {pad(i + 1)} / {pad(slides.length)}</p>
+            <h3>{s.name}</h3>
+            <p class="desc">{s.description}</p>
+            {s.spec && <p class="spec">{s.spec}</p>}
+            {s.chips && (
+              <ul class="chips" aria-label={s.chipLabel}>
+                {s.chips.map((c, k) => <li class:list={{ on: k === s.activeChip }}>{c}</li>)}
+              </ul>
+            )}
+            <div class="buttons">
+              <a class="btn btn-lg btn-primary" href="#">{s.primary}</a>
+              <a class="btn btn-lg btn-outline" href="#">{s.secondary}</a>
+            </div>
+          </div>
+        </article>
+      ))}
+
+      <div class="thumbs" role="group" aria-label="Choose a category">
+        {slides.map((s, i) => (
+          <button class:list={['thumb', { 'is-active': i === 0 }]} type="button" data-go={i} aria-label={`${s.category}: ${s.name}`} aria-pressed={i === 0 ? 'true' : 'false'} style={`background-image: url(${a(s.thumb)})`}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---------- intro sentence (scrolls away) ---------- */
+  /* Above the neighbouring sections so tiles can overhang them without being clipped */
+  .intro { position: relative; z-index: 5; padding: 5em var(--margin); }
+
+  /* ---------- pinned full-screen slider ---------- */
+  .slider-track { height: calc(100vh + (var(--n) - 1) * 80vh); }
+  .slider {
+    position: sticky; top: 0; height: 100vh; min-height: 40em; overflow: hidden;
+    display: grid; isolation: isolate;
+    /* Figma "Glow Grey" behind the product */
+    background: radial-gradient(42em 9em at 50% 55%, rgba(255, 255, 255, 0.12), transparent 70%), #000;
+  }
+  .slider > .grid {
+    height: 100%; padding-block: 4em 5em;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* Every slide covers the whole grid and shares its columns and rows (subgrid) */
+  .slide {
+    grid-column: 1 / -1; grid-row: 1 / -1;
+    display: grid; grid-template-columns: subgrid; grid-template-rows: subgrid;
+    visibility: hidden; transition: visibility 0s linear 0.6s;
+  }
+  .slide.is-active { visibility: visible; transition-delay: 0s; }
+
+  /* Fade and move each layer, never the slide or wordmark wrapper (see Wordmark.astro) */
+  .slide :global(.slide-wordmark .layer), .product, .copy { opacity: 0; transition: opacity 0.6s ease, transform 0.9s var(--ease-out); }
+  .slide.is-active :global(.slide-wordmark .layer),
+  .slide.is-active .product, .slide.is-active .copy { opacity: 1; transform: none; }
+
+  /* Frosted wordmark across the full 1520 container */
+  .slide :global(.slide-wordmark) { grid-column: 1 / -1; grid-row: 1; }
+  .slide :global(.slide-wordmark .layer) { transform: translateY(1.5em); }
+
+  /* Product cut-out (background removed): fits a 1038 × 461 box at the frame (columns 4–17),
+     shrinking with short screens, sitting on the box's bottom edge */
+  .product {
+    grid-column: 4 / 18; grid-row: 1 / -1; place-self: center; z-index: 1;
+    width: 100%; height: min(28.8125em, 52vh);
+    object-fit: contain; object-position: center bottom;
+    transform: scale(0.96);
+  }
+
+  .copy {
+    grid-column: 1 / 8; grid-row: 3; align-self: end; z-index: 2;
+    display: grid; justify-items: start; gap: 0.875em;
+    transform: translateY(0.75em); transition-delay: 0.1s;
+  }
+  .eyebrow { margin: 0; font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); }
+  h3 { margin: 0; font: 400 2em/1.1875 var(--font); letter-spacing: -0.025em; }
+  .desc { margin: 0; max-width: 17.5em; font: 400 1em/1.5 var(--font); color: #cfcfcf; }
+  .spec { margin: 0; font: 400 0.8125em/1.3 var(--font); color: #9a9a9a; }
+  .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375em; }
+  .chips::before {
+    content: attr(aria-label); margin-right: 0.5em;
+    font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: #9a9a9a;
+  }
+  .chips li { padding: 0.5385em 1.0769em; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.3); font: 400 0.8125em/1.2 var(--font); }
+  .chips li.on { background: #fff; border-color: #fff; color: #0a0a0a; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 0.75em; margin-top: 1.625em; }
+
+  /* Thumbnails: 160 × 96, bottom right */
+  .thumbs { grid-column: 11 / -1; grid-row: 3; align-self: end; justify-self: end; z-index: 2; display: flex; gap: 1.375em; }
+  .thumb {
+    position: relative; width: 10em; height: 6em; padding: 0; border-radius: 0.5em; cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.12); background: #0a0a0a center / cover no-repeat;
+    opacity: 0.55; overflow: hidden; transition: opacity 0.3s ease, border-color 0.3s ease;
+  }
+  .thumb:hover { opacity: 0.85; }
+  .thumb.is-active { opacity: 1; border-color: rgba(255, 255, 255, 0.24); }
+  /* Figma 634:6581: gold wash on the active thumbnail, used here as scroll progress */
+  .thumb::after {
+    content: ''; position: absolute; inset: 0 auto 0 0; width: calc(var(--p, 0) * 100%);
+    background: linear-gradient(to left, rgba(138, 110, 75, 0.56), transparent);
+    border-right: 1px solid rgba(138, 110, 75, 0.4);
+  }
+  .thumb:not(.is-active)::after { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .slide :global(.slide-wordmark .layer), .product, .copy { transition: none; }
+  }
+
+  /* ---------- 991px and below: no pinning, tap to switch ---------- */
+  @media (max-width: 991px) {
+    .intro { padding: 3.5em var(--margin) 2em; }
+
+    .slider-track { height: auto; }
+    .slider { position: static; height: auto; min-height: 0; }
+    .slider > .grid { padding-block: 1em 4em; grid-template-rows: none; }
+    .slide { display: none; grid-template-rows: none; }
+    .slide.is-active { display: grid; }
+    .slide :global(.slide-wordmark), .product, .copy, .thumbs { grid-column: 1 / -1; grid-row: auto; }
+    .slide :global(.slide-wordmark) { --wordmark-size: 6em; }
+    .product { width: 100%; height: auto; margin: -2em 0 1em; }
+    .copy { align-self: start; }
+    .thumbs { justify-self: stretch; margin-top: 2em; gap: 0.5em; }
+    .thumb { flex: 1; width: auto; height: auto; aspect-ratio: 5 / 3; }
+  }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>('.slider-track');
+  if (track) {
+    const slides = [...track.querySelectorAll<HTMLElement>('.slide')];
+    const thumbs = [...track.querySelectorAll<HTMLElement>('.thumb')];
+    const n = slides.length;
+    const pinned = window.matchMedia('(min-width: 992px)');
+    let current = 0;
+
+    const setActive = (i: number) => {
+      if (i === current) return;
+      current = i;
+      slides.forEach((el, k) => {
+        el.classList.toggle('is-active', k === i);
+        el.inert = k !== i;
+        el.toggleAttribute('aria-hidden', k !== i);
+      });
+      thumbs.forEach((el, k) => {
+        el.classList.toggle('is-active', k === i);
+        el.setAttribute('aria-pressed', String(k === i));
+      });
+    };
+
+    // Scroll position inside the tall track → which slide, and how far through it.
+    const range = () => track.offsetHeight - window.innerHeight;
+    const update = () => {
+      if (!pinned.matches) return;
+      const p = Math.min(1, Math.max(0, -track.getBoundingClientRect().top / range()));
+      const x = p * n;
+      const i = Math.min(n - 1, Math.floor(x));
+      setActive(i);
+      thumbs[i].style.setProperty('--p', String(Math.min(1, x - i)));
+    };
+
+    const goTo = (i: number) => {
+      if (pinned.matches) {
+        const top = track.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top + ((i + 0.02) / n) * range(), behavior: 'smooth' });
+      } else {
+        setActive(i);
+        thumbs[i].style.setProperty('--p', '1');
+      }
+    };
+    document.querySelectorAll<HTMLElement>('[data-go]').forEach((el) =>
+      el.addEventListener('click', () => goTo(Number(el.dataset.go)))
+    );
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    pinned.addEventListener('change', update);
+    update();
+  }
+</script>
