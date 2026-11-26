@@ -3,7 +3,8 @@
 // The sentence is pinned in the centre of the screen; one featured product card per category
 // scrolls up over it, with the sentence showing again between cards. Each card zooms in as it
 // rises to the middle and back out as it leaves (the product counter-zooms inside it), like the
-// reference. A card's word in the sentence turns gold a little before the card comes into view.
+// reference, and tilts like it's on the face of a drum. A card's word in the sentence turns gold
+// a little before the card comes into view.
 // Clicking a word scrolls its card into view.
 import Sentence from './Sentence.astro';
 import Wordmark from './Wordmark.astro';
@@ -63,7 +64,11 @@ const pad = (n: number) => String(n).padStart(2, '0');
   .card {
     grid-column: 4 / 18; justify-self: center; position: relative; overflow: hidden;
     width: min(100%, 86svh * 1.6); aspect-ratio: 16 / 10; padding: 2.5em;
-    transform: scale(var(--s, 1)); will-change: transform;
+    /* Drum effect: --rx tilts the card around its horizontal axis (leaning back below the
+       middle of the screen, forward above it) and --z pushes it away at the edges, so the stack
+       reads as if it's on the face of a cylinder. Both come from the script. */
+    transform: perspective(150em) translateZ(var(--z, 0px)) rotateX(var(--rx, 0deg)) scale(var(--s, 1));
+    will-change: transform;
     display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto 1fr auto; column-gap: 2em;
     border-radius: 1.25em; border: 1px solid rgba(255, 255, 255, 0.1);
     /* Opaque: the frosted wordmark's soft-light layers blend with this */
@@ -121,6 +126,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
     ).observe(sentence);
 
     const MIN = 0.72; // card scale at the edges of the screen
+    const TILT = 14; // degrees of drum tilt at the edges of the screen
+    const DEPTH = 6; // em the card recedes at the edges of the screen
     const ease = (t: number) => t * t * (3 - 2 * t);
 
     // Measured on the slots, which never transform, so the zoom doesn't feed back into itself.
@@ -133,8 +140,17 @@ const pad = (n: number) => String(n).padStart(2, '0');
         // Full size across the middle 30% of that journey, easing down to MIN at either edge.
         const p = (vh - r.top) / (vh + r.height);
         const t = Math.min(1, Math.max(0, (Math.abs(p - 0.5) * 2 - 0.3) / 0.7));
-        const s = still.matches || !wide.matches ? 1 : 1 - (1 - MIN) * ease(t);
+        const animate = !still.matches && wide.matches;
+        const s = animate ? 1 - (1 - MIN) * ease(t) : 1;
+        // Drum: -1 entering at the bottom, 0 centred, 1 leaving at the top. A sine curve keeps
+        // the tilt gentle around the middle and strongest at the edges, like a curved surface.
+        const d = Math.max(-1, Math.min(1, p * 2 - 1));
+        // Convex drum: the edge nearer the middle of the screen is the one closer to you.
+        const rx = animate ? -TILT * Math.sin(d * Math.PI / 2) : 0;
+        const z = animate ? -DEPTH * (1 - Math.cos(d * Math.PI / 2)) : 0;
         cards[k].style.setProperty('--s', s.toFixed(4));
+        cards[k].style.setProperty('--rx', `${rx.toFixed(2)}deg`);
+        cards[k].style.setProperty('--z', `${z.toFixed(3)}em`);
         // Highlight starts while the card is still below the fold and holds until the card is
         // covering the sentence (its middle above 60% of the screen). The sentence is hidden at
         // that point, so the next card's word can already light up before that card comes in.
