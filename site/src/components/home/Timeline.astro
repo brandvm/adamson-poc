@@ -1,0 +1,179 @@
+---
+// "08 Timeline" (Figma 463:969), ported from the preview (web/components/blocks/Timeline.tsx,
+// content from adamson-preview.vercel.app). Huge stacked years: the current milestone's year
+// sits at the bottom in gold, later years stack above it and fade out. The arrows (or a swipe)
+// step through the milestones; the year column slides to follow and the text cross-fades.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+const pad = (n: number) => String(n).padStart(2, '0');
+
+// 2002 and 2003 are the preview's placeholders: Figma shows those years without a milestone yet
+const milestones = [
+  { year: '1984', title: 'Adamson is founded', text: 'Brock Adamson starts building loudspeakers for professional audio in Vancouver.' },
+  { year: '2002', title: 'Milestone title', text: 'Placeholder: the Figma design shows the year only. Replace with the 2002 milestone.' },
+  { year: '2003', title: 'Milestone title', text: 'Placeholder: the Figma design shows the year only. Replace with the 2003 milestone.' },
+];
+---
+
+<section class="timeline" data-theme="dark" aria-label="Timeline"
+  style={`--chev-l: url(${a('icon-chevron-left-dark.svg')}); --chev-r: url(${a('icon-chevron-right-dark.svg')})`}>
+  <div class="stage" style={`--i: 0`}>
+    <!-- Big years: decorative (each year is also read out with its milestone) -->
+    <div class="years" aria-hidden="true">
+      {milestones.map((m, i) => (
+        <div class="year" style={`--k: ${i}`}>
+          <span class="num now">{m.year}</span>
+          <span class="num next">{m.year}</span>
+          <span class="num far">{m.year}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="label">
+      <img src={a('logo-mark-gold.svg')} alt="" width="22" height="19" />
+      <span>Timeline</span>
+    </div>
+
+    <div class="texts" aria-live="polite">
+      {milestones.map((m, i) => (
+        <div class:list={['text', { 'is-active': i === 0 }]} inert={i === 0 ? undefined : true} aria-hidden={i === 0 ? undefined : 'true'}>
+          <p class="eyebrow">Milestone</p>
+          <h3><span class="sr-only">{m.year}: </span>{m.title}</h3>
+          <p class="body">{m.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="controls">
+      <a class="btn btn-glass" href="#">View Full Story</a>
+      <div class="nav">
+        <p class="counter"><span class="cur">01</span><span class="tot">/ {pad(milestones.length)}</span></p>
+        <button class="arrow prev" type="button" aria-label="Previous milestone" disabled></button>
+        <button class="arrow next" type="button" aria-label="Next milestone"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Warm glow bottom right (Figma: gold 22% → 0 at 60%) */
+  .timeline {
+    padding-block: 7.5em; color: #fff;
+    background: radial-gradient(42.2em 54.1em at 82.56% 91.34%, rgba(139, 111, 76, 0.22), rgba(139, 111, 76, 0)), #000;
+  }
+  /* The 1680 frame: positions below are Figma px / 16 */
+  .stage {
+    --step: 15.375em;   /* year line height + 10px */
+    position: relative; width: min(105em, 100%); height: 40em; margin-inline: auto; overflow: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  /* ---- Years ---- */
+  .years { position: absolute; inset: 0; pointer-events: none; user-select: none; }
+  /* d = k - i: 0 is current (bottom), 1 the next year above it, 2+ further up */
+  .year {
+    --d: calc(var(--k) - var(--i));
+    position: absolute; top: 25.25em; left: 13.1875em; display: grid;
+    transform: translateY(calc(var(--d) * var(--step) * -1));
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .num {
+    grid-area: 1 / 1; white-space: nowrap;
+    font: 500 18.75em/0.7867 var(--font); letter-spacing: -0.05em;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    opacity: 0; transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .now { background-image: linear-gradient(rgba(139, 111, 76, 0.5), #8b6f4c); }
+  .next { background-image: linear-gradient(#1c1d1e, #5a5d60); }
+  .far { background-image: linear-gradient(transparent, #2a2b2c); }
+  /* Which layer shows is set per year by the script (data-d) */
+  .year[data-d='0'] .now { opacity: 1; }
+  .year[data-d='1'] .next { opacity: 0.5; }
+  .year[data-d='far'] .far { opacity: 0.4; }
+
+  /* ---- Label, text, controls ---- */
+  .label { position: absolute; top: 2.8125em; left: 4.25em; display: flex; align-items: center; gap: 0.75em; }
+  .label img { width: 1.375em; height: auto; }
+  .label span, .eyebrow { font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); }
+
+  .texts { position: absolute; top: 12.75em; left: 63.5625em; width: 27.75em; display: grid; }
+  .text {
+    grid-area: 1 / 1; display: grid; gap: 1em; align-content: start;
+    opacity: 0; translate: 0 0.75em; transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), translate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .text.is-active { opacity: 1; translate: 0 0; transition-delay: 0.15s; }
+  .text p, .text h3 { margin: 0; }
+  h3 { font: 400 2.5em/1.15 var(--font); letter-spacing: -0.025em; }
+  .body { font: 400 1.125em/1.4444 var(--font); color: #c0c1c2; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .controls { position: absolute; left: 63.5625em; right: 4.25em; bottom: 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 2em; }
+  .nav { display: flex; align-items: center; gap: 1em; }
+  .counter { margin: 0 0.25em 0 0; display: flex; align-items: flex-end; gap: 0.25em; white-space: nowrap; }
+  .cur { font: 300 1.75em/1.1429 var(--font); }
+  .tot { font: 400 0.8125em/1.3846 var(--font); color: #9a9a9a; }
+  .arrow {
+    width: 2.75em; aspect-ratio: 1; border-radius: 999px; cursor: pointer; display: grid; place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(157, 137, 111, 0.04); backdrop-filter: blur(4.5px);
+    color: #fff; transition: opacity 0.2s ease, border-color 0.2s ease;
+  }
+  .arrow:hover:not(:disabled) { border-color: #fff; }
+  .arrow:disabled { opacity: 0.3; cursor: default; }
+  .arrow::before { content: ''; width: 0.875em; aspect-ratio: 1; background: currentColor; -webkit-mask: var(--chev-l) center / contain no-repeat; mask: var(--chev-l) center / contain no-repeat; }
+  .arrow.next::before { -webkit-mask-image: var(--chev-r); mask-image: var(--chev-r); }
+
+  @media (prefers-reduced-motion: reduce) { .year, .num, .text { transition: none; } }
+
+  /* Below 992px: stacked; years in a short window, the smaller number style */
+  @media (max-width: 991px) {
+    .timeline { padding-block: 4.5em; }
+    .stage { --step: 5.25em; height: auto; display: flex; flex-direction: column; padding-inline: var(--margin); }
+    .label { position: static; order: -1; }
+    .years { position: relative; inset: auto; height: 13em; margin-top: 2em; overflow: hidden; }
+    .year { top: 8em; left: 0; }
+    .num { font-size: 6em; line-height: 0.8333; }
+    .texts { position: static; width: 100%; max-width: 36em; margin-top: 2em; }
+    h3 { font-size: 1.75em; }
+    .controls { position: static; margin-top: 2.5em; flex-wrap: wrap; align-items: center; gap: 1.5em; }
+    .nav { margin-left: auto; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.timeline').forEach((section) => {
+    const stage = section.querySelector<HTMLElement>('.stage')!;
+    const years = [...section.querySelectorAll<HTMLElement>('.year')];
+    const texts = [...section.querySelectorAll<HTMLElement>('.text')];
+    const prev = section.querySelector<HTMLButtonElement>('.arrow.prev')!;
+    const next = section.querySelector<HTMLButtonElement>('.arrow.next')!;
+    const cur = section.querySelector<HTMLElement>('.cur')!;
+    const total = texts.length;
+    let i = 0;
+
+    const render = () => {
+      stage.style.setProperty('--i', String(i));
+      years.forEach((y, k) => { const d = k - i; y.dataset.d = d === 0 ? '0' : d === 1 ? '1' : d >= 2 ? 'far' : 'past'; });
+      texts.forEach((t, k) => {
+        const on = k === i;
+        t.classList.toggle('is-active', on); t.inert = !on; t.toggleAttribute('aria-hidden', !on);
+      });
+      cur.textContent = String(i + 1).padStart(2, '0');
+      prev.disabled = i === 0; next.disabled = i === total - 1;
+    };
+    const step = (dir: number) => { i = Math.min(total - 1, Math.max(0, i + dir)); render(); };
+    prev.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+
+    // Horizontal swipe (touch / pen) steps; vertical drags keep scrolling
+    let sw: { id: number; x: number; y: number } | null = null;
+    stage.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') sw = { id: e.pointerId, x: e.clientX, y: e.clientY }; });
+    stage.addEventListener('pointerup', (e) => {
+      const s = sw; sw = null;
+      if (!s || s.id !== e.pointerId) return;
+      const dx = e.clientX - s.x, dy = e.clientY - s.y;
+      if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.2) step(dx < 0 ? 1 : -1);
+    });
+    stage.addEventListener('pointercancel', () => (sw = null));
+    render();
+  });
+</script>
