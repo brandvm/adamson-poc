@@ -1,0 +1,253 @@
+---
+// Figma: "02 Featured products" (660:9625), straight after the hero with no sentence before it.
+// Four full-viewport category slides: a dark photo, a big soft-light wordmark, the product
+// render on top, copy bottom left and four category thumbnails bottom right.
+// Desktop: the slider pins and each scroll step moves to the next category (as on /home);
+// clicking a thumbnail scrolls to it. Under 992px nothing pins: tap the thumbnails.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const a = (f: string) => `${base}home/${f}`;
+const pad = (n: number) => String(n).padStart(2, '0');
+
+type Slide = {
+  key: string; word: string; wordSize: number; wordTop: number;
+  name: string; text: string; meta: string; cta: string;
+  bg?: string; product: string; thumb: string;
+};
+// wordSize / wordTop: the wordmark's font size and top offset in em (px / 16 at the 1680 frame),
+// each sized in Figma to span the frame (wordSize is unitless so phones can scale it to the screen)
+const slides: Slide[] = [
+  { key: 'loudspeakers', word: 'LOUDSPEAKERS', wordSize: 14.1, wordTop: 4.52,
+    name: 'Loudspeakers', text: 'Intelligently designed for the main stage.', meta: '6 series · 40 models', cta: 'Explore Loudspeakers',
+    product: 'fs-loudspeakers.png', thumb: 'fs-thumb-loudspeakers.png' },
+  { key: 'electronics', word: 'ELECTRONICS', wordSize: 15.42, wordTop: 3.95,
+    name: 'Electronics', text: 'Amplification, DSP, media conversion and audio distribution, built in Port Perry, Ontario, Canada.', meta: '4 categories · up to 16 kW', cta: 'Explore Electronics',
+    bg: 'fs-bg-electronics.jpg', product: 'fs-electronics.png', thumb: 'fs-bg-electronics.jpg' },
+  { key: 'software', word: 'SOFTWARE', wordSize: 18.57, wordTop: 2.59,
+    name: 'Software', text: 'The brilliance behind the scenes.', meta: '2 tools · both free', cta: 'Explore Software',
+    bg: 'fs-bg-software.jpg', product: 'fs-software.png', thumb: 'fs-bg-software.jpg' },
+  { key: 'immersive', word: 'IMMERSIVE', wordSize: 18.57, wordTop: 2.59,
+    name: 'Immersive: Fletcher Machine', text: 'FletcherMachine: reference class spatial audio rendering system.', meta: '5 system models', cta: 'Explore FletcherMachine',
+    bg: 'fs-bg-immersive.jpg', product: 'fs-immersive.png', thumb: 'fs-bg-immersive.jpg' },
+];
+---
+
+<section class="fs-track" id="categories" data-theme="dark" aria-label="Product categories" style={`--n: ${slides.length}; --explore: url(${a('icon-explore.svg')})`}>
+  <div class="fs">
+    {slides.map((s, i) => (
+      <article
+        class:list={['slide', s.key, { 'is-active': i === 0 }]}
+        aria-hidden={i === 0 ? undefined : 'true'} inert={i === 0 ? undefined : true}
+        style={`--word-size: ${s.wordSize}; --word-top: ${s.wordTop}em`}
+      >
+        <div class="media" aria-hidden="true">
+          {s.bg && <img class="bg" src={a(s.bg)} alt="" loading={i === 0 ? 'eager' : 'lazy'} />}
+          <p class="word"><span>{s.word}</span></p>
+          <img class="product" src={a(s.product)} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+        </div>
+        <div class="copy">
+          <div class="text">
+            <p class="eyebrow">{pad(i + 1)} / {pad(slides.length)}</p>
+            <h3>{s.name}</h3>
+            <p class="desc">{s.text}</p>
+            <p class="meta">{s.meta}</p>
+          </div>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#">{s.cta}</a>
+            <a class="btn btn-glass" href="#">All Products</a>
+          </div>
+        </div>
+      </article>
+    ))}
+
+    <div class="shade top" aria-hidden="true"></div>
+    <div class="shade bottom" aria-hidden="true"></div>
+
+    <div class="thumbs" role="group" aria-label="Choose a category">
+      {slides.map((s, i) => (
+        <button class:list={['thumb', { 'is-active': i === 0 }]} type="button" data-go={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+          <img src={a(s.thumb)} alt="" />
+          <span class="label">{s.key}</span>
+          <span class="explore">explore</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Pinned: the track is as tall as the steps need; the slider sticks full screen inside it */
+  .fs-track { height: calc(100vh + (var(--n) - 1) * 80vh); }
+  .fs { position: sticky; top: 0; height: 100vh; min-height: 40em; overflow: hidden; background: #000; isolation: isolate; }
+
+  .slide { position: absolute; inset: 0; visibility: hidden; transition: visibility 0s linear 0.8s; }
+  .slide.is-active { visibility: visible; transition-delay: 0s; }
+
+  /* Media fills the screen like the 1680 × 998 frame: photo and render share one box, so the
+     product sits on its own photo; the wordmark goes between them */
+  .media { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease; }
+  .slide.is-active .media { opacity: 1; }
+  /* Photo box per slide, from Figma (relative to the 1680 × 998 frame):
+     Electronics 1764 × 1130, Software 1680 × 998 (17px low), Immersive 1858 × 1104 (37px left) */
+  .bg, .product {
+    position: absolute; left: var(--x, 50%); top: var(--y, 50%); width: var(--w, 105%); height: var(--h, 113.2%); max-width: none;
+    object-fit: cover; translate: -50% -50%;
+    transform: scale(1.04); transition: transform 1.4s var(--ease-out);
+  }
+  .slide.is-active :is(.bg, .product) { transform: none; }
+
+  .software { --w: 100%; --h: 100%; --y: calc(50% + 1.0625em); }
+  .immersive { --w: 110.6%; --h: 110.6%; --x: calc(50% - 2.3125em); }
+
+  /* Loudspeakers has no photo: the Figma glows on black (two very large ellipses that wash the
+     whole frame warm grey, which is also what the soft-light wordmark shows against), and a
+     fade into the floor */
+  .loudspeakers .media {
+    background:
+      radial-gradient(92% 298% at 3% 10%, rgba(139, 111, 76, 0.42), transparent 57%),
+      radial-gradient(65% 165% at 76% 0%, rgba(91, 90, 95, 0.7), transparent 70%),
+      #000;
+  }
+  .loudspeakers .product { width: 131%; height: 142%; top: 42%; object-fit: contain; object-position: center bottom; }
+  .loudspeakers .media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 55%, rgba(0, 0, 0, 0.8)); pointer-events: none; }
+  /* Software and Immersive: a gold glow in the bottom left */
+  :is(.software, .immersive) .media::before {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(55% 55% at 6% 94%, rgba(139, 111, 76, 0.32), transparent 57%);
+  }
+
+  /* Frosted category word, soft-light over the photo, sized per slide to span the screen.
+     The slide and .media must not isolate it (no transform/filter on them) or it renders flat. */
+  .word {
+    position: absolute; left: 50%; top: var(--word-top); margin: 0; z-index: 1;
+    translate: -50% 0; white-space: nowrap; color: #f4f2ef;
+    mix-blend-mode: soft-light; opacity: 0.7;
+  }
+  /* The size lives on the span so the top offset above stays in the page's em */
+  .word span { display: block; font: 400 calc(var(--word-size) * 1em)/0.86 var(--font); }
+  .product { z-index: 2; }
+
+  .shade { position: absolute; inset-inline: 0; z-index: 3; pointer-events: none; }
+  .shade.top { top: 0; height: 26.25em; background: linear-gradient(rgba(0, 0, 0, 0.72), transparent); }
+  .shade.bottom { bottom: 0; height: 23.625em; background: linear-gradient(transparent, rgba(0, 0, 0, 0.65)); }
+
+  /* Copy: bottom left on the container */
+  .copy {
+    position: absolute; z-index: 4; bottom: 6.4375em; left: max(var(--margin), (100% - var(--container)) / 2);
+    width: 24.4375em; display: grid; gap: 2.5em; justify-items: start;
+    opacity: 0; translate: 0 0.75em; transition: opacity 0.6s ease 0.1s, translate 0.9s var(--ease-out) 0.1s;
+  }
+  .slide.is-active .copy { opacity: 1; translate: 0 0; }
+  .text { display: grid; gap: 0.875em; }
+  .text p, h3 { margin: 0; }
+  .eyebrow { font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); }
+  h3 { font: 400 2em/1.1875 var(--font); letter-spacing: -0.025em; color: #fff; }
+  .desc { font: 400 1em/1.5 var(--font); color: #cfcfcf; }
+  .meta { font: 400 0.8125em/1.3 var(--font); color: #9a9a9a; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 1em; }
+
+  /* Thumbnails: 166 × 100, bottom right, the active one outlined in gold */
+  .thumbs {
+    position: absolute; z-index: 4; bottom: 6.4375em; right: max(var(--margin), (100% - var(--container)) / 2);
+    display: flex; gap: 0.875em;
+  }
+  .thumb {
+    position: relative; width: 10.375em; height: 6.25em; padding: 0; overflow: hidden; cursor: pointer;
+    border-radius: 0.75em; border: 1px solid rgba(255, 255, 255, 0.1); background: #000;
+    font: inherit; text-align: left; transition: border-color 0.3s ease;
+  }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: opacity 0.3s ease, transform 0.6s var(--ease-out); }
+  .thumb:first-child img { object-fit: contain; object-position: center 40%; background: linear-gradient(210deg, #8c8b94 9%, #3f3e43 32%, #080808 69%); }
+  .thumb:hover img { opacity: 0.7; transform: scale(1.05); }
+  .thumb.is-active { border-color: var(--gold); }
+  .thumb.is-active img { opacity: 1; }
+  .thumb .label, .thumb .explore {
+    position: absolute; left: 0.625em; font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .thumb .label { bottom: 2.0833em; color: #fff; }
+  .thumb.is-active .label { bottom: 0.5833em; }
+  .thumb .explore { bottom: 0.5833em; display: flex; align-items: center; gap: 0.5em; color: #7e8182; }
+  .thumb .explore::after { content: ''; width: 1em; aspect-ratio: 1; background: var(--explore) center / contain no-repeat; }
+  .thumb.is-active .explore { display: none; }
+  /* Scroll progress on the active thumbnail: a gold wash filling left to right */
+  .thumb::after {
+    content: ''; position: absolute; inset: 0 auto 0 0; width: calc(var(--p, 0) * 100%); pointer-events: none;
+    background: linear-gradient(to left, rgba(138, 110, 75, 0.45), transparent);
+  }
+  .thumb:not(.is-active)::after { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .media, .bg, .product, .copy { transition: none; }
+  }
+
+  /* 991px and below: no pinning; the slider is one screen tall, tap the thumbnails */
+  @media (max-width: 991px) {
+    .fs-track { height: auto; }
+    .fs { position: relative; height: 100svh; min-height: 36em; }
+    .word { top: 4em; }
+    .word span { font-size: calc(var(--word-size) * 100vw / 105); }   /* spans the screen, as at 1680 */
+    .bg, .product, .software :is(.bg, .product), .immersive :is(.bg, .product) { left: 50%; width: 130%; height: 50%; top: 34%; }
+    .loudspeakers .product { width: 150%; height: 60%; top: 30%; }
+    .copy { left: var(--margin); right: var(--margin); width: auto; bottom: 9.5em; gap: 1.5em; }
+    .thumbs { left: var(--margin); right: var(--margin); bottom: 1.25em; gap: 0.5em; }
+    .thumb { flex: 1; width: auto; height: 5.5em; }
+    .thumb .explore { display: none; }
+    .thumb .label { bottom: 0.6em; left: 0.6em; font-size: 0.5625em; letter-spacing: 0.04em; }
+  }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>('.fs-track');
+  if (track) {
+    const slides = [...track.querySelectorAll<HTMLElement>('.slide')];
+    const thumbs = [...track.querySelectorAll<HTMLElement>('.thumb')];
+    const n = slides.length;
+    const pinned = window.matchMedia('(min-width: 992px)');
+    let current = 0;
+
+    const setActive = (i: number) => {
+      if (i === current) return;
+      current = i;
+      slides.forEach((el, k) => {
+        el.classList.toggle('is-active', k === i);
+        el.inert = k !== i;
+        el.toggleAttribute('aria-hidden', k !== i);
+      });
+      thumbs.forEach((el, k) => {
+        el.classList.toggle('is-active', k === i);
+        el.setAttribute('aria-pressed', String(k === i));
+      });
+    };
+
+    // Scroll position inside the tall track → which slide, and how far through it
+    const range = () => track.offsetHeight - window.innerHeight;
+    const update = () => {
+      if (!pinned.matches) return;
+      const p = Math.min(1, Math.max(0, -track.getBoundingClientRect().top / range()));
+      const x = p * n;
+      const i = Math.min(n - 1, Math.floor(x));
+      setActive(i);
+      thumbs[i].style.setProperty('--p', String(Math.min(1, x - i)));
+    };
+
+    const goTo = (i: number) => {
+      if (pinned.matches) {
+        const top = track.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top + ((i + 0.02) / n) * range(), behavior: 'smooth' });
+      } else {
+        setActive(i);
+        thumbs[i].style.setProperty('--p', '1');
+      }
+    };
+    thumbs.forEach((el) => el.addEventListener('click', () => goTo(Number(el.dataset.go))));
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    pinned.addEventListener('change', update);
+    update();
+  }
+</script>
