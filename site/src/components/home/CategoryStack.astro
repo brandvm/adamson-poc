@@ -7,14 +7,20 @@
 // a little before the card comes into view.
 // Clicking a word scrolls its card into view.
 import Sentence from './Sentence.astro';
+import Chladni from './Chladni.astro';
 import Wordmark from './Wordmark.astro';
 import { slides } from '../../data/home';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const a = (f: string) => `${base}home/${f}`;
-const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <section class="stack" id="categories" aria-label="What Adamson makes">
+  <!-- Chladni sand (Figma "Chaldni Pattern"): a full-screen background pinned for the whole
+       section, behind the sentence and the cards -->
+  <div class="backdrop" aria-hidden="true">
+    <Chladni opacity={1} />
+  </div>
+
   <div class="pin">
     <Sentence />
   </div>
@@ -22,9 +28,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
   <div class="cards">
     {slides.map((s, i) => (
       <div class="slot container grid">
-        <article class="card" data-card={i} aria-labelledby={`card-${i}`}>
-          <p class="eyebrow">{s.category} · {pad(i + 1)} / {pad(slides.length)}</p>
-          <Wordmark slide={s} class="card-wordmark" />
+        <article class="card" style={`--chars: ${(s.cardWordmark ?? s.wordmark).length}`} data-card={i} aria-labelledby={`card-${i}`}>
+          <Wordmark slide={s} text={s.cardWordmark} class="card-wordmark" />
           <img class="product" src={a(s.image)} alt="" loading="lazy" />
           <div class="copy">
             <h3 id={`card-${i}`}>{s.name}</h3>
@@ -44,16 +49,28 @@ const pad = (n: number) => String(n).padStart(2, '0');
   /* --sentence-h is measured by the script below (fallback: the design's 196px) */
   .stack { --sentence-h: 12.25em; --centre: calc(50svh - var(--sentence-h) / 2); position: relative; padding-top: 5em; }
 
+  /* Pinned background: one screen tall, stuck to the top of the viewport while the section
+     scrolls. It takes no space (negative bottom margin) and starts at the section's top edge
+     (negative top margin cancels the section's padding). The fades blend it into the black
+     above and below the section. */
+  .backdrop {
+    position: sticky; top: 0; z-index: 0; height: 100vh; height: 100svh;
+    margin-top: -5em; margin-bottom: calc(-100svh + 5em);
+    pointer-events: none;
+    -webkit-mask: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+    mask: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  }
+
   /* The sentence follows "Heard at" with normal section spacing and scrolls up normally;
      once its middle reaches the middle of the screen it sticks there, behind the cards */
-  .pin { position: sticky; top: var(--centre); z-index: 0; padding-inline: var(--margin); }
+  .pin { position: sticky; top: var(--centre); z-index: 1; padding-inline: var(--margin); }
 
   /* The first card follows the sentence at half the distance that would put it just below the
      screen when the sentence sticks, so it's already rising into view by then. The gaps let the
      sentence show through again between cards; the bottom padding brings it back to the centre
      on its own before the section scrolls away. */
   .cards {
-    position: relative; z-index: 1; margin-top: calc(var(--centre) * 0.5);
+    position: relative; z-index: 2; margin-top: calc(var(--centre) * 0.5);
     display: grid; gap: 40vh; padding-bottom: var(--centre);
   }
 
@@ -62,51 +79,48 @@ const pad = (n: number) => String(n).padStart(2, '0');
      every desktop size. On very short screens the whole card narrows to stay within 86% of the
      screen height. --s is the scroll zoom from the script (1 = resting size, mid-screen). */
   .card {
-    grid-column: 4 / 18; justify-self: center; position: relative; overflow: hidden;
+    grid-column: 4 / 18; justify-self: center; position: relative; overflow: hidden; container-type: inline-size;
     width: min(100%, 86svh * 1.6); aspect-ratio: 16 / 10; padding: 2.5em;
     /* Drum effect: --rx tilts the card around its horizontal axis (leaning back below the
        middle of the screen, forward above it) and --z pushes it away at the edges, so the stack
        reads as if it's on the face of a cylinder. Both come from the script. */
     transform: perspective(150em) translateZ(var(--z, 0px)) rotateX(var(--rx, 0deg)) scale(var(--s, 1));
     will-change: transform;
-    display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto 1fr auto; column-gap: 2em;
+    display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; column-gap: 2em;
     border-radius: 1.25em; border: 1px solid rgba(255, 255, 255, 0.1);
     /* Opaque: the frosted wordmark's soft-light layers blend with this */
     background: radial-gradient(60% 40% at 50% 62%, #262019, transparent 70%), linear-gradient(#111, #060606);
     box-shadow: 0 2.5em 5em rgba(0, 0, 0, 0.6);
   }
-  .eyebrow {
-    grid-column: 1 / -1; margin: 0;
-    font: 500 0.75em/1.3333 var(--font); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light);
-  }
-  /* Rows: eyebrow / wordmark / product space / copy + buttons. The product overlaps the
-     wordmark row so it sits in front of the big word, as on the slider. */
-  .card :global(.card-wordmark) { grid-column: 1 / -1; grid-row: 2; margin-top: 1em; --wordmark-size: 12.5em; }
+  /* Rows: wordmark / product space / copy + buttons */
+  /* 12.5em, or smaller so long words (e.g. LOUDSPEAKERS) still fit the card's width */
+  .card :global(.card-wordmark) { grid-column: 1 / -1; grid-row: 1; --wordmark-size: min(12.5em, 100cqi / (var(--chars) * 0.62)); }
   /* The product sits in the space below the wordmark and only tucks up into its bottom edge
      (as on the Figma slider), so the big word stays readable.
      Counter-zoom: the product is a little larger while the card is small, like the reference. */
   .product {
-    grid-column: 1 / -1; grid-row: 3; align-self: end; justify-self: center; z-index: 1;
-    width: 82%; height: calc(100% + 2.5em); min-height: 0; margin-top: -2.5em;
+    grid-column: 1 / -1; grid-row: 2; align-self: end; justify-self: center; z-index: 1;
+    width: 82%; height: calc(100% + 2.5em); max-height: 20em; min-height: 0; margin-top: -2.5em;
     object-fit: contain; object-position: center bottom;
     scale: calc(1 + (1 - var(--s, 1)) * 0.3); transform-origin: 50% 100%;
   }
-  .copy { grid-column: 1; grid-row: 4; align-self: end; display: grid; gap: 0.5em; z-index: 1; }
+  .copy { grid-column: 1; grid-row: 3; align-self: end; display: grid; gap: 0.5em; z-index: 1; }
   h3 { margin: 0; font: 400 2em/1.1875 var(--font); letter-spacing: -0.025em; }
   .copy p { margin: 0; max-width: 22em; font: 400 1em/1.5 var(--font); color: #cfcfcf; }
-  .buttons { grid-column: 2; grid-row: 4; align-self: end; display: flex; gap: 0.75em; z-index: 1; }
+  .buttons { grid-column: 2; grid-row: 3; align-self: end; display: flex; gap: 0.75em; z-index: 1; }
 
   @media (max-width: 991px) {
     .stack { padding-top: 3.5em; }
+    .backdrop { margin-top: -3.5em; margin-bottom: calc(-100svh + 3.5em); }
     .cards { gap: 34vh; }
     .card {
       grid-column: 1 / -1; width: 100%; aspect-ratio: auto; min-height: 30em; padding: 1.5em;
-      grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto auto; row-gap: 1em;
+      grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; row-gap: 1em;
     }
     .card :global(.card-wordmark) { --wordmark-size: 5em; }
-    .product { grid-row: 3; width: 100%; height: auto; }
-    .copy { grid-column: 1; grid-row: 4; }
-    .buttons { grid-column: 1; grid-row: 5; flex-wrap: wrap; }
+    .product { grid-row: 2; width: 100%; height: auto; }
+    .copy { grid-column: 1; grid-row: 3; }
+    .buttons { grid-column: 1; grid-row: 4; flex-wrap: wrap; }
   }
 </style>
 
@@ -159,6 +173,11 @@ const pad = (n: number) => String(n).padStart(2, '0');
         const start = k === 0 ? 1 : 1.35;
         if (current === -1 && r.top < vh * start && (r.top + r.bottom) / 2 > vh * 0.6) current = k;
       });
+      // Only while the sentence is pinned in the centre: no highlight while it's still rising
+      // into place, or once it scrolls away at the end of the section.
+      const sb = sentence.getBoundingClientRect();
+      const pinned = Math.abs((sb.top + sb.bottom) / 2 - vh / 2) < 2;
+      if (!pinned) current = -1;
       sentence.classList.toggle('has-current', current !== -1);
       words.forEach((w, k) => w.classList.toggle('is-current', k === current));
     };

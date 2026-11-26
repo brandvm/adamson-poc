@@ -6,13 +6,15 @@
 // Animate the `.layer` elements, never the wrapper: opacity or transform on the wrapper isolates
 // it, and the soft-light layers would flash flat white.
 import type { Slide } from '../../data/home';
-interface Props { slide: Slide; class?: string }
-const { slide, class: className } = Astro.props;
+// `text` replaces the word (always drawn as live text), e.g. a category name instead of the product.
+interface Props { slide: Slide; text?: string; class?: string }
+const { slide, text, class: className } = Astro.props;
+const word = text ?? slide.wordmark;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const a = (f: string) => `${base}home/${f}`;
 ---
 
-{slide.wordmarkSvg ? (
+{slide.wordmarkSvg && !text ? (
   <div class:list={['wordmark', className]} aria-hidden="true" style={`--mask: url(${a('vergence-mask.svg')})`}>
     <img class="layer soft" src={a('vergence-1.svg')} alt="" />
     <img class="layer" src={a('vergence-2.svg')} alt="" />
@@ -20,8 +22,8 @@ const a = (f: string) => `${base}home/${f}`;
   </div>
 ) : (
   <div class:list={['wordmark text', className]} aria-hidden="true">
-    <span class="layer soft">{slide.wordmark}</span>
-    <span class="layer">{slide.wordmark}</span>
+    <span class="layer soft">{word}</span>
+    <span class="layer">{word}</span>
   </div>
 )}
 

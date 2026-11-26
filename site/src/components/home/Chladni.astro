@@ -1,17 +1,17 @@
 ---
 // Chladni sand: bronze grains pulled onto the still (nodal) lines of a vibrating plate,
 // L(x,y) = a·sin(πnx)·sin(πmy) + b·sin(πmx)·sin(πny). n, m, a, b drift slowly, so the figure
-// keeps morphing; the pointer stirs the sand, and the hero's sound wave (SoundWaves.astro,
-// shared on window.__adamsonWave) shakes it as its rim passes. Ported from the driver-face study
+// keeps morphing; the pointer stirs the sand. With reactToWave, a SoundWaves layer in the same
+// box (shared on window.__adamsonWave) also shakes it as its rim passes. Ported from the driver-face study
 // (public/driver-face-webgl.html) without the driver shader or the audio,
 // and in plain WebGL so the page doesn't load three.js.
 // Fills its positioned parent. Runs only while on screen and the tab is visible; with reduced
 // motion it draws one settled, still frame.
-interface Props { opacity?: number; class?: string }
-const { opacity = 0.24, class: className } = Astro.props;
+interface Props { opacity?: number; reactToWave?: boolean; class?: string }
+const { opacity = 0.24, reactToWave = false, class: className } = Astro.props;
 ---
 
-<canvas class:list={['chladni', className]} style={`--opacity:${opacity}`} aria-hidden="true"></canvas>
+<canvas class:list={['chladni', className]} style={`--opacity:${opacity}`} data-wave={reactToWave ? '' : undefined} aria-hidden="true"></canvas>
 
 <style>
   .chladni { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
@@ -45,6 +45,7 @@ const { opacity = 0.24, class: className } = Astro.props;
     const gl = canvas.getContext('webgl', { alpha: true, antialias: false, premultipliedAlpha: true, powerPreference: 'low-power' });
     if (!gl) return;
 
+    const reactToWave = canvas.hasAttribute('data-wave');
     const coarse = matchMedia('(pointer: coarse)').matches;
     const SAND = { count: coarse ? 30000 : 60000, size: 1.5, spread: 11, color: [138 / 255, 110 / 255, 75 / 255] };
     const N = SAND.count;
@@ -101,7 +102,7 @@ const { opacity = 0.24, class: className } = Astro.props;
 
       // The hero's current sound wave, if any (same maths as the study): its rim kicks grains
       // as it sweeps past, and the moment it leaves the dome the whole plate shakes harder.
-      const w = window.__adamsonWave;
+      const w = reactToWave ? window.__adamsonWave : null;
       let shell: number[] | null = null, energy = 0;
       if (w) {
         const f = (performance.now() - w.t0) / 1000 / w.life;
