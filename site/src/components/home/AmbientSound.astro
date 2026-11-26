@@ -1,0 +1,146 @@
+---
+// Optional sound for the stack concept, synthesised with Web Audio (no files). Off until the
+// visitor turns it on (browsers block audio before a click anyway).
+// - Bed: a slow, soft Amaj9 pad (detuned sine pairs that swell on their own cycles) with a
+//   breath of filtered air, all through a generated reverb.
+// - Card change: the compression-driver "note" from the driver study (a pitched-down thump and
+//   a rising air burst) plus a soft bell tuned per card, fired when the sand changes mode.
+// - Hero click: the same thump, with the sound wave leaving the speaker.
+---
+
+<button class="sound" type="button" aria-pressed="false" aria-label="Sound">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="label">Sound off</span>
+</button>
+
+<style>
+  .sound {
+    position: fixed; right: max(1.25em, (100vw - var(--container)) / 2); bottom: 1.25em; z-index: 40;
+    display: flex; align-items: center; gap: 0.7em; padding: 0.75em 1.1em;
+    border: 1px solid color-mix(in srgb, var(--gold-light) 45%, transparent); border-radius: 999px;
+    background: color-mix(in srgb, var(--page-bg) 45%, transparent);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    color: var(--gold-light); cursor: pointer;
+    font: 400 0.6875em/1 var(--font); letter-spacing: 0.24em; text-transform: uppercase;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.9s ease;
+  }
+  .sound:hover { border-color: var(--gold-light); color: var(--gold); }
+  .bars { display: flex; align-items: flex-end; gap: 2px; height: 10px; }
+  .bars i { width: 2px; height: 3px; background: currentColor; transition: height 0.3s ease; }
+  .sound[aria-pressed='true'] .bars i { animation: eq 1.1s ease-in-out infinite; }
+  .sound[aria-pressed='true'] .bars i:nth-child(2) { animation-delay: -0.35s; }
+  .sound[aria-pressed='true'] .bars i:nth-child(3) { animation-delay: -0.7s; }
+  @keyframes eq { 0%, 100% { height: 3px; } 50% { height: 10px; } }
+  @media (prefers-reduced-motion: reduce) { .sound[aria-pressed='true'] .bars i { animation: none; height: 7px; } }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('button.sound');
+  if (btn) {
+    // A3, C#4, E4, G#4: one bell per card, rising through the chord the pad holds
+    const NOTES = [220, 277.18, 329.63, 415.3];
+    let ctx: AudioContext | null = null, master: GainNode, bus: GainNode, verb: GainNode, noise: AudioBuffer;
+    let on = false;
+
+    const init = () => {
+      ctx = new AudioContext();
+      master = ctx.createGain(); master.gain.value = 0;
+      const comp = ctx.createDynamicsCompressor();
+      comp.threshold.value = -22; comp.ratio.value = 4; comp.attack.value = 0.005; comp.release.value = 0.3;
+      master.connect(comp); comp.connect(ctx.destination);
+
+      // Reverb from a generated impulse: 3.5s of decaying stereo noise
+      const len = ctx.sampleRate * 3.5, ir = ctx.createBuffer(2, len, ctx.sampleRate);
+      for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len) ** 3; }
+      const conv = ctx.createConvolver(); conv.buffer = ir;
+      verb = ctx.createGain(); verb.gain.value = 1; verb.connect(conv);
+      const wet = ctx.createGain(); wet.gain.value = 0.55; conv.connect(wet); wet.connect(master);
+      bus = ctx.createGain(); bus.connect(master);
+
+      noise = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+      const ch = noise.getChannelData(0); for (let i = 0; i < ch.length; i++) ch[i] = Math.random() * 2 - 1;
+
+      // Pad: Amaj9 (A2 E3 G#3 B3 C#4), each voice two sines a few cents apart, swelling slowly
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 0.5;
+      const pad = ctx.createGain(); pad.gain.value = 0.05;
+      lp.connect(pad); pad.connect(bus); pad.connect(verb);
+      [110, 164.81, 207.65, 246.94, 277.18].forEach((f, i) => {
+        const v = ctx!.createGain(); v.gain.value = 0.5; v.connect(lp);
+        const swell = ctx!.createOscillator(); swell.frequency.value = 0.025 + i * 0.013;
+        const sg = ctx!.createGain(); sg.gain.value = 0.4; swell.connect(sg); sg.connect(v.gain); swell.start();
+        [-4, 4].forEach((cents) => {
+          const o = ctx!.createOscillator(); o.type = 'sine'; o.frequency.value = f; o.detune.value = cents;
+          o.connect(v); o.start();
+        });
+      });
+      const lfo = ctx.createOscillator(); lfo.frequency.value = 0.05;   // the filter breathes every 20s
+      const lg = ctx.createGain(); lg.gain.value = 350; lfo.connect(lg); lg.connect(lp.frequency); lfo.start();
+
+      // Air: very quiet low-passed noise, like a room
+      const air = ctx.createBufferSource(); air.buffer = noise; air.loop = true;
+      const alp = ctx.createBiquadFilter(); alp.type = 'lowpass'; alp.frequency.value = 500;
+      const ag = ctx.createGain(); ag.gain.value = 0.018;
+      air.connect(alp); alp.connect(ag); ag.connect(bus); air.start();
+    };
+
+    // The driver note: pitched-down thump plus a rising air burst (from the driver study)
+    const thump = (t: number, level = 0.6) => {
+      const o = ctx!.createOscillator(); o.type = 'sine';
+      o.frequency.setValueAtTime(130, t); o.frequency.exponentialRampToValueAtTime(42, t + 0.28);
+      const g = ctx!.createGain(); g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(level, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.7);
+      o.connect(g); g.connect(bus); o.start(t); o.stop(t + 0.75);
+      const n = ctx!.createBufferSource(); n.buffer = noise;
+      const bp = ctx!.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 1.4;
+      bp.frequency.setValueAtTime(1800, t); bp.frequency.exponentialRampToValueAtTime(6500, t + 0.5);
+      const ng = ctx!.createGain(); ng.gain.setValueAtTime(0.0001, t);
+      ng.gain.exponentialRampToValueAtTime(0.07, t + 0.04); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
+      n.connect(bp); bp.connect(ng); ng.connect(bus); ng.connect(verb); n.start(t); n.stop(t + 0.6);
+    };
+    // Soft bell: the note plus a quieter inharmonic partial, long decay into the reverb
+    const bell = (f: number, t: number) => {
+      [[1, 0.16, 3], [2.76, 0.04, 1.4]].forEach(([mul, lvl, dur]) => {
+        const o = ctx!.createOscillator(); o.type = 'sine'; o.frequency.value = f * mul;
+        const g = ctx!.createGain(); g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(lvl, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.connect(g); g.connect(bus); g.connect(verb); o.start(t); o.stop(t + dur + 0.05);
+      });
+    };
+
+    // Card change: the sand dispatches chladni:mode (bubbling) with the card index, -1 for none
+    let lastNote = -1;
+    document.addEventListener('chladni:mode', ((e: CustomEvent<number>) => {
+      const k = e.detail;
+      if (!on || !ctx || k == null || k < 0) return;
+      const t = ctx.currentTime + 0.01;
+      if (t - lastNote < 0.25) return;   // fast scrolling: don't stack notes
+      lastNote = t;
+      thump(t, 0.45); bell(NOTES[k % NOTES.length], t + 0.04);
+    }) as EventListener);
+
+    // Hero click: the thump goes out with the sound wave (same rule as SoundWaves: not on links)
+    document.querySelector('.hero .stage')?.addEventListener('click', (e) => {
+      if (!on || !ctx || (e.target as Element).closest('a, button')) return;
+      thump(ctx.currentTime + 0.01);
+    });
+
+    const fade = (to: number, s: number) => {
+      const t = ctx!.currentTime;
+      master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(master.gain.value, t);
+      master.gain.linearRampToValueAtTime(to, t + s);
+    };
+    btn.addEventListener('click', async () => {
+      if (!ctx) init();
+      on = !on;
+      if (on) { await ctx!.resume(); fade(0.9, 1.5); }
+      else { fade(0, 0.6); setTimeout(() => { if (!on) ctx!.suspend(); }, 700); }
+      btn.setAttribute('aria-pressed', String(on));
+      btn.querySelector('.label')!.textContent = on ? 'Sound on' : 'Sound off';
+    });
+    // Silent in a background tab
+    document.addEventListener('visibilitychange', () => {
+      if (!ctx || !on) return;
+      if (document.hidden) ctx.suspend(); else ctx.resume();
+    });
+  }
+</script>
